@@ -1,9 +1,15 @@
 {
-  "name": "Premise-Wp",
+  "name": "Premise-WP",
   "version": "1.2.0",
   "description": "Wordpress framework for theme and plugin developers",
-  "author": "Mario Vallejo",
-  "license": "ISC",
+  "author": "Premise WP",
+  "license": "GPL",
+  "repository": {
+    "url": "https://github.com/PremiseWP/Premise-WP/"
+  },
+  "bugs": {
+    "url": "https://github.com/PremiseWP/Premise-WP/issues"
+  },
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-autoprefixer": "^3.0.0",
