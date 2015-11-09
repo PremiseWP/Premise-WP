@@ -1,0 +1,510 @@
+/**
+ * Premise Forms CSS
+ *
+ * This file contains all the main Premise styles for form elements
+ *
+ * @package Premise
+ * @subpackage CSS
+ */
+
+
+
+
+/**
+ * Premise Forms Global
+ *
+ * Styles that apply to every field.
+ */
+.premise-field {
+	position: relative;
+	display: block;
+	margin-bottom: 20px;
+	box-sizing: border-box;
+}
+
+/**
+ * The Field Wrapper
+ */
+.premise-field > div {
+	position: relative;
+	display: block;
+	box-sizing: border-box;
+}
+
+/**
+ * Apply general styles to form elements
+ */
+.premise-field input,
+.premise-field textarea,
+.premise-field select {
+	box-sizing: border-box;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	border: 1px solid #888;
+	border-radius: 2px;
+	background: #fff;
+}
+
+/**
+ * Full Width Fields
+ *
+ * NOT checkbox, radio
+ */
+.premise-field input,
+.premise-field input[type="text"],
+.premise-field input[type="username"],
+.premise-field input[type="password"],
+.premise-field input[type="email"],
+.premise-field input[type="file"],
+.premise-field input[type="tel"],
+.premise-field input[type="number"],
+.premise-field input[type="color"],
+.premise-field input[type="range"],
+.premise-field input[type="search"],
+.premise-field input[type="url"],
+.premise-field input[type="date"],
+.premise-field input[type="datetime"],
+.premise-field input[type="datetime-local"],
+.premise-field input[type="time"],
+.premise-field input[type="week"],
+.premise-field input[type="month"],
+.premise-field textarea,
+.premise-field select {
+	display: block;
+	width: 100%;
+	padding: 7px 5px;
+	line-height: 1.2em;
+	font-size: 1em;
+}
+
+/**
+ * Non-Full Width Fields
+ *
+ * Checkboxes and radio fields
+ */
+.premise-field input[type="checkbox"],
+.premise-field input[type="radio"] {
+	display: inline-block;
+	padding: 2px;
+	width: auto;
+}
+
+/**
+ * Button input fields
+ */
+.premise-field input[type="button"],
+.premise-field input[type="submit"],
+.premise-field input[type="reset"] {
+	display: inline-block;
+	padding: 10px 20px;
+	width: auto;
+}
+
+/**
+ * Placeholders
+ */
+.premise-field > div ::-webkit-input-placeholder {
+	line-height: inherit;
+	font-size: inherit;
+	color: inherit;
+	letter-spacing: 1px;
+}
+.premise-field > div :-moz-placeholder {
+	line-height: inherit;
+	font-size: inherit;
+	color: inherit;
+	letter-spacing: 1px;
+}
+.premise-field > div ::-moz-placeholder {
+	line-height: inherit;
+	font-size: inherit;
+	color: inherit;
+	letter-spacing: 1px;
+}
+.premise-field > div :-ms-input-placeholder {
+	line-height: inherit;
+	font-size: inherit;
+	color: inherit;
+	letter-spacing: 1px;
+}
+
+/**
+ * The field label
+ */
+.premise-field > label,
+.premise-field > p.premise-label {
+	display: inline-block;
+	text-transform: uppercase;
+	margin:0 10px 5px 0;
+}
+
+/**
+ * Field Tooltip
+ *
+ * Display a tooltip when someone hovers over the label.
+ * Add an icon next to the label element that explains the field
+ * to the user.
+ */
+.premise-field span.premise-tooltip {
+	position:relative;
+	display:inline-block;
+	vertical-align: top;
+	line-height:150%;
+	color:#fff;
+	margin-left:0px;
+	cursor: help;
+}
+
+.premise-field .premise-tooltip:before{
+	color:#27b4b4;
+	font-family: 'FontAwesome';
+	content: "\f05a";
+}
+
+.premise-field span.premise-tooltip > i {
+	visibility:hidden;
+	opacity:0;
+	position:absolute;
+	bottom:150%;
+	left:-20px;
+	width:200px;
+	z-index:999999;
+	background:#444;
+	display:inline-block;
+	padding:10px;
+	border-radius:10px;
+	-webkit-border-radius:10px;
+	-moz-border-radius:10px;
+	-ms-border-radius:10px;
+	-o-border-radius:10px;
+	transition: all .3s ease-in-out;
+	font-size: 1em;
+	line-height: 1.3em;
+	text-transform: none;
+}
+
+.premise-admin .premise-field span.premise-tooltip > i {
+	font-size: 0.65em;
+}
+
+.premise-field span.premise-tooltip:hover > i {
+	visibility:visible;
+	opacity:1;
+}
+
+
+
+
+/**
+ * Textarea Fields
+ *
+ * for types video and textarea
+ */
+.premise-field .premise-field-textarea textarea,
+.premise-field .premise-field-video textarea {
+	height: 150px;
+	text-align: justify;
+}
+
+
+
+
+/**
+ * Select Field
+ *
+ * Only for select field that are not multiple
+ */
+.premise-field .premise-field-select select {
+	height: auto;
+}
+
+.premise-field:not(.premise-field-multiple) > .premise-field-select:after {
+	position: absolute;
+	top:  5px;
+	right: 5px;
+	content: '\f107';
+	font-family: 'FontAwesome';
+	pointer-events: none;
+}
+
+
+
+
+/**
+ * Checkbox
+ *
+ * @see http://www.sitepoint.com/css3-toggle-switch/
+ */
+.premise-field > .premise-field-checkbox {
+	display: inline-block;
+}
+
+.premise-field .premise-field-checkbox input:empty {
+	margin-left: -999px;
+}
+
+.premise-field .premise-field-checkbox input:empty ~ .premise-field-state {
+	position: relative;
+	float: left;
+	line-height: 1.8em;
+	margin: 0.2em 0;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	height: 1.8em;
+	color: #fff;
+}
+
+.premise-field .premise-field-checkbox input:empty ~ .premise-field-state:before, 
+.premise-field .premise-field-checkbox input:empty ~ .premise-field-state:after {
+	position: absolute;
+	display: block;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	content: ' ';
+	width: 5em;
+	background-color: #444;
+	border-radius: 0.3em;
+	transition: all 100ms ease-in;
+}
+
+.premise-field .premise-field-checkbox input:empty ~ .premise-field-state:before {
+	content: 'OFF';
+	text-indent: 0.3em;
+	color: #fff;
+}
+
+.premise-field .premise-field-checkbox input:empty ~ .premise-field-state:after {
+	width: 2.4em;
+	top: 0.1em;
+	bottom: 0.1em;
+	margin-left: 2.5em;
+	background-color: #fff;
+	border-radius: 0;
+	border-top-right-radius: 0.3em;
+	border-bottom-right-radius: 0.3em;
+}
+
+.premise-field .premise-field-checkbox input:checked ~ .premise-field-state:after {
+	border-radius: 0;
+	border-top-left-radius: 0.3em;
+	border-bottom-left-radius: 0.3em;
+}
+.premise-field .premise-field-checkbox input:checked ~ .premise-field-state:before {
+	content: 'ON';
+	text-indent: 2.9em;
+	color: #fff;
+}
+
+.premise-field .premise-field-checkbox input:checked ~ .premise-field-state:before {
+	background-color: #27b4b4;
+}
+
+.premise-field .premise-field-checkbox input:checked ~ .premise-field-state:after {
+	margin-left: 0.1em;
+}
+
+
+
+
+/**
+ * Radio
+ *
+ * @see http://www.sitepoint.com/css3-toggle-switch/
+ */
+.premise-field > .premise-field-radio {}
+
+.premise-field .premise-field-radio input:empty {
+	margin-left: -999px;
+}
+
+.premise-field .premise-field-radio input:empty ~ .premise-field-state {
+	position: relative;
+	float: left;
+	line-height: 1.8em;
+	margin: 0.2em 0;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	height: 1.8em;
+	color: #fff;
+}
+
+.premise-field .premise-field-radio input:empty ~ .premise-field-state:before, 
+.premise-field .premise-field-radio input:empty ~ .premise-field-state:after {
+	position: absolute;
+	display: block;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	content: ' ';
+	width: 5em;
+	background-color: #444;
+	border-radius: 0.3em;
+	transition: all 100ms ease-in;
+}
+
+.premise-field .premise-field-radio input:empty ~ .premise-field-state:after {
+	width: 2.4em;
+	top: 0.1em;
+	bottom: 0.1em;
+	margin-left: 2.5em;
+	background-color: #fff;
+	border-radius: 0;
+	border-top-right-radius: 0.3em;
+	border-bottom-right-radius: 0.3em;
+}
+
+.premise-field .premise-field-radio input:checked ~ .premise-field-state:after {
+	border-radius: 0;
+	border-top-left-radius: 0.3em;
+	border-bottom-left-radius: 0.3em;
+}
+
+.premise-field .premise-field-radio input:empty ~ .premise-field-state:before {
+	content: 'OFF';
+	text-indent: 0.3em;
+	color: #fff;
+}
+.premise-field .premise-field-radio input:checked ~ .premise-field-state:before {
+	content: 'ON';
+	text-indent: 2.9em;
+	color: #fff;
+}
+
+.premise-field .premise-field-radio input:checked ~ .premise-field-state:before {
+	background-color: #27b4b4;
+}
+
+.premise-field .premise-field-radio input:checked ~ .premise-field-state:after {
+	margin-left: 0.1em;
+}
+
+
+
+
+/**
+ * File Field
+ */
+.premise-field .premise-btn-upload,
+.premise-field .premise-btn-remove {
+	position:absolute;
+	display:block;
+	top: 0px;
+	z-index: 1;
+	box-sizing:border-box;
+	padding: 5px;
+	border: 1px solid;
+	border-color: #888 transparent #888 #ccc;
+	background:#fff;
+	width:40px;
+	height: 100%;
+	text-align:center;
+	outline: 0;
+}
+
+.premise-field > .premise-field-wp_media > .premise-btn-upload {
+	right:41px;
+}
+
+.premise-field > .premise-field-wp_media > .premise-btn-remove {
+	right:1px;
+}
+
+
+
+
+/**
+ * FontAwesome Icon Field
+ */
+.premise-field-fa_icon {
+
+}
+
+.premise-field .premise-choose-icon,
+.premise-field .premise-remove-icon {
+	position:absolute;
+	display:block;
+	top: 0px;
+	z-index: 1;
+	box-sizing:border-box;
+	padding: 5px;
+	border: 1px solid;
+	border-color: #888 transparent #888 #ccc;
+	background:#fff;
+	width:40px;
+	height: 100%;
+	text-align:center;
+	outline: 0;
+}
+
+.premise-field > .premise-field-fa_icon > .premise-choose-icon {
+	right:41px;
+}
+
+.premise-field > .premise-field-fa_icon > .premise-remove-icon {
+	right:1px;
+}
+
+.premise-field > .premise-field-fa-icons-container {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	max-height: 300px;
+	overflow: auto;
+	border: 1px solid #888;
+	border-radius: 2px;
+	background: #fff;
+	box-sizing: border-box;
+	z-index: 1;
+}
+
+.premise-field > .premise-field-fa-icons-container .premise-field-fa-icon-li {
+	margin: 5px;
+}
+
+.premise-field > .premise-field-fa-icons-container .premise-field-fa-icon-anchor {
+	display: block;
+	padding: 5px;
+	transition: -webkit-transform .1s ease-in-out;
+	transition: transform .1s ease-in-out;
+	color: #444;
+	font-size: 28px;
+}
+
+.premise-field > .premise-field-fa-icons-container .premise-field-fa-icon-anchor:hover {
+	-webkit-transform: scale(1.8,1.8);
+	        transform: scale(1.8,1.8);
+}
+
+
+
+
+/**
+ * Minicolors Field
+ *
+ * Not yet styled 8/11/15
+ */
+.premise-field > div .minicolors {
+	display:block;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	position:relative;
+	min-height:33px;
+}
+
+.premise-field > div:after,
+.premise-field > div .minicolors {
+	content: "";
+	display:block;
+	clear:both;
+}
+
+.premise-field input[type="text"].minicolors-input {
+	padding-left: 26px;
+}

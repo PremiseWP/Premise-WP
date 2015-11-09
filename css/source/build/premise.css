@@ -1,0 +1,210 @@
+/*
+ * Premise WP
+ *
+ * Global CSS Styling
+ *
+ * @package Premise
+ * @subpackage CSS
+ * 
+ */
+
+
+/**
+ * Resets
+ */ 
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+
+
+
+
+/**
+ * Global Classes
+ */
+.premise-absolute {
+	position:absolute;
+}
+
+.premise-relative {
+	position:relative;
+}
+
+.premise-fixed { 
+	position:fixed;
+} 
+
+.premise-block {
+	display:block;
+}
+
+.premise-inline-block {
+	display:inline-block;
+}
+
+.premise-border-box {
+	box-sizing:border-box;
+	-moz-box-sizing:border-box;
+}
+
+.premise-hidden {
+	display:none;
+}
+
+.premise-responsive,
+img.premise-responsive {
+	max-width:100%;
+	height:auto;
+}
+
+.premise-float-right {
+	float:right;
+}
+
+.premise-float-left {
+	float:left;
+}
+
+.premise-align-center {
+	text-align:center;
+}
+
+.premise-align-left {
+	text-align:left;
+}
+
+.premise-align-right {
+	text-align:right;
+}
+
+.premise-align-justify {
+	text-align:justify;
+}
+
+.premise-uppercase {
+	text-transform: uppercase;
+}
+
+.premise-underline {
+	text-decoration: underline;
+}
+
+.premise-not-underline {
+	text-decoration: none;
+}
+
+
+
+
+/**
+ * Premise CSS Grid Sysytem
+ *
+ * This classes help build grid layouts quickly that are fully responsive
+ */
+.premise-row {
+	display:block;
+	margin-left:-1%;
+	margin-right:-1%;
+}
+
+.premise-row:after,
+/* This one is just helpful! */
+.premise-clear-float:after {
+	content:"";
+	display:block;
+	clear: both;
+}
+
+.premise-row > [class^="span"],
+.premise-row > [class*=" span"],
+.premise-row > [class^="col"],
+.premise-row > [class*=" col"] {
+	float:left;
+	margin-left:1%;
+	margin-right:1%;
+}
+
+.premise-clear {
+	display:block;
+	clear:both;
+	width:100%;
+}
+
+.premise-inline > [class^="span"],
+.premise-inline > [class*=" span"],
+.premise-inline > [class^="col"],
+.premise-inline > [class*=" col"],
+ul.premise-inline > li {
+	display:inline-block;
+}
+
+.span1 {
+	width:6.3%;
+}
+
+.span2 {
+	width:14.6%;
+}
+
+.span3 {
+	width:23%;
+}
+
+.span4 {
+	width:31.33%;
+}
+
+.span5 {
+	width:39.6%;
+}
+
+.span6 {
+	width:48%;
+}
+
+.span7 {
+	width:56.3%;
+}
+
+.span8 {
+	width:64.6%;
+}
+
+.span9 {
+	width:73%;
+}
+
+.span10 {
+	width:81.3%;
+}
+
+.span11 {
+	width:89.6%;
+}
+
+.span12 {
+	width:98%;
+}
+
+.col2 {
+	width:48%;
+}
+
+.col3 {
+	width:31.33%;
+}
+
+.col4 {
+	width:23%;
+}
+
+.col5 {
+	width:18%;
+}
+
+.col6 {
+	width:14.6%;
+}

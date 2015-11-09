@@ -1,0 +1,23 @@
+/**
+ * Premise WP Framework
+ *
+ * Admin side CSS
+ *
+ */
+
+/**
+ * Premise admin Globals
+ */
+.premise-admin,
+.premise-admin p{
+	font-size: 20px;
+}
+
+.premise-admin p{
+	font-weight: 300;
+	color: #777;
+}
+
+
+
+
