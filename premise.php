@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Premise WP
  * Description: A Wordpress framework for developers who build themes and plugins. It allows you to quickly build options in the backend by doing the heavy lifting and repetitive tasks for you. Premise WP aslo comes with a CSS framework readily available on both the backend and frontend that allows you to quickly build responsive markup. To begin using Premise WP simply download and install the plugin, once you activate it you are all set! You can begin using it in your theme or plugin's code.
- * Plugin URI:	https://github.com/____
+ * Plugin URI:	https://github.com/PremiseWP/Premise-WP
  * Version:     1.2.0
  * Author:      Premise WP
  * Author URI:  http://premisewp.com
@@ -174,7 +174,7 @@ class Premise_WP {
 	 * Premise loads 2 main files: Premise-WP.min.css, and Premise-WP.min.js. In addition to these files
 	 * Premise also loads FontAwesome - a library of icons by Dave Gandy.
 	 *
-	 * Filters cming soon to allow more control over what loads
+	 * Filters coming soon to allow more control over what loads
 	 *
 	 * @author Dvae Gandy http://twitter.com/davegandy
 	 * @see http://fontawesome.io/ For more information about FontAwesome
