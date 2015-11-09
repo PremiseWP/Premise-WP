@@ -184,10 +184,10 @@ class Premise_WP {
 	public function premise_scripts() {
 		//register styles
 		wp_register_style( 'premise_font_awesome', $this->plugin_url . 'includes/font-awesome-4.2.0/css/font-awesome.min.css' );
-		wp_register_style( 'premise_style_css'   , $this->plugin_url . 'css/Premise-Wp.min.css', array( 'premise_font_awesome' ) );
+		wp_register_style( 'premise_style_css'   , $this->plugin_url . 'css/Premise-WP.min.css', array( 'premise_font_awesome' ) );
 		
 		//register scripts
-		wp_register_script( 'premise_script_js'  , $this->plugin_url . 'js/Premise-Wp.min.js', array( 'jquery', 'wp-color-picker' ) );
+		wp_register_script( 'premise_script_js'  , $this->plugin_url . 'js/Premise-WP.min.js', array( 'jquery', 'wp-color-picker' ) );
 		
 		// For color picker to work
 		wp_enqueue_style( 'wp-color-picker' );
