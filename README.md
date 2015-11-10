@@ -5,6 +5,84 @@ for you. Premise WP also comes with a CSS framework readily available on both th
 
 To begin using Premise WP simply download and install the plugin, once you activate it you are all set! You can begin using it in your theme or plugin's code.
 
+**Note:** If downloading from GitHub, rename the folder from `Premise-WP-master` to `Premise-WP` before installing.
+
+---
+
+### Make Premise WP required in your project
+
+To ensure that your theme or plugin runs smoothly and without issues when your users install it, you may want to make Premise WP required by your project. This way, Wordpress will know
+that without Premise WP installed and active things may break and it will notify the user to install it. For this functionality we make use of the [TGM Activation Plugin Class](https://github.com/TGMPA/TGM-Plugin-Activation, TGM Activation Plugin Class).
+To implement, copy and paste the code below into your project and edit `Path_To_TGM_Plugin_Activation_Class` and `my_unique_id`.
+
+```php
+/**
+ * Example taken from TGM-Plugin-Activation and modified for Premise WP
+ * 
+ * This file represents an example of the code that themes and other plugins would use to register
+ * Premise WP as a required plugin. This functionality requires the use of TGM-Plugin-Activation Class.
+ *
+ * @see  http://tgmpluginactivation.com/configuration/ for detailed documentation.
+ *
+ * @link https://github.com/TGMPA/TGM-Plugin-Activation
+ */
+
+/**
+ * Require the TGM_Plugin_Activation class.
+ */
+require_once Path_To_TGM_Plugin_Activation_Class;
+
+/**
+ * Register TGM_Plugin_Activation Hook
+ */
+add_action( 'tgmpa_register', 'my_theme_register_required_plugins' );
+
+/**
+ * This function is hooked into tgmpa_init, which is fired within the
+ * TGM_Plugin_Activation class constructor.
+ */
+function my_theme_register_required_plugins() {
+	/*
+	 * Array of plugin arrays. Required keys are name and slug.
+	 * If the source is NOT from the .org repo, then source is also required.
+	 */
+	$plugins = array(
+
+		// Make Premise WP required
+		array(
+			'name'               => 'Premise WP Plugin',                              // The plugin name.
+			'slug'               => 'Premise-WP',                                     // The plugin slug (typically the folder name).
+			'source'             => plugins_url('Premise-WP/plugins/Premise-WP.zip'), // The plugin source.
+			'required'           => true,                                             // If false, the plugin is only 'recommended' instead of required.
+			'version'            => '',                                               // E.g. 1.0.0. If set, the active plugin must be this version or higher. If the plugin version is higher than the plugin version installed, the user will be notified to update the plugin.
+			'force_activation'   => false,                                            // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch.
+			'force_deactivation' => false,                                            // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins.
+			'external_url'       => '',                                               // If set, overrides default API URL and points to an external URL.
+			'is_callable'        => '',                                               // If set, this callable will be be checked for availability to determine if a plugin is active.
+		),
+
+	);
+
+	/*
+	 * Array of configuration settings. Amend each line as needed.
+	 */
+	$config = array(
+		'id'           => 'my_unique_id',      // Unique ID for hashing notices for multiple instances of TGMPA.
+		'default_path' => '',                  // Default absolute path to bundled plugins.
+		'menu'         => 'my_unique_id-slug', // Menu slug.
+		'parent_slug'  => 'plugins.php',       // Parent menu slug.
+		'capability'   => 'manage_options',    // Capability needed to view plugin install page, should be a capability associated with the parent menu used.
+		'has_notices'  => true,                // Show admin notices or not.
+		'dismissable'  => true,                // If false, a user cannot dismiss the nag message.
+		'dismiss_msg'  => '',                  // If 'dismissable' is false, this message will be output at top of nag.
+		'is_automatic' => false,               // Automatically activate plugins after installation or not.
+		'message'      => '',                  // Message to output right before the plugins table.
+	);
+
+	tgmpa( $plugins, $config );
+}
+```
+
 ---
 
 ### Building options in the backend
