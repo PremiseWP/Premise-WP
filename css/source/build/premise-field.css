@@ -90,6 +90,13 @@
 }
 
 /**
+ * Color fields
+ */
+.premise-field input[type="color"] {
+	padding: 0;
+}
+
+/**
  * Button input fields
  */
 .premise-field input[type="button"],
@@ -480,31 +487,4 @@
 .premise-field > .premise-field-fa-icons-container .premise-field-fa-icon-anchor:hover {
 	-webkit-transform: scale(1.8,1.8);
 	        transform: scale(1.8,1.8);
-}
-
-
-
-
-/**
- * Minicolors Field
- *
- * Not yet styled 8/11/15
- */
-.premise-field > div .minicolors {
-	display:block;
-	box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	position:relative;
-	min-height:33px;
-}
-
-.premise-field > div:after,
-.premise-field > div .minicolors {
-	content: "";
-	display:block;
-	clear:both;
-}
-
-.premise-field input[type="text"].minicolors-input {
-	padding-left: 26px;
 }
