@@ -342,6 +342,10 @@ class PremiseField {
 			add_filter( 'premise_field_label_html', array( $this, 'silent_label' ) );
 			array_push( $this->filters_used, 'premise_field_label_html' );
 		}
+
+		if ( 'wp_media' == $this->type ) {
+			wp_enqueue_media();
+		}
 		
 		unset( $this->field['add_filter'] );
 	}
