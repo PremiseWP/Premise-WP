@@ -986,7 +986,7 @@ class PremiseField {
 		if ( $val ) 
 			return esc_attr( $val );
 		else 
-			return ! empty( $this->field['default'] ) ? esc_attr( $this->field['default'] ) : '';
+			return ! empty( $this->args['default'] ) ? esc_attr( $this->args['default'] ) : '';
 	}
 
 

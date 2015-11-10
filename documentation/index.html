@@ -65,12 +65,12 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="reports/errors.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">6</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">6</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="reports/markers.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
                                 </a>
                             </li>
                         </ul>
@@ -90,19 +90,18 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1763695238"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-5708062"></a>
                                 <a href="namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1763695238" class="accordion-body collapse in">
+            <div id="namespace-5708062" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
                     <ul>
-                                                                                                    <li class="class"><a href="classes/PremiseCPT.html">PremiseCPT</a></li>
+                                                                                                    <li class="class"><a href="classes/Premise_WP.html">Premise_WP</a></li>
+                                                    <li class="class"><a href="classes/PremiseCPT.html">PremiseCPT</a></li>
                                                     <li class="class"><a href="classes/PremiseField.html">PremiseField</a></li>
-                                                    <li class="class"><a href="classes/Fixture.html">Fixture</a></li>
                                                     <li class="class"><a href="classes/A.html">A</a></li>
-                                                    <li class="class"><a href="classes/Premise_WP.html">Premise_WP</a></li>
                                             </ul>
                 </div>
             </div>
@@ -126,6 +125,10 @@
                                         <h2>Classes</h2>
                     <table class="table table-hover">
                                             <tr>
+                            <td><a href="classes/Premise_WP.html">Premise_WP</a></td>
+                            <td><em>Load Premise WP!</em></td>
+                        </tr>
+                                            <tr>
                             <td><a href="classes/PremiseCPT.html">PremiseCPT</a></td>
                             <td><em>Custom Post Type Class</em></td>
                         </tr>
@@ -134,16 +137,8 @@
                             <td><em>PremiseField Class</em></td>
                         </tr>
                                             <tr>
-                            <td><a href="classes/Fixture.html">Fixture</a></td>
-                            <td><em>A class used for testing grunt-phpdoc.</em></td>
-                        </tr>
-                                            <tr>
                             <td><a href="classes/A.html">A</a></td>
                             <td><em>Simple class used to generate a test PHPDocumentor documentation.</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="classes/Premise_WP.html">Premise_WP</a></td>
-                            <td><em>Load Premise WP!</em></td>
                         </tr>
                                         </table>
                                     </div>
@@ -244,190 +239,6 @@
                 </section>
                 <aside class="span4 detailsbar"></aside>
             </div>
-
-                                        <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_premise_field" name="method_premise_field" class="anchor"></a>
-            <article class="method">
-                <h3 class=" ">premise_field()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">premise_field(string <span class="argument">$type</span>, array <span class="argument">$args</span>, boolean <span class="argument">$echo</span>) : string</pre>
-                <p><em>Premise Field</em></p>
-                <p>Create any form field quickly by simply passing a few arguments to this function. The first
-argument is the type of element you are trying to create i.e. 'text', 'password', 'select'.
-The second argument is an array of options that help build your form field. The options basically adds
-attributes to the field as well as tell Premise how to treat it in the backend of Wordpress.
-For example passing the 'name' attribute will add 'name="your_value"' to your field but it will also tell
-Premise where to save the value and how to retrieve it after a value has been saved.</p>
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string</td>
-                                <td>$type</td>
-                                <td><p>the type of field to print or return. i.e. text, textarea, checkbox, wp_media, video</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$args</td>
-                                <td><p>array of arguments to buid a field</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>boolean</td>
-                                <td>$echo</td>
-                                <td><p>true outputs the html on to the page. false returns it as a string</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    string
-                                            &mdash; <p>html markup for a form field</p>
-                                                </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                    <dt>File</dt>
-                    <dd><a href=""><div class="path-wrapper"></div></a></dd>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr>
-                        <th>
-                            since
-                        </th>
-                        <td>
-                                                            1.2                                <p>Parameters order changed, new parameter added:</p>
-<pre><code>       Old params: (array) arguments, (boolean) echo
-       New params: (string) type, (array) arguments, (boolean) echo</code></pre>
-                                                    </td>
-                    </tr>
-                                    <tr>
-                        <th>
-                            subpackage
-                        </th>
-                        <td>
-                                                    </td>
-                    </tr>
-                                    <tr>
-                        <th>
-                            todo
-                        </th>
-                        <td>
-                                                    </td>
-                    </tr>
-                            </table>
-        </aside>
-    </div>
-
-                                        <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_premise_field_section" name="method_premise_field_section" class="anchor"></a>
-            <article class="method">
-                <h3 class=" ">premise_field_section()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">premise_field_section(array <span class="argument">$args</span>, boolean <span class="argument">$echo</span>) : string</pre>
-                <p><em>Premise field section</em></p>
-                <p>Group of fields wrapped within one parent element.</p>
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>array</td>
-                                <td>$args</td>
-                                <td><p>array of arrays. The fields to insert</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>boolean</td>
-                                <td>$echo</td>
-                                <td><p>whether to echo ro return the string</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    string
-                                            &mdash; <p>html for field section</p>
-                                                </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                    <dt>File</dt>
-                    <dd><a href=""><div class="path-wrapper"></div></a></dd>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr>
-                        <th>
-                            since
-                        </th>
-                        <td>
-                                                            1.2                                <p>Simplified parameters. You can no longer use 'container' parameters.</p>
-<pre><code>            instead, use the 'premise_field_section_html' filter.</code></pre>
-                                                    </td>
-                    </tr>
-                                    <tr>
-                        <th>
-                            subpackage
-                        </th>
-                        <td>
-                                                    </td>
-                    </tr>
-                                    <tr>
-                        <th>
-                            todo
-                        </th>
-                        <td>
-                                                    </td>
-                    </tr>
-                            </table>
-        </aside>
-    </div>
-
-                                        <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_premise_get_fa_icons" name="method_premise_get_fa_icons" class="anchor"></a>
-            <article class="method">
-                <h3 class=" ">premise_get_fa_icons()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">premise_get_fa_icons() : array</pre>
-                <p><em>Get font awesome icons</em></p>
-                
-
-                
-                
-                                    <h4>Returns</h4>
-                    array
-                                            &mdash; <p>array of icons</p>
-                                                </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                    <dt>File</dt>
-                    <dd><a href=""><div class="path-wrapper"></div></a></dd>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr>
-                        <th>
-                            subpackage
-                        </th>
-                        <td>
-                                                    </td>
-                    </tr>
-                                    <tr>
-                        <th>
-                            todo
-                        </th>
-                        <td>
-                                                    </td>
-                    </tr>
-                            </table>
-        </aside>
-    </div>
 
                                         <div class="row-fluid">
         <div class="span8 content class">
@@ -846,6 +657,190 @@ The string includes only letters and numbers at this point.</p>
         </aside>
     </div>
 
+                                        <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_premise_field" name="method_premise_field" class="anchor"></a>
+            <article class="method">
+                <h3 class=" ">premise_field()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">premise_field(string <span class="argument">$type</span>, array <span class="argument">$args</span>, boolean <span class="argument">$echo</span>) : string</pre>
+                <p><em>Premise Field</em></p>
+                <p>Create any form field quickly by simply passing a few arguments to this function. The first
+argument is the type of element you are trying to create i.e. 'text', 'password', 'select'.
+The second argument is an array of options that help build your form field. The options basically adds
+attributes to the field as well as tell Premise how to treat it in the backend of Wordpress.
+For example passing the 'name' attribute will add 'name="your_value"' to your field but it will also tell
+Premise where to save the value and how to retrieve it after a value has been saved.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$type</td>
+                                <td><p>the type of field to print or return. i.e. text, textarea, checkbox, wp_media, video</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$args</td>
+                                <td><p>array of arguments to buid a field</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>boolean</td>
+                                <td>$echo</td>
+                                <td><p>true outputs the html on to the page. false returns it as a string</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>html markup for a form field</p>
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                    <dt>File</dt>
+                    <dd><a href=""><div class="path-wrapper"></div></a></dd>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            since
+                        </th>
+                        <td>
+                                                            1.2                                <p>Parameters order changed, new parameter added:</p>
+<pre><code>       Old params: (array) arguments, (boolean) echo
+       New params: (string) type, (array) arguments, (boolean) echo</code></pre>
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            subpackage
+                        </th>
+                        <td>
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                        <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_premise_field_section" name="method_premise_field_section" class="anchor"></a>
+            <article class="method">
+                <h3 class=" ">premise_field_section()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">premise_field_section(array <span class="argument">$args</span>, boolean <span class="argument">$echo</span>) : string</pre>
+                <p><em>Premise field section</em></p>
+                <p>Group of fields wrapped within one parent element.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$args</td>
+                                <td><p>array of arrays. The fields to insert</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>boolean</td>
+                                <td>$echo</td>
+                                <td><p>whether to echo ro return the string</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>html for field section</p>
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                    <dt>File</dt>
+                    <dd><a href=""><div class="path-wrapper"></div></a></dd>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            since
+                        </th>
+                        <td>
+                                                            1.2                                <p>Simplified parameters. You can no longer use 'container' parameters.</p>
+<pre><code>            instead, use the 'premise_field_section_html' filter.</code></pre>
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            subpackage
+                        </th>
+                        <td>
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                        <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_premise_get_fa_icons" name="method_premise_get_fa_icons" class="anchor"></a>
+            <article class="method">
+                <h3 class=" ">premise_get_fa_icons()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">premise_get_fa_icons() : array</pre>
+                <p><em>Get font awesome icons</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                            &mdash; <p>array of icons</p>
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                    <dt>File</dt>
+                    <dd><a href=""><div class="path-wrapper"></div></a></dd>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            subpackage
+                        </th>
+                        <td>
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
                             
         </div>
     </section>
@@ -886,7 +881,7 @@ The string includes only letters and numbers at this point.</p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on November 9th, 2015 at 07:14.
+                    on November 9th, 2015 at 23:10.
                 </section>
             </section>
         </section>
