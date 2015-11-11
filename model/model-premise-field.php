@@ -826,7 +826,8 @@ class PremiseField {
 	 * @return string html for fa icons
 	 */
 	public function fa_icons() {
-		$icons = '<div class="premise-field-fa-icons-container" style="display:none;"><ul>';
+		$icons = '<div class="premise-field-fa-icons-container" style="display:none;">
+				  <div class="premise-field-fa-icons-container-inner"><ul>';
 		
 		foreach ( (array) premise_get_fa_icons() as $icon ) {
 			
@@ -838,7 +839,7 @@ class PremiseField {
 
 		}
 
-		$icons .= '</ul></div>';
+		$icons .= '</ul></div></div>';
 
 		return $icons;
 	}
