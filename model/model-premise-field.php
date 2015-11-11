@@ -338,11 +338,6 @@ class PremiseField {
 			array_push( $this->filters_used, 'premise_field_html_after_wrapper' );
 		}
 
-		if ( 'checkbox' == $this->type || 'radio' == $this->type ) {
-			add_filter( 'premise_field_label_html', array( $this, 'silent_label' ) );
-			array_push( $this->filters_used, 'premise_field_label_html' );
-		}
-
 		if ( 'wp_media' == $this->type ) {
 			wp_enqueue_media();
 		}
@@ -599,7 +594,7 @@ class PremiseField {
 		
 		$field .= $this->get_atts();
 
-		$field .= '><label for="'.esc_attr( $this->field['id'] ).'" class="premise-field-state"></label>';
+		$field .= '>';
 
 		return $field;
 
@@ -623,26 +618,9 @@ class PremiseField {
 		
 		$field .= $this->get_atts();
 
-		$field .= '><label for="'.esc_attr( $this->field['id'] ).'" class="premise-field-state"></label>';
+		$field .= '>';
 
 		return $field;
-	}
-
-
-
-
-
-	/**
-	 * Returns the label for a field as a <p> element so it is not clickable. 
-	 * Also adds 'class="premise-label"' for styling. Used for checkbox and radio fields.
-	 *
-	 * @since 1.2 
-	 *
-	 * @param  string $label html for the label field
-	 * @return string        returns silent label
-	 */
-	public function silent_label( $label ) {
-		return str_replace( array( '<label', '</label>' ), array( '<p class="premise-label"', '</p>' ), $label );
 	}
 
 
