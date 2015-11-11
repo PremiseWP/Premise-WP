@@ -152,6 +152,9 @@ $defaults = array(
 );
 ```
 
+**Important:** When creating radio fields make sure you pass an `id` attribute to each one of the fields. Otherwise,
+the fields won't work poroperly.
+
 ---
 
 ### Building quick markup
