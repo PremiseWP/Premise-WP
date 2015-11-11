@@ -827,11 +827,11 @@ class PremiseField {
 	 */
 	public function fa_icons() {
 		$icons = '<div class="premise-field-fa-icons-container" style="display:none;">
-				  <div class="premise-field-fa-icons-container-inner"><ul>';
+				  <div class="premise-field-fa-icons-container-inner"><ul class="premise-row">';
 		
 		foreach ( (array) premise_get_fa_icons() as $icon ) {
 			
-			$icons .= '<li class="premise-field-fa-icon-li premise-inline-block premise-float-left">
+			$icons .= '<li class="premise-field-fa-icon-li premise-inline-block premise-float-left span1">
 				<a href="javascript:;" class="premise-field-fa-icon-anchor premise-block" data-icon="'.$icon.'">
 					<i class="fa fa-fw '.$icon.'"></i>
 				</a>

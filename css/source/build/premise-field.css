@@ -374,6 +374,7 @@
 
 .premise-field > .premise-field-fa-icons-container .premise-field-fa-icon-li {
 	margin: 5px;
+	transition: all .4s ease-in-out;
 }
 
 .premise-field > .premise-field-fa-icons-container .premise-field-fa-icon-anchor {
@@ -382,7 +383,8 @@
 	transition: -webkit-transform .1s ease-in-out;
 	transition: transform .1s ease-in-out;
 	color: #444;
-	font-size: 28px;
+	font-size: 2em;
+	text-align: center;
 }
 
 .premise-field > .premise-field-fa-icons-container .premise-field-fa-icon-anchor:hover {
@@ -391,6 +393,54 @@
 }
 
 
+@media screen and (min-width: 1300px) {
+	.premise-field > .premise-field-fa-icons-container {
+		height: 600px;
+	}
+
+	.premise-field > .premise-field-fa-icons-container .premise-field-fa-icons-container-inner {
+		height: 560px;
+	}
+
+	.premise-field > .premise-field-fa-icons-container .premise-field-fa-icon-li {
+		width: 23%;
+		border: 1px solid #888;
+		border-radius: 5px;
+		padding: 40px 0;
+		margin: 10px 1%;
+	}
+
+	.premise-field>.premise-field-fa-icons-container .premise-field-fa-icon-anchor {
+		font-size: 5em;
+	}
+}
+
+@media screen and (min-width: 1800px) {
+	.premise-field > .premise-field-fa-icons-container {
+		height: 600px;
+	}
+
+	.premise-field > .premise-field-fa-icons-container .premise-field-fa-icons-container-inner {
+		height: 560px;
+	}
+
+	.premise-field > .premise-field-fa-icons-container {
+		height: 1000px;
+	}
+
+	.premise-field > .premise-field-fa-icons-container .premise-field-fa-icons-container-inner {
+		height: 960px;
+	}
+
+	.premise-field > .premise-field-fa-icons-container .premise-field-fa-icon-li {
+		width: 14.6%;
+		margin: 20px 1%;
+		padding: 60px 0;
+	}
+	.premise-field>.premise-field-fa-icons-container .premise-field-fa-icon-anchor {
+		font-size: 8em;
+	}
+}
 
 
 
