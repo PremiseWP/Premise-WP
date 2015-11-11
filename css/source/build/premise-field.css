@@ -333,15 +333,43 @@
 
 .premise-field > .premise-field-fa-icons-container {
 	position: absolute;
+	z-index: 1;
 	top: 100%;
 	left: 0;
-	max-height: 300px;
-	overflow: auto;
+	height: 300px;
+	margin-top: 20px;
+	box-sizing: border-box;
+	background: #fff;
+	padding: 20px;
 	border: 1px solid #888;
 	border-radius: 2px;
-	background: #fff;
-	box-sizing: border-box;
-	z-index: 1;
+}
+
+.premise-field > .premise-field-fa-icons-container:before {
+	position: absolute;
+    top: -20px;
+    right: 40px;
+    content: '';
+    border-width: 0 20px 20px 20px;
+    border-color: transparent transparent #666 transparent;
+    border-style: solid;
+    z-index: -1;
+}
+
+.premise-field > .premise-field-fa-icons-container:after {
+	position: absolute;
+    top: -19px;
+    right: 41px;
+    content: '';
+    border-width: 0 19px 19px 19px;
+    border-color: transparent transparent #fff transparent;
+    border-style: solid;
+    z-index: 6;
+}
+
+.premise-field > .premise-field-fa-icons-container .premise-field-fa-icons-container-inner {
+	height: 258px;
+	overflow: auto;
 }
 
 .premise-field > .premise-field-fa-icons-container .premise-field-fa-icon-li {
@@ -361,3 +389,30 @@
 	-webkit-transform: scale(1.8,1.8);
 	        transform: scale(1.8,1.8);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
