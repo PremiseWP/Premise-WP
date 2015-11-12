@@ -47,7 +47,7 @@ class PremiseField {
 		 */
 		'label'      => '',      // Wraps label element around field. uses id for for attribute if id not empty
 		'tooltip'    => '',      // Adds a tooltip and tooltip functionality to field
-		'add_filter' => '',      // Add a filter to this field. Read documentation for list of filters
+		'add_filter' => array(), // Add a filter to this field. Read documentation for list of filters
 		'context'    => '',      // Used to let Premise know where to retrieve values from ( post, user )
 		/**
 		 * Normal Parameters
@@ -317,16 +317,15 @@ class PremiseField {
 	 * This has to run first to make sure that our filters get hooked before they are called.
 	 * Unsets the filter argument at the end to avoid conflicts when printing attributes on field.
 	 *
-	 * Filters are passed strings containing the name of the filter and the function to call separated
-	 * by a ':'. i.e. premise_field_html_after_wrapper:function_to_call
+	 * Filters are passed arrays containing the name of the filter and the function to call separated
+	 * @example 'add_filter' => array( 'premise_field_input', array( $this, 'my_field_input' ) )
 	 *
 	 * @since 1.2 
 	 */
 	protected function add_filters() {
 		
-		if ( ! empty( $this->field['add_filter'] ) && strpos( $this->field['add_filter'], ':' ) ) {
-
-			$filter = explode( ':', $this->field['add_filter'] );
+		if ( ! empty( $this->field['add_filter'] )
+			&& is_array( $this->field['add_filter'] ) ) {
 
 			add_filter( $filter[0], $filter[1] );
 
