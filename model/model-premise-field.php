@@ -930,13 +930,27 @@ class PremiseField {
 	/**
 	 * Filter the textarea for wp_color field
 	 *
-	 * @since 1.2 
+	 * @since 1.2
+	 *
+	 * @see http://stackoverflow.com/questions/18318537/using-wordpress-color-picker-in-post-options
 	 * 
 	 * @param  string $field html for textarea field
 	 * @return string        new html
 	 */
 	public function wp_color_input( $field ) {
-		return str_replace( 'type="wp_color"', 'type="text" data-type="wp_color" class="premise-wp_color"', $field );
+
+		wp_enqueue_script( 'wp-color-picker' );
+		wp_enqueue_style( 'wp-color-picker' );
+
+		$js = "<script>
+			jQuery(document).ready(function($) {
+				$('#" . $this->get_id_att() . "').wpColorPicker();
+			});
+		</script>";
+
+		$field = str_replace( 'type="wp_color"', 'type="text" data-type="wp_color" class="premise-wp_color"', $field );
+
+		return $js . $field;
 	}
 
 
