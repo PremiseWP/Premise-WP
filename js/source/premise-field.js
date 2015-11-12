@@ -23,6 +23,16 @@
 var PremiseField = {
 
 	/**
+	 * Holds jQuery object for tooltip elements
+	 * 
+	 * @type {object}
+	 */
+	tooltip: null,
+
+
+
+
+	/**
 	 * Holds jQuery object for fa_icon button to open icons.
 	 * 
 	 * @type {object}
@@ -62,6 +72,9 @@ var PremiseField = {
 	 */
 	init: function() {
 
+		// tooltips
+		this.tooltip = jQuery('.premise-field .premise-tooltip');
+
 		// The show icons button
 		this.faShowIconsBtn = jQuery('.premise-field-fa_icon .premise-choose-icon');
 
@@ -98,6 +111,11 @@ var PremiseField = {
 	 */
 	bindEvents: function() {
 
+		// bind tooltip
+		if ( this.tooltip.length > 0 ) {
+			this.tooltip.mouseenter(this.adjustTooltip);
+		}
+
 		// Display FA icons when btn is clicked or
 		// when the field itself is clicked on
 		this.faShowIconsBtn.click(PremiseField.faIcon.showIcons);
@@ -114,6 +132,37 @@ var PremiseField = {
 
 		// Bind success message
 		jQuery(document).on('premiseFieldAfterInit', function(){console.log('PremiseField Object Initited successfully.')});
+	},
+
+
+
+
+	adjustTooltip: function() {
+		var self = PremiseField;
+
+		var W = jQuery(window).width(),
+		H = jQuery(window).height(),
+		$this = jQuery(this),
+		tip = $this.find('.premise-tooltip-inner'),
+		arrow = $this.find('.premise-tooltip-inner:after'),
+		w = tip.outerWidth(true),
+		h = tip.outerHeight(true),
+		adjust;
+console.log(w);
+
+		var position = ( tip.offset().top - h < h ) ? 'top' : 'bottom';
+		tip.addClass('premise-tooltip-'+position);
+		
+		if ( tip.offset().left + w > W ) {
+			adjust =  ( tip.offset().left + w ) - W;
+			tip.css('margin-left', '-'+adjust+'px');
+		}
+
+		$this.mouseleave(function(){
+			tip.removeClass('premise-tooltip-'+position).removeAttr('style');
+		});
+
+		return false;
 	}
 }
 

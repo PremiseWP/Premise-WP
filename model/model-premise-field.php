@@ -361,10 +361,10 @@ class PremiseField {
 
 		if ( ! empty( $this->field['label'] ) ) {
 			$label .= '<label';
-			$label .= ! empty( $this->field['id'] )       ? ' for="'.esc_attr( $this->field['id'] ).'">'                                           : '>';
+			$label .= ! empty( $this->field['id'] )       ? ' for="'.esc_attr( $this->field['id'] ).'">'                                                                                      : '>';
 			$label .= esc_attr( $this->field['label'] );
-			$label .= ! empty( $this->field['required'] ) ? ' <span class="premise-required">*</span>'                                             : '';
-			$label .= ! empty( $this->field['tooltip'] )  ? ' <span class="premise-tooltip"><i>'.esc_attr( $this->field['tooltip'] ).'</i></span>' : '';
+			$label .= ! empty( $this->field['required'] ) ? ' <span class="premise-required">*</span>'                                                                                        : '';
+			$label .= ! empty( $this->field['tooltip'] )  ? ' <span class="premise-tooltip"><span class="premise-tooltip-inner"><i>'.esc_attr( $this->field['tooltip'] ).'</i></span></span>' : '';
 			$label .= '</label>';
 		}
 
