@@ -327,9 +327,9 @@ class PremiseField {
 		if ( ! empty( $this->field['add_filter'] )
 			&& is_array( $this->field['add_filter'] ) ) {
 
-			add_filter( $filter[0], $filter[1] );
+			add_filter( $this->field['add_filter'][0], $this->field['add_filter'][1] );
 
-			array_push( $this->filters_used, $filter[0] );
+			array_push( $this->filters_used, $this->field['add_filter'][0] );
 		}
 
 		if ( 'fa_icon' == $this->type ) {
