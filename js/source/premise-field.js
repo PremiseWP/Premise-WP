@@ -148,18 +148,24 @@ var PremiseField = {
 		w = tip.outerWidth(true),
 		h = tip.outerHeight(true),
 		adjust;
-console.log(w);
 
-		var position = ( tip.offset().top - h < h ) ? 'top' : 'bottom';
-		tip.addClass('premise-tooltip-'+position);
+		var position = ( tip.offset().top - h > h ) ? 'top' : 'bottom';
 		
-		if ( tip.offset().left + w > W ) {
-			adjust =  ( tip.offset().left + w ) - W;
-			tip.css('margin-left', '-'+adjust+'px');
+		if ( tip.offset().left < 0 ) {
+			adjust = tip.offset().left * -1;
+		}
+		else if ( tip.offset().left + w > W ) {
+			adjust =  '-'+( tip.offset().left + w ) - W;
 		}
 
+		console.log(adjust);
+		
+		$this.addClass('premise-tooltip-'+position);
+		tip.css('margin-left', adjust+'px');
+
 		$this.mouseleave(function(){
-			tip.removeClass('premise-tooltip-'+position).removeAttr('style');
+			$this.removeClass('premise-tooltip-'+position);
+			tip.removeAttr('style');
 		});
 
 		return false;
