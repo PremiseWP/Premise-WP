@@ -898,13 +898,18 @@ class PremiseField {
 	/**
 	 * build wp_color field
 	 *
-	 * Right now this only returns a textarea with some classes added to it. 
+	 * Implemented
 	 * Eventually this should have options to search for wp_color to embed and
 	 * display the wp_color belo or something.
+	 *
+	 * @see http://stackoverflow.com/questions/18318537/using-wordpress-color-picker-in-post-options
 	 *
 	 * @since 1.2
 	 */
 	protected function wp_color() {
+
+		wp_enqueue_script( 'wp-color-picker' );
+		wp_enqueue_style( 'wp-color-picker' );
 
 		/**
 		 * We our own filter to alter the html of our input field
@@ -930,13 +935,22 @@ class PremiseField {
 	/**
 	 * Filter the textarea for wp_color field
 	 *
-	 * @since 1.2 
+	 * @since 1.2
 	 * 
 	 * @param  string $field html for textarea field
 	 * @return string        new html
 	 */
 	public function wp_color_input( $field ) {
-		return str_replace( 'type="wp_color"', 'type="text" data-type="wp_color" class="premise-wp_color"', $field );
+
+		$js = "<script>
+			jQuery(document).ready(function($) {
+				$('#" . $this->get_id_att() . "').wpColorPicker();
+			});
+		</script>";
+
+		$field = str_replace( 'type="wp_color"', 'type="text" data-type="wp_color" class="premise-wp_color"', $field );
+
+		return $js . $field;
 	}
 
 
