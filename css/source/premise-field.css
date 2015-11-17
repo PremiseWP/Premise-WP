@@ -174,7 +174,7 @@
 .premise-field .premise-tooltip:after {
 	content: '';
 	position: absolute;
-	z-index: 9;
+	z-index: 99999;
 	left: 50%;
 	margin-left: -15px;
 	border-width: 15px 15px 15px 15px;
@@ -198,7 +198,7 @@
 
 .premise-field .premise-tooltip > .premise-tooltip-inner {
 	position: absolute;
-	z-index: 99;
+	z-index: 99999;
 	left: -160px;
 	display: inline-block;
 	margin: 20px;
