@@ -12,7 +12,7 @@ To begin using Premise WP simply download and install the plugin, once you activ
 ### Make Premise WP required in your project
 
 To ensure that your theme or plugin runs smoothly and without issues when your users install it, you may want to make Premise WP required by your project. This way, Wordpress will know
-that without Premise WP installed and active things may break and it will notify the user to install it. For this functionality we make use of the [TGM Activation Plugin Class](https://github.com/TGMPA/TGM-Plugin-Activation, TGM Activation Plugin Class).
+that without Premise WP installed and active things may break and it will notify the user to install it. For this functionality we make use of the [TGM Activation Plugin Class](https://github.com/TGMPA/TGM-Plugin-Activation).
 To implement, copy and paste the code below into your project and edit `Path_To_TGM_Plugin_Activation_Class` and `my_unique_id`.
 
 ```php
@@ -318,6 +318,6 @@ Hook                               | Type         | Description                 
 
 #### 1.2  
 * Updated `PremiseField` class. Made it simpler to create fields, added filters, added `video` field.
-* Changed arameters for `premise_field()`. This function now takes a string as first param which makes it possible to create a field simpler e.g. `premise_field( 'text' )`.
-* Added prefix `premise-` to all classes of Premise WP CSS Framework. Divided CSS into sectins each in its own file.
+* Changed parameters for `premise_field()`. This function now takes a string as first param which makes it possible to create a field simpler e.g. `premise_field( 'text' )`.
+* Added prefix `premise-` to all classes of Premise WP CSS Framework. Divided CSS into sections each in its own file.
 * Started moving Premise WP JS into objects. Still a lot of work left here.
