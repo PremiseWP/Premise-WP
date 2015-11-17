@@ -49,6 +49,7 @@ class PremiseField {
 		'tooltip'    => '',      // Adds a tooltip and tooltip functionality to field
 		'add_filter' => array(), // Add filter(s) to this field. Read documentation for list of filters
 		'context'    => '',      // Used to let Premise know where to retrieve values from ( post, user )
+		'wrapper_class' => '',   // Add additional classes to the fields wrapper
 		/**
 		 * Normal Parameters
 		 */
@@ -1138,7 +1139,8 @@ class PremiseField {
 		unset( $_field['options'] );
 		unset( $_field['value_att'] );
 		unset( $_field['attribute'] );
-		unset( $_field['context'] ); 
+		unset( $_field['context'] );
+		unset( $_field['wrapper_class'] );
 
 		foreach ( $_field as $k => $v ) {
 			$field .= ! empty( $v ) ? ' '.esc_attr( $k ).'="'.esc_attr( $v ).'"' : '';
