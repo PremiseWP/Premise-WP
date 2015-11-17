@@ -137,7 +137,7 @@ $defaults = array(
 	 */
 	'label'      => '',      // Wraps label element around field. uses id for for attribute if id not empty
 	'tooltip'    => '',      // Adds a tooltip to field
-	'add_filter' => '',      // Add a filter to this field. Read documentation for list of filters
+	'add_filter' => array(), // Add filter(s) to this field. Read documentation for list of filters
 	'context'    => '',      // Used to let Premise know where to retrieve values from ( post, user )
 	/**
 	 * Normal Parameters

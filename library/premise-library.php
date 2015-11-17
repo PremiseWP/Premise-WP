@@ -14,29 +14,31 @@
 
 
 /**
- * premise_get_value()
+ * Get the value from any option, including options from a post or a user.
  *
  * This function allows you to retrieve options saved in the Wordpress database whether they 
  * are saved within a post, a user profile or in the 'options' table. You can also retreive
  * options quickly by passing the 'name' attribute used on that particualr field. So if the 
- * field's name attribute looks like this: 'name="option[array1][array2]', by simply calling
- * premise_get_option( 'option[array1][array2]' ), Premise WP will retrieve the value saved in
- * [array2].
+ * field's name attribute looks like this: <code>name="option[array1][array2]</code>, by simply
+ * calling <code>premise_get_option( 'option[array1][array2]' )</code>, Premise WP will retrieve 
+ * the value saved in <code>[array2]</code>
  *
  * By passing a context param, you can tell the function where to look for the option. So if 
- * you pass the context 'post', the function will look for the value using Wordpress' built in
- * get_post_meta(), instead of get_option(). At the same time if you pass the context 'user'
- * the function will use get_user_meta() to retreive the data you are looking for.
+ * you pass the <code>'context' => 'post'</code>, the function will look for the value using Wordpress' built
+ * in <code>get_post_meta()</code>, instead of <code>get_option()</code>. At the same time
+ * if you pass the <code>'context' => 'user'</code> the function will use <code>get_user_meta()</code> to retreive
+ * the data you are looking for.
  * 
  * The context param can be an array containing the post or user id and the single param used by 
- * both get_post_meta() and get_user_meta().
+ * both <code>get_post_meta()</code> and <code>get_user_meta()</code>
  *
- * This following will retireve the value [array2], from post ID 78:
- * premise_get_option( 'option[array1][array2]', array(
- * 	   'context' => 'post',
- *     'id'      => '78',
- *     'single'  => false
+ * The following will retireve the value <samp>[array2]</samp>, from post ID 78:
+ * <pre><code>premise_get_option( 'option[array1][array2]', array(
+ * 	'context' => 'post',
+ * 	'id'      => '78',
+ * 	'single'  => false
  * ) );
+ * </code></pre>
  * 
  * @see https://developer.wordpress.org/reference/functions/get_post_meta/ single param is the last param this function takes
  * @see https://developer.wordpress.org/reference/functions/get_user_meta/ single param is the last param this function takes

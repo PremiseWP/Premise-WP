@@ -47,8 +47,9 @@ class PremiseField {
 		 */
 		'label'      => '',      // Wraps label element around field. uses id for for attribute if id not empty
 		'tooltip'    => '',      // Adds a tooltip and tooltip functionality to field
-		'add_filter' => '',      // Add a filter to this field. Read documentation for list of filters
+		'add_filter' => array(), // Add filter(s) to this field. Read documentation for list of filters
 		'context'    => '',      // Used to let Premise know where to retrieve values from ( post, user )
+		'wrapper_class' => '',   // Add additional classes to the fields wrapper
 		/**
 		 * Normal Parameters
 		 */
@@ -317,20 +318,39 @@ class PremiseField {
 	 * This has to run first to make sure that our filters get hooked before they are called.
 	 * Unsets the filter argument at the end to avoid conflicts when printing attributes on field.
 	 *
-	 * Filters are passed strings containing the name of the filter and the function to call separated
-	 * by a ':'. i.e. premise_field_html_after_wrapper:function_to_call
+	 * Filters are passed arrays containing the name of the filter and the function to call separated
+	 *
+	 * @example 'add_filter' => array( 'premise_field_input', array( $this, 'my_field_input' ) )
+	 *
+	 * @example 'add_filter' => array(
+	 *              array( 'premise_field_input', array( $this, 'my_field_input' ) ), // Filter 1
+	 *              array( 'premise_field_input', array( $this, 'my_field_input2' ) ), // Filter 2
+	 *          )
 	 *
 	 * @since 1.2 
 	 */
 	protected function add_filters() {
 		
-		if ( ! empty( $this->field['add_filter'] ) && strpos( $this->field['add_filter'], ':' ) ) {
+		if ( ! empty( $this->field['add_filter'] )
+			&& is_array( $this->field['add_filter'] ) ) {
 
-			$filter = explode( ':', $this->field['add_filter'] );
+			// Array of arrays (multiple filters)
+			if ( is_array( $this->field['add_filter'][0] ) )
+			{
+				foreach( $this->field['add_filter'] as $filter ) {
 
-			add_filter( $filter[0], $filter[1] );
+					add_filter( $filter[0], $filter[1] );
 
-			array_push( $this->filters_used, $filter[0] );
+					array_push( $this->filters_used, $filter[0] );
+				}
+			}
+			// 1 filter
+			else
+			{
+				add_filter( $this->field['add_filter'][0], $this->field['add_filter'][1] );
+
+				array_push( $this->filters_used, $this->field['add_filter'][0] );
+			}
 		}
 
 		if ( 'fa_icon' == $this->type ) {
@@ -361,10 +381,10 @@ class PremiseField {
 
 		if ( ! empty( $this->field['label'] ) ) {
 			$label .= '<label';
-			$label .= ! empty( $this->field['id'] )       ? ' for="'.esc_attr( $this->field['id'] ).'">'                                           : '>';
+			$label .= ! empty( $this->field['id'] )       ? ' for="'.esc_attr( $this->field['id'] ).'">'                                                                                      : '>';
 			$label .= esc_attr( $this->field['label'] );
-			$label .= ! empty( $this->field['required'] ) ? ' <span class="premise-required">*</span>'                                             : '';
-			$label .= ! empty( $this->field['tooltip'] )  ? ' <span class="premise-tooltip"><i>'.esc_attr( $this->field['tooltip'] ).'</i></span>' : '';
+			$label .= ! empty( $this->field['required'] ) ? ' <span class="premise-required">*</span>'                                                                                        : '';
+			$label .= ! empty( $this->field['tooltip'] )  ? ' <span class="premise-tooltip"><span class="premise-tooltip-inner"><i>'.esc_attr( $this->field['tooltip'] ).'</i></span></span>' : '';
 			$label .= '</label>';
 		}
 
@@ -898,13 +918,18 @@ class PremiseField {
 	/**
 	 * build wp_color field
 	 *
-	 * Right now this only returns a textarea with some classes added to it. 
+	 * Implemented
 	 * Eventually this should have options to search for wp_color to embed and
 	 * display the wp_color belo or something.
+	 *
+	 * @see http://stackoverflow.com/questions/18318537/using-wordpress-color-picker-in-post-options
 	 *
 	 * @since 1.2
 	 */
 	protected function wp_color() {
+
+		wp_enqueue_script( 'wp-color-picker' );
+		wp_enqueue_style( 'wp-color-picker' );
 
 		/**
 		 * We our own filter to alter the html of our input field
@@ -930,13 +955,22 @@ class PremiseField {
 	/**
 	 * Filter the textarea for wp_color field
 	 *
-	 * @since 1.2 
+	 * @since 1.2
 	 * 
 	 * @param  string $field html for textarea field
 	 * @return string        new html
 	 */
 	public function wp_color_input( $field ) {
-		return str_replace( 'type="wp_color"', 'type="text" data-type="wp_color" class="premise-wp_color"', $field );
+
+		$js = "<script>
+			jQuery(document).ready(function($) {
+				$('#" . $this->get_id_att() . "').wpColorPicker();
+			});
+		</script>";
+
+		$field = str_replace( 'type="wp_color"', 'type="text" data-type="wp_color" class="premise-wp_color"', $field );
+
+		return $js . $field;
 	}
 
 
@@ -1105,7 +1139,8 @@ class PremiseField {
 		unset( $_field['options'] );
 		unset( $_field['value_att'] );
 		unset( $_field['attribute'] );
-		unset( $_field['context'] ); 
+		unset( $_field['context'] );
+		unset( $_field['wrapper_class'] );
 
 		foreach ( $_field as $k => $v ) {
 			$field .= ! empty( $v ) ? ' '.esc_attr( $k ).'="'.esc_attr( $v ).'"' : '';
