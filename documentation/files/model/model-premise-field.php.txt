@@ -49,6 +49,7 @@ class PremiseField {
 		'tooltip'    => '',      // Adds a tooltip and tooltip functionality to field
 		'add_filter' => '',      // Add a filter to this field. Read documentation for list of filters
 		'context'    => '',      // Used to let Premise know where to retrieve values from ( post, user )
+		'wrapper_class' => '',
 		/**
 		 * Normal Parameters
 		 */
@@ -338,9 +339,8 @@ class PremiseField {
 			array_push( $this->filters_used, 'premise_field_html_after_wrapper' );
 		}
 
-		if ( 'checkbox' == $this->type || 'radio' == $this->type ) {
-			add_filter( 'premise_field_label_html', array( $this, 'silent_label' ) );
-			array_push( $this->filters_used, 'premise_field_label_html' );
+		if ( 'wp_media' == $this->type ) {
+			wp_enqueue_media();
 		}
 		
 		unset( $this->field['add_filter'] );
@@ -362,10 +362,10 @@ class PremiseField {
 
 		if ( ! empty( $this->field['label'] ) ) {
 			$label .= '<label';
-			$label .= ! empty( $this->field['id'] )       ? ' for="'.esc_attr( $this->field['id'] ).'">'                                           : '>';
+			$label .= ! empty( $this->field['id'] )       ? ' for="'.esc_attr( $this->field['id'] ).'">'                                                                                      : '>';
 			$label .= esc_attr( $this->field['label'] );
-			$label .= ! empty( $this->field['required'] ) ? ' <span class="premise-required">*</span>'                                             : '';
-			$label .= ! empty( $this->field['tooltip'] )  ? ' <span class="premise-tooltip"><i>'.esc_attr( $this->field['tooltip'] ).'</i></span>' : '';
+			$label .= ! empty( $this->field['required'] ) ? ' <span class="premise-required">*</span>'                                                                                        : '';
+			$label .= ! empty( $this->field['tooltip'] )  ? ' <span class="premise-tooltip"><span class="premise-tooltip-inner"><i>'.esc_attr( $this->field['tooltip'] ).'</i></span></span>' : '';
 			$label .= '</label>';
 		}
 
@@ -595,7 +595,7 @@ class PremiseField {
 		
 		$field .= $this->get_atts();
 
-		$field .= '><label for="'.esc_attr( $this->field['id'] ).'" class="premise-field-state"></label>';
+		$field .= '>';
 
 		return $field;
 
@@ -619,26 +619,9 @@ class PremiseField {
 		
 		$field .= $this->get_atts();
 
-		$field .= '><label for="'.esc_attr( $this->field['id'] ).'" class="premise-field-state"></label>';
+		$field .= '>';
 
 		return $field;
-	}
-
-
-
-
-
-	/**
-	 * Returns the label for a field as a <p> element so it is not clickable. 
-	 * Also adds 'class="premise-label"' for styling. Used for checkbox and radio fields.
-	 *
-	 * @since 1.2 
-	 *
-	 * @param  string $label html for the label field
-	 * @return string        returns silent label
-	 */
-	public function silent_label( $label ) {
-		return str_replace( array( '<label', '</label>' ), array( '<p class="premise-label"', '</p>' ), $label );
 	}
 
 
@@ -844,11 +827,12 @@ class PremiseField {
 	 * @return string html for fa icons
 	 */
 	public function fa_icons() {
-		$icons = '<div class="premise-field-fa-icons-container" style="display:none;"><ul>';
+		$icons = '<div class="premise-field-fa-icons-container" style="display:none;">
+				  <div class="premise-field-fa-icons-container-inner"><ul class="premise-row">';
 		
 		foreach ( (array) premise_get_fa_icons() as $icon ) {
 			
-			$icons .= '<li class="premise-field-fa-icon-li premise-inline-block premise-float-left">
+			$icons .= '<li class="premise-field-fa-icon-li premise-inline-block premise-float-left span1">
 				<a href="javascript:;" class="premise-field-fa-icon-anchor premise-block" data-icon="'.$icon.'">
 					<i class="fa fa-fw '.$icon.'"></i>
 				</a>
@@ -856,7 +840,7 @@ class PremiseField {
 
 		}
 
-		$icons .= '</ul></div>';
+		$icons .= '</ul></div></div>';
 
 		return $icons;
 	}
@@ -1122,7 +1106,8 @@ class PremiseField {
 		unset( $_field['options'] );
 		unset( $_field['value_att'] );
 		unset( $_field['attribute'] );
-		unset( $_field['context'] ); 
+		unset( $_field['context'] );
+		unset( $_field['wrapper_class'] );
 
 		foreach ( $_field as $k => $v ) {
 			$field .= ! empty( $v ) ? ' '.esc_attr( $k ).'="'.esc_attr( $v ).'"' : '';

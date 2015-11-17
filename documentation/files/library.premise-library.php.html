@@ -113,12 +113,12 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="../reports/errors.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">6</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">12</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="../reports/markers.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
                                 </a>
                             </li>
                         </ul>
@@ -138,18 +138,20 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1544696897"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1223589457"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1544696897" class="accordion-body collapse in">
+            <div id="namespace-1223589457" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
                     <ul>
                                                                                                     <li class="class"><a href="../classes/Premise_WP.html">Premise_WP</a></li>
+                                                    <li class="class"><a href="../classes/PremiseVersion.html">PremiseVersion</a></li>
                                                     <li class="class"><a href="../classes/PremiseCPT.html">PremiseCPT</a></li>
                                                     <li class="class"><a href="../classes/PremiseField.html">PremiseField</a></li>
                                                     <li class="class"><a href="../classes/A.html">A</a></li>
+                                                    <li class="class"><a href="../classes/Premise_Options.html">Premise_Options</a></li>
                                             </ul>
                 </div>
             </div>
@@ -206,25 +208,27 @@ to work properly. This library cannot be excluded from Premise WP.</p>
                 <h3 class=" ">premise_get_value()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">premise_get_value(string <span class="argument">$name</span>, mixed <span class="argument">$context</span>) : mixed</pre>
-                <p><em>premise_get_value()</em></p>
+                <p><em>Get the value from any option, including options from a post or a user.</em></p>
                 <p>This function allows you to retrieve options saved in the Wordpress database whether they
 are saved within a post, a user profile or in the 'options' table. You can also retreive
 options quickly by passing the 'name' attribute used on that particualr field. So if the
-field's name attribute looks like this: 'name="option[array1][array2]', by simply calling
-premise_get_option( 'option[array1][array2]' ), Premise WP will retrieve the value saved in
-[array2].</p>
+field's name attribute looks like this: <code>name="option[array1][array2]</code>, by simply
+calling <code>premise_get_option( 'option[array1][array2]' )</code>, Premise WP will retrieve
+the value saved in <code>[array2]</code></p>
 <p>By passing a context param, you can tell the function where to look for the option. So if
-you pass the context 'post', the function will look for the value using Wordpress' built in
-get_post_meta(), instead of get_option(). At the same time if you pass the context 'user'
-the function will use get_user_meta() to retreive the data you are looking for.</p>
+you pass the <code>'context' => 'post'</code>, the function will look for the value using Wordpress' built
+in <code>get_post_meta()</code>, instead of <code>get_option()</code>. At the same time
+if you pass the <code>'context' => 'user'</code> the function will use <code>get_user_meta()</code> to retreive
+the data you are looking for.</p>
 <p>The context param can be an array containing the post or user id and the single param used by
-both get_post_meta() and get_user_meta().</p>
-<p>This following will retireve the value [array2], from post ID 78:
-premise_get_option( 'option[array1][array2]', array(</p>
-<pre><code>   'context' =&gt; 'post',
-'id'      =&gt; '78',
-'single'  =&gt; false</code></pre>
-<p>) );</p>
+both <code>get_post_meta()</code> and <code>get_user_meta()</code></p>
+<p>The following will retireve the value <samp>[array2]</samp>, from post ID 78:</p>
+<pre><code>premise_get_option( 'option[array1][array2]', array(
+    'context' => 'post',
+    'id'      => '78',
+    'single'  => false
+) );
+</code></pre>
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
@@ -666,7 +670,7 @@ The string includes only letters and numbers at this point.</p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on November 10th, 2015 at 01:49.
+                    on November 14th, 2015 at 04:58.
                 </section>
             </section>
         </section>

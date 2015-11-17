@@ -14,8 +14,23 @@
 
 
 
+// Block direct access to this file
+defined( 'ABSPATH' ) or die();
 
+
+
+
+/**
+ * Define Premise path
+ */
 define( 'PREMISE_PATH', plugin_dir_path(__FILE__) );
+
+
+
+
+/**
+ * Define Premise url
+ */
 define( 'PREMISE_URL', plugin_dir_url(__FILE__) );
 
 
