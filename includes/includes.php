@@ -10,6 +10,7 @@
 /**
  * Model
  */
+include_once( PREMISE_PATH . 'model/model-premise-options.php' );
 include_once( PREMISE_PATH . 'model/model-premise-field.php' );
 include_once( PREMISE_PATH . 'model/model-premise-custom-post-type.php' );
 
