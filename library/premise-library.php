@@ -101,7 +101,7 @@ function premise_get_value( $name = '', $context = '' ) {
 		$value = $value[0];
 
 	// like get_option(), return FALSE if no value
-	return ! empty( $value ) ? $value : false;
+	return ! empty( $value ) || $value == '0' ? $value : false;
 }
 
 
