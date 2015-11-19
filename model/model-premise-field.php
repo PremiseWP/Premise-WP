@@ -496,11 +496,11 @@ class PremiseField {
 		 * 
 		 * @var string
 		 */
-		$html = '<div class="'.$this->get_wrapper_class().'">';
+		$html = '<div class="' . $this->get_wrapper_class() . '">';
 		
 			$html .= $this->label;
 
-			$html .= '<div class="premise-field-'.$this->type.'">';
+			$html .= '<div class="premise-field-' . $this->type . '">';
 
 				$html .= $this->field_html;
 
@@ -1170,6 +1170,8 @@ class PremiseField {
 	 * This basically takes every parameter that was passed and adds it as a class
 	 * to the wrapper html with premise-field- as a prefix, additionally to the
 	 * regular class - premise-field.
+	 *
+	 * Then, the 'wrapper_class' parameter is appended.
 	 * 
 	 * @return string classes for field wrapper
 	 */
@@ -1178,10 +1180,14 @@ class PremiseField {
 		// Start with the main classes
 		$class = 'premise-field premise-field-type-' . $this->type;
 
-		$class .= ! empty( $this->wrapper_class ) ? ' ' . $this->wrapper_class : '';
-
 		foreach( $this->field as $k => $v ) {
 			$class .= ! empty( $v ) ? ' premise-field-' . esc_attr( $k ) : '';
+		}
+
+		// Append 'wrapper_class' parameter
+		if ( ! empty( $this->field['wrapper_class'] ) ) {
+
+			$class .= ' ' . esc_attr( $this->field['wrapper_class'] );
 		}
 
 		/**
@@ -1191,9 +1197,7 @@ class PremiseField {
 		 *
 		 * @premise-hook premise_field_wrapper_class do filter for wrapper classes
 		 */
-		$class = apply_filters( 'premise_field_wrapper_class', $class );
-
-		return $class;
+		return apply_filters( 'premise_field_wrapper_class', $class );
 	}
 
 
