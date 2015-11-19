@@ -1166,6 +1166,8 @@ class PremiseField {
 		// Start with the main classes
 		$class = 'premise-field premise-field-type-' . $this->type;
 
+		$class .= ! empty( $this->wrapper_class ) ? ' ' . $this->wrapper_class : '';
+
 		foreach( $this->field as $k => $v ) {
 			$class .= ! empty( $v ) ? ' premise-field-' . esc_attr( $k ) : '';
 		}
