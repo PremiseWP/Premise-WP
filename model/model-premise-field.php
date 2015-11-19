@@ -610,7 +610,9 @@ class PremiseField {
 		
 		$field  = '<input type="'. $this->type .'"';
 
-		$field .= ! empty( $this->field['value_att'] ) ? ' value="' . $this->field['value_att'] . '"' : 'value="1"';
+		$field .= isset( $this->field['value_att'] ) && ! $this->empty_value( $this->field['value_att'] ) ?
+			' value="' . $this->field['value_att'] . '"' :
+			' value="1"';
 		
 		$field .= $this->get_atts();
 
@@ -634,7 +636,9 @@ class PremiseField {
 		
 		$field  .= '<input type="'.$this->type.'"';
 
-		$field .= ! empty( $this->field['value_att'] ) ? ' value="' . $this->field['value_att'] . '"' : 'value="1"';
+		$field .= isset( $this->field['value_att'] ) && ! $this->empty_value( $this->field['value_att'] ) ?
+			' value="' . $this->field['value_att'] . '"' :
+			' value="1"';
 		
 		$field .= $this->get_atts();
 
@@ -986,7 +990,8 @@ class PremiseField {
 	 */
 	protected function get_db_value() {
 		
-		if ( ! empty( $this->args['value'] ) ) {
+		if ( isset( $this->args['value'] )
+			&& ! $this->empty_value( $this->args['value'] ) ) {
 			$val = $this->args['value'];
 		}
 		else {
@@ -1000,10 +1005,12 @@ class PremiseField {
 			$val = premise_get_value( $name, $context );
 		}
 
-		if ( $val ) 
+		if ( ! $this->empty_value( $val ) )
 			return esc_attr( $val );
 		else 
-			return ! empty( $this->args['default'] ) ? esc_attr( $this->args['default'] ) : '';
+			return isset( $this->args['default'] ) && ! $this->empty_value( $this->args['default'] ) ?
+				esc_attr( $this->args['default'] ) :
+				'';
 	}
 
 
@@ -1128,8 +1135,13 @@ class PremiseField {
 		if ( 'select' == $this->type || 'textarea' == $this->type )
 			unset( $_field['value'] );
 
-		if ( 'radio' == $this->type || 'checkbox' == $this->type )
-			$field .= ! empty( $this->field['value_att'] ) && ! empty( $_field['value'] ) ? ' ' . checked( $this->field['value_att'], $_field['value'], false ) : '';
+		if ( 'radio' == $this->type || 'checkbox' == $this->type ) {
+
+			$field .= isset( $this->field['value_att'] ) && ! $this->empty_value( $this->field['value_att'] )
+				&& isset( $_field['value'] ) && ! $this->empty_value( $_field['value'] ) ?
+				' ' . checked( $this->field['value_att'], $_field['value'], false ) :
+				'';
+		}
 
 		unset( $_field['label'] );
 		unset( $_field['tooltip'] );
@@ -1143,7 +1155,7 @@ class PremiseField {
 		unset( $_field['wrapper_class'] );
 
 		foreach ( $_field as $k => $v ) {
-			$field .= ! empty( $v ) ? ' '.esc_attr( $k ).'="'.esc_attr( $v ).'"' : '';
+			$field .= ! $this->empty_value( $v ) ? ' '.esc_attr( $k ).'="'.esc_attr( $v ).'"' : '';
 		}
 		
 		return $field;
@@ -1211,5 +1223,28 @@ class PremiseField {
 	public function get_field() {
 		return $this->html;
 	}
+
+
+
+
+	/**
+	 * Is value empty?
+	 * Allow '0' values
+	 * Prefer empty_value over PHP empty function when checking for empty values
+	 * excluding 0, '0' or 0.0 values
+	 *
+	 * @link http://php.net/empty
+	 *
+	 * @since 1.2
+	 *
+	 * @example if ( isset( $value ) && ! $this->empty_value( $value ) )
+	 *
+	 * @param  string  $value Value
+	 *
+	 * @return boolean True if empty value & value != '0', else false
+	 */
+	public function empty_value( $value ) {
+
+		return empty( $value ) && $value != '0';
+	}
 }
-?>
