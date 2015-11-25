@@ -1137,9 +1137,14 @@ class PremiseField {
 
 		if ( 'radio' == $this->type || 'checkbox' == $this->type ) {
 
-			$field .= isset( $this->field['value_att'] ) && ! $this->empty_value( $this->field['value_att'] )
-				&& isset( $_field['value'] ) && ! $this->empty_value( $_field['value'] ) ?
-				' ' . checked( $this->field['value_att'], $_field['value'], false ) :
+			$field .= isset( $_field['value'] ) && ! $this->empty_value( $_field['value'] ) ?
+				' ' . checked(
+					isset( $this->field['value_att'] ) && ! $this->empty_value( $this->field['value_att'] ) ?
+						$this->field['value_att'] :
+						'1',
+					$_field['value'],
+					false
+				) :
 				'';
 		}
 
