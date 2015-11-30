@@ -96,9 +96,12 @@ function premise_get_value( $name = '', $context = '' ) {
 	/**
 	 * if value is still in array but with only one value
 	 * get tha value and return it.
+	 *
+	 * FJ fix error index 0 not set
+	 * Return array anyway
 	 */
-	if ( is_array( $value ) && ( 1 == count( $value ) ) )
-		$value = $value[0];
+	/*if ( is_array( $value ) && ( 1 == count( $value ) ) )
+		$value = $value[0];*/
 
 	// like get_option(), return FALSE if no value
 	return ! empty( $value ) || $value == '0' ? $value : false;
