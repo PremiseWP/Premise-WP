@@ -86,6 +86,8 @@ class Premise_Options {
 	 * 
 	 * Register our 2 main hooks <code>admin_init</code> and <code>admin_menu</code>.
 	 *
+	 * @link https://codex.wordpress.org/Function_Reference/wp_create_nonce for more information on wp_create_nonce()
+	 *
 	 * @param mixed $title       can be a string with page title, or array with $this->menu_page_args
 	 * @param array $fields      array of fields to insert into page
 	 * @param mixed $option_name can be a string with option name, or array with multiple names
@@ -175,6 +177,9 @@ class Premise_Options {
 
 	/**
 	 * Display the options page content
+	 *
+	 * @link https://codex.wordpress.org/Function_Reference/wp_nonce_field  for more information on wp_nonce_field()
+	 * @link https://codex.wordpress.org/Function_Reference/settings_fields for more information on settings_fields()
 	 * 
 	 * @return string the page content
 	 */
@@ -185,9 +190,12 @@ class Premise_Options {
 			<?php 
 			if ( ! empty( $this->fields ) ) { 
 				echo '<form action="options.php" method="post">';
-				wp_nonce_field( $this->nonce );
-				settings_fields( $this->option_group );
-				premise_field_section( $this->fields );
+					wp_nonce_field( $this->nonce, $_POST['_wpnonce'], true, true );
+					settings_fields( $this->option_group );
+					
+					// echo our fields
+					premise_field_section( $this->fields );
+
 				echo '</form>';
 			}
 			else {
