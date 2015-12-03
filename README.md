@@ -162,7 +162,7 @@ the fields won't work poroperly.
 
 ### Create an option page in one function  
 
-Now you can create a full options page, add it to the admin menu, and insert fields, by calling just one function. Here is how it works..  
+Now you can create a full options page, add it to the admin menu, and insert fields by calling just one function. Here is how it works..  
 
 Premise WP has a class `Premise_Options`, and when instantiated it will create a new admin page for you. All you should do is give it a title 
 and some fields. Technically you dont need to pass anything to this class, but if you dont it will just create a blank page, we did  this on 
