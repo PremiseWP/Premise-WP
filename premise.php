@@ -135,7 +135,7 @@ class Premise_WP {
 	 * @since 1.0
 	 */
 	protected function do_includes() {
-		require( 'includes/includes.php' );
+		require_once 'includes/includes.php';
 	}
 
 	
