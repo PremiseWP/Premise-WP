@@ -13,6 +13,12 @@
 
 
 
+// Block direct access to this file
+defined( 'ABSPATH' ) or die();
+
+
+
+
 /**
  * Get the value from any option, including options from a post or a user.
  *

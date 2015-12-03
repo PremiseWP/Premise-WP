@@ -8,6 +8,15 @@
  * @subpackage Model
  */
 
+
+
+
+// Block direct access to this file
+defined( 'ABSPATH' ) or die();
+
+
+
+
 /**
  * PremiseField Class
  *

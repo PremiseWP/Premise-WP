@@ -8,6 +8,15 @@
  * @subpackage Model
  */
 
+
+
+
+// Block direct access to this file
+defined( 'ABSPATH' ) or die();
+
+
+
+
 /**
  * This Premise WP class is based on jjgrainger's CPT class.
  * Used to help create custom post types for Wordpress.

@@ -11,6 +11,12 @@
 
 
 
+// Block direct access to this file
+defined( 'ABSPATH' ) or die();
+
+
+
+
 /**
  * The main Premise Options class
  */
