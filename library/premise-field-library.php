@@ -102,7 +102,7 @@ function premise_field_section( $args = array(), $echo = true ) {
 
 	$html = ''; // Start with a clean section
 
-	foreach( $args as $k => $v ) {
+	foreach ( $args as $k => $v ) {
 
 		if ( is_array( $v ) ) {
 			// Pass each field args as first parameter

@@ -337,7 +337,7 @@ class PremiseField {
 			// Array of arrays (multiple filters)
 			if ( is_array( $this->field['add_filter'][0] ) )
 			{
-				foreach( $this->field['add_filter'] as $filter ) {
+				foreach ( $this->field['add_filter'] as $filter ) {
 
 					add_filter( $filter[0], $filter[1] );
 
@@ -1187,7 +1187,7 @@ class PremiseField {
 		// Start with the main classes
 		$class = 'premise-field premise-field-type-' . $this->type;
 
-		foreach( $this->field as $k => $v ) {
+		foreach ( $this->field as $k => $v ) {
 			$class .= ! empty( $v ) ? ' premise-field-' . esc_attr( $k ) : '';
 		}
 

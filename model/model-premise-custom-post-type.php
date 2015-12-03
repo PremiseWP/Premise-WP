@@ -586,7 +586,7 @@ class PremiseCPT {
     function register_exisiting_taxonomies() {
 
         if ( is_array( $this->exisiting_taxonomies ) ) {
-            foreach( $this->exisiting_taxonomies as $taxonomy_name ) {
+            foreach ( $this->exisiting_taxonomies as $taxonomy_name ) {
                 register_taxonomy_for_object_type( $taxonomy_name, $this->post_type_name );
             }
         }
@@ -619,7 +619,7 @@ class PremiseCPT {
             }
 
             // foreach exisiting columns
-            foreach( $columns as $key => $title ) {
+            foreach ( $columns as $key => $title ) {
 
                 // add exisiting column to the new column array
                 $new_columns[$key] = $title;
@@ -631,7 +631,7 @@ class PremiseCPT {
                     if ( is_array( $this->taxonomies ) ) {
 
                         // Create a column for each taxonomy.
-                        foreach( $this->taxonomies as $tax ) {
+                        foreach ( $this->taxonomies as $tax ) {
 
                             // WordPress adds Categories and Tags automatically, ignore these
                             if ( $tax !== 'category' && $tax !== 'post_tag' ) {
@@ -686,7 +686,7 @@ class PremiseCPT {
                     $output = array();
 
                     // Loop through each term, linking to the 'edit posts' page for the specific term.
-                    foreach( $terms as $term ) {
+                    foreach ( $terms as $term ) {
 
                         // Output is an array of terms associated with the post.
                         $output[] = sprintf(
