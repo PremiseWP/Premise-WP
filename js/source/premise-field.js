@@ -23,16 +23,6 @@
 var PremiseField = {
 
 	/**
-	 * Holds jQuery object for tooltip elements
-	 * 
-	 * @type {object}
-	 */
-	tooltip: null,
-
-
-
-
-	/**
 	 * Holds jQuery object for fa_icon button to open icons.
 	 * 
 	 * @type {object}
@@ -72,9 +62,6 @@ var PremiseField = {
 	 */
 	init: function() {
 
-		// tooltips
-		this.tooltip = jQuery('.premise-field .premise-tooltip');
-
 		// The show icons button
 		this.faShowIconsBtn = jQuery('.premise-field-fa_icon .premise-choose-icon');
 
@@ -111,11 +98,6 @@ var PremiseField = {
 	 */
 	bindEvents: function() {
 
-		// bind tooltip
-		if ( this.tooltip.length > 0 ) {
-			this.tooltip.mouseenter(this.adjustTooltip);
-		}
-
 		// Display FA icons when btn is clicked or
 		// when the field itself is clicked on
 		this.faShowIconsBtn.click(PremiseField.faIcon.showIcons);
@@ -123,7 +105,7 @@ var PremiseField = {
 
 		// Hide FA icons when the delete btn is clicked on
 		// passing the argument true deletes the field's value
-		this.faHideIconsBtn.click(function(){PremiseField.faIcon.hideIcons(true)});
+		this.faHideIconsBtn.click(function(){PremiseField.faIcon.hideIcons(true);});
 
 		this.faInputField.keyup(PremiseField.faIcon.filterIcons);
 
@@ -131,46 +113,11 @@ var PremiseField = {
 		this.faSelectIconBtn.click(PremiseField.faIcon.insertIcon);
 
 		// Bind success message
-		jQuery(document).on('premiseFieldAfterInit', function(){console.log('PremiseField Object Initited successfully.')});
-	},
-
-
-
-
-	adjustTooltip: function() {
-		var self = PremiseField;
-
-		var W = jQuery(window).width(),
-		H = jQuery(window).height(),
-		$this = jQuery(this),
-		tip = $this.find('.premise-tooltip-inner'),
-		arrow = $this.find('.premise-tooltip-inner:after'),
-		w = tip.outerWidth(true),
-		h = tip.outerHeight(true),
-		adjust;
-
-		var position = ( tip.offset().top - h > h ) ? 'top' : 'bottom';
-		
-		if ( tip.offset().left < 0 ) {
-			adjust = tip.offset().left * -1;
-		}
-		else if ( tip.offset().left + w > W ) {
-			adjust =  '-'+( tip.offset().left + w ) - W;
-		}
-
-		console.log(adjust);
-		
-		$this.addClass('premise-tooltip-'+position);
-		tip.css('margin-left', adjust+'px');
-
-		$this.mouseleave(function(){
-			$this.removeClass('premise-tooltip-'+position);
-			tip.removeAttr('style');
-		});
-
-		return false;
+		jQuery(document).on('premiseFieldAfterInit', function(){console.log('PremiseField Object Initited successfully.');});
 	}
-}
+
+
+};
 
 
 
@@ -300,7 +247,7 @@ PremiseField.faIcon = {
 			}
 		});
 	}
-}
+};
 
 
 
@@ -384,30 +331,30 @@ PremiseField.WPMedia = {
 		PremiseField.WPMedia.mediaUploaded = [];
 
 		// If the uploader object has already been created, open it
-	    if (PremiseField.WPMedia.uploader) {
-	        PremiseField.WPMedia.uploader.open();
-	        return;
-	    }
+		if (PremiseField.WPMedia.uploader) {
+			PremiseField.WPMedia.uploader.open();
+			return;
+		}
 
-	    // Extend the wp.media object
-	    PremiseField.WPMedia.uploader = wp.media.frames.file_frame = wp.media({
-	        title: 'Upload Media',
-	        button: {
-	            text: 'Insert Media'
-	        },
-	        multiple: PremiseField.WPMedia.isMulti
-	    });
+		// Extend the wp.media object
+		PremiseField.WPMedia.uploader = wp.media.frames.file_frame = wp.media({
+			title: 'Upload Media',
+			button: {
+				text: 'Insert Media'
+			},
+			multiple: PremiseField.WPMedia.isMulti
+		});
 
-	    /**
-	     * Bind function for when files are inserted
-	     *
-	     * bind here and not in our bindEvents function because on our 
-	     * bindEvents function the uploader object has not been created yet.
-	     */
-	    PremiseField.WPMedia.onInsert();
+		/**
+		 * Bind function for when files are inserted
+		 *
+		 * bind here and not in our bindEvents function because on our 
+		 * bindEvents function the uploader object has not been created yet.
+		 */
+		PremiseField.WPMedia.onInsert();
 
-	    //Open the uploader dialog
-	    PremiseField.WPMedia.uploader.open();
+		//Open the uploader dialog
+		PremiseField.WPMedia.uploader.open();
 	},
 
 
@@ -417,19 +364,19 @@ PremiseField.WPMedia = {
 	 */
 	onInsert: function() {
 		PremiseField.WPMedia.uploader.on('select', function() {
-	        
-	        // get array of attachment objects
-	        attachment = PremiseField.WPMedia.uploader.state().get('selection').toJSON();
-	        
-	        // Loop through images selected and save them to our mediaUploaded var
-	        jQuery(attachment).each(function(i, v){
-	        	PremiseField.WPMedia.mediaUploaded.push(attachment[i].url);
-	        });
-	        
-	        // Update thumbnails
-	        // PremiseField.WPMedia.updateMediaThumbs();
-	        PremiseField.WPMedia.handleFiles();
-	    });
+
+			// get array of attachment objects
+			attachment = PremiseField.WPMedia.uploader.state().get('selection').toJSON();
+
+			// Loop through images selected and save them to our mediaUploaded var
+			jQuery(attachment).each(function(i, v){
+				PremiseField.WPMedia.mediaUploaded.push(attachment[i].url);
+			});
+
+			// Update thumbnails
+			// PremiseField.WPMedia.updateMediaThumbs();
+			PremiseField.WPMedia.handleFiles();
+		});
 	},
 
 
@@ -474,7 +421,7 @@ PremiseField.WPMedia = {
 		jQuery(el).parent('.premise-field-wp_media').find('.premise-file-url').val('');
 		return false;
 	}
-}
+};
 
 
 
