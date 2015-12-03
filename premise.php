@@ -236,4 +236,3 @@ class Premise_WP {
 		);
 	}
 }
-?>

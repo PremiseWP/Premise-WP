@@ -206,5 +206,3 @@ class Premise_Options {
 		<?php 
 	}
 }
-
-?>

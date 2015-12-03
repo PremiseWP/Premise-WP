@@ -330,6 +330,3 @@ function premise_rand_str( $length = '' ) {
 }
 
 
-
-
-?>
