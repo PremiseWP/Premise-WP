@@ -68,7 +68,9 @@ function premiseCountVisibleElements(elements) {
 	var visible = 0;
 
 	elements.each(function(i,v){
-		jQuery(v).is(':visible') ? visible++ : '';
+		if( jQuery(v).is(':visible') ){
+			visible++;
+		}
 	});
 	return visible;
 }

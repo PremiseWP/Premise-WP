@@ -4,4 +4,4 @@
  * Coming soon
  */
 
-var PremiseAjax = {}
+var PremiseAjax = {};
