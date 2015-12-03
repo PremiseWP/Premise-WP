@@ -111,6 +111,10 @@ var PremiseField = {
 	 */
 	bindEvents: function() {
 
+		if ( jQuery('.premise-field-type-wp_media').length > 0 ) {
+			PremiseField.WPMedia.bindPreview();
+		}
+
 		// bind tooltip
 		if ( this.tooltip.length > 0 ) {
 			this.tooltip.mouseenter(this.adjustTooltip);
@@ -352,6 +356,15 @@ PremiseField.WPMedia = {
 
 
 
+
+	previewContainers: [],
+
+
+
+	hasPreview: false,
+
+
+
 	/**
 	 * construct our object
 	 */
@@ -371,7 +384,25 @@ PremiseField.WPMedia = {
 	 * bind events needed for media uploader to work
 	 */
 	bindEvents: function() {
-		
+		// this.bindPreview();
+	},
+
+
+
+	/**
+	 * Binded preview separately becuase it is the only one that gets called
+	 * before init. Needs to be independent.
+	 * 
+	 * @return {void} binds the preview function. does not return anything
+	 */
+	bindPreview: function() {
+		var self = PremiseField.WPMedia;
+		if ( jQuery('.premise-field-type-wp_media.premise-field-preview').length > 0 ) {
+			self.previewContainers = jQuery('.premise-field-type-wp_media.premise-field-preview');
+			self.hasPreview = true;
+			self.setPreview();
+		}
+		return false;
 	},
 
 
@@ -420,14 +451,13 @@ PremiseField.WPMedia = {
 	        
 	        // get array of attachment objects
 	        attachment = PremiseField.WPMedia.uploader.state().get('selection').toJSON();
-	        
+	        console.log(attachment);
+	        PremiseField.WPMedia.mediaUploaded = [];
 	        // Loop through images selected and save them to our mediaUploaded var
 	        jQuery(attachment).each(function(i, v){
 	        	PremiseField.WPMedia.mediaUploaded.push(attachment[i].url);
 	        });
 	        
-	        // Update thumbnails
-	        // PremiseField.WPMedia.updateMediaThumbs();
 	        PremiseField.WPMedia.handleFiles();
 	    });
 	},
@@ -442,23 +472,10 @@ PremiseField.WPMedia = {
 		var $this = PremiseField.WPMedia;
 		
 		$this.mediaField.val($this.mediaUploaded);
-	},
 
-
-
-	/**
-	 * update media thumbs
-	 */
-	updateMediaThumbs: function() {
-		var div = jQuery('.spt-upload-stats-here');
-
-		for ( var i = 0; i < PremiseField.WPMedia.mediaUploaded.length; i++ ) {
-			var a = document.createElement('div');
-			a.setAttribute('class', 'spt-stat-item');
-			a.style.backgroundImage = 'url(' + PremiseField.WPMedia.mediaUploaded[i] + ')';
-			a.innerHTML = '<a href="javascript:;" class="spt-stat-item-delete"><i class="fa fa-close"></i></a>'+
-			'<input type="hidden" class="spt-hidden-field" name="spt_options[stats][]" value="'+PremiseField.WPMedia.mediaUploaded[i]+'">';
-			div.append(a);
+		if ( $this.hasPreview ) {
+			var container = $this.mediaField.parents('.premise-field-type-wp_media.premise-field-preview');
+			$this.insertPreview( container, $this.mediaUploaded );
 		}
 	},
 
@@ -473,6 +490,43 @@ PremiseField.WPMedia = {
 	removeFile: function(el) {
 		jQuery(el).parent('.premise-field-wp_media').find('.premise-file-url').val('');
 		return false;
+	},
+
+
+
+
+	setPreview: function() {
+		var self = PremiseField.WPMedia;
+
+		self.previewContainers.each(function(){
+			var $this = jQuery(this),
+			img = $this.find('.premise-file-url').val();
+			if ( img && '' !== img ) {
+				self.insertPreview($this, img);
+			}
+		});
+	},
+
+
+	insertPreview: function(container, media) {
+		var $this = PremiseField.WPMedia;
+		
+		var cont = container;
+
+		cont.find('.premise-wp_media-preview').remove();
+
+		if ( jQuery.isArray(media) && media.length > 1 ) {
+			var count = media.length,
+			str = '<div class="premise-wp_media-preview"><div class="premise-wp_media-preview-inner">';
+			for ( var i = 0; i < count; i++ ) {
+				str += '<span class="premise-preview-thumb" style="background-image: url('+media[i]+');"></span>';
+			}
+			str += '</div></div>';
+			cont.append(str);
+		}
+		else {
+			cont.append('<div class="premise-wp_media-preview" style="background-image: url('+media+');">');
+		}
 	}
 }
 
