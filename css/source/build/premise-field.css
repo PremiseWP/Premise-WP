@@ -140,7 +140,7 @@
  * The field label
  */
 .premise-field > label,
-.premise-field > .premise-label {
+.premise-field > p.premise-label {
 	display: inline-block;
 	text-transform: uppercase;
 	margin:0 0 5px;
@@ -272,6 +272,7 @@
  * @see http://www.sitepoint.com/css3-toggle-switch/
  */
 .premise-field > .premise-field-checkbox {
+	display: inline-block;
 	float: left;
 	margin-right: 10px;
 }
@@ -285,6 +286,7 @@
  * @see http://www.sitepoint.com/css3-toggle-switch/
  */
 .premise-field > .premise-field-radio {
+	display: inline-block;
 	float: left;
 	margin-right: 10px;
 }
@@ -293,13 +295,13 @@
 
 
 /**
- * File Field
+ * wp_media Field
  */
 .premise-field .premise-btn-upload,
 .premise-field .premise-btn-remove {
 	position:absolute;
 	display:block;
-	top: 0;
+	top: 0px;
 	z-index: 1;
 	box-sizing:border-box;
 	padding: 5px;
@@ -320,6 +322,63 @@
 	right:1px;
 }
 
+.premise-wp_media-preview {
+	position: relative;
+	transition: all .4s ease-in-out;
+	height: 300px;
+	width: 100%;
+	background-position: center center;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-color: #fff;
+	border: 1px solid #888;
+	border-radius: 2px;
+	margin-top: 13px;
+}
+
+.premise-wp_media-preview:before {
+	content: '';
+	display: block;
+	position: absolute;
+	top: -11px;
+	left: 50%;
+	margin-left: -10px;
+	border-width: 0 10px 10px 10px;
+	border-style: solid;
+	border-color: transparent transparent #888 transparent; 
+}
+
+.premise-wp_media-preview:after {
+	content: '';
+	display: block;
+	position: absolute;
+	top: -9px;
+	left: 50%;
+	margin-left: -10px;
+	border-width: 0 10px 10px 10px;
+	border-style: solid;
+	border-color: transparent transparent #fff transparent; 
+}
+
+.premise-wp_media-preview .premise-wp_media-preview-inner {
+	position: relative;
+	height: 260px;
+	margin: 20px;
+	overflow: auto;
+}
+
+.premise-preview-thumb {
+	display: block;
+	width: 23%;
+	padding-top: 23%;
+	margin: 1%;
+	float: left;
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-color: rgba(225, 225, 225, 0.2);
+}
+
 
 
 
@@ -334,7 +393,7 @@
 .premise-field .premise-remove-icon {
 	position:absolute;
 	display:block;
-	top: 0;
+	top: 0px;
 	z-index: 1;
 	box-sizing:border-box;
 	padding: 5px;
