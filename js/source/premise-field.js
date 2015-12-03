@@ -6,8 +6,8 @@
  *
  * @since 1.2
  * 
- * @package Premise WP JS
- * @subpackage PremiseField
+ * @package Premise WP
+ * @subpackage JS / PremiseField
  */
 
 

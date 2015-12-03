@@ -1,7 +1,7 @@
 <?php
 /**
  * Premise Includes
- * @package Premise
+ * @package Premise WP
  * @subpackage Includes
  */
 

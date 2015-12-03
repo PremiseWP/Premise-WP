@@ -1,8 +1,8 @@
 /**
  * Load Premise WP core JS
  * 
- * @package Premise WP JS
- * @subpackage Premise
+ * @package Premise WP
+ * @subpackage JS
  */
 jQuery(function($){
 
