@@ -585,7 +585,7 @@ class PremiseCPT {
      */
     function register_exisiting_taxonomies() {
 
-        if( is_array( $this->exisiting_taxonomies ) ) {
+        if ( is_array( $this->exisiting_taxonomies ) ) {
             foreach( $this->exisiting_taxonomies as $taxonomy_name ) {
                 register_taxonomy_for_object_type( $taxonomy_name, $this->post_type_name );
             }
@@ -610,9 +610,9 @@ class PremiseCPT {
             // determine which column to add custom taxonomies after
             if ( is_array( $this->taxonomies ) && in_array( 'post_tag', $this->taxonomies ) || $this->post_type_name === 'post' ) {
                 $after = 'tags';
-            } elseif( is_array( $this->taxonomies ) && in_array( 'category', $this->taxonomies ) || $this->post_type_name === 'post' ) {
+            } elseif ( is_array( $this->taxonomies ) && in_array( 'category', $this->taxonomies ) || $this->post_type_name === 'post' ) {
                 $after = 'categories';
-            } elseif( post_type_supports( $this->post_type_name, 'author' ) ) {
+            } elseif ( post_type_supports( $this->post_type_name, 'author' ) ) {
                 $after = 'author';
             } else {
                 $after = 'title';
@@ -625,7 +625,7 @@ class PremiseCPT {
                 $new_columns[$key] = $title;
 
                 // we want to add taxonomy columns after a specific column
-                if( $key === $after ) {
+                if ( $key === $after ) {
 
                     // If there are taxonomies registered to the post type.
                     if ( is_array( $this->taxonomies ) ) {
@@ -634,7 +634,7 @@ class PremiseCPT {
                         foreach( $this->taxonomies as $tax ) {
 
                             // WordPress adds Categories and Tags automatically, ignore these
-                            if( $tax !== 'category' && $tax !== 'post_tag' ) {
+                            if ( $tax !== 'category' && $tax !== 'post_tag' ) {
                                 // Get the taxonomy object for labels.
                                 $taxonomy_object = get_taxonomy( $tax );
 
@@ -873,7 +873,7 @@ class PremiseCPT {
     function columns( $columns ) {
 
         // If columns is set.
-        if( isset( $columns ) ) {
+        if ( isset( $columns ) ) {
 
             // Assign user submitted columns to object.
             $this->columns = $columns;
@@ -970,7 +970,7 @@ class PremiseCPT {
             $meta_key = $values[0];
 
             // If the meta_key is a taxonomy
-            if( taxonomy_exists( $meta_key ) ) {
+            if ( taxonomy_exists( $meta_key ) ) {
 
                 // Sort by taxonomy.
                 $key = "taxonomy";

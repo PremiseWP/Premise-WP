@@ -67,7 +67,7 @@ function premise_field( $type = 'text', $args = array(), $echo = true ) {
 	$field = new PremiseField( $type, $args );
 	$html  = $field->get_field();
 
-	if( !$echo )
+	if ( !$echo )
 		return $html;
 	else
 		echo $html;
@@ -129,7 +129,7 @@ function premise_field_section( $args = array(), $echo = true ) {
 
 	remove_all_filters( 'premise_field_section_html' );
 
-	if( ! $echo )
+	if ( ! $echo )
 		return $html;
 	else
 		echo (string) $html;

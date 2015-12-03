@@ -204,7 +204,7 @@ class PremiseField {
 		if ( ! empty( $type ) && is_string( $type ) )
 			$this->type = $type;
 
-		if( ! empty( $args ) && is_array( $args ) )
+		if ( ! empty( $args ) && is_array( $args ) )
 			$this->args = $args;
 
 		if ( ( empty( $type ) && is_array( $args ) ) && array_key_exists( 'type', $args ) ) {
@@ -683,7 +683,7 @@ class PremiseField {
 
 		foreach ( (array) $this->field['options'] as $key => $value ) {
 			$options .= '<option  value="'.$value.'"';
-				if( is_array( $this->field['value'] ) ) {
+				if ( is_array( $this->field['value'] ) ) {
 					$options .= in_array( $value, $this->field['value'] ) ? 'selected="selected"' : '';
 				}
 				else {

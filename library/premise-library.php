@@ -206,7 +206,7 @@ function premise_get_option( $option = '', $key = '' ) {
 		return premise_get_value( $option );
 	}
 	
-	if( is_array( $option ) ) {
+	if ( is_array( $option ) ) {
 		$options = array();
 
 		foreach( $option as $opt ) {
