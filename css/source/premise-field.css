@@ -140,7 +140,7 @@
  * The field label
  */
 .premise-field > label,
-.premise-field > p.premise-label {
+.premise-field > .premise-label {
 	display: inline-block;
 	text-transform: uppercase;
 	margin:0 0 5px;
@@ -272,7 +272,6 @@
  * @see http://www.sitepoint.com/css3-toggle-switch/
  */
 .premise-field > .premise-field-checkbox {
-	display: inline-block;
 	float: left;
 	margin-right: 10px;
 }
@@ -286,7 +285,6 @@
  * @see http://www.sitepoint.com/css3-toggle-switch/
  */
 .premise-field > .premise-field-radio {
-	display: inline-block;
 	float: left;
 	margin-right: 10px;
 }
@@ -301,7 +299,7 @@
 .premise-field .premise-btn-remove {
 	position:absolute;
 	display:block;
-	top: 0px;
+	top: 0;
 	z-index: 1;
 	box-sizing:border-box;
 	padding: 5px;
@@ -336,7 +334,7 @@
 .premise-field .premise-remove-icon {
 	position:absolute;
 	display:block;
-	top: 0px;
+	top: 0;
 	z-index: 1;
 	box-sizing:border-box;
 	padding: 5px;
