@@ -1004,6 +1004,8 @@ class PremiseField {
 
 			$val = premise_get_value( $name, $context );
 		}
+		
+		$val = is_array( $val ) ? implode( ',', $val ) : $val;
 
 		if ( ! $this->empty_value( $val ) )
 			return esc_attr( $val );
