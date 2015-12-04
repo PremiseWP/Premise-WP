@@ -23,16 +23,6 @@
 var PremiseField = {
 
 	/**
-	 * Holds jQuery object for tooltip elements
-	 * 
-	 * @type {object}
-	 */
-	tooltip: null,
-
-
-
-
-	/**
 	 * Holds jQuery object for fa_icon button to open icons.
 	 * 
 	 * @type {object}
@@ -71,9 +61,6 @@ var PremiseField = {
 	 * @return {void} 
 	 */
 	init: function() {
-
-		// tooltips
-		this.tooltip = jQuery('.premise-field .premise-tooltip');
 
 		// The show icons button
 		this.faShowIconsBtn = jQuery('.premise-field-fa_icon .premise-choose-icon');
@@ -116,11 +103,6 @@ var PremiseField = {
 			PremiseField.WPMedia.bindPreview();
 		}
 
-		// bind tooltip
-		if ( this.tooltip.length > 0 ) {
-			this.tooltip.mouseenter(this.adjustTooltip);
-		}
-
 		// Display FA icons when btn is clicked or
 		// when the field itself is clicked on
 		this.faShowIconsBtn.click(PremiseField.faIcon.showIcons);
@@ -128,7 +110,7 @@ var PremiseField = {
 
 		// Hide FA icons when the delete btn is clicked on
 		// passing the argument true deletes the field's value
-		this.faHideIconsBtn.click(function(){PremiseField.faIcon.hideIcons(true)});
+		this.faHideIconsBtn.click(function(){PremiseField.faIcon.hideIcons(true);});
 
 		this.faInputField.keyup(PremiseField.faIcon.filterIcons);
 
@@ -136,44 +118,11 @@ var PremiseField = {
 		this.faSelectIconBtn.click(PremiseField.faIcon.insertIcon);
 
 		// Bind success message
-		jQuery(document).on('premiseFieldAfterInit', function(){console.log('PremiseField Object Initited successfully.')});
+		jQuery(document).on('premiseFieldAfterInit', function(){console.log('PremiseField Object Initited successfully.');});
 	},
 
 
-
-
-	adjustTooltip: function() {
-		var self = PremiseField;
-
-		var W = jQuery(window).width(),
-		H = jQuery(window).height(),
-		$this = jQuery(this),
-		tip = $this.find('.premise-tooltip-inner'),
-		arrow = $this.find('.premise-tooltip-inner:after'),
-		w = tip.outerWidth(true),
-		h = tip.outerHeight(true),
-		adjust;
-
-		var position = ( tip.offset().top - h > h ) ? 'top' : 'bottom';
-		
-		if ( tip.offset().left < 0 ) {
-			adjust = tip.offset().left * -1;
-		}
-		else if ( tip.offset().left + w > W ) {
-			adjust =  '-'+( tip.offset().left + w ) - W;
-		}
-		
-		$this.addClass('premise-tooltip-'+position);
-		tip.css('margin-left', adjust+'px');
-
-		$this.mouseleave(function(){
-			$this.removeClass('premise-tooltip-'+position);
-			tip.removeAttr('style');
-		});
-
-		return false;
-	}
-}
+};
 
 
 
@@ -303,7 +252,7 @@ PremiseField.faIcon = {
 			}
 		});
 	}
-}
+};
 
 
 
@@ -431,30 +380,30 @@ PremiseField.WPMedia = {
 		PremiseField.WPMedia.mediaUploaded = [];
 
 		// If the uploader object has already been created, open it
-	    if (PremiseField.WPMedia.uploader) {
-	        PremiseField.WPMedia.uploader.open();
-	        return;
-	    }
+		if (PremiseField.WPMedia.uploader) {
+			PremiseField.WPMedia.uploader.open();
+			return;
+		}
 
-	    // Extend the wp.media object
-	    PremiseField.WPMedia.uploader = wp.media.frames.file_frame = wp.media({
-	        title: 'Upload Media',
-	        button: {
-	            text: 'Insert Media'
-	        },
-	        multiple: PremiseField.WPMedia.isMulti
-	    });
+		// Extend the wp.media object
+		PremiseField.WPMedia.uploader = wp.media.frames.file_frame = wp.media({
+			title: 'Upload Media',
+			button: {
+				text: 'Insert Media'
+			},
+			multiple: PremiseField.WPMedia.isMulti
+		});
 
-	    /**
-	     * Bind function for when files are inserted
-	     *
-	     * bind here and not in our bindEvents function because on our 
-	     * bindEvents function the uploader object has not been created yet.
-	     */
-	    PremiseField.WPMedia.onInsert();
+		/**
+		 * Bind function for when files are inserted
+		 *
+		 * bind here and not in our bindEvents function because on our 
+		 * bindEvents function the uploader object has not been created yet.
+		 */
+		PremiseField.WPMedia.onInsert();
 
-	    //Open the uploader dialog
-	    PremiseField.WPMedia.uploader.open();
+		//Open the uploader dialog
+		PremiseField.WPMedia.uploader.open();
 	},
 
 
@@ -465,18 +414,18 @@ PremiseField.WPMedia = {
 	 */
 	onInsert: function() {
 		PremiseField.WPMedia.uploader.on('select', function() {
-	        
-	        // get array of attachment objects
-	        attachment = PremiseField.WPMedia.uploader.state().get('selection').toJSON();
 
-	        PremiseField.WPMedia.mediaUploaded = [];
-	        // Loop through images selected and save them to our mediaUploaded var
-	        jQuery(attachment).each(function(i, v){
-	        	PremiseField.WPMedia.mediaUploaded.push(attachment[i].url);
-	        });
-	        
-	        PremiseField.WPMedia.handleFiles();
-	    });
+			// get array of attachment objects
+			attachment = PremiseField.WPMedia.uploader.state().get('selection').toJSON();
+
+			PremiseField.WPMedia.mediaUploaded = [];
+			// Loop through images selected and save them to our mediaUploaded var
+			jQuery(attachment).each(function(i, v){
+				PremiseField.WPMedia.mediaUploaded.push(attachment[i].url);
+			});
+
+			PremiseField.WPMedia.handleFiles();
+		});
 	},
 
 
@@ -511,7 +460,7 @@ PremiseField.WPMedia = {
 		
 		var $this = PremiseField.WPMedia;
 		if ( $this.hasPreview ) {
-			$this.removePreview(jQuery(el).parents('.premise-field-type-wp_media.premise-field-preview'))
+			$this.removePreview(jQuery(el).parents('.premise-field-type-wp_media.premise-field-preview'));
 		}
 		return false;
 	},
@@ -550,8 +499,8 @@ PremiseField.WPMedia = {
 	 * @return {string}           returns html for our preview thumbnails
 	 */
 	insertPreview: function(container, media) {
-		container = container || {}
-		media     = media     || {}
+		container = container || {};
+		media     = media     || {};
 
 		if ( media.length > 0 ) {
 			var $this = PremiseField.WPMedia,
@@ -570,7 +519,7 @@ PremiseField.WPMedia = {
 			}
 			// process only one file
 			else {
-				str += '<span class="premise-preview-thumb" style="background-image: url('+media+');"></span>'
+				str += '<span class="premise-preview-thumb" style="background-image: url('+media+');"></span>';
 			}
 			str += '</div></div>';
 			container.append(str);
@@ -590,4 +539,4 @@ PremiseField.WPMedia = {
 	removePreview: function(container) {
 		container.find('.premise-wp_media-preview').remove();
 	}
-}
+};
