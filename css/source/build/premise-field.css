@@ -324,59 +324,71 @@
 
 .premise-wp_media-preview {
 	position: relative;
-	transition: all .4s ease-in-out;
-	height: 300px;
+	height: 0;
 	width: 100%;
+	margin-top: 13px;
+	border: 1px solid #888;
+	border-radius: 2px;
 	background-position: center center;
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-color: #fff;
-	border: 1px solid #888;
-	border-radius: 2px;
-	margin-top: 13px;
+	opacity: 0;
+	visibility: hidden;
+	transition: all .4s ease-in-out;
 }
 
-.premise-wp_media-preview:before {
-	content: '';
-	display: block;
-	position: absolute;
-	top: -11px;
-	left: 50%;
-	margin-left: -10px;
-	border-width: 0 10px 10px 10px;
-	border-style: solid;
-	border-color: transparent transparent #888 transparent; 
-}
-
+.premise-wp_media-preview:before,
 .premise-wp_media-preview:after {
 	content: '';
 	display: block;
 	position: absolute;
-	top: -9px;
 	left: 50%;
 	margin-left: -10px;
 	border-width: 0 10px 10px 10px;
 	border-style: solid;
+}
+
+.premise-wp_media-preview:before {
+	top: -11px;
+	border-color: transparent transparent #888 transparent; 
+}
+
+.premise-wp_media-preview:after {
+	top: -9px;
 	border-color: transparent transparent #fff transparent; 
 }
 
-.premise-wp_media-preview .premise-wp_media-preview-inner {
+.premise-wp_media-preview-inner {
 	position: relative;
-	height: 260px;
-	margin: 20px;
+	height: 100%;
+	margin: 0 20px;
 	overflow: auto;
 }
 
 .premise-preview-thumb {
+	position: relative;
 	display: block;
-	width: 23%;
-	padding-top: 23%;
+	height: 95%;
+	width: 98%;
 	margin: 1%;
-	float: left;
 	background-size: contain;
 	background-position: center;
 	background-repeat: no-repeat;
 	background-color: rgba(225, 225, 225, 0.2);
+}
+
+.premise-preview-thumb.premise-preview-thumb-multi {
+	width: 23%;
+	height: 0;
+	padding-top: 23%;
+	float: left;
+}
+
+.premise-field-preview .premise-wp_media-preview {
+	height: 300px;
+	opacity: 1;
+	visibility: visible;
 }
 
 

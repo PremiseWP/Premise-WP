@@ -111,6 +111,7 @@ var PremiseField = {
 	 */
 	bindEvents: function() {
 
+		// bind media preview if using media
 		if ( jQuery('.premise-field-type-wp_media').length > 0 ) {
 			PremiseField.WPMedia.bindPreview();
 		}
@@ -161,8 +162,6 @@ var PremiseField = {
 		else if ( tip.offset().left + w > W ) {
 			adjust =  '-'+( tip.offset().left + w ) - W;
 		}
-
-		console.log(adjust);
 		
 		$this.addClass('premise-tooltip-'+position);
 		tip.css('margin-left', adjust+'px');
@@ -346,6 +345,8 @@ PremiseField.WPMedia = {
 	mediaUploaded: [],
 
 
+
+
 	/**
 	 * holds array of media that was laready saved
 	 * to avoid overriding previous uploads
@@ -356,12 +357,23 @@ PremiseField.WPMedia = {
 
 
 
-
+	/**
+	 * Holds elements that require previews
+	 * 
+	 * @type {Array}
+	 */
 	previewContainers: [],
 
 
 
+
+	/**
+	 * whether the preview param was passed to the field
+	 * 
+	 * @type {Boolean}
+	 */
 	hasPreview: false,
+
 
 
 
@@ -380,11 +392,13 @@ PremiseField.WPMedia = {
 	},
 
 
+
+
 	/**
 	 * bind events needed for media uploader to work
 	 */
 	bindEvents: function() {
-		// this.bindPreview();
+		
 	},
 
 
@@ -404,6 +418,8 @@ PremiseField.WPMedia = {
 		}
 		return false;
 	},
+
+
 
 
 	/**
@@ -443,6 +459,7 @@ PremiseField.WPMedia = {
 
 
 
+
 	/**
 	 * When user clicks insert media
 	 */
@@ -451,7 +468,7 @@ PremiseField.WPMedia = {
 	        
 	        // get array of attachment objects
 	        attachment = PremiseField.WPMedia.uploader.state().get('selection').toJSON();
-	        console.log(attachment);
+
 	        PremiseField.WPMedia.mediaUploaded = [];
 	        // Loop through images selected and save them to our mediaUploaded var
 	        jQuery(attachment).each(function(i, v){
@@ -481,6 +498,7 @@ PremiseField.WPMedia = {
 
 
 
+
 	/**
 	 * Remove a saved or uploaded file from the wp_media field. Empties the value.
 	 * 
@@ -488,54 +506,88 @@ PremiseField.WPMedia = {
 	 * @return {void}
 	 */
 	removeFile: function(el) {
+
 		jQuery(el).parent('.premise-field-wp_media').find('.premise-file-url').val('');
+		
+		var $this = PremiseField.WPMedia;
+		if ( $this.hasPreview ) {
+			$this.removePreview(jQuery(el).parents('.premise-field-type-wp_media.premise-field-preview'))
+		}
 		return false;
 	},
 
 
 
 
+	/**
+	 * Gets called on load if there is a preview attribute in one of the 
+	 * wp_media fields.
+	 *
+	 * Loops through the wp_media fields and inserts preview if one is needed.
+	 */
 	setPreview: function() {
 		var self = PremiseField.WPMedia;
 
 		self.previewContainers.each(function(){
 			var $this = jQuery(this),
 			img = $this.find('.premise-file-url').val();
+
 			if ( img && '' !== img ) {
-				self.insertPreview($this, img);
+				var media = img.split(',');
+				self.insertPreview($this, media);
 			}
 		});
 	},
 
 
+
+
+	/**
+	 * Inserts the preview at the end of our wp_media premise field container.
+	 * 
+	 * @param  {object} container the jQuery object for our premise field main wrapper
+	 * @param  {mixed}  media     array of urls to use as thumbnails
+	 * @return {string}           returns html for our preview thumbnails
+	 */
 	insertPreview: function(container, media) {
-		var $this = PremiseField.WPMedia;
-		
-		var cont = container;
+		container = container || {}
+		media     = media     || {}
 
-		cont.find('.premise-wp_media-preview').remove();
+		if ( media.length > 0 ) {
+			var $this = PremiseField.WPMedia,
+			count     = media.length,
+			str = '';
 
-		if ( jQuery.isArray(media) && media.length > 1 ) {
-			var count = media.length,
+			// Remove previously inserted previews to avoid duplicates
+			$this.removePreview(container);
+
 			str = '<div class="premise-wp_media-preview"><div class="premise-wp_media-preview-inner">';
-			for ( var i = 0; i < count; i++ ) {
-				str += '<span class="premise-preview-thumb" style="background-image: url('+media[i]+');"></span>';
+			// process more than one uploaded file
+			if ( count > 1 ) {
+				for ( var i = 0; i < count; i++ ) {
+					str += '<span class="premise-preview-thumb premise-preview-thumb-multi" style="background-image: url('+media[i]+');"></span>';
+				}
+			}
+			// process only one file
+			else {
+				str += '<span class="premise-preview-thumb" style="background-image: url('+media+');"></span>'
 			}
 			str += '</div></div>';
-			cont.append(str);
+			container.append(str);
 		}
-		else {
-			cont.append('<div class="premise-wp_media-preview" style="background-image: url('+media+');">');
-		}
+		return false;
+	},
+
+
+
+
+	/**
+	 * Removes the preview container from element provided
+	 * 
+	 * @param  {object} container jquery object
+	 * @return {void}             romves object if found
+	 */
+	removePreview: function(container) {
+		container.find('.premise-wp_media-preview').remove();
 	}
 }
-
-
-
-
-
-
-
-
-
-
