@@ -643,7 +643,7 @@ class PremiseField {
 	 */
 	protected function radio() {
 		
-		$field  .= '<input type="'.$this->type.'"';
+		$field  = '<input type="'.$this->type.'"';
 
 		$field .= isset( $this->field['value_att'] ) && ! $this->empty_value( $this->field['value_att'] ) ?
 			' value="' . $this->field['value_att'] . '"' :
