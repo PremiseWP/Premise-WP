@@ -619,7 +619,7 @@ class PremiseField {
 		
 		$field  = '<input type="'. $this->type .'"';
 
-		$field .= isset( $this->field['value_att'] ) && ! $this->empty_value( $this->field['value_att'] ) ?
+		$field .= ! $this->empty_value( $this->field['value_att'] ) ?
 			' value="' . $this->field['value_att'] . '"' :
 			' value="1"';
 		
@@ -645,7 +645,7 @@ class PremiseField {
 		
 		$field  = '<input type="'.$this->type.'"';
 
-		$field .= isset( $this->field['value_att'] ) ?
+		$field .= ! $this->empty_value( $this->field['value_att'] ) ?
 			' value="' . $this->field['value_att'] . '"' :
 			' value="1"';
 		
@@ -1148,15 +1148,18 @@ class PremiseField {
 
 		if ( 'radio' == $this->type || 'checkbox' == $this->type ) {
 
-			$field .= isset( $_field['value'] ) && ! $this->empty_value( $_field['value'] ) ?
+			$field .= ! $this->empty_value( $_field['value'] ) ?
 				' ' . checked(
-					isset( $this->field['value_att'] ) && ! $this->empty_value( $this->field['value_att'] ) ?
-						$this->field['value_att'] :
+					! $this->empty_value( $_field['value_att'] ) ?
+						$_field['value_att'] :
 						'1',
 					$_field['value'],
 					false
 				) :
 				'';
+
+			// unset value attribute: already set using value_att
+			unset( $_field['value'] );
 		}
 
 		unset( $_field['label'] );
