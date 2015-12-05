@@ -1,8 +1,8 @@
 /**
  * Load Premise WP core JS
  * 
- * @package Premise WP JS
- * @subpackage Premise
+ * @package Premise WP
+ * @subpackage JS
  */
 jQuery(function($){
 
@@ -25,6 +25,7 @@ var Premise = {
 	 * Initiate the main Premise Objcect
 	 */
 	init: function() {
+
 
 		/**
 		 * Initiate the Premise Field Object
@@ -72,6 +73,11 @@ var Premise = {
 		else return navigator.userAgent;
 	}
 }
+
+	premiseSameHeight();
+
+});
+
 
 
 
