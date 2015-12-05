@@ -74,10 +74,6 @@ var Premise = {
 	}
 }
 
-	premiseSameHeight();
-
-});
-
 
 
 
