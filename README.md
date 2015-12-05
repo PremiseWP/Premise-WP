@@ -257,7 +257,7 @@ $Obj = new Premise_Options( $title, $fields, 'my_option_name' );
  */
 $option_names = array(
 	'option_one',
-	'otion_two',
+	'option_two',
 	'option_three',
 	'you_get_the_point',
 );
