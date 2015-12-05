@@ -3,7 +3,7 @@
  *
  * This file contains all the main Premise styles for form elements
  *
- * @package Premise
+ * @package Premise WP
  * @subpackage CSS
  */
 
@@ -151,11 +151,11 @@
 /**
  * Field Tooltip
  *
- * Display a tooltip when someone hovers over the label.
- * Add an icon next to the label element that explains the field
+ * Displays a tooltip when someone hovers the icon.
+ * Adds an icon next to the label element that explains the field
  * to the user.
  */
-.premise-field .premise-tooltip {
+.premise-tooltip {
 	position: relative;
 	display: inline-block;
 	vertical-align: top;
@@ -165,13 +165,13 @@
 	cursor: help;
 }
 
-.premise-field .premise-tooltip:before{
+.premise-tooltip:before{
 	color: #888;
 	font-family: 'FontAwesome';
 	content: "\f05a";
 }
 
-.premise-field .premise-tooltip:after {
+/*.premise-tooltip:after {
 	content: '';
 	position: absolute;
 	z-index: 99999;
@@ -182,50 +182,33 @@
 	visibility:hidden;
 	opacity: 0;
 	transition: opacity .3s ease-in-out;
-}
+}*/
 
-.premise-field .premise-tooltip.premise-tooltip-top:after {
-	bottom: 100%;
-	margin-bottom: -10px;
-	border-color: #444 transparent transparent transparent;
-}
-
-.premise-field .premise-tooltip.premise-tooltip-bottom:after {
-	top: 100%;
-	margin-top: -10px;
-	border-color: transparent transparent #444 transparent;
-}
-
-.premise-field .premise-tooltip > .premise-tooltip-inner {
-	position: absolute;
-	z-index: 99999;
-	left: -160px;
-	display: inline-block;
-	margin: 20px;
-	width: 300px;
-	line-height: 1.3em;
+.premise-tooltip > .premise-tooltip-inner{
+	visibility:hidden;
+	opacity:0;
+	position:absolute;
+	bottom:150%;
+	left:-90px;
+	width:200px;
+	z-index:999999;
+	display:inline-block;
 	padding: 10px;
 	border-radius: 10px;
-	background: #444;
-	font-size: 1em;
+	transition:opacity .3s ease-in-out;
+	text-align:left;
 	text-transform: none;
-	visibility:hidden;
-	opacity: 0;
-	transition: opacity .3s ease-in-out;
+	background: #444;
 }
 
-.premise-field .premise-tooltip-top > .premise-tooltip-inner {
-	bottom:100%;
-}
-
-.premise-field .premise-tooltip-bottom > .premise-tooltip-inner {
-	top:100%;
-}
-
-.premise-field .premise-tooltip:hover:after,
-.premise-field .premise-tooltip:hover > .premise-tooltip-inner {
+.premise-tooltip:hover > .premise-tooltip-inner{
 	visibility:visible;
-	opacity:1;
+	opacity:1
+}
+
+.premise-admin .premise-tooltip-inner{
+	font-size: 0.7em;
+	line-height: 1.3;
 }
 
 
@@ -293,7 +276,7 @@
 
 
 /**
- * File Field
+ * wp_media Field
  */
 .premise-field .premise-btn-upload,
 .premise-field .premise-btn-remove {
@@ -318,6 +301,76 @@
 
 .premise-field > .premise-field-wp_media > .premise-btn-remove {
 	right:1px;
+}
+
+.premise-wp_media-preview {
+	position: relative;
+	height: 0;
+	width: 100%;
+	margin-top: 13px;
+	border: 1px solid #888;
+	border-radius: 2px;
+	background-position: center center;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-color: #fff;
+	opacity: 0;
+	visibility: hidden;
+	transition: all .4s ease-in-out;
+}
+
+.premise-wp_media-preview:before,
+.premise-wp_media-preview:after {
+	content: '';
+	display: block;
+	position: absolute;
+	left: 50%;
+	margin-left: -10px;
+	border-width: 0 10px 10px 10px;
+	border-style: solid;
+}
+
+.premise-wp_media-preview:before {
+	top: -11px;
+	border-color: transparent transparent #888 transparent; 
+}
+
+.premise-wp_media-preview:after {
+	top: -9px;
+	border-color: transparent transparent #fff transparent; 
+}
+
+.premise-wp_media-preview-inner {
+	position: relative;
+	height: 100%;
+	margin: 0 20px;
+	overflow: auto;
+}
+
+.premise-preview-thumb {
+	position: relative;
+	display: block;
+	height: 95%;
+	width: 98%;
+	margin: 1%;
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-color: #fff;
+	background-color: rgba(225, 225, 225, 0.2);
+}
+
+.premise-preview-thumb.premise-preview-thumb-multi {
+	width: 23%;
+	height: 0;
+	padding-top: 23%;
+	float: left;
+}
+
+.premise-field-preview .premise-wp_media-preview {
+	height: 300px;
+	opacity: 1;
+	visibility: visible;
 }
 
 

@@ -8,6 +8,15 @@
  * @subpackage Model
  */
 
+
+
+
+// Block direct access to this file
+defined( 'ABSPATH' ) or die();
+
+
+
+
 /**
  * PremiseField Class
  *
@@ -204,7 +213,7 @@ class PremiseField {
 		if ( ! empty( $type ) && is_string( $type ) )
 			$this->type = $type;
 
-		if( ! empty( $args ) && is_array( $args ) )
+		if ( ! empty( $args ) && is_array( $args ) )
 			$this->args = $args;
 
 		if ( ( empty( $type ) && is_array( $args ) ) && array_key_exists( 'type', $args ) ) {
@@ -337,7 +346,7 @@ class PremiseField {
 			// Array of arrays (multiple filters)
 			if ( is_array( $this->field['add_filter'][0] ) )
 			{
-				foreach( $this->field['add_filter'] as $filter ) {
+				foreach ( $this->field['add_filter'] as $filter ) {
 
 					add_filter( $filter[0], $filter[1] );
 
@@ -384,7 +393,7 @@ class PremiseField {
 			$label .= ! empty( $this->field['id'] )       ? ' for="'.esc_attr( $this->field['id'] ).'">'                                                                                      : '>';
 			$label .= esc_attr( $this->field['label'] );
 			$label .= ! empty( $this->field['required'] ) ? ' <span class="premise-required">*</span>'                                                                                        : '';
-			$label .= ! empty( $this->field['tooltip'] )  ? ' <span class="premise-tooltip"><span class="premise-tooltip-inner"><i>'.esc_attr( $this->field['tooltip'] ).'</i></span></span>' : '';
+			$label .= premise_tooltip( $this->field['tooltip'] );
 			$label .= '</label>';
 		}
 
@@ -610,7 +619,7 @@ class PremiseField {
 		
 		$field  = '<input type="'. $this->type .'"';
 
-		$field .= isset( $this->field['value_att'] ) && ! $this->empty_value( $this->field['value_att'] ) ?
+		$field .= ! $this->empty_value( $this->field['value_att'] ) ?
 			' value="' . $this->field['value_att'] . '"' :
 			' value="1"';
 		
@@ -634,9 +643,9 @@ class PremiseField {
 	 */
 	protected function radio() {
 		
-		$field  .= '<input type="'.$this->type.'"';
+		$field  = '<input type="'.$this->type.'"';
 
-		$field .= isset( $this->field['value_att'] ) && ! $this->empty_value( $this->field['value_att'] ) ?
+		$field .= ! $this->empty_value( $this->field['value_att'] ) ?
 			' value="' . $this->field['value_att'] . '"' :
 			' value="1"';
 		
@@ -683,7 +692,7 @@ class PremiseField {
 
 		foreach ( (array) $this->field['options'] as $key => $value ) {
 			$options .= '<option  value="'.$value.'"';
-				if( is_array( $this->field['value'] ) ) {
+				if ( is_array( $this->field['value'] ) ) {
 					$options .= in_array( $value, $this->field['value'] ) ? 'selected="selected"' : '';
 				}
 				else {
@@ -1004,6 +1013,8 @@ class PremiseField {
 
 			$val = premise_get_value( $name, $context );
 		}
+		
+		$val = is_array( $val ) ? implode( ',', $val ) : $val;
 
 		if ( ! $this->empty_value( $val ) )
 			return esc_attr( $val );
@@ -1137,10 +1148,18 @@ class PremiseField {
 
 		if ( 'radio' == $this->type || 'checkbox' == $this->type ) {
 
-			$field .= isset( $this->field['value_att'] ) && ! $this->empty_value( $this->field['value_att'] )
-				&& isset( $_field['value'] ) && ! $this->empty_value( $_field['value'] ) ?
-				' ' . checked( $this->field['value_att'], $_field['value'], false ) :
+			$field .= ! $this->empty_value( $_field['value'] ) ?
+				' ' . checked(
+					! $this->empty_value( $_field['value_att'] ) ?
+						$_field['value_att'] :
+						'1',
+					$_field['value'],
+					false
+				) :
 				'';
+
+			// unset value attribute: already set using value_att
+			unset( $_field['value'] );
 		}
 
 		unset( $_field['label'] );
@@ -1180,7 +1199,7 @@ class PremiseField {
 		// Start with the main classes
 		$class = 'premise-field premise-field-type-' . $this->type;
 
-		foreach( $this->field as $k => $v ) {
+		foreach ( $this->field as $k => $v ) {
 			$class .= ! empty( $v ) ? ' premise-field-' . esc_attr( $k ) : '';
 		}
 

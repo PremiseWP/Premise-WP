@@ -13,6 +13,12 @@
 
 
 
+// Block direct access to this file
+defined( 'ABSPATH' ) or die();
+
+
+
+
 /**
  * Get the value from any option, including options from a post or a user.
  *
@@ -206,10 +212,10 @@ function premise_get_option( $option = '', $key = '' ) {
 		return premise_get_value( $option );
 	}
 	
-	if( is_array( $option ) ) {
+	if ( is_array( $option ) ) {
 		$options = array();
 
-		foreach( $option as $opt ) {
+		foreach ( $option as $opt ) {
 			array_push( $options, premise_get_value( $opt ) );
 		}
 
@@ -331,5 +337,26 @@ function premise_rand_str( $length = '' ) {
 
 
 
+/**
+ * Premise tooltip
+ *
+ * CSS tooltip
+ * 
+ * @see premise-field.css
+ *
+ * @since 1.2
+ * 
+ * @param  string $tooltip_text Tooltip text
+ *
+ * @return string Tooltip HTML or empty string if empty( $tooltip_text )
+ */
+function premise_tooltip( $tooltip_text )
+{
+	if ( empty( $tooltip_text ) ) {
 
-?>
+		return '';
+	}
+
+	return ' <span class="premise-tooltip"><span class="premise-tooltip-inner"><i>' .
+		esc_attr( $tooltip_text ) . '</i></span></span>';
+}
