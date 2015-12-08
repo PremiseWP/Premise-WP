@@ -25,7 +25,7 @@ var PremiseParallax = {
 			this.elements = jQuery('.premise-parallax');
 			PremiseParallax.prepareParallax();
 
-			console.log('PremiseParallax Initiated successfully!')
+			console.log('PremiseParallax Initiated successfully!');
 		}
 
 		return false;
@@ -39,7 +39,7 @@ var PremiseParallax = {
 
 		$this.elements.each(function(i, v) {
 			var inView = jQuery(v).attr('data-in-view') ? jQuery(v).attr('data-in-view') : null;
-			jQuery(window).scroll( $this.doParallax(jQuery(this), inView );
+			jQuery(window).scroll( $this.doParallax(jQuery(this), inView ) );
 		});
 	},
 
@@ -60,7 +60,7 @@ var PremiseParallax = {
 		} else {
 			if(Premise.whichBrs() == 'Safari' || Premise.whichBrs() == 'Chrome'){
 				newScroll = jQuery('body').scrollTop();
-			} 
+			}
 			else {
 				newScroll = jQuery('html,body').scrollTop();
 			}
@@ -85,6 +85,6 @@ var PremiseParallax = {
 
 
 
-	scrollNow: function(){
+	scrollNow: function(){}
 		
-}
+};
