@@ -237,9 +237,13 @@
 	height: auto;
 }
 
+.premise-field:not(.premise-field-multiple) > .premise-field-select select {
+	padding-right: 15px;
+}
+
 .premise-field:not(.premise-field-multiple) > .premise-field-select:after {
 	position: absolute;
-	top:  5px;
+	top:  25%;
 	right: 5px;
 	content: '\f107';
 	font-family: 'FontAwesome';
