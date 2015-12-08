@@ -42,6 +42,7 @@ module.exports = function(grunt) {
 			},
             build: {
                 src: [
+                    'js/source/premise-parallax.js',
                     'js/source/premise-ajax.js',
                     'js/source/premise-field.js',
                     'js/source/premise.js'

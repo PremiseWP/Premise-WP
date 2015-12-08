@@ -86,5 +86,5 @@ var PremiseParallax = {
 
 
 	scrollNow: function(){}
-		
+
 };
