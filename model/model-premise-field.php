@@ -509,16 +509,22 @@ class PremiseField {
 	 */
 	protected function build_field() {
 
+		// Sanitize wrapper CSS classes.
+		$wrapper_class = implode(
+			' ',
+			array_map( 'sanitize_html_class', explode( ' ', $this->get_wrapper_class() ) )
+		);
+
 		/**
 		 * HTML for actual field
 		 *
 		 * @var string
 		 */
-		$html = '<div class="' . $this->get_wrapper_class() . '">';
+		$html = '<div class="' . $wrapper_class . '">';
 
 			$html .= $this->label;
 
-			$html .= '<div class="premise-field-' . $this->type . '">';
+			$html .= '<div class="premise-field-' . sanitize_html_class( $this->type ) . '">';
 
 				$html .= $this->field_html;
 
@@ -568,7 +574,7 @@ class PremiseField {
 	 */
 	protected function input_field() {
 
-		$field  = '<input type="'. $this->type .'"';
+		$field  = '<input type="'. esc_attr( $this->type ) .'"';
 
 		$field .= $this->get_atts();
 
@@ -601,7 +607,7 @@ class PremiseField {
 
 		$field .= $this->get_atts();
 
-		$field .= '>'.$this->field['value'].'</textarea>';
+		$field .= '>' . esc_textarea( $this->field['value'] ) . '</textarea>';
 
 		/**
 		 * Premise_field_textarea filter
@@ -625,10 +631,10 @@ class PremiseField {
 	 */
 	protected function checkbox() {
 
-		$field  = '<input type="' . $this->type . '"';
+		$field  = '<input type="' . esc_attr( $this->type ) . '"';
 
 		$field .= ! $this->empty_value( $this->field['value_att'] ) ?
-			' value="' . $this->field['value_att'] . '"' :
+			' value="' . esc_attr( $this->field['value_att'] ) . '"' :
 			' value="1"';
 
 		$field .= $this->get_atts();
@@ -653,7 +659,7 @@ class PremiseField {
 		$field  = '<input type="' . $this->type . '"';
 
 		$field .= ! $this->empty_value( $this->field['value_att'] ) ?
-			' value="' . $this->field['value_att'] . '"' :
+			' value="' . esc_attr( $this->field['value_att'] ) . '"' :
 			' value="1"';
 
 		$field .= $this->get_atts();
@@ -699,7 +705,7 @@ class PremiseField {
 
 		foreach ( (array) $this->field['options'] as $key => $value ) {
 
-			$options .= '<option  value="' . $value . '"';
+			$options .= '<option  value="' . esc_attr( $value ) . '"';
 
 			if ( is_array( $this->field['value'] ) ) {
 
@@ -710,7 +716,7 @@ class PremiseField {
 				$options .= selected( $this->field['value'], $value, false );
 			}
 
-			$options .= '>' . $key . '</option>';
+			$options .= '>' . esc_html( $key ) . '</option>';
 		}
 
 		return $options;
