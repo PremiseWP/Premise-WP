@@ -11,10 +11,7 @@
  * @package Premise WP
  */
 
-
-
-
-// Block direct access to this file
+// Block direct access to this file.
 defined( 'ABSPATH' ) or die();
 
 
@@ -23,7 +20,7 @@ defined( 'ABSPATH' ) or die();
 /**
  * Define Premise path
  */
-define( 'PREMISE_PATH', plugin_dir_path(__FILE__) );
+define( 'PREMISE_PATH', plugin_dir_path( __FILE__ ) );
 
 
 
@@ -31,17 +28,14 @@ define( 'PREMISE_PATH', plugin_dir_path(__FILE__) );
 /**
  * Define Premise url
  */
-define( 'PREMISE_URL', plugin_dir_url(__FILE__) );
+define( 'PREMISE_URL', plugin_dir_url( __FILE__ ) );
 
 
 
 
 // Instantiate our main class and setup Premise WP
-// Must use 'plugins_loaded' hook
+// Must use 'plugins_loaded' hook.
 add_action( 'plugins_loaded', array( Premise_WP::get_instance(), 'premise_setup' ) );
-
-
-
 
 /**
  * Load Premise WP!
@@ -49,23 +43,23 @@ add_action( 'plugins_loaded', array( Premise_WP::get_instance(), 'premise_setup'
  * This is Premise WP main class.
  */
 class Premise_WP {
-	
+
 
 	/**
 	 * Plugin instance.
 	 *
 	 * @see get_instance()
-	 * 
+	 *
 	 * @var object
 	 */
-	protected static $instance = NULL;
+	protected static $instance = null;
 
 
-	
+
 
 	/**
-	 * plugin url
-	 * 
+	 * Plugin url
+	 *
 	 * @var string
 	 */
 	public $plugin_url = PREMISE_URL;
@@ -74,13 +68,13 @@ class Premise_WP {
 
 
 	/**
-	 * plugin path
-	 * 
+	 * Plugin path
+	 *
 	 * @var strin
 	 */
 	public $plugin_path = PREMISE_PATH;
-	
-	
+
+
 
 
 
@@ -92,7 +86,7 @@ class Premise_WP {
 	 */
 	public function __construct() {}
 
-	
+
 
 
 
@@ -103,8 +97,8 @@ class Premise_WP {
 	 * @return  object instance of this class
 	 */
 	public static function get_instance() {
-		NULL === self::$instance and self::$instance = new self;
-		
+		null === self::$instance and self::$instance = new self;
+
 		return self::$instance;
 	}
 
@@ -138,10 +132,10 @@ class Premise_WP {
 		require_once 'includes/includes.php';
 	}
 
-	
 
 
-	
+
+
 	/**
 	 * Premise Hooks
 	 *
@@ -149,14 +143,14 @@ class Premise_WP {
 	 */
 	public function premise_hooks() {
 
-		// Enqueue scripts
+		// Enqueue scripts.
 		add_action( 'wp_enqueue_scripts', array( $this, 'premise_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'premise_scripts' ) );
 
-		// Add classes to body
+		// Add classes to body.
 		add_filter( 'body_class', array( $this, 'body_class' ) );
 
-		// Add classes to body
+		// Add classes to body.
 		add_filter( 'admin_body_class', array( $this, 'body_class' ) );
 	}
 
@@ -165,14 +159,16 @@ class Premise_WP {
 
 	/**
 	 * Add premise classes to body of document in the front-end and backend
-	 * 
-	 * @param  array $classes  array of classes being passed to the body
+	 *
+	 * @param  array $classes  array of classes being passed to the body.
 	 * @return string          array including our new classes
 	 */
 	public function body_class( $classes ) {
-		if ( is_admin() )
+		if ( is_admin() ) {
+
 			return $classes . 'Premise-WP premise-wp-admin';
-		
+		}
+
 		$classes[] = 'Premise-WP';
 		$classes[] = 'premise-wp-frontend';
 		return $classes;
@@ -197,17 +193,17 @@ class Premise_WP {
 	 * @since 1.2 removed all other libraries. Replaced minicolors with Wordpress' wp_color and dropped msdropdown
 	 */
 	public function premise_scripts() {
-		//register styles
+		// Register styles.
 		wp_register_style( 'premise_font_awesome', $this->plugin_url . 'includes/font-awesome-4.2.0/css/font-awesome.min.css' );
 		wp_register_style( 'premise_style_css'   , $this->plugin_url . 'css/Premise-WP.min.css', array( 'premise_font_awesome' ) );
-		
-		//register scripts
+
+		// Register scripts.
 		wp_register_script( 'premise_script_js'  , $this->plugin_url . 'js/Premise-WP.min.js', array( 'jquery', 'wp-color-picker' ) );
-		
-		// For color picker to work
+
+		// For color picker to work.
 		wp_enqueue_style( 'wp-color-picker' );
 
-		// enqueue our styles and scripts for both admin and frontend
+		// Enqueue our styles and scripts for both admin and frontend.
 		wp_enqueue_style( 'premise_style_css' );
 		wp_enqueue_script( 'premise_script_js' );
 	}
@@ -222,10 +218,11 @@ class Premise_WP {
 	 * Currently not supported. but here for future integration
 	 *
 	 * @since   1.0
-	 * 
+	 *
 	 * @wp-hook init
-	 * 
-	 * @param   string $domain
+	 *
+	 * @param   string $domain Domain.
+	 *
 	 * @return  void
 	 */
 	public function load_language( $domain ) {

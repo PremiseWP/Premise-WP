@@ -2,32 +2,25 @@
 /**
  * Premise Custom Post Type Class
  *
- * Based on jjgrainger's custom post type class
+ * This Premise WP class is based on jjgrainger's CPT class.
+ * Used to help create custom post types for Wordpress.
+ *
+ * @link http://github.com/jjgrainger/wp-custom-post-type-class/ Please read this for more information
  *
  * @package Premise WP
  * @subpackage Model
  */
 
-
-
-
-// Block direct access to this file
+// Block direct access to this file.
 defined( 'ABSPATH' ) or die();
 
 
-
-
-/**
- * This Premise WP class is based on jjgrainger's CPT class.
- * Used to help create custom post types for Wordpress.
- * 
- * @link http://github.com/jjgrainger/wp-custom-post-type-class/ Please read this for more information
- */
 
 /**
  * Custom Post Type Class
  *
  * Used to help create custom post types for Wordpress.
+ *
  * @link http://github.com/jjgrainger/wp-custom-post-type-class/
  *
  * @author  jjgrainger

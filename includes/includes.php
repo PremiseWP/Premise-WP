@@ -1,14 +1,12 @@
 <?php
 /**
  * Premise Includes
+ *
  * @package Premise WP
  * @subpackage Includes
  */
 
-
-
-
-// Block direct access to this file
+// Block direct access to this file.
 defined( 'ABSPATH' ) or die();
 
 
