@@ -196,7 +196,7 @@ class Premise_Options {
 			<h2><?php echo esc_html( $this->menu_page_args['title'] ); ?></h2>
 			<?php
 			if ( ! empty( $this->fields ) ) {
-				echo '<form action="options.php" method="post">';
+				echo '<form action="options.php" method="post" enctype="multipart/form-data" class="premise-admin">';
 					wp_nonce_field( $this->nonce, $_POST['_wpnonce'], true, true );
 					settings_fields( $this->option_group );
 
