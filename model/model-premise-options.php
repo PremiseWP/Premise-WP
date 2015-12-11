@@ -200,7 +200,19 @@ class Premise_Options {
 					wp_nonce_field( $this->nonce, $_POST['_wpnonce'], true, true );
 					settings_fields( $this->option_group );
 
-					// Echo our fields.
+					/**
+					 * Display html before fields
+					 *
+					 * This hook allows you to pass an html string to display anything you want
+					 * in the admin page before the fields.
+					 *
+					 * @wp_hook premise_options_before_fields
+					 *
+					 * @since 1.2.2
+					 */
+					echo apply_filters( 'premise_options_before_fields', '', $this->fields );
+					
+					// echo our fields
 					premise_field_section( $this->fields );
 
 				echo '</form>';

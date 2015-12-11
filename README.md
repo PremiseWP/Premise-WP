@@ -412,6 +412,7 @@ Hook                               | Type         | Description                 
 `premise_field_icon_remove_btn`    | Filter       | do filter for button to hide fa icon             |
 `premise_field_section_html`       | Filter       | filter the field section html                    |
 `premise_field_wrapper_class`      | Filter       | filter the classes passed to the wrapper element |
+`premise_options_before_fields`    | Filter       | Insert html before fields in admin page          |
 `premise_field_fa_icon_html`       | Trigger      | do filter for fa_icon field                      |
 `premiseFieldAfterInit`            | Trigger      | do hook after PremiseField object inits          |
 `premiseFieldAfterFaIconsOpen`     | Trigger      | do hook after icons box opens                    |
