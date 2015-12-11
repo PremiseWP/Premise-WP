@@ -19,11 +19,10 @@ var PremiseParallax = {
 
 
 	init: function() {
-
 		if ( jQuery('.premise-parallax').length > 0 ) {
 			// Construct our object
 			this.elements = jQuery('.premise-parallax');
-			PremiseParallax.prepareParallax();
+			this.prepareParallax();
 
 			console.log('PremiseParallax Initiated successfully!');
 		}
@@ -39,7 +38,7 @@ var PremiseParallax = {
 
 		$this.elements.each(function(i, v) {
 			var inView = jQuery(v).attr('data-in-view') ? jQuery(v).attr('data-in-view') : null;
-			jQuery(window).scroll( $this.doParallax(jQuery(this), inView ) );
+			jQuery(window).scroll( $this.doParallax( jQuery(this), inView ) );
 		});
 	},
 
@@ -55,10 +54,11 @@ var PremiseParallax = {
 		totalScroll = jQuery(document).height() - jQuery(window).height(),
 		newScroll, currentScroll;
 		
-		if(Premise.browserMobile){
+		if ( Premise.browserMobile ) {
 			newScroll = jQuery(window).scrollTop();
-		} else {
-			if(Premise.whichBrs() == 'Safari' || Premise.whichBrs() == 'Chrome'){
+		}
+		else {
+			if ( Premise.whichBrs() == 'Safari' || Premise.whichBrs() == 'Chrome' ) {
 				newScroll = jQuery('body').scrollTop();
 			}
 			else {
@@ -70,7 +70,7 @@ var PremiseParallax = {
 			if ( newScroll + jQuery(window).height() >= jQuery(this).offset().top + inView.offsetIn && currentScroll < newScroll ) {
 				self.startAnimation( jQuery(this) );
 			}
-			if(!self.browserMobile && newScroll + jQuery(window).height() <= jQuery(this).offset().top + inView.offsetOut && currentScroll > newScroll ) {
+			if( ! self.browserMobile && newScroll + jQuery(window).height() <= jQuery(this).offset().top + inView.offsetOut && currentScroll > newScroll ) {
 				self.endAnimation( jQuery(this) );
 			}
 		}
@@ -80,11 +80,5 @@ var PremiseParallax = {
 		}
 
 		currentScroll = newScroll;
-	},
-
-
-
-
-	scrollNow: function(){}
-
-};
+	}
+}
