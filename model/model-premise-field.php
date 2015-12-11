@@ -53,6 +53,7 @@ class PremiseField {
 		'add_filter' => array(), // Add filter(s) to this field. Read documentation for list of filters.
 		'context'    => '',      // Used to let Premise know where to retrieve values from ( post, user ).
 		'wrapper_class' => '',   // Add additional classes to the fields wrapper.
+		'default'    => '',      // If value is empty and get_option() return false.
 		/**
 		 * Normal Arguments
 		 */
@@ -60,7 +61,6 @@ class PremiseField {
 		'id'         => '',      // ID attribute. is empty fills from name.
 		'value'      => '',      // Value attribute. by default tries to get_option(name).
 		'value_att'  => '',      // Value attribute. Used for checkboxes and radio.
-		'default'    => '',      // If value is empty and get_option() return false.
 		'options'    => array(), // Options for select fields in this format ( Text => Value ).
 		'attribute'  => '',      // HTML attributes to add to element i.e. onchange="doSomethingCool()".
 	);
