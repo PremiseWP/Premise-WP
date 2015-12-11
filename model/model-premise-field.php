@@ -607,7 +607,7 @@ class PremiseField {
 
 		$field .= $this->get_atts();
 
-		$field .= '>' . esc_textarea( $this->field['value'] ) . '</textarea>';
+		$field .= '>' . $this->field['value'] . '</textarea>';
 
 		/**
 		 * Premise_field_textarea filter
@@ -1220,7 +1220,7 @@ class PremiseField {
 
 		foreach ( $_field as $k => $v ) {
 
-			$field .= ! $this->empty_value( $v ) ? ' '.esc_attr( $k ).'="'.esc_attr( $v ).'"' : '';
+			$field .= ! $this->empty_value( $v ) ? ' ' . esc_attr( $k ) . '="' . esc_attr( $v ) . '"' : '';
 		}
 
 		return $field;
