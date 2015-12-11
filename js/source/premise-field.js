@@ -122,7 +122,7 @@ var PremiseField = {
 	},
 
 
-};
+}
 
 
 
@@ -252,7 +252,7 @@ PremiseField.faIcon = {
 			}
 		});
 	}
-};
+}
 
 
 
@@ -539,4 +539,4 @@ PremiseField.WPMedia = {
 	removePreview: function(container) {
 		container.find('.premise-wp_media-preview').remove();
 	}
-};
+}
