@@ -44,9 +44,9 @@ class PremiseField {
 	 *
 	 * @since 1.2 Moved type oustide of arguments and other changes
 	 */
-	protected $defaults = array(
+	public $defaults = array(
 		/**
-		 * Special Parameters
+		 * Special Arguments
 		 */
 		'label'      => '',      // Wraps label element around field. uses id for for attribute if id not empty.
 		'tooltip'    => '',      // Adds a tooltip and tooltip functionality to field.
@@ -54,7 +54,7 @@ class PremiseField {
 		'context'    => '',      // Used to let Premise know where to retrieve values from ( post, user ).
 		'wrapper_class' => '',   // Add additional classes to the fields wrapper.
 		/**
-		 * Normal Parameters
+		 * Normal Arguments
 		 */
 		'name'       => '',      // Name attribute. if empty fills from id.
 		'id'         => '',      // ID attribute. is empty fills from name.
