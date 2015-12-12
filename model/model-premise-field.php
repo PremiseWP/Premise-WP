@@ -1043,13 +1043,15 @@ class PremiseField {
 			$val = premise_get_value( $name, $context );
 		}
 
-		$val = is_array( $val ) ? implode( ',', $val ) : $val;
+		if ( is_array( $val ) ) {
 
-		if ( ! $this->empty_value( $val ) ) {
+			return $val;
+		}
+		elseif ( ! $this->empty_value( $val ) ) {
 
 			return esc_attr( $val );
-
-		} else {
+		} 
+		else {
 
 			return isset( $this->args['default'] ) && ! $this->empty_value( $this->args['default'] ) ?
 				esc_attr( $this->args['default'] ) :
@@ -1206,6 +1208,11 @@ class PremiseField {
 			// Unset value attribute: already set using value_att.
 			unset( $_field['value'] );
 		}
+
+		// If it is media field and value is array
+		// display comma separated values
+		if ( 'wp_media' == $this->type && is_array( $_field['value'] ) ) 
+			$_field['value'] = implode( ',', $_field['value'] );
 
 		unset( $_field['label'] );
 		unset( $_field['tooltip'] );
