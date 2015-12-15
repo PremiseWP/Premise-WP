@@ -422,7 +422,8 @@ Hook                               | Type         | Description                 
 
 ## Changelog  
 
-#### 1.2  
+#### 1.2
+* Added `premise_tooltip()` function.
 * Updated `PremiseField` class. Made it simpler to create fields, added filters, added `video` field.
 * Changed parameters for `premise_field()`. This function now takes a string as first param which makes it possible to create a field simpler e.g. `premise_field( 'text' )`.
 * Added prefix `premise-` to all classes of Premise WP CSS Framework. Divided CSS into sections each in its own file.
