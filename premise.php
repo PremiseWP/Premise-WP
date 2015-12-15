@@ -226,7 +226,7 @@ class Premise_WP {
 	 * @return  void
 	 */
 	public function load_language( $domain ) {
-		load_theme_textdomain(
+		load_plugin_textdomain(
 			$domain,
 			false,
 			$this->plugin_path . 'languages'
