@@ -191,38 +191,68 @@ class Premise_Options {
 	 * @return string the page content
 	 */
 	public function menu_page() {
+		$this->start_page();
+		
+		if ( ! empty( $this->fields ) ) {
+			echo '<form action="options.php" method="post" enctype="multipart/form-data" class="premise-admin">';
+				wp_nonce_field( $this->nonce, $_POST['_wpnonce'], true, true );
+				settings_fields( $this->option_group );
+
+				/**
+				 * Display html before fields
+				 *
+				 * This hook allows you to pass an html string to display anything you want
+				 * in the admin page before the fields.
+				 *
+				 * @wp_hook premise_options_before_fields
+				 *
+				 * @since 1.2.2
+				 */
+				echo apply_filters( 'premise_options_before_fields', '', $this->fields );
+				
+				// echo our fields
+				premise_field_section( $this->fields );
+
+			echo '</form>';
+
+		}
+		else {
+
+			echo '<p>Looks like the \'fields\' parameter is empty.</p>';
+		}
+		
+		$this->end_page();
+	}
+
+
+
+	/**
+	 * Prints the opening html tag for the this page. Called from menu_page() method
+	 *
+	 * @see menu_page() this function is called from menu_page() method
+	 * 
+	 * @return string html for begining of page
+	 */
+	public function start_page() {
 		?>
-		<div class="wrap">
-			<h2><?php echo esc_html( $this->menu_page_args['title'] ); ?></h2>
-			<?php
-			if ( ! empty( $this->fields ) ) {
-				echo '<form action="options.php" method="post" enctype="multipart/form-data" class="premise-admin">';
-					wp_nonce_field( $this->nonce, $_POST['_wpnonce'], true, true );
-					settings_fields( $this->option_group );
+		<div class="wrap premise-admin-page">
+		<h1><?php echo esc_html( $this->menu_page_args['title'] ); ?></h1>
+		<?php
+	}
 
-					/**
-					 * Display html before fields
-					 *
-					 * This hook allows you to pass an html string to display anything you want
-					 * in the admin page before the fields.
-					 *
-					 * @wp_hook premise_options_before_fields
-					 *
-					 * @since 1.2.2
-					 */
-					echo apply_filters( 'premise_options_before_fields', '', $this->fields );
-					
-					// echo our fields
-					premise_field_section( $this->fields );
 
-				echo '</form>';
 
-			} else {
-
-				echo '<p>Looks like the \'fields\' parameter is empty.</p>';
-			}
-			?>
+	/**
+	 * Prints the closing html tag for the this page. Called from menu_page() method
+	 *
+	 * @see menu_page() this function is called from menu_page() method
+	 * 
+	 * @return string html for end of page
+	 */
+	public function end_page() {
+		?>
 		</div>
 		<?php
 	}
+
 }
