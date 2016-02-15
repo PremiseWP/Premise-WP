@@ -1038,7 +1038,7 @@ class PremiseField {
 				return '';
 			}
 
-			$context = ! empty( $this->args['context'] ) ? $this->args['context'] : '';
+			$context = ! empty( $this->args['context'] ) ? $this->args['context'] : 'post';
 
 			$val = premise_get_value( $name, $context );
 		}
