@@ -70,7 +70,7 @@ function premise_get_value( $name = '', $context = '' ) {
 	 */
 	$context_type = is_array( $context ) ? $context['context'] : $context;
 	$id           = is_array( $context ) ? $context['id']      : '';
-	$single       = is_array( $context ) ? $context['single']  : '';
+	// $single       = is_array( $context ) ? $context['single']  : '';
 
 	/**
 	 * Get the value based on the context_type if $context_type is not empty.
