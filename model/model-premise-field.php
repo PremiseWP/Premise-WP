@@ -1322,10 +1322,10 @@ class PremiseField {
 	 *
 	 * @param  string $value Value.
 	 *
-	 * @return boolean True if empty value & value != '0', else false
+	 * @return boolean True if empty value & $value !== 0, 0.0, '0', else false
 	 */
 	public function empty_value( $value ) {
 
-		return empty( $value ) && '0' != $value;
+		return empty( $value ) && $value !== 0 && $value !== 0.0 && $value !== '0';
 	}
 }
