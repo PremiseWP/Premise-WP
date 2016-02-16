@@ -194,7 +194,7 @@ class Premise_WP {
 	 */
 	public function premise_scripts() {
 		// Register styles.
-		wp_register_style( 'premise_font_awesome', $this->plugin_url . 'includes/font-awesome-4.2.0/css/font-awesome.min.css' );
+		wp_register_style( 'premise_font_awesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' );
 		wp_register_style( 'premise_style_css'   , $this->plugin_url . 'css/Premise-WP.min.css', array( 'premise_font_awesome' ) );
 
 		if ( is_admin() ) {
