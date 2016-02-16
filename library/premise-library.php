@@ -381,3 +381,117 @@ function premise_tooltip( $tooltip_text ) {
 	return ' <span class="premise-tooltip"><span class="premise-tooltip-inner"><i>' .
 		esc_attr( $tooltip_text ) . '</i></span></span>';
 }
+
+
+
+/**
+ * Output a Youtube or a Vimeo video
+ *
+ * @see PremiseField 'video' type
+ *
+ * @link https://developers.google.com/youtube/iframe_api_reference
+ * @link http://stackoverflow.com/questions/5830387/how-to-find-all-youtube-video-ids-in-a-string-using-a-regex
+ * @link https://developer.vimeo.com/player/embedding
+ *
+ * @since 1.3
+ *
+ * @param  string $video Video URL or ID.
+ *
+ * @return string        HTML for video
+ */
+function premise_output_video( $video ) {
+
+	static $video_count = 1;
+
+	static $js_included = false;
+
+	if ( empty( $video ) || ! is_string( $video ) ) {
+		return '';
+	}
+
+	$video_id = '';
+
+	// Extract Youtube video ID from URL.
+	if ( strpos( $video, 'youtu' ) ) {
+
+		// http://stackoverflow.com/questions/5830387/how-to-find-all-youtube-video-ids-in-a-string-using-a-regex
+		$video_id = preg_replace( '~(?#!js YouTubeId Rev:20160125_1800)
+			# Match non-linked youtube URL in the wild. (Rev:20130823)
+			https?://          # Required scheme. Either http or https.
+			(?:[0-9A-Z-]+\.)?  # Optional subdomain.
+			(?:                # Group host alternatives.
+			  youtu\.be/       # Either youtu.be,
+			| youtube          # or youtube.com or
+			  (?:-nocookie)?   # youtube-nocookie.com
+			  \.com            # followed by
+			  \S*?             # Allow anything up to VIDEO_ID,
+			  [^\w\s-]         # but char before ID is non-ID char.
+			)                  # End host alternatives.
+			([\w-]{11})        # $1: VIDEO_ID is exactly 11 chars.
+			(?=[^\w-]|$)       # Assert next char is non-ID or EOS.
+			(?!                # Assert URL is not pre-linked.
+			  [?=&+%\w.-]*     # Allow URL (query) remainder.
+			  (?:              # Group pre-linked alternatives.
+			    [\'"][^<>]*>   # Either inside a start tag,
+			  | </a>           # or inside <a> element text contents.
+			  )                # End recognized pre-linked alts.
+			)                  # End negative lookahead assertion.
+			[?=&+%\w.-]*       # Consume any URL (query) remainder.
+			~ix', '$1',
+			$video );
+
+		$video_type = 'youtube';
+
+	} elseif ( strpos( $video, 'vimeo' ) ) {
+
+		if ( preg_match( '~(?<=/)([\d]+)~', $video, $matches ) ) {
+ 			$video_id = $matches[0];
+ 		}
+
+		$video_type = 'vimeo';
+
+	} else {
+
+		$video_id = $video;
+
+		if ( (string) (int) $video_id === $video_id ) {
+
+			// Vimeo ID is integer.
+			$video_type = 'vimeo';
+
+		} else {
+
+			// Youtube ID is 11 char long.
+			$video_type = 'youtube';
+		}
+	}
+
+	if ( ! $video_id ) {
+		return '';
+	}
+
+	if ( $video_type == 'youtube' ) {
+
+		$js = '';
+
+		// 2. This code loads the IFrame Player API code asynchronously.
+		if ( ! $js_included ) {
+			$js = '<script>
+			var tag = document.createElement("script");
+			tag.src = "https://www.youtube.com/iframe_api";
+			var firstScriptTag = document.getElementsByTagName("script")[0];
+			firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+			</script>';
+
+			$js_included = true;
+		}
+
+		$html = $js . '<div class="premise-video premise-youtube-video" data-premise-youtube-video-id="' . $video_id . '" id="premise-youtube-video-' . $video_count++ . '"></div>';
+
+	} else {
+
+		$html = '<iframe src="//player.vimeo.com/video/' . $video_id . '" class="premise-video premise-vimeo-video" id="psv-vimeo-video-' . $video_count++ .'" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
+	}
+
+	return $html;
+}
