@@ -522,13 +522,15 @@ class PremiseField {
 		 */
 		$html = '<div class="' . $wrapper_class . '">';
 
-			$html .= $this->label;
+			$html .= ( 'checkbox' !== $this->type && 'radio' !== $this->type ) ? $this->label : '';
 
 			$html .= '<div class="premise-field-' . sanitize_html_class( $this->type ) . '">';
 
 				$html .= $this->field_html;
 
 			$html .= '</div>';
+
+			$html .= ( 'checkbox' !== $this->type && 'radio' !== $this->type ) ? '' : $this->label;
 
 			/**
 			 * Insert your own markup after the field

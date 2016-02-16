@@ -116,24 +116,28 @@
 	font-size: inherit;
 	color: inherit;
 	letter-spacing: 1px;
+	opacity: .6;
 }
 .premise-field > div :-moz-placeholder {
 	line-height: inherit;
 	font-size: inherit;
 	color: inherit;
 	letter-spacing: 1px;
+	opacity: .6;
 }
 .premise-field > div ::-moz-placeholder {
 	line-height: inherit;
 	font-size: inherit;
 	color: inherit;
 	letter-spacing: 1px;
+	opacity: .6;
 }
 .premise-field > div :-ms-input-placeholder {
 	line-height: inherit;
 	font-size: inherit;
 	color: inherit;
 	letter-spacing: 1px;
+	opacity: .6;
 }
 
 /**
@@ -259,7 +263,7 @@
  * @see http://www.sitepoint.com/css3-toggle-switch/
  */
 .premise-field > .premise-field-checkbox {
-	float: left;
+	display: inline-block;
 	margin-right: 10px;
 }
 
@@ -270,7 +274,7 @@
  * Radio
  */
 .premise-field > .premise-field-radio {
-	float: left;
+	display: inline-block;
 	margin-right: 10px;
 }
 
