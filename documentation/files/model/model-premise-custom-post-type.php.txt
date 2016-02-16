@@ -2,23 +2,25 @@
 /**
  * Premise Custom Post Type Class
  *
- * Based on jjgrainger's custom post type class
+ * This Premise WP class is based on jjgrainger's CPT class.
+ * Used to help create custom post types for Wordpress.
+ *
+ * @link http://github.com/jjgrainger/wp-custom-post-type-class/ Please read this for more information
  *
  * @package Premise WP
  * @subpackage Model
  */
 
-/**
- * This Premise WP class is based on jjgrainger's CPT class.
- * Used to help create custom post types for Wordpress.
- * 
- * @link http://github.com/jjgrainger/wp-custom-post-type-class/ Please read this for more information
- */
+// Block direct access to this file.
+defined( 'ABSPATH' ) or die();
+
+
 
 /**
  * Custom Post Type Class
  *
  * Used to help create custom post types for Wordpress.
+ *
  * @link http://github.com/jjgrainger/wp-custom-post-type-class/
  *
  * @author  jjgrainger
@@ -585,8 +587,8 @@ class PremiseCPT {
      */
     function register_exisiting_taxonomies() {
 
-        if( is_array( $this->exisiting_taxonomies ) ) {
-            foreach( $this->exisiting_taxonomies as $taxonomy_name ) {
+        if ( is_array( $this->exisiting_taxonomies ) ) {
+            foreach ( $this->exisiting_taxonomies as $taxonomy_name ) {
                 register_taxonomy_for_object_type( $taxonomy_name, $this->post_type_name );
             }
         }
@@ -610,31 +612,31 @@ class PremiseCPT {
             // determine which column to add custom taxonomies after
             if ( is_array( $this->taxonomies ) && in_array( 'post_tag', $this->taxonomies ) || $this->post_type_name === 'post' ) {
                 $after = 'tags';
-            } elseif( is_array( $this->taxonomies ) && in_array( 'category', $this->taxonomies ) || $this->post_type_name === 'post' ) {
+            } elseif ( is_array( $this->taxonomies ) && in_array( 'category', $this->taxonomies ) || $this->post_type_name === 'post' ) {
                 $after = 'categories';
-            } elseif( post_type_supports( $this->post_type_name, 'author' ) ) {
+            } elseif ( post_type_supports( $this->post_type_name, 'author' ) ) {
                 $after = 'author';
             } else {
                 $after = 'title';
             }
 
             // foreach exisiting columns
-            foreach( $columns as $key => $title ) {
+            foreach ( $columns as $key => $title ) {
 
                 // add exisiting column to the new column array
                 $new_columns[$key] = $title;
 
                 // we want to add taxonomy columns after a specific column
-                if( $key === $after ) {
+                if ( $key === $after ) {
 
                     // If there are taxonomies registered to the post type.
                     if ( is_array( $this->taxonomies ) ) {
 
                         // Create a column for each taxonomy.
-                        foreach( $this->taxonomies as $tax ) {
+                        foreach ( $this->taxonomies as $tax ) {
 
                             // WordPress adds Categories and Tags automatically, ignore these
-                            if( $tax !== 'category' && $tax !== 'post_tag' ) {
+                            if ( $tax !== 'category' && $tax !== 'post_tag' ) {
                                 // Get the taxonomy object for labels.
                                 $taxonomy_object = get_taxonomy( $tax );
 
@@ -686,7 +688,7 @@ class PremiseCPT {
                     $output = array();
 
                     // Loop through each term, linking to the 'edit posts' page for the specific term.
-                    foreach( $terms as $term ) {
+                    foreach ( $terms as $term ) {
 
                         // Output is an array of terms associated with the post.
                         $output[] = sprintf(
@@ -873,7 +875,7 @@ class PremiseCPT {
     function columns( $columns ) {
 
         // If columns is set.
-        if( isset( $columns ) ) {
+        if ( isset( $columns ) ) {
 
             // Assign user submitted columns to object.
             $this->columns = $columns;
@@ -970,7 +972,7 @@ class PremiseCPT {
             $meta_key = $values[0];
 
             // If the meta_key is a taxonomy
-            if( taxonomy_exists( $meta_key ) ) {
+            if ( taxonomy_exists( $meta_key ) ) {
 
                 // Sort by taxonomy.
                 $key = "taxonomy";

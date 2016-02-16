@@ -420,7 +420,10 @@ Hook                               | Type         | Description                 
 
 ===  
 
-## Changelog  
+## Changelog
+
+#### 1.3
+* Added `premise_output_video()` function. Pass a Youtube or Vimeo ID / URL to embed the video.
 
 #### 1.2
 * Added `premise_tooltip()` function.

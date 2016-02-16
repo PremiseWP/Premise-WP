@@ -113,12 +113,12 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="../reports/errors.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">12</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">4</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="../reports/markers.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
                                 </a>
                             </li>
                         </ul>
@@ -138,16 +138,15 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1454053445"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-45287472"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1454053445" class="accordion-body collapse in">
+            <div id="namespace-45287472" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
                     <ul>
                                                                                                     <li class="class"><a href="../classes/Premise_WP.html">Premise_WP</a></li>
-                                                    <li class="class"><a href="../classes/PremiseVersion.html">PremiseVersion</a></li>
                                                     <li class="class"><a href="../classes/PremiseCPT.html">PremiseCPT</a></li>
                                                     <li class="class"><a href="../classes/PremiseField.html">PremiseField</a></li>
                                                     <li class="class"><a href="../classes/A.html">A</a></li>
@@ -229,17 +228,17 @@ Premise where to save the value and how to retrieve it after a value has been sa
                                                     <tr>
                                 <td>string</td>
                                 <td>$type</td>
-                                <td><p>the type of field to print or return. i.e. text, textarea, checkbox, wp_media, video</p></td>
+                                <td><p>the type of field to print or return. i.e. text, textarea, checkbox, wp_media, video.</p></td>
                             </tr>
                                                     <tr>
                                 <td>array</td>
                                 <td>$args</td>
-                                <td><p>array of arguments to buid a field</p></td>
+                                <td><p>array of arguments to buid a field.</p></td>
                             </tr>
                                                     <tr>
                                 <td>boolean</td>
                                 <td>$echo</td>
-                                <td><p>true outputs the html on to the page. false returns it as a string</p></td>
+                                <td><p>true outputs the html on to the page. false returns it as a string.</p></td>
                             </tr>
                                             </table>
                 
@@ -300,12 +299,12 @@ Premise where to save the value and how to retrieve it after a value has been sa
                                                     <tr>
                                 <td>array</td>
                                 <td>$args</td>
-                                <td><p>array of arrays. The fields to insert</p></td>
+                                <td><p>array of arrays. The fields to insert.</p></td>
                             </tr>
                                                     <tr>
                                 <td>boolean</td>
                                 <td>$echo</td>
-                                <td><p>whether to echo ro return the string</p></td>
+                                <td><p>whether to echo ro return the string.</p></td>
                             </tr>
                                             </table>
                 
@@ -393,6 +392,70 @@ Premise where to save the value and how to retrieve it after a value has been sa
         </aside>
     </div>
 
+                                        <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_premise_output_video" name="method_premise_output_video" class="anchor"></a>
+            <article class="method">
+                <h3 class=" ">premise_output_video()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">premise_output_video(string <span class="argument">$video</span>) : string</pre>
+                <p><em>Output a Youtube or a Vimeo video</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$video</td>
+                                <td><p>Video URL or ID.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>HTML for video</p>
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                    <dt>File</dt>
+                    <dd><a href=""><div class="path-wrapper">library/premise-field-library.php</div></a></dd>
+                                                                                            <dt>See also</dt>
+                                                                <dd><a href=""><span class="namespace-wrapper">&#039;video&#039; type</span></a></dd>
+                                                                                                    <dd><a href="https://developers.google.com/youtube/iframe_api_reference"><span class="namespace-wrapper">https://developers.google.com/youtube/iframe_api_reference</span></a></dd>
+                                            <dd><a href="http://stackoverflow.com/questions/5830387/how-to-find-all-youtube-video-ids-in-a-string-using-a-regex"><span class="namespace-wrapper">http://stackoverflow.com/questions/5830387/how-to-find-all-youtube-video-ids-in-a-string-using-a-regex</span></a></dd>
+                                            <dd><a href="https://developer.vimeo.com/player/embedding"><span class="namespace-wrapper">https://developer.vimeo.com/player/embedding</span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            since
+                        </th>
+                        <td>
+                                                            1.3                                
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            subpackage
+                        </th>
+                        <td>
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
                             
         </div>
     </section>
@@ -443,7 +506,7 @@ Premise where to save the value and how to retrieve it after a value has been sa
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on November 14th, 2015 at 04:58.
+                    on February 16th, 2016 at 14:52.
                 </section>
             </section>
         </section>
