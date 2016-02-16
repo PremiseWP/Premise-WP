@@ -268,12 +268,20 @@
 
 /**
  * Radio
- *
- * @see http://www.sitepoint.com/css3-toggle-switch/
  */
 .premise-field > .premise-field-radio {
 	float: left;
 	margin-right: 10px;
+}
+
+
+
+
+/**
+ * Hidden
+ */
+.premise-field-type-hidden {
+	margin-bottom: 0;
 }
 
 
