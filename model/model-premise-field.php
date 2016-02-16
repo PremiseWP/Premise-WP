@@ -914,39 +914,20 @@ class PremiseField {
 	 */
 	protected function video() {
 
-		/**
-		 * We our own filter to alter the html of our input field
-		 */
-		add_filter( 'premise_field_textarea', array( $this, 'video_textarea' ) );
+		$field  = '<input type="text" data-type="video"';
+
+		$field .= $this->get_atts();
+
+		$field .= '>';
 
 		/**
-		 * Call the input field.
+		 * Filter to alter html of input field after creating it
 		 *
-		 * This will be alter due to our hook above
+		 * @since 1.2 added to offer more control over markup
 		 *
-		 * @var string
+		 * @premise-hook premise_field_input filter the input field html
 		 */
-		$field = $this->textarea();
-
-		return $field;
-	}
-
-
-
-
-
-	/**
-	 * Filter the textarea for video field
-	 *
-	 * @since 1.2
-	 *
-	 * @param  string $field html for textarea field.
-	 *
-	 * @return string        new html
-	 */
-	public function video_textarea( $field ) {
-
-		return str_replace( '<textarea', '<textarea data-type="video" class="premise-video"', $field );
+		return apply_filters( 'premise_field_input', $field, $this->field, $this->type );
 	}
 
 
