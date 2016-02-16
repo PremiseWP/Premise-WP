@@ -197,11 +197,20 @@ class Premise_WP {
 		wp_register_style( 'premise_font_awesome', $this->plugin_url . 'includes/font-awesome-4.2.0/css/font-awesome.min.css' );
 		wp_register_style( 'premise_style_css'   , $this->plugin_url . 'css/Premise-WP.min.css', array( 'premise_font_awesome' ) );
 
-		// Register scripts.
-		wp_register_script( 'premise_script_js'  , $this->plugin_url . 'js/Premise-WP.min.js', array( 'jquery', 'wp-color-picker' ) );
+		if ( is_admin() ) {
 
-		// For color picker to work.
-		wp_enqueue_style( 'wp-color-picker' );
+			// Register scripts.
+			wp_register_script( 'premise_script_js'  , $this->plugin_url . 'js/Premise-WP.min.js', array( 'jquery', 'wp-color-picker' ) );
+
+			// For color picker to work.
+			wp_enqueue_style( 'wp-color-picker' );
+
+		} else {
+
+			// Do not load color picker on frontend.
+			// Register scripts.
+			wp_register_script( 'premise_script_js'  , $this->plugin_url . 'js/Premise-WP.min.js', array( 'jquery' ) );
+		}
 
 		// Enqueue our styles and scripts for both admin and frontend.
 		wp_enqueue_style( 'premise_style_css' );
