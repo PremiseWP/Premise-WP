@@ -63,6 +63,7 @@ class Premise_Options {
 		'menu_title' => 'Premise Options',
 		'capability' => 'manage_options',
 		'menu_slug' => 'premise_options_page',
+		'call_back' => '',
 		'icon' => '',
 		'position' => '59.2',
 	);
@@ -127,6 +128,8 @@ class Premise_Options {
 		} elseif ( is_array( $title ) ) {
 
 			$this->menu_page_args = wp_parse_args( $title, $this->menu_page_args );
+			if ( '' == $this->menu_page_args['call_back'] )
+				$this->menu_page_args['call_back'] = array( $this, 'menu_page' );
 		}
 	}
 
@@ -167,13 +170,13 @@ class Premise_Options {
 	 * @return void does not return anything
 	 */
 	public function add_menu() {
-
+		$this->menu_page_args['call_back'] = 
 		add_menu_page(
 			$this->menu_page_args['title'],      // $page_title.
 			$this->menu_page_args['menu_title'], // $menu_title.
 			$this->menu_page_args['capability'], // $capability.
 			$this->menu_page_args['menu_slug'],  // $menu_slug.
-			array( $this, 'menu_page' ),         // $function.
+			$this->menu_page_args['call_back'],  // $function.
 			$this->menu_page_args['icon'],       // $icon_url.
 			$this->menu_page_args['position']    // $position.
 		);
