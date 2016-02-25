@@ -396,6 +396,8 @@ class PremiseField {
 			$label .= '</label>';
 		}
 
+		array_push( $this->filters_used, 'premise_field_label_html' );
+
 		/**
 		 * Alter the label html
 		 *
@@ -483,6 +485,8 @@ class PremiseField {
 				break;
 		}
 
+		array_push( $this->filters_used, 'premise_field_raw_html' );
+
 		/**
 		 * Filter the field's html
 		 *
@@ -532,6 +536,8 @@ class PremiseField {
 
 			$html .= ( 'checkbox' !== $this->type && 'radio' !== $this->type ) ? '' : $this->label;
 
+			array_push( $this->filters_used, 'premise_field_html_after_wrapper' );
+
 			/**
 			 * Insert your own markup after the field
 			 *
@@ -544,6 +550,8 @@ class PremiseField {
 			$html .= apply_filters( 'premise_field_html_after_wrapper', '', $this->field, $this->type );
 
 		$html .= '</div>';
+
+		array_push( $this->filters_used, 'premise_field_html' );
 
 		/**
 		 * Filter the entire html
@@ -582,6 +590,8 @@ class PremiseField {
 
 		$field .= '>';
 
+		array_push( $this->filters_used, 'premise_field_input' );
+
 		/**
 		 * Filter to alter html of input field after creating it
 		 *
@@ -610,6 +620,8 @@ class PremiseField {
 		$field .= $this->get_atts();
 
 		$field .= '>' . $this->field['value'] . '</textarea>';
+
+		array_push( $this->filters_used, 'premise_field_textarea' );
 
 		/**
 		 * Premise_field_textarea filter
@@ -764,6 +776,8 @@ class PremiseField {
 		 */
 		$field .= apply_filters( 'premise_field_upload_btn', $this->btn_upload_file, $this->field );
 
+		array_push( $this->filters_used, 'premise_field_upload_btn' );
+
 		/**
 		 * Filter to alter the html on the media remove button
 		 *
@@ -772,6 +786,10 @@ class PremiseField {
 		 * @premise-hook premise_field_remove_btn filter the wp media remove button
 		 */
 		$field .= apply_filters( 'premise_field_remove_btn', $this->btn_remove_file, $this->field );
+
+		array_push( $this->filters_used, 'premise_field_remove_btn' );
+
+		array_push( $this->filters_used, 'premise_field_wp_media_html' );
 
 		/**
 		 * Filter to alter the html wp media field
@@ -836,6 +854,8 @@ class PremiseField {
 		 */
 		$field .= apply_filters( 'premise_field_icon_insert_btn', $this->btn_insert_icon, $this->field );
 
+		array_push( $this->filters_used, 'premise_field_icon_insert_btn' );
+
 		/**
 		 * Filter to alter the html on the icon remove button
 		 *
@@ -844,6 +864,10 @@ class PremiseField {
 		 * @premise-hook premise_field_icon_remove_btn do filter for button to hide fa icon
 		 */
 		$field .= apply_filters( 'premise_field_icon_remove_btn', $this->btn_remove_icon, $this->field );
+
+		array_push( $this->filters_used, 'premise_field_icon_remove_btn' );
+
+		array_push( $this->filters_used, 'premise_field_fa_icon_html' );
 
 		/**
 		 * premise_field_fa_icon_html filter
@@ -922,6 +946,8 @@ class PremiseField {
 
 		$field .= '>';
 
+		array_push( $this->filters_used, 'premise_field_input' );
+
 		/**
 		 * Filter to alter html of input field after creating it
 		 *
@@ -953,7 +979,7 @@ class PremiseField {
 		wp_enqueue_style( 'wp-color-picker' );
 
 		/**
-		 * We our own filter to alter the html of our input field
+		 * We add our own filter to alter the html of our input field
 		 */
 		add_filter( 'premise_field_input', array( $this, 'wp_color_input' ) );
 
@@ -1245,6 +1271,8 @@ class PremiseField {
 
 			$class .= ' ' . esc_attr( $this->field['wrapper_class'] );
 		}
+
+		array_push( $this->filters_used, 'premise_field_wrapper_class' );
 
 		/**
 		 * Filter to alter the classes passed to the wrapper element
