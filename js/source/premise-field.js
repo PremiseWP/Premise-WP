@@ -198,7 +198,7 @@ PremiseField.faIcon = {
 		 * @param {object} icons jQuery object for element holding all icons
 		 * @param {object} parent jQuery object for field main element
 		 */
-		jQuery(document).trigger('premiseFieldAfterFaIconsClose', icons, parent );
+		jQuery(document).trigger('premiseFieldAfterFaIconsClose', [ icons, parent ] );
 
 		return false;
 	},
