@@ -585,6 +585,7 @@ var PremiseYouTubePlayer = {
  * @see premise_video_output()
  */
 function onYouTubeIframeAPIReady() {
+	console.log('jjj');
 	(function($){
 		PremiseYouTubePlayer.init($, YT);
 	})(jQuery);

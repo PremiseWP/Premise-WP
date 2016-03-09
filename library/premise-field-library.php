@@ -258,7 +258,7 @@ function premise_output_video( $video ) {
 
 		$js = '';
 
-		// 2. This code loads the IFrame Player API code asynchronously.
+		// This code loads the IFrame Player API code asynchronously.
 		if ( ! $js_included ) {
 			$js = '<script>
 			var tag = document.createElement("script");
