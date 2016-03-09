@@ -187,8 +187,6 @@ function premise_output_video( $video ) {
 
 	static $video_count = 1;
 
-	static $js_included = false;
-
 	if ( empty( $video ) || ! is_string( $video ) ) {
 		return '';
 	}
@@ -258,19 +256,7 @@ function premise_output_video( $video ) {
 
 		$js = '';
 
-		// 2. This code loads the IFrame Player API code asynchronously.
-		if ( ! $js_included ) {
-			$js = '<script>
-			var tag = document.createElement("script");
-			tag.src = "https://www.youtube.com/iframe_api";
-			var firstScriptTag = document.getElementsByTagName("script")[0];
-			firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-			</script>';
-
-			$js_included = true;
-		}
-
-		$html = $js . '<div class="premise-video premise-youtube-video" data-premise-youtube-video-id="' . $video_id . '" id="premise-youtube-video-' . $video_count++ . '"></div>';
+		$html = '<div class="premise-video premise-youtube-video" data-premise-youtube-video-id="' . $video_id . '" id="premise-youtube-video-' . $video_count++ . '"></div>';
 
 	} else {
 
