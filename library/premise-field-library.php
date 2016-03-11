@@ -187,8 +187,6 @@ function premise_output_video( $video ) {
 
 	static $video_count = 1;
 
-	static $js_included = false;
-
 	if ( empty( $video ) || ! is_string( $video ) ) {
 		return '';
 	}
@@ -258,6 +256,7 @@ function premise_output_video( $video ) {
 
 		$js = '';
 
+
 		// This code loads the IFrame Player API code asynchronously.
 		if ( ! $js_included ) {
 			$js = '<script>
@@ -279,3 +278,31 @@ function premise_output_video( $video ) {
 
 	return $html;
 }
+
+
+
+
+/**
+ * Premise tooltip
+ *
+ * CSS tooltip
+ *
+ * @see premise-field.css
+ *
+ * @since 1.2
+ *
+ * @param  string $tooltip_text Tooltip text.
+ *
+ * @return string Tooltip HTML or empty string if empty( $tooltip_text )
+ */
+function premise_tooltip( $tooltip_text ) {
+
+	if ( empty( $tooltip_text ) ) {
+
+		return '';
+	}
+
+	return ' <span class="premise-tooltip"><span class="premise-tooltip-inner"><i>' .
+		esc_attr( $tooltip_text ) . '</i></span></span>';
+}
+>>>>>>> origin/master
