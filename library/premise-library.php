@@ -355,29 +355,3 @@ function premise_rand_str( $length = '' ) {
 	// Return random string.
 	return esc_attr( $token );
 }
-
-
-
-/**
- * Premise tooltip
- *
- * CSS tooltip
- *
- * @see premise-field.css
- *
- * @since 1.2
- *
- * @param  string $tooltip_text Tooltip text.
- *
- * @return string Tooltip HTML or empty string if empty( $tooltip_text )
- */
-function premise_tooltip( $tooltip_text ) {
-
-	if ( empty( $tooltip_text ) ) {
-
-		return '';
-	}
-
-	return ' <span class="premise-tooltip"><span class="premise-tooltip-inner"><i>' .
-		esc_attr( $tooltip_text ) . '</i></span></span>';
-}

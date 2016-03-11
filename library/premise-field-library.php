@@ -305,4 +305,3 @@ function premise_tooltip( $tooltip_text ) {
 	return ' <span class="premise-tooltip"><span class="premise-tooltip-inner"><i>' .
 		esc_attr( $tooltip_text ) . '</i></span></span>';
 }
->>>>>>> origin/master
