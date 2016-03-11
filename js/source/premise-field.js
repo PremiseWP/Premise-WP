@@ -110,7 +110,7 @@ var PremiseField = {
 
 		// Hide FA icons when the delete btn is clicked on
 		// passing the argument true deletes the field's value
-		this.faHideIconsBtn.click(function(){PremiseField.faIcon.hideIcons(true);});
+		this.faHideIconsBtn.click(function(){PremiseField.faIcon.hideIcons(this,true);});
 
 		this.faInputField.keyup(PremiseField.faIcon.filterIcons);
 
@@ -122,7 +122,7 @@ var PremiseField = {
 	},
 
 
-}
+};
 
 
 
@@ -159,7 +159,7 @@ PremiseField.faIcon = {
 		 * @param {object} icons jQuery object for element holding all icons
 		 * @param {object} parent jQuery object for field main element
 		 */
-		jQuery(document).trigger('premiseFieldAfterFaIconsOpen', icons, parent );
+		jQuery(document).trigger('premiseFieldAfterFaIconsOpen', [ icons, parent ] );
 
 		return false;
 	},
@@ -170,14 +170,14 @@ PremiseField.faIcon = {
 	/**
 	 * Hide the Icons
 	 *
+	 * @param {object}  original target element
 	 * @param {boolean} empty if true will empty the field. default false
 	 * @return {void}   hides icons
 	 */
-	hideIcons: function(empty) {
+	hideIcons: function(el, empty) {
 		empty = 'boolean' === typeof empty ? empty : false;
 		
-		var e  = window.event,
-		parent = jQuery(e.target).parents('.premise-field'),
+		var parent = jQuery(el).parents('.premise-field'),
 		icons  = parent.find('.premise-field-fa-icons-container');
 
 		// empty the field if argument 'empty' is true
@@ -198,7 +198,7 @@ PremiseField.faIcon = {
 		 * @param {object} icons jQuery object for element holding all icons
 		 * @param {object} parent jQuery object for field main element
 		 */
-		jQuery(document).trigger('premiseFieldAfterFaIconsClose', icons, parent );
+		jQuery(document).trigger('premiseFieldAfterFaIconsClose', [ icons, parent ] );
 
 		return false;
 	},
@@ -217,7 +217,7 @@ PremiseField.faIcon = {
 		jQuery(this).parents('.premise-field').find('input.premise-fa_icon').val(icon);
 		
 		// close icons
-		PremiseField.faIcon.hideIcons();
+		PremiseField.faIcon.hideIcons(this);
 	},
 
 
@@ -252,7 +252,7 @@ PremiseField.faIcon = {
 			}
 		});
 	}
-}
+};
 
 
 
@@ -539,7 +539,7 @@ PremiseField.WPMedia = {
 	removePreview: function(container) {
 		container.find('.premise-wp_media-preview').remove();
 	}
-}
+};
 
 
 
