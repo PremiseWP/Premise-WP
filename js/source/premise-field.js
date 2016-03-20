@@ -597,7 +597,6 @@ PremiseField.WPMedia = {
 
 
 
-
 /**
  * YouTube JS
  *
