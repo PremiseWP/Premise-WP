@@ -422,10 +422,14 @@ Hook                               | Type         | Description                 
 
 ## Changelog
 
-#### 1.3
+#### 1.3.1
+* Renamed `call_back` param to `callback` in `Premise_Options` class.
+* The `callback` param now overrides the fields param. If a callback is provided, the fields argument will be ignored.
+
+#### 1.3.0
 * Added `premise_output_video()` function. Pass a Youtube or Vimeo ID / URL to embed the video.
 
-#### 1.2
+#### 1.2.0
 * Added `premise_tooltip()` function.
 * Updated `PremiseField` class. Made it simpler to create fields, added filters, added `video` field.
 * Changed parameters for `premise_field()`. This function now takes a string as first param which makes it possible to create a field simpler e.g. `premise_field( 'text' )`.
