@@ -188,7 +188,7 @@ class Premise_Options {
 			$this->menu_page_args['menu_title'], // $menu_title.
 			$this->menu_page_args['capability'], // $capability.
 			$this->menu_page_args['menu_slug'],  // $menu_slug.
-			array( $this, 'menu_page' ), //$this->menu_page_args['callback'],  // $function.
+			array( $this, 'menu_page' ),         // $callback.
 			$this->menu_page_args['icon'],       // $icon_url.
 			$this->menu_page_args['position']    // $position.
 		);
@@ -200,8 +200,7 @@ class Premise_Options {
 	/**
 	 * Display the options page content
 	 *
-	 * @link https://codex.wordpress.org/Function_Reference/wp_nonce_field  for more information on wp_nonce_field()
-	 * @link https://codex.wordpress.org/Function_Reference/settings_fields for more information on settings_fields()
+	 * Displays either the callback or the fields the user passed.
 	 *
 	 * @return string the page content
 	 */
@@ -236,9 +235,12 @@ class Premise_Options {
 
 
 	/**
-	 * Prints the opening html tag for the this page. Called from menu_page() method
+	 * Prints the opening html for the this page. Called from menu_page() method
 	 *
 	 * @see menu_page() this function is called from menu_page() method
+	 *
+	 * @link https://codex.wordpress.org/Function_Reference/wp_nonce_field  for more information on wp_nonce_field()
+	 * @link https://codex.wordpress.org/Function_Reference/settings_fields for more information on settings_fields()
 	 * 
 	 * @return string html for begining of page
 	 */
