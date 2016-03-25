@@ -170,7 +170,6 @@ class Premise_Options {
 	 * @return void does not return anything
 	 */
 	public function add_menu() {
-		$this->menu_page_args['call_back'] = 
 		add_menu_page(
 			$this->menu_page_args['title'],      // $page_title.
 			$this->menu_page_args['menu_title'], // $menu_title.
