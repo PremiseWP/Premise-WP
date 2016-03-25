@@ -120,17 +120,18 @@ class Premise_Options {
 	protected function parse_menu_page_args( $title ) {
 
 		if ( is_string( $title ) && ! empty( $title ) ) {
-
 			$this->menu_page_args['title'] = $title;
 			$this->menu_page_args['menu_title'] = $title;
 			$this->menu_page_args['menu_slug'] = str_replace( ' ', '_', strtolower( $title ) );
 
-		} elseif ( is_array( $title ) ) {
-
-			$this->menu_page_args = wp_parse_args( $title, $this->menu_page_args );
-			if ( '' == $this->menu_page_args['call_back'] )
-				$this->menu_page_args['call_back'] = array( $this, 'menu_page' );
 		}
+		elseif ( is_array( $title ) ) {
+			$this->menu_page_args = wp_parse_args( $title, $this->menu_page_args );
+		}
+		
+		// Make sure we have a valid callback
+		if ( '' == $this->menu_page_args['call_back'] )
+			$this->menu_page_args['call_back'] = array( $this, 'menu_page' );
 	}
 
 
