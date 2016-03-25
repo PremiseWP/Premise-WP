@@ -63,7 +63,7 @@ class Premise_Options {
 		'menu_title' => 'Premise Options',
 		'capability' => 'manage_options',
 		'menu_slug' => 'premise_options_page',
-		'call_back' => '',
+		'callback' => '',
 		'icon' => '',
 		'position' => '59.2',
 	);
@@ -120,18 +120,30 @@ class Premise_Options {
 	protected function parse_menu_page_args( $title ) {
 
 		if ( is_string( $title ) && ! empty( $title ) ) {
+			// clean 
+			$title = esc_html( $title );
+
 			$this->menu_page_args['title'] = $title;
 			$this->menu_page_args['menu_title'] = $title;
 			$this->menu_page_args['menu_slug'] = str_replace( ' ', '_', strtolower( $title ) );
 
 		}
-		elseif ( is_array( $title ) ) {
+		elseif ( is_array( $title ) && isset( $title['title'] ) && ! empty( $title['title'] ) ) {
+
+			if ( ! isset( $title['menu_title'] ) || empty( $title['menu_title'] ) ) {
+				$title['menu_title'] = esc_html( $title['title'] );
+			}
+
+			if ( ! isset( $title['menu_slug'] ) || empty( $title['menu_slug'] ) ) {
+				$title['menu_slug'] = str_replace( ' ', '_', strtolower( esc_html( $title['title'] ) ) );
+			}
+
 			$this->menu_page_args = wp_parse_args( $title, $this->menu_page_args );
 		}
 		
 		// Make sure we have a valid callback
-		if ( '' == $this->menu_page_args['call_back'] )
-			$this->menu_page_args['call_back'] = array( $this, 'menu_page' );
+		// if ( '' == $this->menu_page_args['callback'] )
+		// 	$this->menu_page_args['callback'] = array( $this, 'menu_page' );
 	}
 
 
@@ -176,7 +188,7 @@ class Premise_Options {
 			$this->menu_page_args['menu_title'], // $menu_title.
 			$this->menu_page_args['capability'], // $capability.
 			$this->menu_page_args['menu_slug'],  // $menu_slug.
-			$this->menu_page_args['call_back'],  // $function.
+			array( $this, 'menu_page' ), //$this->menu_page_args['callback'],  // $function.
 			$this->menu_page_args['icon'],       // $icon_url.
 			$this->menu_page_args['position']    // $position.
 		);
@@ -196,32 +208,26 @@ class Premise_Options {
 	public function menu_page() {
 		$this->start_page();
 		
-		if ( ! empty( $this->fields ) ) {
-			echo '<form action="options.php" method="post" enctype="multipart/form-data" class="premise-admin">';
-				wp_nonce_field( $this->nonce, $_POST['_wpnonce'], true, true );
-				settings_fields( $this->option_group );
-
-				/**
-				 * Display html before fields
-				 *
-				 * This hook allows you to pass an html string to display anything you want
-				 * in the admin page before the fields.
-				 *
-				 * @wp_hook premise_options_before_fields
-				 *
-				 * @since 1.2.2
-				 */
-				echo apply_filters( 'premise_options_before_fields', '', $this->fields );
-				
-				// echo our fields
+		/**
+		 * Display html before fields
+		 *
+		 * This hook allows you to pass an html string to display anything you want
+		 * in the admin page before the fields.
+		 *
+		 * @wp_hook premise_options_before_fields
+		 *
+		 * @since 1.2.2
+		 */
+		echo apply_filters( 'premise_options_before_fields', '', $this->fields );
+		
+		if ( '' !== $this->menu_page_args['callback'] )	{
+			$this->menu_page_args['callback']();
+		}
+		elseif ( ! empty( $this->fields ) ) {
 				premise_field_section( $this->fields );
-
-			echo '</form>';
-
 		}
 		else {
-
-			echo '<p>Looks like the \'fields\' parameter is empty.</p>';
+			echo '<p>No valid callback or fields to display.</p>';
 		}
 		
 		$this->end_page();
@@ -239,8 +245,11 @@ class Premise_Options {
 	public function start_page() {
 		?>
 		<div class="wrap premise-admin-page">
-		<h1><?php echo esc_html( $this->menu_page_args['title'] ); ?></h1>
-		<?php
+			<h1><?php echo esc_html( $this->menu_page_args['title'] ); ?></h1>
+			<form action="options.php" method="post" enctype="multipart/form-data" class="premise-admin">
+				<?php 
+				wp_nonce_field( $this->nonce, $_POST['_wpnonce'], true, true );
+				settings_fields( $this->option_group );
 	}
 
 
@@ -254,6 +263,7 @@ class Premise_Options {
 	 */
 	public function end_page() {
 		?>
+			</form>
 		</div>
 		<?php
 	}
