@@ -42,10 +42,9 @@ module.exports = function(grunt) {
 			},
             build: {
                 src: [
-                    'js/source/premise-parallax.js',
+                    'js/source/premise-library.js',
                     'js/source/premise-ajax.js',
                     'js/source/premise-field.js',
-                    'js/source/premise-youtube.js',
                     'js/source/premise.js'
                 ],
                 dest: 'js/<%= pkg.name %>.min.js'
