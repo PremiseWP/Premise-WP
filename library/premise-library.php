@@ -105,7 +105,7 @@ function premise_get_value( $name = '', $context = '' ) {
 
 	/**
 	 * If value is still in array but with only one value
-	 * get tha value and return it.
+	 * get that value and return it.
 	 *
 	 * FJ fix error index 0 not set
 	 * Return array anyway
