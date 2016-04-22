@@ -112,22 +112,21 @@ var PremiseField = {
 
 		this.bindEvents();
 
-		if ( jQuery( '.premise-youtube-video' ).length ) {
+		// ( jQuery( '.premise-youtube-video' ).length ) ? this.YTPlayer.init() : false;
 
-			/**
-			 * This code loads the IFrame Player API code asynchronously.
-			 */
-			var tag = document.createElement("script");
-			tag.src = "https://www.youtube.com/iframe_api";
+		/**
+		 * This code loads the IFrame Player API code asynchronously.
+		 */
+		var tag = document.createElement("script");
+		tag.src = "https://www.youtube.com/iframe_api";
 
-			var firstScriptTag = document.getElementsByTagName("script")[0];
+		var firstScriptTag = document.getElementsByTagName("script")[0];
 
-			var tag2 = document.createElement("script");
-			tag2.innerHTML = 'function onYouTubeIframeAPIReady(){console.log("YT run!");var a=jQuery(".premise-youtube-video"),b=[];if(a.length<=0){return}a.each(function(a,c){var d=jQuery(this);b[a]=new YT.Player(d.attr("id"),{height:d.css("height"),width:d.css("width"),videoId:d.attr("data-premise-youtube-video-id")})})}';
+		var tag2 = document.createElement("script");
+		tag2.innerHTML = 'function onYouTubeIframeAPIReady(){return ( jQuery( \'.premise-youtube-video\' ).length ) ? PremiseField.YTPlayer.init() : false;}';
 
-			firstScriptTag.parentNode.insertBefore(tag2, firstScriptTag);
-			firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-		}
+		firstScriptTag.parentNode.insertBefore(tag2, firstScriptTag);
+		firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 
 		/**
@@ -603,29 +602,44 @@ PremiseField.WPMedia = {
  * @package Premise-WP
  */
 
-var PremiseYouTubePlayer = {
+PremiseField.YTPlayer = {
 
-	init: function($, YT) {
-		console.log('YT run!');
+	init: function() {
+		(function($){
+			PremiseField.YTPlayer.initPlayer($, YT);
+		}(jQuery));
+	},
+
+
+	initPlayer: function($) {
+		console.log('YT run !');
 		var ytVideos = $('.premise-youtube-video');
 
 		// Begin YouTube Player when needed
 		if ( ytVideos.length > 0 ) {
 
 			ytVideos.each(function(i,v){
-				var videoId = $(this).attr('data-premise-youtube-video-id');
+				var videoId = $(this).attr('data-premise-youtube-video-id'),
 
-				new YT.Player( $(this).attr('id'), {
+				player = new YT.Player( $(this).attr('id'), {
 					height: $(this).css('height'),
 					width: $(this).css('width'),
 					videoId: videoId,
-					/*events: {
-						'onReady': '',
+					playerVars: { 'autoplay': 1, 'playlist': [videoId] },
+					events: {
+						'onReady': PremiseField.YTPlayer.playerReady,
 						'onStateChange': ''
-					}*/
+					}
 				});
+				
+				player.setLoop = true;
 			});
 		}
+	},
+
+
+	playerReady: function( event ) {
+	  event.target.setVolume(0);
 	}
 };
 
@@ -639,8 +653,5 @@ var PremiseYouTubePlayer = {
  * @see premise_video_output()
  */
 function onYouTubeIframeAPIReady() {
-	console.log('jjj');
-	(function($){
-		PremiseYouTubePlayer.init($, YT);
-	})(jQuery);
+	console.log('api ready');
 }
