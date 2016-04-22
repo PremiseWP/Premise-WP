@@ -20,23 +20,6 @@ require_once PREMISE_PATH . 'model/model-premise-custom-post-type.php';
 
 
 
-
-/**
- * Controller
- */
-
-
-
-
-
-/**
- * View
- */
-
-
-
-
-
 /**
  * Libraries
  */
