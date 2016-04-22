@@ -31,13 +31,6 @@ var Premise = {
 		 * Initiate the Premise Field Object
 		 */
 		PremiseField.init();
-
-
-
-		/**
-		 * Initiate the Premise Field Object
-		 */
-		PremiseParallax.init();
 	},
 
 
