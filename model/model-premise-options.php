@@ -246,7 +246,7 @@ class Premise_Options {
 	 */
 	public function start_page() {
 		?>
-		<div class="wrap premise-admin-page">
+		<div class="wrap premise-options-page">
 			<h1><?php echo esc_html( $this->menu_page_args['title'] ); ?></h1>
 			<form action="options.php" method="post" enctype="multipart/form-data" class="premise-admin">
 				<?php 
