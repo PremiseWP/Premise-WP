@@ -422,6 +422,12 @@ Hook                               | Type         | Description                 
 
 ## Changelog
 
+#### 1.3.2
+* Removed `premise-parallax.js`. This was a beta object that we added to create parallax animations. 
+Since then, we have built [premiseScroll](https://github.com/PremiseWP/premiseScroll), a jQuery plugin that allows you to easily
+bind animations on scroll to any element in the DOM.
+* Moved global JS functions to `premise-library.js`. This file will hold the global functions used throughout Premise WP.
+
 #### 1.3.1
 * Renamed `call_back` param to `callback` in `Premise_Options` class.
 * The `callback` param now overrides the fields param. If a callback is provided, the fields argument will be ignored.
