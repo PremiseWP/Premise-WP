@@ -6,7 +6,9 @@
  */
 jQuery(function($){
 
-	Premise.init();
+	$(document).ready(function(){
+		Premise.init();
+	});
 
 });
 
