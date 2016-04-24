@@ -394,6 +394,12 @@ For a full list of CSS classes available and the styles each assign take a look 
 
 ---
 
+## Premise JS
+
+Since Version 1.4.0, we organized all the JavaScript used in Premise WP.
+
+---
+
 ## Premise Hooks  
 
 Premise includes a variety of hooks that you can use to change or customize the way Premise behaves in your project. Here is a list of hooks and a brief description of what each hook does.  
@@ -421,6 +427,12 @@ Hook                               | Type         | Description                 
 ===  
 
 ## Changelog
+
+#### 1.4.0
+* Moved all functionality for the `fa_icon` field to be handled by a small jQuery plugin `premiseFieldFaIcon`.
+The plugin is called on all elements with class `.premise-field-type-fa_icon` which is the unique class this field's wrapper gets.
+
+------------------------------------------
 
 #### 1.3.2
 * Removed `premise-parallax.js`. This was a beta object that we added to create parallax animations. 
