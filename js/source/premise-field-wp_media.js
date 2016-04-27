@@ -26,6 +26,7 @@
 		// reference our element
 		var el = this;
 
+		// reference all our global variables
 		var $el = $(el),
 		field,
 		btnUpload,
@@ -35,12 +36,9 @@
 
 		// Initiate the plugin
 		var init = function() {
-
 			// if the plugin was called directly on to an input element
 			if ( $el.is( 'input[type="text"]' ) ) {
 				field = $el;
-
-				$el.addClass('premise-file-url');
 
 				btnDelete = $el.siblings('.premise-btn-remove');
 				btnUpload = $el.siblings('.premise-btn-upload');
@@ -55,12 +53,19 @@
 					field[0].parentNode.insertBefore( btnUpload[0], field[0].nextSibling );
 				}
 			}
+			// if the field is loaded through premise_field()
 			else {
 				field = $el.find('.premise-file-url');
 				btnUpload = $el.find('.premise-btn-upload');
 				btnDelete = $el.find('.premise-btn-remove');
 			}
-			
+
+			// set multiple param in case the element has the property set inline
+			opts.multiple = field.attr( 'multiple' ) ? true : opts.multiple;
+
+			// set multiple param in case the element has the property set inline
+			opts.preview = field.attr( 'preview' ) ? true : opts.preview;
+
 			// Bind upload button
 			btnUpload.click(openUploader);
 
@@ -68,7 +73,7 @@
 			btnDelete.click(clearField);
 		}
 
-
+		// open uploader thickbox when upload button is clicked
 		var openUploader = function() {
 			// If the uploader object has already been created, open it
 			if ( uploader ) {
@@ -86,7 +91,6 @@
 			});
 
 			uploader.on('select', function() {
-
 				// get array of attachment objects
 				var attachment = uploader.state().get('selection').toJSON();
 
@@ -112,15 +116,21 @@
 			return false;
 		}
 
-
+		// handle files
 		var handleFiles = function() {
 			field.val( mediaUploaded.join() );
+			if ( opts.preview ) setPreview();
 		}
 
-
+		// empty field when delet btn is clicked
 		var clearField = function() {
 			field.val('');
 			return false;
+		}
+
+
+		var setPreview = function() {
+			
 		}
 
 		init();
@@ -133,6 +143,7 @@
 		multiple: false,
 		imageSize: 'full',
 		return: 'url',
+		preview: false,
 	}
 
 }(jQuery));
