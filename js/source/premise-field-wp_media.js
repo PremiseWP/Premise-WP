@@ -42,20 +42,23 @@
 
 				$el.addClass('premise-file-url');
 
-				if ( ! btnDelete ) {
+				btnDelete = $el.siblings('.premise-btn-remove');
+				btnUpload = $el.siblings('.premise-btn-upload');
+
+				if ( ! btnDelete.length ) {
 					btnDelete = $('<a class="premise-btn-remove" href="javascript:void(0);"><i class="fa fa-fw fa-times"></i></a>');
 					field[0].parentNode.insertBefore( btnDelete[0], field[0].nextSibling );
 				}
 
-				if ( ! btnUpload ) {
+				if ( ! btnUpload.length ) {
 					btnUpload = $('<a class="premise-btn-upload" href="javascript:void(0);"><i class="fa fa-fw fa-upload"></i></a>');
 					field[0].parentNode.insertBefore( btnUpload[0], field[0].nextSibling );
 				}
 			}
 			else {
 				field = $el.find('.premise-file-url');
-				btnUpload = $el.find('.premise-btn-upload').length;
-				btnDelete = $el.find('.premise-btn-remove').length;
+				btnUpload = $el.find('.premise-btn-upload');
+				btnDelete = $el.find('.premise-btn-remove');
 			}
 			
 			// Bind upload button
@@ -105,6 +108,8 @@
 			});
 
 			uploader.open();
+
+			return false;
 		}
 
 
