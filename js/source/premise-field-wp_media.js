@@ -27,15 +27,42 @@
 		var el = this;
 
 		var $el = $(el),
-		field = $el.find('.premise-file-url'),
-		btnUpload = $el.find('.premise-btn-upload'),
-		btnDelete = $el.find('.premise-btn-remove'),
+		field,
+		btnUpload,
+		btnDelete,
 		uploader,
 		mediaUploaded = [];
 
 		// Initiate the plugin
 		var init = function() {
+
+			// if the plugin was called directly on to an input element
+			if ( $el.is( 'input[type="text"]' ) ) {
+				field = $el;
+
+				$el.addClass('premise-file-url');
+
+				if ( ! btnDelete ) {
+					btnDelete = $('<a class="premise-btn-remove" href="javascript:void(0);"><i class="fa fa-fw fa-times"></i></a>');
+					field[0].parentNode.insertBefore( btnDelete[0], field[0].nextSibling );
+				}
+
+				if ( ! btnUpload ) {
+					btnUpload = $('<a class="premise-btn-upload" href="javascript:void(0);"><i class="fa fa-fw fa-upload"></i></a>');
+					field[0].parentNode.insertBefore( btnUpload[0], field[0].nextSibling );
+				}
+			}
+			else {
+				field = $el.find('.premise-file-url');
+				btnUpload = $el.find('.premise-btn-upload').length;
+				btnDelete = $el.find('.premise-btn-remove').length;
+			}
+			
+			// Bind upload button
 			btnUpload.click(openUploader);
+
+			// Bind delete button
+			btnDelete.click(clearField);
 		}
 
 
@@ -68,7 +95,8 @@
 						mediaUploaded.push( v.id );
 					}
 					else if ( 'url' === opts.return ) {
-						var url = ( 'image' == v.type ) ? v.sizes[opts.imageSize].url : v.url;
+						// include image subtype in logic. Some file types such as SVG may be of type image and throw an error, since there is no sizes.
+						var url = ( 'image' == v.type && v.subtype.match(/(jpg|png|gif|jpeg)/gi) ) ? v.sizes[opts.imageSize].url : v.url;
 						mediaUploaded.push( url );
 					}
 				});
@@ -82,6 +110,12 @@
 
 		var handleFiles = function() {
 			field.val( mediaUploaded.join() );
+		}
+
+
+		var clearField = function() {
+			field.val('');
+			return false;
 		}
 
 		init();
