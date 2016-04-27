@@ -111,9 +111,7 @@ var PremiseField = {
 	bindEvents: function() {
 
 		// bind media preview if using media
-		if ( jQuery('.premise-field-type-wp_media').length > 0 ) {
-			PremiseField.WPMedia.bindPreview();
-		}
+		jQuery('.premise-field-type-wp_media').premiseFieldWpMedia();
 
 		jQuery('.premise-field-type-fa_icon').premiseFieldFaIcon();
 

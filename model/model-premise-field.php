@@ -125,8 +125,7 @@ class PremiseField {
 	 */
 	protected $btn_upload_file = '<a 
 		class="premise-btn-upload" 
-		href="javascript:void(0);" 
-		onclick="PremiseField.WPMedia.init(this)"
+		href="javascript:void(0);"
 		><i class="fa fa-fw fa-upload"></i></a>';
 
 
@@ -139,8 +138,7 @@ class PremiseField {
 	 */
 	protected $btn_remove_file = '<a 
 		class="premise-btn-remove" 
-		href="javascript:void(0);" 
-		onclick="PremiseField.WPMedia.removeFile(this)"
+		href="javascript:void(0);"
 		><i class="fa fa-fw fa-times"></i></a>';
 
 
