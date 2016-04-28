@@ -60,11 +60,19 @@
 				btnDelete = $el.find('.premise-btn-remove');
 			}
 
-			// set multiple param in case the element has the property set inline
-			opts.multiple = field.attr( 'multiple' ) ? true : opts.multiple;
+			// Override options if submitted inline via 'data-options'
+			var inlineOptions = field.attr( 'data-options' );
+			if ( '' !== inlineOptions ) {
+				var optionsObj = $.parseJSON( inlineOptions );
+				opts = $.extend( {}, opts, optionsObj );
+			}
+console.log(opts);
 
 			// set multiple param in case the element has the property set inline
-			opts.preview = field.attr( 'preview' ) ? true : opts.preview;
+			// opts.multiple = field.attr( 'multiple' ) ? true : opts.multiple;
+
+			// set multiple param in case the element has the property set inline
+			// opts.preview = field.attr( 'preview' ) ? true : opts.preview;
 
 			// Bind upload button
 			btnUpload.click(openUploader);
@@ -130,7 +138,7 @@
 
 
 		var setPreview = function() {
-			
+
 		}
 
 		init();
