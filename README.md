@@ -394,12 +394,6 @@ For a full list of CSS classes available and the styles each assign take a look 
 
 ---
 
-## Premise JS
-
-Since Version 1.4.0, we organized all the JavaScript used in Premise WP.
-
----
-
 ## Premise Hooks  
 
 Premise includes a variety of hooks that you can use to change or customize the way Premise behaves in your project. Here is a list of hooks and a brief description of what each hook does.  
