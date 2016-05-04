@@ -15,6 +15,17 @@
 		// Parse the default options
 		var opts = $.extend( {}, $.fn.premiseFieldWpMedia.defaults, options );
 
+		// reference our element
+		var el = this;
+
+		// reference all our global variables
+		var $el = $(el),
+		wrapper,
+		btnUpload,
+		btnDelete,
+		uploader,
+		mediaUploaded = [];
+
 		// support multiple elements
 		if ( this.length > 1 ) {
 			this.each( function() {
@@ -23,56 +34,26 @@
 			return this;
 		}
 
-		// reference our element
-		var el = this;
-
-		// reference all our global variables
-		var $el = $(el),
-		field,
-		btnUpload,
-		btnDelete,
-		uploader,
-		mediaUploaded = [];
-
 		// Initiate the plugin
 		var init = function() {
-			// if the plugin was called directly on to an input element
-			if ( $el.is( 'input[type="text"]' ) ) {
-				field = $el;
-
-				btnDelete = $el.siblings('.premise-btn-remove');
-				btnUpload = $el.siblings('.premise-btn-upload');
-
-				if ( ! btnDelete.length ) {
-					btnDelete = $('<a class="premise-btn-remove" href="javascript:void(0);"><i class="fa fa-fw fa-times"></i></a>');
-					field[0].parentNode.insertBefore( btnDelete[0], field[0].nextSibling );
-				}
-
-				if ( ! btnUpload.length ) {
-					btnUpload = $('<a class="premise-btn-upload" href="javascript:void(0);"><i class="fa fa-fw fa-upload"></i></a>');
-					field[0].parentNode.insertBefore( btnUpload[0], field[0].nextSibling );
-				}
-			}
-			// if the field is loaded through premise_field()
-			else {
-				field = $el.find('.premise-file-url');
-				btnUpload = $el.find('.premise-btn-upload');
-				btnDelete = $el.find('.premise-btn-remove');
+			// check that we have the correct type of element
+			if ( ! $el.is( 'input[type="text"]' ) ) {
+				console.error( 'premiseFieldWpMedia() must be called on an input element with type="text".' );
+				return false;
 			}
 
 			// Override options if submitted inline via 'data-options'
-			var inlineOptions = field.attr( 'data-options' );
+			var inlineOptions = $el.attr( 'data-options' );
 			if ( '' !== inlineOptions ) {
 				var optionsObj = $.parseJSON( inlineOptions );
 				opts = $.extend( {}, opts, optionsObj );
 			}
-console.log(opts);
 
-			// set multiple param in case the element has the property set inline
-			// opts.multiple = field.attr( 'multiple' ) ? true : opts.multiple;
+			// wrap container around element
+			if ( opts.wrap ) $el.wrap( '<div class="premise-field-wp_media"></div>' );
 
-			// set multiple param in case the element has the property set inline
-			// opts.preview = field.attr( 'preview' ) ? true : opts.preview;
+			// now that we have our $el ready, insert buttons.
+			insertBtns();
 
 			// Bind upload button
 			btnUpload.click(openUploader);
@@ -98,6 +79,7 @@ console.log(opts);
 				multiple: opts.multiple
 			});
 
+			// bind selection of media in uploader
 			uploader.on('select', function() {
 				// get array of attachment objects
 				var attachment = uploader.state().get('selection').toJSON();
@@ -105,7 +87,6 @@ console.log(opts);
 				mediaUploaded = [];
 				// Loop through images selected and save them to our mediaUploaded var
 				$(attachment).each(function(i, v){
-					console.log(v);
 					if ( 'id' === opts.return ) {
 						mediaUploaded.push( v.id );
 					}
@@ -120,8 +101,6 @@ console.log(opts);
 			});
 
 			uploader.open();
-
-			return false;
 		}
 
 		// handle files
@@ -136,9 +115,29 @@ console.log(opts);
 			return false;
 		}
 
-
+		// sets the preiview for images.
 		var setPreview = function() {
 
+		}
+
+		// Insert buttons to upload and remove files if they dont exist already
+		var insertBtns = function() {
+			wrapper = $el.parent();
+
+			btnDelete = $el.siblings('.premise-btn-remove');
+			btnUpload = $el.siblings('.premise-btn-upload');
+
+			if ( ! btnDelete.length ) {
+				btnDelete = $('<a class="premise-btn-remove" href="javascript:void(0);"><i class="fa fa-fw fa-times"></i></a>');
+				// $el.parentNode.insertBefore( btnDelete[0], field[0].nextSibling );
+				wrapper.append( btnDelete );
+			}
+
+			if ( ! btnUpload.length ) {
+				btnUpload = $('<a class="premise-btn-upload" href="javascript:void(0);"><i class="fa fa-fw fa-upload"></i></a>');
+				// $el.parentNode.insertBefore( btnUpload[0], field[0].nextSibling );
+				wrapper.append( btnUpload );
+			}
 		}
 
 		init();
@@ -152,6 +151,7 @@ console.log(opts);
 		imageSize: 'full',
 		return: 'url',
 		preview: false,
+		wrap: true,
 	}
 
 }(jQuery));
