@@ -795,7 +795,7 @@ class PremiseField {
 	 */
 	public function wp_media_input( $field ) {
 
-		return str_replace( 'type="wp_media"', 'type="text" class="premise-file-url"', $field );
+		return str_replace( 'type="wp_media"', 'type="text" class="premise-wp-media-field" data-options=\'{ "wrap": false }\'', $field );
 	}
 
 
