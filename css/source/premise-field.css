@@ -294,8 +294,8 @@
 /**
  * wp_media Field
  */
-.premise-field .premise-btn-upload,
-.premise-field .premise-btn-remove {
+.premise-field-wp_media .premise-btn-upload,
+.premise-field-wp_media .premise-btn-remove {
 	position:absolute;
 	display:block;
 	top: 0;
@@ -311,11 +311,11 @@
 	outline: 0;
 }
 
-.premise-field > .premise-field-wp_media > .premise-btn-upload {
+.premise-field-wp_media > .premise-btn-upload {
 	right:41px;
 }
 
-.premise-field > .premise-field-wp_media > .premise-btn-remove {
+.premise-field-wp_media > .premise-btn-remove {
 	right:1px;
 }
 
