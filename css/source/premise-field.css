@@ -294,8 +294,8 @@
 /**
  * wp_media Field
  */
-.premise-field .premise-btn-upload,
-.premise-field .premise-btn-remove {
+.premise-field-wp_media .premise-btn-upload,
+.premise-field-wp_media .premise-btn-remove {
 	position:absolute;
 	display:block;
 	top: 0;
@@ -306,23 +306,24 @@
 	border-color: #888 transparent #888 #ccc;
 	background:#fff;
 	width:40px;
-	height: 100%;
+	height: 31px;
 	text-align:center;
 	outline: 0;
 }
 
-.premise-field > .premise-field-wp_media > .premise-btn-upload {
+.premise-field-wp_media > .premise-btn-upload {
 	right:41px;
 }
 
-.premise-field > .premise-field-wp_media > .premise-btn-remove {
+.premise-field-wp_media > .premise-btn-remove {
 	right:1px;
 }
 
 .premise-wp_media-preview {
 	position: relative;
-	height: 0;
+	height: auto;
 	width: 100%;
+	padding: 20px;
 	margin-top: 13px;
 	border: 1px solid #888;
 	border-radius: 2px;
@@ -330,9 +331,14 @@
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-color: #fff;
-	opacity: 0;
-	visibility: hidden;
 	transition: all .4s ease-in-out;
+}
+
+.premise-wp_media-preview-inner {
+	position: relative;
+	height: auto;
+	max-height: 300px;
+	overflow: auto;
 }
 
 .premise-wp_media-preview:before,
@@ -356,37 +362,11 @@
 	border-color: transparent transparent #fff transparent; 
 }
 
-.premise-wp_media-preview-inner {
-	position: relative;
-	height: 100%;
-	margin: 0 20px;
-	overflow: auto;
-}
-
 .premise-preview-thumb {
-	position: relative;
-	display: block;
-	height: 95%;
-	width: 98%;
-	margin: 1%;
+	padding-top: 25%;
 	background-size: contain;
 	background-position: center;
 	background-repeat: no-repeat;
-	background-color: #fff;
-	background-color: rgba(225, 225, 225, 0.2);
-}
-
-.premise-preview-thumb.premise-preview-thumb-multi {
-	width: 23%;
-	height: 0;
-	padding-top: 23%;
-	float: left;
-}
-
-.premise-field-preview .premise-wp_media-preview {
-	height: 300px;
-	opacity: 1;
-	visibility: visible;
 }
 
 
@@ -426,9 +406,10 @@
 
 .premise-field > .premise-field-fa-icons-container {
 	position: absolute;
-	z-index: 1;
+	z-index: 2;
 	top: 100%;
 	left: 0;
+	width: 100%;
 	height: 300px;
 	margin-top: 20px;
 	box-sizing: border-box;

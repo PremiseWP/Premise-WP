@@ -422,6 +422,17 @@ Hook                               | Type         | Description                 
 
 ## Changelog
 
+#### 1.4.0
+* Moved all functionality for the `fa_icon` field to be handled by a small jQuery plugin `premiseFieldFaIcon`.
+The plugin is called on all elements with class `.premise-field-type-fa_icon` which is the unique class this field's wrapper gets.
+* Moved all functionality for `wp_media` fields to be handled by a small jQuery plugin `premiseFieldWpMedia`. This allows you to insert the 
+`wp_media` functionality into any element in Wordpress. **NOTE** you must enqueue Wordpress Media Upploader for this plugin to work. Using [premise_field](/library/premise-field-library.php#L22)
+will take care of this for you.
+* Moved Global functions from `/js/source/premise-field.js` into new file `/js/source/premise-library.js`.
+* Removed `premise-ajax.js` 
+
+------------------------------------------
+
 #### 1.3.2
 * Removed `premise-parallax.js`. This was a beta object that we added to create parallax animations. 
 Since then, we have built [premiseScroll](https://github.com/PremiseWP/premiseScroll), a jQuery plugin that allows you to easily
