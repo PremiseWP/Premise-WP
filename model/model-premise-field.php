@@ -794,8 +794,10 @@ class PremiseField {
 	 * @return string        the new html for the field
 	 */
 	public function wp_media_input( $field ) {
+		$multi = ( isset( $this->field['multiple'] ) && $this->field['multiple'] ) ? 'true' : 'false';
+		$preview = ( isset( $this->field['preview'] ) && $this->field['preview'] ) ? 'true' : 'false';
 
-		return str_replace( 'type="wp_media"', 'type="text" class="premise-wp-media-field" data-options=\'{ "wrap": false }\'', $field );
+		return str_replace( 'type="wp_media"', 'type="text" class="premise-wp-media-field" data-options=\'{ "wrap": false, "preview": '.$preview.', "multiple": '.$multi.' }\'', $field );
 	}
 
 

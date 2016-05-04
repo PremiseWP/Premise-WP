@@ -42,6 +42,19 @@
 				return false;
 			}
 
+			// set the parent container
+			wrapper = $el.parent();
+
+			if ( opts.preview && '' !== $el.val() ) {
+				var media = $el.val().split( ',' );
+				for (var i = media.length - 1; i >= 0; i--) {
+					if ( media[i].match(/(jpg|png|gif|jpeg)/gi) ) {
+						mediaUploaded.push( media[i] );
+					}
+				}
+				setPreview();
+			}
+
 			// Override options if submitted inline via 'data-options'
 			var inlineOptions = $el.attr( 'data-options' );
 			if ( '' !== inlineOptions ) {
@@ -64,6 +77,12 @@
 
 		// open uploader thickbox when upload button is clicked
 		var openUploader = function() {
+			// exit if the is no wordpress media uploader 
+			if ( ! wp.media ) {
+				console.error( 'wp.media object is undefined. Make sure Wordpress Media Uploader Scripts are enqueued.' );
+				return false;
+			}
+
 			// If the uploader object has already been created, open it
 			if ( uploader ) {
 				uploader.open();
@@ -105,25 +124,53 @@
 
 		// handle files
 		var handleFiles = function() {
-			field.val( mediaUploaded.join() );
-			if ( opts.preview ) setPreview();
+			$el.val( mediaUploaded.join() );
+			if ( opts.preview && 'url' == opts.return ) setPreview();
 		}
 
 		// empty field when delet btn is clicked
 		var clearField = function() {
-			field.val('');
+			$el.val('');
 			return false;
 		}
 
 		// sets the preiview for images.
 		var setPreview = function() {
+			if ( mediaUploaded.length > 0 ) {
+				var preview = wrapper.find('.premise-wp_media-preview'), 
+				count = mediaUploaded.length;
 
+				if ( ! preview.length ) {
+					wrapper.append( $( '<div class="premise-wp_media-preview"></div>' ) );
+					preview = wrapper.find('.premise-wp_media-preview');
+				}
+
+				preview.html( insertPreview() );
+			}
+		}
+
+		// insert the media
+		var insertPreview = function() {
+			var str = '<div class="premise-row premise-wp_media-preview-inner">';
+			// process more than one uploaded file
+			if ( mediaUploaded.length > 1 ) {
+				for ( var i = 0; i < mediaUploaded.length; i++ ) {
+					var col = ( 6 > mediaUploaded.length ) ? mediaUploaded.length : 6;
+					str += '<span class="premise-preview-thumb col'+col+'" style="background-image: url('+mediaUploaded[i]+');"></span>';
+				}
+			}
+			// process only one file
+			else {
+				str += '<span class="premise-preview-thumb span12" style="background-image: url('+mediaUploaded[0]+');"></span>';
+			}
+			str += '</div>';
+			
+			console.log( str );
+			return str;
 		}
 
 		// Insert buttons to upload and remove files if they dont exist already
 		var insertBtns = function() {
-			wrapper = $el.parent();
-
 			btnDelete = $el.siblings('.premise-btn-remove');
 			btnUpload = $el.siblings('.premise-btn-upload');
 
