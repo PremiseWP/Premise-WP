@@ -97,41 +97,14 @@ PremiseField.YTPlayer = {
 
 	init: function() {
 		(function($){
-			PremiseField.YTPlayer.initPlayer($, YT);
+			$('.premise-youtube-video').premiseFieldYouTube();
 		}(jQuery));
-	},
-
-
-	initPlayer: function($) {
-		console.log('YT run !');
-		var ytVideos = $('.premise-youtube-video');
-
-		// Begin YouTube Player when needed
-		if ( ytVideos.length > 0 ) {
-
-			ytVideos.each(function(i,v){
-				var videoId = $(this).attr('data-premise-youtube-video-id'),
-
-				player = new YT.Player( $(this).attr('id'), {
-					height: $(this).css('height'),
-					width: $(this).css('width'),
-					videoId: videoId,
-					playerVars: { 'autoplay': 1, 'playlist': [videoId] },
-					events: {
-						'onReady': PremiseField.YTPlayer.playerReady,
-						'onStateChange': ''
-					}
-				});
-				
-				player.setLoop = true;
-			});
-		}
-	},
-
-
-	playerReady: function( event ) {
-	  event.target.setVolume(0);
 	}
+
+
+	// playerReady: function( event ) {
+	//   event.target.setVolume(0);
+	// }
 };
 
 
