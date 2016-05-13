@@ -36,19 +36,11 @@ var PremiseField = {
 
 		this.bindEvents();
 
-		/**
-		 * This code loads the IFrame Player API code asynchronously.
-		 */
-		var tag = document.createElement("script");
-		tag.src = "https://www.youtube.com/iframe_api";
-
-		var firstScriptTag = document.getElementsByTagName("script")[0];
 
 		var tag2 = document.createElement("script");
 		tag2.innerHTML = 'function onYouTubeIframeAPIReady(){return ( jQuery( \'.premise-youtube-video\' ).length ) ? PremiseField.YTPlayer.init() : false;}';
 
-		firstScriptTag.parentNode.insertBefore(tag2, firstScriptTag);
-		firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+		// firstScriptTag.parentNode.insertBefore(tag2, firstScriptTag);
 
 
 		/**
@@ -78,6 +70,15 @@ var PremiseField = {
 
 		jQuery('.premise-field-type-fa_icon').premiseFieldFaIcon();
 
+		var ytbe = jQuery('.premise-youtube-video').premiseFieldYouTube({
+			videoId: ['_AsWk7PC5aY'],
+			// mute: true,
+			volume: 0,
+			// autoplay: 1,
+		});
+
+		console.log( ytbe );
+
 		// Bind success message
 		jQuery(document).on('premiseFieldAfterInit', function(){console.log('PremiseField Object Initited successfully.');});
 	},
@@ -93,29 +94,18 @@ var PremiseField = {
  * @package Premise-WP
  */
 
-PremiseField.YTPlayer = {
+// 
+// .YTPlayer = {
 
-	init: function() {
-		(function($){
-			$('.premise-youtube-video').premiseFieldYouTube();
-		}(jQuery));
-	}
-
-
-	// playerReady: function( event ) {
-	//   event.target.setVolume(0);
-	// }
-};
+// 	init: function() {
+		
+// 	}
 
 
+// 	// playerReady: function( event ) {
+// 	//   event.target.setVolume(0);
+// 	// }
+// };
 
-/**
- * On Youtube iframe API ready.
- *
- * @link https://developers.google.com/youtube/iframe_api_reference
- *
- * @see premise_video_output()
- */
-function onYouTubeIframeAPIReady() {
-	console.log('api ready');
-}
+
+

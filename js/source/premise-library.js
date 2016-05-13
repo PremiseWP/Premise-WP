@@ -94,3 +94,19 @@ function premiseBrowserName() {
 		return navigator.userAgent.substr(0,agt.indexOf(' '));
 	else return navigator.userAgent;
 }
+
+
+
+/**
+ * On Youtube iframe API ready.
+ *
+ * @link https://developers.google.com/youtube/iframe_api_reference
+ *
+ * @see premise_video_output()
+ */
+// function onYouTubeIframeAPIReady() {
+// 	console.log('youtube API called');
+// 	(function($){
+// 		$('.premise-youtube-video').premiseFieldYouTube();
+// 	}(jQuery));
+// }

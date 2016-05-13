@@ -3,7 +3,7 @@
 	/**
 	 * Insert a YouTube video
 	 * 
-	 * @param  {Object} options [description]
+	 * @param  {Object} options options object to build a youtube player
 	 * @return {Object}         Node in context
 	 */
 	$.fn.premiseFieldYouTube = function( options ) {
@@ -29,29 +29,49 @@
 
 		opts.videoId = ( opts.videoId.length ) ? opts.videoId : el.attr( 'data-premise-youtube-video-id' );
 
-		// opts.playerVars.autoplay
-		// opts.playerVars.playlist
-		// opts.playerVars.loop
+		opts.playerVars.autoplay = opts.playerVars.autoplay || opts.autoplay;
+		opts.playerVars.playlist = opts.playerVars.playlist || opts.playlist;
+		opts.playerVars.loop     = opts.playerVars.loop     || opts.loop;
 
 		// Initiate the plugin
 		var init = function() {
+			( 'undefined' === typeof YT ) ? loadAPI() : buildPlayer();
+		}
+
+		// build the player if YT object exists
+		var buildPlayer = function() {
 			player = new YT.Player( el[0], {
 				height: opts.height,
 				width: opts.width,
 				videoId: opts.videoId,
-				playerVars: opts.playerVars, //{ 'autoplay': 1, 'playlist': [id], 'loop': 1 }
+				playerVars: opts.playerVars, 
 				events: opts.events,
 			});
+
+			( -1 !== opts.volume ) ? player.setVolume( opts.volume ) : console.log(false);
 		}
 
-		// on player ready
-		var ready = function() {
-			console.log( 'ready' );
+		// load the youtube API asynchronously
+		var loadAPI = function() {
+			// bind youtube api ready function
+			window.onYouTubeIframeAPIReady = buildPlayer;
+			// create API script
+			var tag = document.createElement("script");
+			tag.src = "https://www.youtube.com/iframe_api";
+			// Load API code asynchronously
+			var firstScriptTag = document.getElementsByTagName("script")[0];
+			firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 		}
 
 		init();
 
 		return this;
+	}
+
+	// on player ready
+	$.fn.premiseFieldYouTube.ready = function() {
+		console.log( 'premiseFieldYouTube Player Ready' );
+		player.setVolume( opts.volume );
 	}
 
 	// Defaults.
@@ -63,10 +83,12 @@
 		events: {
 			onReady: $.fn.premiseFieldYouTube.ready,
 		}, 
-
-		autoplay: 1,
-		loop: 1,
+		// quick options - for commonly used options
+		autoplay: 0,
+		loop: 0,
 		playlist: [], 
+		mute: false,
+		volume: -1,
 	}
 
 }(jQuery));
