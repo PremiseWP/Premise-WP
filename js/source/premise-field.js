@@ -70,12 +70,7 @@ var PremiseField = {
 
 		jQuery('.premise-field-type-fa_icon').premiseFieldFaIcon();
 
-		var ytbe = jQuery('.premise-youtube-video').premiseFieldYouTube({
-			videoId: ['_AsWk7PC5aY'],
-			// mute: true,
-			volume: 0,
-			// autoplay: 1,
-		});
+		var ytbe = jQuery('.premise-youtube-video').premiseFieldYouTube();
 
 		console.log( ytbe );
 

@@ -83,7 +83,7 @@
 		events: {
 			onReady: $.fn.premiseFieldYouTube.ready,
 		}, 
-		// quick options - for commonly used options
+		// quick options - for commonly used settings
 		autoplay: 0,
 		loop: 0,
 		playlist: [], 

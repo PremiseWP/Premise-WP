@@ -260,10 +260,11 @@ function premise_output_video( $video ) {
 		// This code loads the IFrame Player API code asynchronously.
 		if ( ! $js_included ) {
 			$js = '<script>
-			var tag = document.createElement("script");
-			tag.src = "https://www.youtube.com/iframe_api";
-			var firstScriptTag = document.getElementsByTagName("script")[0];
-			firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+			(function($){
+				$(document).ready(function{
+					$(\'#premise-youtube-video-' . $video_count++ . '\').premiseFieldYouTube();
+				})
+			}(jQuery));
 			</script>';
 
 			$js_included = true;
