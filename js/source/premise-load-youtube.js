@@ -1,19 +1,19 @@
 (function($){
 
 	/**
-	 * Insert a YouTube video
+	 * Load a YouTube video
 	 * 
 	 * @param  {Object} options options object to build a youtube player
 	 * @return {Object}         Node in context
 	 */
-	$.fn.premiseFieldYouTube = function( options ) {
+	$.fn.premiseLoadYouTube = function( options ) {
 
 		if ( this.length === 0 ) {
 			return this;
 		}
 
 		// Parse the default options
-		var opts = $.extend( {}, $.fn.premiseFieldYouTube.defaults, options );
+		var opts = $.extend( {}, $.fn.premiseLoadYouTube.defaults, options );
 
 		// reference our element and global variables
 		var el = this,
@@ -22,20 +22,41 @@
 		// support multiple elements
 		if ( this.length > 1 ) {
 			this.each( function() {
-				$( this ).premiseFieldYouTube( options );
+				$( this ).premiseLoadYouTube( options );
 			});
 			return this;
 		}
 
-		opts.videoId = ( opts.videoId.length ) ? opts.videoId : el.attr( 'data-premise-youtube-video-id' );
-
-		opts.playerVars.autoplay = opts.playerVars.autoplay || opts.autoplay;
-		opts.playerVars.playlist = opts.playerVars.playlist || opts.playlist;
-		opts.playerVars.loop     = opts.playerVars.loop     || opts.loop;
-
 		// Initiate the plugin
 		var init = function() {
+			// build plugin options
+			buildOptions();
+			// build player if YT API exists, otherwise load YT API first
 			( 'undefined' === typeof YT ) ? loadAPI() : buildPlayer();
+		}
+
+		// Build Plugin options and validate them
+		var buildOptions = function() {
+			// if video ID was not passed in options, get it form the element
+			if ( 0 === opts.videoId.length ) {
+				if ( '' !== el.attr( 'data-premise-youtube-video-id' ) ) {
+					opts.videoId = el.attr( 'data-premise-youtube-video-id' );
+				}
+				else {
+					console.error( 'premiseLoadYouTube a valid videoID is required.' );
+					return false;
+				}
+			}
+
+			// Parse quick options 
+			opts.playerVars.autoplay = opts.playerVars.autoplay || opts.autoplay;
+			opts.playerVars.playlist = opts.playerVars.playlist || opts.playlist;
+			opts.playerVars.loop     = opts.playerVars.loop     || opts.loop;
+			
+			// if loop option is true, make sure our video/s is/are passed as a playlist
+			if ( opts.playerVars.loop && ( 0 === opts.playerVars.playlist.length ) ) {
+				opts.playerVars.playlist = [opts.videoId];
+			}
 		}
 
 		// build the player if YT object exists
@@ -69,19 +90,19 @@
 	}
 
 	// on player ready
-	$.fn.premiseFieldYouTube.ready = function() {
-		console.log( 'premiseFieldYouTube Player Ready' );
+	$.fn.premiseLoadYouTube.ready = function() {
+		console.log( 'premiseLoadYouTube Player Ready' );
 		player.setVolume( opts.volume );
 	}
 
 	// Defaults.
-	$.fn.premiseFieldYouTube.defaults = {
+	$.fn.premiseLoadYouTube.defaults = {
 		videoId: [],
 		height: '390', 
 		width: '640', 
 		playerVars: {}, 
 		events: {
-			onReady: $.fn.premiseFieldYouTube.ready,
+			onReady: $.fn.premiseLoadYouTube.ready,
 		}, 
 		// quick options - for commonly used settings
 		autoplay: 0,

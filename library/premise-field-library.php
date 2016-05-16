@@ -183,7 +183,7 @@ function premise_get_fa_icons() {
  *
  * @return string        HTML for video
  */
-function premise_output_video( $video ) {
+function premise_output_video( $video, $args = array() ) {
 
 	static $video_count = 1;
 
@@ -256,21 +256,26 @@ function premise_output_video( $video ) {
 
 		$js = '';
 
+		if ( is_array( $args ) && ( 0 < count( $args ) ) ) {
+			$yt_args = json_encode( $args );
+		}
 
 		// This code loads the IFrame Player API code asynchronously.
 		if ( ! $js_included ) {
+			$video_cont_id = $video_count++;
+
 			$js = '<script>
-			(function($){
-				$(document).ready(function{
-					$(\'#premise-youtube-video-' . $video_count++ . '\').premiseFieldYouTube();
-				})
-			}(jQuery));
+				(function($){
+					$(document).ready(function(){
+						$(\'#premise-youtube-video-' . $video_cont_id . '\').premiseLoadYouTube(' . $yt_args . ');
+					})
+				}(jQuery));
 			</script>';
 
-			$js_included = true;
+			// $js_included = true; let it always be false. that way it always loads
 		}
 
-		$html = $js . '<div class="premise-video premise-youtube-video" data-premise-youtube-video-id="' . $video_id . '" id="premise-youtube-video-' . $video_count++ . '"></div>';
+		$html = $js . '<div class="premise-video premise-youtube-video" data-premise-youtube-video-id="' . $video_id . '" id="premise-youtube-video-' . $video_cont_id . '"></div>';
 
 	} else {
 

@@ -35,14 +35,7 @@ var PremiseField = {
 	init: function() {
 
 		this.bindEvents();
-
-
-		var tag2 = document.createElement("script");
-		tag2.innerHTML = 'function onYouTubeIframeAPIReady(){return ( jQuery( \'.premise-youtube-video\' ).length ) ? PremiseField.YTPlayer.init() : false;}';
-
-		// firstScriptTag.parentNode.insertBefore(tag2, firstScriptTag);
-
-
+		
 		/**
 		 * premiseFieldAfterInit
 		 *
@@ -70,9 +63,9 @@ var PremiseField = {
 
 		jQuery('.premise-field-type-fa_icon').premiseFieldFaIcon();
 
-		var ytbe = jQuery('.premise-youtube-video').premiseFieldYouTube();
+		// var ytbe = jQuery('.premise-youtube-video').premiseLoadYouTube();
 
-		console.log( ytbe );
+		// console.log( ytbe );
 
 		// Bind success message
 		jQuery(document).on('premiseFieldAfterInit', function(){console.log('PremiseField Object Initited successfully.');});
