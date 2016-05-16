@@ -39,8 +39,8 @@
 		var buildOptions = function() {
 			// if video ID was not passed in options, get it form the element
 			if ( 0 === opts.videoId.length ) {
-				if ( '' !== el.attr( 'data-premise-youtube-video-id' ) ) {
-					opts.videoId = el.attr( 'data-premise-youtube-video-id' );
+				if ( '' !== el.attr( 'data-video-id' ) ) {
+					opts.videoId = el.attr( 'data-video-id' );
 				}
 				else {
 					console.error( 'premiseLoadYouTube a valid videoID is required.' );
