@@ -214,8 +214,8 @@ ul.premise-inline > li {
  * @see premise_output_video()
  */
 .premise-video {
-	width: 100%;
-	height: 100%;
+	/*width: 100%;  Deleting these properties will enable control 
+	height: 100%;   from premise_output_video() directly - MV */
 }
 
 .premise-vimeo-video {
