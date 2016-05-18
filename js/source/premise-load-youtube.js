@@ -57,6 +57,8 @@
 			if ( opts.playerVars.loop && ( 0 === opts.playerVars.playlist.length ) ) {
 				opts.playerVars.playlist = [opts.videoId];
 			}
+
+			opts.events.onReady = opts.events.onReady || ready;
 		}
 
 		// build the player if YT object exists
@@ -68,8 +70,6 @@
 				playerVars: opts.playerVars, 
 				events: opts.events,
 			});
-
-			( -1 !== opts.volume ) ? player.setVolume( opts.volume ) : console.log(false);
 		}
 
 		// load the youtube API asynchronously
@@ -84,15 +84,24 @@
 			firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 		}
 
+		// on player ready
+		var ready = function() {
+			// set the volume 
+			if ( -1 !== opts.volume ) player.setVolume( opts.volume );
+
+			// mute if mute option is true
+			if ( opts.mute ) player.mute();
+
+			// pass the player as part of our object
+			el.player = player;
+
+			// log that this function ran.
+			console.log( 'premiseLoadYouTube Player Ready' );
+		}
+
 		init();
 
 		return this;
-	}
-
-	// on player ready
-	$.fn.premiseLoadYouTube.ready = function() {
-		console.log( 'premiseLoadYouTube Player Ready' );
-		player.setVolume( opts.volume );
 	}
 
 	// Defaults.
@@ -102,7 +111,7 @@
 		width: '640', 
 		playerVars: {}, 
 		events: {
-			onReady: $.fn.premiseLoadYouTube.ready,
+			// onReady: $.fn.premiseLoadYouTube.ready,
 		}, 
 		// quick options - for commonly used settings
 		autoplay: 0,
