@@ -180,6 +180,7 @@ function premise_get_fa_icons() {
  * @since 1.3
  *
  * @param  string $video Video URL or ID.
+ * @param  array  $args  array of arguments to pass as JS object to the premiseLoadYouTube().
  *
  * @return string        HTML for video
  */
@@ -268,14 +269,14 @@ function premise_output_video( $video, $args = array() ) {
 				(function($){
 					$(document).ready(function(){
 						$(\'#premise-youtube-video-' . $video_cont_id . '\').premiseLoadYouTube(' . $yt_args . ');
-					})
+					});
 				}(jQuery));
 			</script>';
 
 			// $js_included = true; let it always be false. that way it always loads
 		}
 
-		$html = $js . '<div class="premise-video premise-youtube-video" data-premise-youtube-video-id="' . $video_id . '" id="premise-youtube-video-' . $video_cont_id . '"></div>';
+		$html = $js . '<div class="premise-video premise-youtube-video" data-video-id="' . $video_id . '" id="premise-youtube-video-' . $video_cont_id . '"></div>';
 
 	} else {
 
