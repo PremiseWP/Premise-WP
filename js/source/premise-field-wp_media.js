@@ -42,6 +42,9 @@
 				return false;
 			}
 
+			// wrap container around element
+			if ( opts.wrap ) $el.wrap( '<div class="premise-field-wp_media"></div>' );
+
 			// set the parent container
 			wrapper = $el.parent();
 
@@ -61,9 +64,6 @@
 				var optionsObj = $.parseJSON( inlineOptions );
 				opts = $.extend( {}, opts, optionsObj );
 			}
-
-			// wrap container around element
-			if ( opts.wrap ) $el.wrap( '<div class="premise-field-wp_media"></div>' );
 
 			// now that we have our $el ready, insert buttons.
 			insertBtns();
