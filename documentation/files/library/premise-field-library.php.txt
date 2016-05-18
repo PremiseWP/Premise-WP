@@ -180,14 +180,13 @@ function premise_get_fa_icons() {
  * @since 1.3
  *
  * @param  string $video Video URL or ID.
+ * @param  array  $args  array of arguments to pass as JS object to the premiseLoadYouTube().
  *
  * @return string        HTML for video
  */
-function premise_output_video( $video ) {
+function premise_output_video( $video, $args = array() ) {
 
 	static $video_count = 1;
-
-	static $js_included = false;
 
 	if ( empty( $video ) || ! is_string( $video ) ) {
 		return '';
@@ -258,19 +257,26 @@ function premise_output_video( $video ) {
 
 		$js = '';
 
-		// 2. This code loads the IFrame Player API code asynchronously.
-		if ( ! $js_included ) {
-			$js = '<script>
-			var tag = document.createElement("script");
-			tag.src = "https://www.youtube.com/iframe_api";
-			var firstScriptTag = document.getElementsByTagName("script")[0];
-			firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-			</script>';
-
-			$js_included = true;
+		if ( is_array( $args ) && ( 0 < count( $args ) ) ) {
+			$yt_args = json_encode( $args );
 		}
 
-		$html = $js . '<div class="premise-video premise-youtube-video" data-premise-youtube-video-id="' . $video_id . '" id="premise-youtube-video-' . $video_count++ . '"></div>';
+		// This code loads the IFrame Player API code asynchronously.
+		if ( ! $js_included ) {
+			$video_cont_id = $video_count++;
+
+			$js = '<script>
+				(function($){
+					$(document).ready(function(){
+						$(\'#premise-youtube-video-' . $video_cont_id . '\').premiseLoadYouTube(' . $yt_args . ');
+					});
+				}(jQuery));
+			</script>';
+
+			// $js_included = true; let it always be false. that way it always loads
+		}
+
+		$html = $js . '<div class="premise-video premise-youtube-video" data-video-id="' . $video_id . '" id="premise-youtube-video-' . $video_cont_id . '"></div>';
 
 	} else {
 
@@ -278,4 +284,31 @@ function premise_output_video( $video ) {
 	}
 
 	return $html;
+}
+
+
+
+
+/**
+ * Premise tooltip
+ *
+ * CSS tooltip
+ *
+ * @see premise-field.css
+ *
+ * @since 1.2
+ *
+ * @param  string $tooltip_text Tooltip text.
+ *
+ * @return string Tooltip HTML or empty string if empty( $tooltip_text )
+ */
+function premise_tooltip( $tooltip_text ) {
+
+	if ( empty( $tooltip_text ) ) {
+
+		return '';
+	}
+
+	return ' <span class="premise-tooltip"><span class="premise-tooltip-inner"><i>' .
+		esc_attr( $tooltip_text ) . '</i></span></span>';
 }

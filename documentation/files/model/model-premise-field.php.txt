@@ -125,8 +125,7 @@ class PremiseField {
 	 */
 	protected $btn_upload_file = '<a 
 		class="premise-btn-upload" 
-		href="javascript:void(0);" 
-		onclick="PremiseField.WPMedia.init(this)"
+		href="javascript:void(0);"
 		><i class="fa fa-fw fa-upload"></i></a>';
 
 
@@ -139,8 +138,7 @@ class PremiseField {
 	 */
 	protected $btn_remove_file = '<a 
 		class="premise-btn-remove" 
-		href="javascript:void(0);" 
-		onclick="PremiseField.WPMedia.removeFile(this)"
+		href="javascript:void(0);"
 		><i class="fa fa-fw fa-times"></i></a>';
 
 
@@ -522,13 +520,15 @@ class PremiseField {
 		 */
 		$html = '<div class="' . $wrapper_class . '">';
 
-			$html .= $this->label;
+			$html .= ( 'checkbox' !== $this->type && 'radio' !== $this->type ) ? $this->label : '';
 
 			$html .= '<div class="premise-field-' . sanitize_html_class( $this->type ) . '">';
 
 				$html .= $this->field_html;
 
 			$html .= '</div>';
+
+			$html .= ( 'checkbox' !== $this->type && 'radio' !== $this->type ) ? '' : $this->label;
 
 			/**
 			 * Insert your own markup after the field
@@ -794,8 +794,10 @@ class PremiseField {
 	 * @return string        the new html for the field
 	 */
 	public function wp_media_input( $field ) {
+		$multi = ( isset( $this->field['multiple'] ) && $this->field['multiple'] ) ? 'true' : 'false';
+		$preview = ( isset( $this->field['preview'] ) && $this->field['preview'] ) ? 'true' : 'false';
 
-		return str_replace( 'type="wp_media"', 'type="text" class="premise-file-url"', $field );
+		return str_replace( 'type="wp_media"', 'type="text" class="premise-wp-media-field" data-options=\'{ "wrap": false, "preview": '.$preview.', "multiple": '.$multi.' }\'', $field );
 	}
 
 
