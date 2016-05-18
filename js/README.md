@@ -1,5 +1,31 @@
 # Premise WP JS Library #
 
+## premiseFieldWpMedia( options ) ##
+
+#### Options ####
+
+**multiple** `(boolean) default: false` Allow multiple files to be uploaded at the same time.  
+**imageSize** `(boolean) default: 'full' options: 'full', 'medium', 'thumbnail'` The size that you want the image in. Can use custom image sizes created by themes or plugins.  
+**return** `(boolean) default: 'url' options: 'url', 'id'` Whether to return the url or the id for the file.  
+**preview** `(boolean) default: false` Whther to preview the image one uploaded.  
+**wrap** `(boolean) default: true` Whther to wrap the input element in a div.  
+
+#### Examples ####
+
+```JS
+var inputField = $( 'input_selector' ); // has to be called on an input[type="text"] element
+
+// Allow user to upload multiple images and display a preview of them.
+inputField.premiseWpMedia({
+	multiple: true,
+	preview: true,
+});
+```
+
+**Note** if nothing happens when you click on the upload button and when you inspect the console you see this error: 'wp.media object is undefined. Make sure Wordpress Media Uploader Scripts are enqueued.', this means that the WP uploader scripts has not loaded. Just call `wp_enqueue_media()` in your php file. This should resolve the issue.
+
+==========================================================================================================================================
+
 ## premiseLoadYouTube( options ) ##
 
 `premiseLoadYouTube()` is a jQuery plugin that loads a YouTube video into a `div`. 
