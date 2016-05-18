@@ -422,6 +422,11 @@ Hook                               | Type         | Description                 
 
 ## Changelog
 
+#### 1.4.1
+* New `premiseLoadYouTube()` jQuery plugin to load youtube videos.
+* Added Readme to JS folder to document the Premise WP Library.
+* Updated `premise_output_video()` to use new `premiseLoadYouTube()` plugin.
+
 #### 1.4.0
 * Moved all functionality for the `fa_icon` field to be handled by a small jQuery plugin `premiseFieldFaIcon`.
 The plugin is called on all elements with class `.premise-field-type-fa_icon` which is the unique class this field's wrapper gets.
