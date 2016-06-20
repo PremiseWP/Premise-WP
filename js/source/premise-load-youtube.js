@@ -70,6 +70,9 @@
 				playerVars: opts.playerVars, 
 				events: opts.events,
 			});
+
+			// pass the player as part of our object
+			el.player = player;
 		}
 
 		// load the youtube API asynchronously
@@ -91,9 +94,6 @@
 
 			// mute if mute option is true
 			if ( opts.mute ) player.mute();
-
-			// pass the player as part of our object
-			el.player = player;
 
 			// log that this function ran.
 			console.log( 'premiseLoadYouTube Player Ready' );
