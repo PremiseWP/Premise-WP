@@ -422,6 +422,9 @@ Hook                               | Type         | Description                 
 
 ## Changelog
 
+#### 1.4.2
+* Update to `premiseLoadYouTube` jQuery plugin: Passes the `player` object right after it is created rather than on the `onReady` callback. The `onReady` callback can be overwritten which will cause issues as the `player` object would not be parsed.
+
 #### 1.4.1
 * New `premiseLoadYouTube()` jQuery plugin to load youtube videos.
 * Added Readme to JS folder to document the Premise WP Library.
