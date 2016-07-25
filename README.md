@@ -1,4 +1,4 @@
-# Premise WP Framework  
+# Premise WP Framework
 
 Premise WP is a Wordpress framework for developers who build themes and plugins. It allows you to quickly build options in the backend by doing the heavy lifting and repetitive tasks
 for you. Premise WP also comes with a CSS framework readily available on both the backend and frontend that allows you to quickly build responsive markup.
@@ -18,7 +18,7 @@ To implement, copy and paste the code below into your project and edit `Path_To_
 ```php
 /**
  * Example taken from TGM-Plugin-Activation and modified for Premise WP
- * 
+ *
  * This file represents an example of the code that themes and other plugins would use to register
  * Premise WP as a required plugin. This functionality requires the use of TGM-Plugin-Activation Class.
  *
@@ -99,7 +99,7 @@ The second argument is an array of options that builds your field and tells Prem
 ```php
 /**
  * Build a text field
- * 
+ *
  * By assigning a 'name' attribute, Premise automatically fills in the id attribute
  * for the field and when the user saves the option, Premise automatically grabs the value
  * from the options table in the database.
@@ -117,7 +117,7 @@ If you want to add a custom field to a user profile or a post (supports pages an
 ```php
 /**
  * Build a text field for a post
- * 
+ *
  * The context parameter lets Premise know if the field is meant for a user, post, or option.
  * default is option, so the context para is only required when on a post or user profile.
  */
@@ -158,14 +158,14 @@ $defaults = array(
 **Important:** When creating radio fields make sure you pass an `id` attribute to each one of the fields. Otherwise,
 the fields won't work poroperly.
 
----  
+---
 
-### Create an option page in one function  
+### Create an option page in one function
 
-Now you can create a full options page, add it to the admin menu, and insert fields by calling just one function. Here is how it works..  
+Now you can create a full options page, add it to the admin menu, and insert fields by calling just one function. Here is how it works..
 
-Premise WP has a class `Premise_Options`, and when instantiated it will create a new admin page for you. All you should do is give it a title 
-and some fields. Technically you dont need to pass anything to this class, but if you dont it will just create a blank page, we did  this on 
+Premise WP has a class `Premise_Options`, and when instantiated it will create a new admin page for you. All you should do is give it a title
+and some fields. Technically you dont need to pass anything to this class, but if you dont it will just create a blank page, we did  this on
 purpose. Once instantiated this class takes care of registering your settings in the database, and inserting the necessary hidden fields for
 the page to work (including a random wp_nonce for security).
 
@@ -174,7 +174,7 @@ the page to work (including a random wp_nonce for security).
  * This is simply a helper function that we use to make sure our code
  * is executed on the 'init' wp hook. Basically all we have to do is
  * instantiate a class and pass 2 parameters: a page title, and an array of fields.
- * 
+ *
  * Couldn't be easier!
  */
 function premise_call_options() {
@@ -209,23 +209,23 @@ function premise_call_options() {
 			'type' => 'submit',
 		)
 	);
-	// Instantiate the class Premise_Options 
+	// Instantiate the class Premise_Options
 	// pass a title plus the fields array and you're done.
 	$Obj = new Premise_Options( 'Your Page Title', $fields );
 }
 add_action('init', 'premise_call_options');
 
-```  
+```
 
 Want more control? Of course youd do, the example above shows the default parameters you should pass to build the object but there is more you can do.
-For exampe if you want to have more control over the title, like being able to display a shorter name for the menu title, then you can pass an array 
-instead of a string as your first parameter. Here is an example..  
+For exampe if you want to have more control over the title, like being able to display a shorter name for the menu title, then you can pass an array
+instead of a string as your first parameter. Here is an example..
 
 ```php
 
 /**
  * Your title can hold all the parameters that can be passed to WP's default function add_menu_page()
- * 
+ *
  * @link https://codex.wordpress.org/Function_Reference/add_menu_page for more information on add_menu_page()
  */
 $title = array(
@@ -239,11 +239,11 @@ $title = array(
 
 $Obj = new Premise_Options( $title, $fields );
 
-```  
+```
 
-You can also change the option name used to save your options in the database. You can pass an array of option names if your options require multiple ones, 
-or you can pass a string with just one option name and save your options in an array format. The latter is recommended so we dont add unnecessary rows to the 
-database. Here is an example..  
+You can also change the option name used to save your options in the database. You can pass an array of option names if your options require multiple ones,
+or you can pass a string with just one option name and save your options in an array format. The latter is recommended so we dont add unnecessary rows to the
+database. Here is an example..
 
 ```php
 
@@ -263,7 +263,7 @@ $option_names = array(
 );
 $Obj = new Premise_Options( $title, $fields, $option_names );
 
-```  
+```
 
 ### Building quick markup
 
@@ -271,8 +271,8 @@ Premise WP comes with a small yet powerful CSS framework that helps you build ma
 
 #### Columns
 
-Columns are useful when creating a grid where all columns have equal widths. The example below adds 3 columns in a row. By assigning the class `premise-row` to 
-the parent element, we let premise know that we are building a grid. 
+Columns are useful when creating a grid where all columns have equal widths. The example below adds 3 columns in a row. By assigning the class `premise-row` to
+the parent element, we let premise know that we are building a grid.
 
 ```html
 <div class="premise-row">
@@ -320,13 +320,13 @@ You can also mix `col` classes this way..
 
 The code above will produce one row that has 3 columns at the top and 2 at the bottom. Here is a list of all `col` classes:
 
-Class  | Output                                     | 
----    | ---                                        | 
-`col2` | 1 column with 1/2 the width of it's parent | 
-`col3` | 1 column with 1/3 the width of it's parent | 
-`col4` | 1 column with 1/4 the width of it's parent | 
-`col5` | 1 column with 1/5 the width of it's parent | 
-`col6` | 1 column with 1/6 the width of it's parent | 
+Class  | Output                                     |
+---    | ---                                        |
+`col2` | 1 column with 1/2 the width of it's parent |
+`col3` | 1 column with 1/3 the width of it's parent |
+`col4` | 1 column with 1/4 the width of it's parent |
+`col5` | 1 column with 1/5 the width of it's parent |
+`col6` | 1 column with 1/6 the width of it's parent |
 
 **Responsive:** There are 2 breakpoints when it comes to the column grid. The first is at 1000px the second at 600px. In order to maintain
 asthetics consistent on a site, the only `col` classes that change at 1000px are `col4` and `col6` - `col4` goes from 4 columns to 2 and `col6`
@@ -394,9 +394,9 @@ For a full list of CSS classes available and the styles each assign take a look 
 
 ---
 
-## Premise Hooks  
+## Premise Hooks
 
-Premise includes a variety of hooks that you can use to change or customize the way Premise behaves in your project. Here is a list of hooks and a brief description of what each hook does.  
+Premise includes a variety of hooks that you can use to change or customize the way Premise behaves in your project. Here is a list of hooks and a brief description of what each hook does.
 
 Hook                               | Type         | Description                                      |
 ---------                          | :----------: | ------------------                               |
@@ -418,9 +418,12 @@ Hook                               | Type         | Description                 
 `premiseFieldAfterFaIconsOpen`     | Trigger      | do hook after icons box opens                    |
 `premiseFieldAfterFaIconsClose`    | Trigger      | do hook after icons close                        |
 
-===  
+===
 
 ## Changelog
+
+#### 1.4.3
+* Update to `premiseFieldWpMedia` jQuery plugin: Fixed issues with buttons not being binded properly.
 
 #### 1.4.2
 * Update to `premiseLoadYouTube` jQuery plugin: Passes the `player` object right after it is created rather than on the `onReady` callback. The `onReady` callback can be overwritten which will cause issues as the `player` object would not be parsed.
@@ -433,16 +436,16 @@ Hook                               | Type         | Description                 
 #### 1.4.0
 * Moved all functionality for the `fa_icon` field to be handled by a small jQuery plugin `premiseFieldFaIcon`.
 The plugin is called on all elements with class `.premise-field-type-fa_icon` which is the unique class this field's wrapper gets.
-* Moved all functionality for `wp_media` fields to be handled by a small jQuery plugin `premiseFieldWpMedia`. This allows you to insert the 
+* Moved all functionality for `wp_media` fields to be handled by a small jQuery plugin `premiseFieldWpMedia`. This allows you to insert the
 `wp_media` functionality into any element in Wordpress. **NOTE** you must enqueue Wordpress Media Upploader for this plugin to work. Using [premise_field](/library/premise-field-library.php#L22)
 will take care of this for you.
 * Moved Global functions from `/js/source/premise-field.js` into new file `/js/source/premise-library.js`.
-* Removed `premise-ajax.js` 
+* Removed `premise-ajax.js`
 
 ------------------------------------------
 
 #### 1.3.2
-* Removed `premise-parallax.js`. This was a beta object that we added to create parallax animations. 
+* Removed `premise-parallax.js`. This was a beta object that we added to create parallax animations.
 Since then, we have built [premiseScroll](https://github.com/PremiseWP/premiseScroll), a jQuery plugin that allows you to easily
 bind animations on scroll to any element in the DOM.
 * Moved global JS functions to `premise-library.js`. This file will hold the global functions used throughout Premise WP.
