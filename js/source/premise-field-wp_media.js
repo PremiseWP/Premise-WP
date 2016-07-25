@@ -7,7 +7,7 @@
 	 * @return {Object}         Node in context
 	 */
 	$.fn.premiseFieldWpMedia = function( options ) {
-console.log( 'ran' );
+
 		if ( this.length === 0 ) {
 			return this;
 		}
@@ -19,10 +19,10 @@ console.log( 'ran' );
 		var el = this;
 
 		// reference all our global variables
-		var $el = $(el),
-		wrapper,
-		btnUpload,
-		btnDelete,
+		var $el       = $(el),
+		wrapper       = $el.parent(),
+		btnUpload     = $el.siblings('.premise-btn-upload'),
+		btnDelete     = $el.siblings('.premise-btn-remove'),
 		uploader,
 		mediaUploaded = [];
 
@@ -44,9 +44,6 @@ console.log( 'ran' );
 
 			// wrap container around element
 			if ( opts.wrap ) $el.wrap( '<div class="premise-field-wp_media"></div>' );
-
-			// set the parent container
-			wrapper = $el.parent();
 
 			if ( opts.preview && '' !== $el.val() ) {
 				var media = $el.val().split( ',' );
@@ -71,7 +68,7 @@ console.log( 'ran' );
 
 		// open uploader thickbox when upload button is clicked
 		var openUploader = function() {
-			console.log( 'clicked' );
+
 			// exit if the is no wordpress media uploader
 			if ( ! wp.media ) {
 				console.error( 'wp.media object is undefined. Make sure Wordpress Media Uploader Scripts are enqueued.' );
@@ -166,23 +163,24 @@ console.log( 'ran' );
 
 		// Insert buttons to upload and remove files if they dont exist already
 		var insertBtns = function() {
-			btnDelete = $el.siblings('.premise-btn-remove');
-			btnUpload = $el.siblings('.premise-btn-upload');
 
 			if ( ! btnDelete.length ) {
-				btnDelete = $('<a class="premise-btn-remove" href="javascript:void(0);"><i class="fa fa-fw fa-times"></i></a>');
+				// btnDelete = $('<a class="premise-btn-remove" href="javascript:void(0);"><i class="fa fa-fw fa-times"></i></a>');
 				// $el.parentNode.insertBefore( btnDelete[0], field[0].nextSibling );
-				wrapper.append( btnDelete );
+				wrapper.append( $('<a class="premise-btn-remove" href="javascript:void(0);"><i class="fa fa-fw fa-times"></i></a>') );
+				btnDelete = $( '.premise-btn-remove' );
 			}
 
 			if ( ! btnUpload.length ) {
-				btnUpload = $('<a class="premise-btn-upload" href="javascript:void(0);"><i class="fa fa-fw fa-upload"></i></a>');
+				// btnUpload = $('<a class="premise-btn-upload" href="javascript:void(0);"><i class="fa fa-fw fa-upload"></i></a>');
 				// $el.parentNode.insertBefore( btnUpload[0], field[0].nextSibling );
-				wrapper.append( btnUpload );
+				wrapper.append( $('<a class="premise-btn-upload" href="javascript:void(0);"><i class="fa fa-fw fa-upload"></i></a>') );
+				btnUpload = $( '.premise-btn-upload' );
 			}
+
 			// Bind upload button
 			btnUpload.click(function(){
-console.log( btnUpload );
+				console.log( 'upload btn was clicked' );
 				openUploader();
 			});
 
