@@ -1,13 +1,13 @@
 (function($){
 
 	/**
-	 * Bind WP Media uploader to an input field 
-	 * 
+	 * Bind WP Media uploader to an input field
+	 *
 	 * @param  {Object} options [description]
 	 * @return {Object}         Node in context
 	 */
 	$.fn.premiseFieldWpMedia = function( options ) {
-
+console.log( 'ran' );
 		if ( this.length === 0 ) {
 			return this;
 		}
@@ -67,17 +67,12 @@
 
 			// now that we have our $el ready, insert buttons.
 			insertBtns();
-
-			// Bind upload button
-			btnUpload.click(openUploader);
-
-			// Bind delete button
-			btnDelete.click(clearField);
 		}
 
 		// open uploader thickbox when upload button is clicked
 		var openUploader = function() {
-			// exit if the is no wordpress media uploader 
+			console.log( 'clicked' );
+			// exit if the is no wordpress media uploader
 			if ( ! wp.media ) {
 				console.error( 'wp.media object is undefined. Make sure Wordpress Media Uploader Scripts are enqueued.' );
 				return false;
@@ -137,7 +132,7 @@
 		// sets the preiview for images.
 		var setPreview = function() {
 			if ( mediaUploaded.length > 0 ) {
-				var preview = wrapper.find('.premise-wp_media-preview'), 
+				var preview = wrapper.find('.premise-wp_media-preview'),
 				count = mediaUploaded.length;
 
 				if ( ! preview.length ) {
@@ -164,7 +159,7 @@
 				str += '<span class="premise-preview-thumb span12" style="background-image: url('+mediaUploaded[0]+');"></span>';
 			}
 			str += '</div>';
-			
+
 			console.log( str );
 			return str;
 		}
@@ -185,6 +180,17 @@
 				// $el.parentNode.insertBefore( btnUpload[0], field[0].nextSibling );
 				wrapper.append( btnUpload );
 			}
+			// Bind upload button
+			btnUpload.click(function(){
+console.log( btnUpload );
+				openUploader();
+			});
+
+			// Bind delete button
+			btnDelete.click(function(){
+				console.log( 'delete btn clicked' );
+				clearField();
+			});
 		}
 
 		init();

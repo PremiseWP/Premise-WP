@@ -35,7 +35,7 @@ var PremiseField = {
 	init: function() {
 
 		this.bindEvents();
-		
+
 		/**
 		 * premiseFieldAfterInit
 		 *
@@ -61,11 +61,8 @@ var PremiseField = {
 		// bind media preview if using media
 		jQuery('.premise-wp-media-field').premiseFieldWpMedia();
 
+		// bind the fa icon fields
 		jQuery('.premise-field-type-fa_icon').premiseFieldFaIcon();
-
-		// var ytbe = jQuery('.premise-youtube-video').premiseLoadYouTube();
-
-		// console.log( ytbe );
 
 		// Bind success message
 		jQuery(document).on('premiseFieldAfterInit', function(){console.log('PremiseField Object Initited successfully.');});
@@ -73,27 +70,3 @@ var PremiseField = {
 
 
 };
-
-
-
-/**
- * YouTube JS
- *
- * @package Premise-WP
- */
-
-// 
-// .YTPlayer = {
-
-// 	init: function() {
-		
-// 	}
-
-
-// 	// playerReady: function( event ) {
-// 	//   event.target.setVolume(0);
-// 	// }
-// };
-
-
-
