@@ -123,8 +123,8 @@ class PremiseField {
 	 *
 	 * @var string
 	 */
-	protected $btn_upload_file = '<a 
-		class="premise-btn-upload" 
+	protected $btn_upload_file = '<a
+		class="premise-btn-upload"
 		href="javascript:void(0);"
 		><i class="fa fa-fw fa-upload"></i></a>';
 
@@ -136,8 +136,8 @@ class PremiseField {
 	 *
 	 * @var string
 	 */
-	protected $btn_remove_file = '<a 
-		class="premise-btn-remove" 
+	protected $btn_remove_file = '<a
+		class="premise-btn-remove"
 		href="javascript:void(0);"
 		><i class="fa fa-fw fa-times"></i></a>';
 
@@ -149,9 +149,9 @@ class PremiseField {
 	 *
 	 * @var string
 	 */
-	protected $btn_insert_icon = '<a 
-		href="javascript:void(0);" 
-		class="premise-choose-icon" 
+	protected $btn_insert_icon = '<a
+		href="javascript:void(0);"
+		class="premise-choose-icon"
 		><i class="fa fa-fw fa-th"></i></a>';
 
 
@@ -163,9 +163,9 @@ class PremiseField {
 	 *
 	 * @var string
 	 */
-	protected $btn_remove_icon = '<a 
-		href="javascript:void(0);" 
-		class="premise-remove-icon" 
+	protected $btn_remove_icon = '<a
+		href="javascript:void(0);"
+		class="premise-remove-icon"
 		><i class="fa fa-fw fa-times"></i></a>';
 
 
@@ -889,7 +889,7 @@ class PremiseField {
 
 		foreach ( (array) premise_get_fa_icons() as $icon ) {
 
-			$icons .= '<li class="premise-field-fa-icon-li premise-inline-block premise-float-left span1">
+			$icons .= '<li class="premise-field-fa-icon-li premise-inline-block premise-float-left span2">
 				<a href="javascript:;" class="premise-field-fa-icon-anchor premise-block" data-icon="' . $icon . '">
 					<i class="fa fa-fw ' . $icon . '"></i>
 				</a>
@@ -1033,7 +1033,7 @@ class PremiseField {
 		elseif ( ! $this->empty_value( $val ) ) {
 
 			return esc_attr( $val );
-		} 
+		}
 		else {
 
 			return isset( $this->args['default'] ) && ! $this->empty_value( $this->args['default'] ) ?
@@ -1194,7 +1194,7 @@ class PremiseField {
 
 		// If it is media field and value is array
 		// display comma separated values
-		if ( 'wp_media' == $this->type && is_array( $_field['value'] ) ) 
+		if ( 'wp_media' == $this->type && is_array( $_field['value'] ) )
 			$_field['value'] = implode( ',', $_field['value'] );
 
 		unset( $_field['label'] );
