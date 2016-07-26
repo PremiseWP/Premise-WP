@@ -422,6 +422,9 @@ Hook                               | Type         | Description                 
 
 ## Changelog
 
+#### 1.4.4
+* Updates to fa\_icon field CSS: Removed top arrow - created by applying pseudo elmenents :after & :before to the container. Changed icon list tiems class - item `premise-field-fa-icon-li` changed class from `span1` to `span2`. Other minor CSS changes.
+
 #### 1.4.3
 * Update to `premiseFieldWpMedia` jQuery plugin: Fixed issues with buttons not being binded properly.
 
