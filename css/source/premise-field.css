@@ -379,6 +379,23 @@
  */
 .premise-field-fa_icon {
 	position: relative;
+	line-height: 20px;
+	font-size: 16px;
+}
+
+.premise-field-fa_icon > input.premise-field-fa_icon-input {
+	display: block;
+	width: 100%;
+	padding: 5px;
+	margin: 0;
+	box-sizing: border-box;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	border: 1px solid #888;
+	border-radius: 2px;
+	background: #fff;
+	line-height: inherit;
+	font-size: inherit;
 }
 
 .premise-field-fa_icon .premise-choose-icon,
