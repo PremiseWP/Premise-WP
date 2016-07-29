@@ -152,6 +152,9 @@ class Premise_WP {
 
 		// Add classes to body.
 		add_filter( 'admin_body_class', array( $this, 'body_class' ) );
+
+		add_action( 'wp_ajax_premise_field_load_fa_icons_ajax', 'premise_get_fa_icons_html_ajax' );
+		add_action( 'wp_ajax_nopriv_premise_field_load_fa_icons_ajax', 'premise_get_fa_icons_html_ajax' );
 	}
 
 
