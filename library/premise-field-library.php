@@ -312,3 +312,41 @@ function premise_tooltip( $tooltip_text ) {
 	return ' <span class="premise-tooltip"><span class="premise-tooltip-inner"><i>' .
 		esc_attr( $tooltip_text ) . '</i></span></span>';
 }
+
+
+
+/**
+ * get the html for the font awesome icons including the container. This function is used to load icons on fa_icon field.
+ *
+ * @return string html for font awesome icons.
+ */
+function premise_get_fa_icons_html() {
+	$icons = '<div class="premise-field-fa-icons-container" style="display:none;">
+		<div class="premise-field-fa-icons-container-inner">
+			<ul class="premise-field-fa-icons-ul">';
+				foreach ( (array) premise_get_fa_icons() as $icon ) {
+					$icons .= '<li class="premise-field-fa-icon-li premise-inline-block">
+						<a href="javascript:;" class="premise-field-fa-icon-anchor premise-block" data-icon="' . esc_attr( $icon ) . '">
+							<i class="fa fa-fw ' . esc_attr( $icon ) . '"></i>
+						</a>
+					</li>';
+				}
+			$icons .= '</ul>
+		</div>
+	</div>';
+
+	return $icons;
+}
+
+
+
+
+/**
+ * load the font awesome UI via ajax. This function is called by the jQuery pugin premiseFieldFaIcon
+ *
+ * @return string html for font awesome icons
+ */
+function premise_get_fa_icons_html_ajax() {
+	echo premise_get_fa_icons_html();
+	die();
+}
