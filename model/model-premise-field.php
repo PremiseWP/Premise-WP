@@ -357,12 +357,6 @@ class PremiseField {
 			}
 		}
 
-		if ( 'fa_icon' == $this->type ) {
-
-			add_filter( 'premise_field_html_after_wrapper', array( $this, 'fa_icons' ) );
-			array_push( $this->filters_used, 'premise_field_html_after_wrapper' );
-		}
-
 		if ( 'wp_media' == $this->type ) {
 
 			wp_enqueue_media();
@@ -871,7 +865,7 @@ class PremiseField {
 	 */
 	public function fa_icon_input( $field ) {
 
-		return str_replace( 'type="fa_icon"', 'type="text" class="premise-fa_icon"', $field );
+		return str_replace( 'type="fa_icon"', 'type="text" class="premise-field-fa_icon-input"', $field );
 	}
 
 
@@ -879,6 +873,8 @@ class PremiseField {
 
 	/**
 	 * Display the fa-icons for user to choose from
+	 *
+	 * @deprecated 1.4.5 replaced with premise_get_fa_icons_html() which is called by ajax when the fields get loaded in the front end
 	 *
 	 * @return string html for fa icons
 	 */
@@ -889,7 +885,7 @@ class PremiseField {
 
 		foreach ( (array) premise_get_fa_icons() as $icon ) {
 
-			$icons .= '<li class="premise-field-fa-icon-li premise-inline-block premise-float-left span2">
+			$icons .= '<li class="premise-field-fa-icon-li premise-inline-block">
 				<a href="javascript:;" class="premise-field-fa-icon-anchor premise-block" data-icon="' . $icon . '">
 					<i class="fa fa-fw ' . $icon . '"></i>
 				</a>
