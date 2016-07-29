@@ -37,6 +37,8 @@
 
 		// build object. bind events
 		var init = function() {
+			if ( $el.is( '.premise-fa-icon-plugin-active' ) ) return false;
+
 			// Build our object
 			_construct();
 			// run the plugin
@@ -45,7 +47,7 @@
 
 		// make sure we have everything we need to work with
 		var _construct = function() {
-			if ( ! $el.is( '.premise-fa_icon' ) ) $el.addClass( 'premise-fa_icon' );
+			if ( ! $el.is( '.premise-field-fa_icon-input' ) ) $el.addClass( 'premise-field-fa_icon-input' );
 
 			if ( ! wrapper.length ) wrapElement();
 
@@ -61,6 +63,7 @@
 			btnInsert.click( toggleIcons );
 			btnRemove.click( clearField );
 			$el.keyup( filterIcons );
+			$el.addClass( 'premise-fa-icon-plugin-active' );
 		}
 
 		// wrap the field in a div so we can scope things properly
@@ -85,11 +88,15 @@
 
 		// build and insert the icons wrapper. Ajax the html for all icons.
 		var buildIconsWrapper = function() {
-			$.post( '/wp-admin/admin-ajax.php', { action: 'premise_field_load_fa_icons_ajax' }, function( r ) {
-				wrapper.append( r );
-				iconsWrapper = wrapper.find( '.premise-field-fa-icons-container' );
-				icon         = iconsWrapper.find('.premise-field-fa-icon-anchor');
-			} );
+			var running = false;
+			if ( ! running ) {
+				$.post( '/wp-admin/admin-ajax.php', { action: 'premise_field_load_fa_icons_ajax' }, function( r ) {
+						running = true;
+						wrapper.append( r );
+						iconsWrapper = wrapper.find( '.premise-field-fa-icons-container' );
+						icon         = iconsWrapper.find('.premise-field-fa-icon-anchor');
+				} );
+			}
 		}
 
 		// toggle the icons container
@@ -97,6 +104,7 @@
 			iconsWrapper.slideToggle( 'fast', function(){
 				( ! iconsVisible && iconsWrapper.is(':visible') ) ? iconsOpened() : iconsClosed();
 			});
+			return false;
 		}
 
 		// when icons open, bind icon click and trigger hook.
@@ -146,7 +154,7 @@
 
 		// bind selection of icon on click
 		var bindIcon = function() {
-			icon.off().click(function(){
+			icon.off().one().click(function(){
 				var a = $(this).attr('data-icon');
 				$el.val(a);
 				toggleIcons();
