@@ -20,6 +20,8 @@
 	display: block;
 	margin-bottom: 20px;
 	box-sizing: border-box;
+	line-height: 20px;
+	font-size: 16px;
 }
 
 /**
@@ -43,6 +45,8 @@
 	border: 1px solid #888;
 	border-radius: 2px;
 	background: #fff;
+	line-height: inherit;
+	font-size: inherit;
 }
 
 /**
@@ -72,9 +76,7 @@
 .premise-field select {
 	display: block;
 	width: 100%;
-	padding: 7px 5px;
-	line-height: 1.2em;
-	font-size: 1em;
+	padding: 5px;
 	margin: 0;
 }
 
@@ -381,17 +383,18 @@
 
 .premise-field-fa_icon .premise-choose-icon,
 .premise-field-fa_icon .premise-remove-icon {
-	position:absolute;
-	display:block;
+	display: block;
+	position: absolute;
 	top: 0;
 	z-index: 1;
-	box-sizing:border-box;
+	box-sizing: border-box;
 	padding: 5px;
 	border: 1px solid;
 	border-color: #888 transparent #888 #ccc;
-	background:#fff;
-	width:40px;
-	height: 100%;
+	background: #fff;
+	width: 40px;
+	line-height: inherit;
+	font-size: inherit;
 	text-align:center;
 	outline: 0;
 }
@@ -408,21 +411,22 @@
 	position: absolute;
 	z-index: 2;
 	top: 100%;
-	left: 0;
+	right: 0;
 	width: 100%;
 	background: #fff;
 	border: 1px solid #888;
 	border-radius: 2px;
 	padding: 0;
 	margin-top: 5px;
-	overflow: hidden;
 	box-sizing: border-box;
+	max-width: 400px;
 }
 
 .premise-field-fa_icon .premise-field-fa-icons-container-inner {
 	position: relative;
 	padding: 75% 0 0 0;
 	box-sizing: border-box;
+	overflow: hidden;
 }
 
 .premise-field-fa_icon .premise-field-fa-icons-ul {
