@@ -15,7 +15,7 @@
  *
  * Styles that apply to every field.
  */
-.premise-field {
+.premise-field{
 	position: relative;
 	display: block;
 	margin-bottom: 20px;
@@ -376,11 +376,11 @@
  * FontAwesome Icon Field
  */
 .premise-field-fa_icon {
-
+	position: relative;
 }
 
-.premise-field .premise-choose-icon,
-.premise-field .premise-remove-icon {
+.premise-field-fa_icon .premise-choose-icon,
+.premise-field-fa_icon .premise-remove-icon {
 	position:absolute;
 	display:block;
 	top: 0;
@@ -396,130 +396,65 @@
 	outline: 0;
 }
 
-.premise-field > .premise-field-fa_icon > .premise-choose-icon {
+.premise-field-fa_icon .premise-choose-icon {
 	right:41px;
 }
 
-.premise-field > .premise-field-fa_icon > .premise-remove-icon {
+.premise-field-fa_icon .premise-remove-icon {
 	right:1px;
 }
 
-.premise-field > .premise-field-fa-icons-container {
+.premise-field-fa_icon .premise-field-fa-icons-container {
 	position: absolute;
 	z-index: 2;
 	top: 100%;
 	left: 0;
 	width: 100%;
-	height: 300px;
-	margin-top: 5px;
 	background: #fff;
 	border: 1px solid #888;
 	border-radius: 2px;
-	box-sizing: border-box;
 	padding: 0;
+	margin-top: 5px;
 	overflow: hidden;
+	box-sizing: border-box;
 }
 
-.premise-field > .premise-field-fa-icons-container .premise-field-fa-icons-container-inner {
+.premise-field-fa_icon .premise-field-fa-icons-container-inner {
 	position: relative;
+	padding: 75% 0 0 0;
+	box-sizing: border-box;
+}
+
+.premise-field-fa_icon .premise-field-fa-icons-ul {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
 	height: 100%;
+	box-sizing: border-box;
 	padding: 20px;
 	overflow: auto;
-	box-sizing: border-box;
+	font-size: 0px; /* important to remove any white space in between li elements */
 }
 
-.premise-field > .premise-field-fa-icons-container .premise-field-fa-icon-li {
+.premise-field-fa_icon .premise-field-fa-icon-li {
 	margin-top: 5px;
 	margin-bottom: 5px;
 	transition: all .4s ease-in-out;
+	width: 20%;
 }
 
-.premise-field > .premise-field-fa-icons-container .premise-field-fa-icon-anchor {
+.premise-field-fa_icon .premise-field-fa-icon-anchor {
 	display: block;
 	padding: 5px;
+	color: #444;
+	font-size: 30px; /* override the ul font size */
+	text-align: center;
 	transition: -webkit-transform .1s ease-in-out;
 	transition: transform .1s ease-in-out;
-	color: #444;
-	font-size: 2em;
-	text-align: center;
 }
 
-.premise-field > .premise-field-fa-icons-container .premise-field-fa-icon-anchor:hover {
+.premise-field-fa_icon .premise-field-fa-icon-anchor:hover {
 	-webkit-transform: scale(1.8,1.8);
 	        transform: scale(1.8,1.8);
 }
-
-
-@media screen and (min-width: 1300px) {
-	.premise-field > .premise-field-fa-icons-container {
-		height: 600px;
-	}
-
-	.premise-field > .premise-field-fa-icons-container .premise-field-fa-icons-container-inner {
-		height: 560px;
-	}
-
-	.premise-field > .premise-field-fa-icons-container .premise-field-fa-icon-li {
-		width: 23%;
-		border: 1px solid #888;
-		border-radius: 5px;
-		padding: 40px 0;
-		margin: 10px 1%;
-	}
-
-	.premise-field>.premise-field-fa-icons-container .premise-field-fa-icon-anchor {
-		font-size: 5em;
-	}
-}
-
-@media screen and (min-width: 1800px) {
-	.premise-field > .premise-field-fa-icons-container {
-		height: 600px;
-	}
-
-	.premise-field > .premise-field-fa-icons-container .premise-field-fa-icons-container-inner {
-		height: 560px;
-	}
-
-	.premise-field > .premise-field-fa-icons-container {
-		height: 1000px;
-	}
-
-	.premise-field > .premise-field-fa-icons-container .premise-field-fa-icons-container-inner {
-		height: 960px;
-	}
-
-	.premise-field > .premise-field-fa-icons-container .premise-field-fa-icon-li {
-		width: 14.6%;
-		margin: 20px 1%;
-		padding: 60px 0;
-	}
-	.premise-field>.premise-field-fa-icons-container .premise-field-fa-icon-anchor {
-		font-size: 8em;
-	}
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

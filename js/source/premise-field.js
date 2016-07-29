@@ -62,7 +62,7 @@ var PremiseField = {
 		jQuery('.premise-wp-media-field').premiseFieldWpMedia();
 
 		// bind the fa icon fields
-		jQuery('.premise-field-type-fa_icon').premiseFieldFaIcon();
+		jQuery('.premise-field-fa_icon-input').premiseFieldFaIcon();
 
 		// Bind success message
 		jQuery(document).on('premiseFieldAfterInit', function(){console.log('PremiseField Object Initited successfully.');});
