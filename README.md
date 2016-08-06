@@ -422,6 +422,9 @@ Hook                               | Type         | Description                 
 
 ## Changelog
 
+#### 1.4.6
+* Updated CSS Grids. - for more informatin see [premise.css](css/source/premise.css)
+
 #### 1.4.5
 * Updated `premiseFieldFaIcon` jQuery plugin and the class `PremiseField` so that the plugin can be called anywhere even when the field was not built by premise.
 
