@@ -4,128 +4,63 @@
  * @package Premise WP
  * @subpackage CSS
  */
+
 .premise-show-on-mobile {
-	display: none;
+	display: inline-block;
 }
 
 .premise-hide-on-mobile {
-	display:block;
+	display: none;
+}
+
+/* trys to force an element to be fullwidth on mobile devices */
+.premise-fullwidth-on-mobile {
+	width:100%;
 }
 
 
-/**
- * @1000px - This would be a Tablet on portrait mode. (iPad landscape is 1024px)
- */
-@media screen and (max-width:1000px) {
-	
-	/**
-	 * Changes to Column grid
-	 *
-	 * Scope responsiveness only to elements used
-	 * within the premise-row class.
-	 */
-	/* Turn 6 columns into 3 stacked */
-	.premise-row > .col6 {
-		width: 31.33%;
+@media screen and ( min-width: 700px ) {
+	/* Set the responsive sizes for column grid - for Desktop */
+	.col2,
+	.col4 {
+		width:48%;
 	}
-	/* Turn 4 columns into 2 */
-	.premise-row > .col4 {
-		width: 48%;
-	}
-
-	/**
-	 * Changes to the span grid
-	 *
-	 * Scope responsiveness only to elements used
-	 * within the premise-row class.
-	 */
-	.premise-row > .span1 {
-		width:14.6%;
-	}
-	.premise-row > .span2 {
-		width:14.6%;
-	}
-	.premise-row > .span3 {
+	.col3,
+	.col5,
+	.col6 {
 		width:31.33%;
 	}
-	.premise-row > .span4 {
-		width:31.33%;
-	}
-	.premise-row > .span5 {
-		width:48%;
-	}
-	.premise-row > .span6 {
-		width:48%;
-	}
-	/* For most common use 7 - 5 */
-	.premise-row > .span7 {
-		width:48%;
-	}
-	.premise-row > .span8 {
-		width:64.6%;
-	}
-	.premise-row > .span9 {
-		width:64.6%;
-	}
-	.premise-row > .span10 {
-		width:81.3%;
-	}
-	.premise-row > .span11 {
-		width:81.3%;
-	}
-	.premise-row > .span12 {
-		width:98%;
-	}
-}
 
-/**
- * @600px - Would be considered a mobile device
- */
-@media screen and (max-width:600px) {
-
-	/**
-	 * Changes to Column grid
-	 *
-	 * Scope responsiveness only to elements used
-	 * within the premise-row class.
-	 */
-	/* Turn 6 columns into 2 stacked */
-	.premise-row > .col6 {
-		width: 48%;
-	}
-	/* Turn every other column into 1 stacked */
-	.premise-row > [class^="col"]:not(.col6),
-	.premise-row > [class*=" col"]:not(.col6) {
-		width: 98%;
-	}
-
-	/**
-	 * Changes to span grid
-	 *
-	 * Scope responsiveness only to elements used
-	 * within the premise-row class.
-	 */
-	/* every span class except 5-7 */
-	.premise-row > .span2,
-	.premise-row > .span3,
-	.premise-row > .span4,
-	.premise-row > .span8,
-	.premise-row > .span9,
-	.premise-row > .span10 {
-		width:98%;
-		clear:both;
-	}
-	
 	/* shows element on mobile devices, otherwise hides it. */
 	.premise-show-on-mobile {
-		display:block;
+		display: none;
 	}
 	/* hides element on mobile devices */
 	.premise-hide-on-mobile {
-		display:none;
+		display: block;
 	}
-	/* fullwidth on mobile devices */
-	.premise-fullwidth-on-mobile {
-		width:100%;
+}
+
+
+@media screen and ( min-width: 1024px ) {
+	/* Set the final sizes for column grid - for Desktop */
+	.col2 {
+		width:48%;
+	}
+
+	.col3 {
+		width:31.33%;
+	}
+
+	.col4 {
+		width:23%;
+	}
+
+	.col5 {
+		width:18%;
+	}
+
+	.col6 {
+		width:14.6%;
 	}
 }

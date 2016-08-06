@@ -10,14 +10,10 @@
 
 /**
  * Resets
- */ 
-* {
-	margin: 0;
-	padding: 0;
-}
-
-
-
+ *
+ * @since 1.4.6 removed resets becuase they were scoped too broad.
+ */
+* {}
 
 
 /**
@@ -31,9 +27,9 @@
 	position:relative;
 }
 
-.premise-fixed { 
+.premise-fixed {
 	position:fixed;
-} 
+}
 
 .premise-block {
 	display:block;
@@ -94,8 +90,6 @@ img.premise-responsive {
 }
 
 
-
-
 /**
  * Premise CSS Grid Sysytem
  *
@@ -139,72 +133,50 @@ ul.premise-inline > li {
 	display:inline-block;
 }
 
+/* the fliud grid */
 .span1 {
 	width:6.3%;
 }
-
 .span2 {
 	width:14.6%;
 }
-
 .span3 {
 	width:23%;
 }
-
 .span4 {
 	width:31.33%;
 }
-
 .span5 {
 	width:39.6%;
 }
-
 .span6 {
 	width:48%;
 }
-
 .span7 {
 	width:56.3%;
 }
-
 .span8 {
 	width:64.6%;
 }
-
 .span9 {
 	width:73%;
 }
-
 .span10 {
 	width:81.3%;
 }
-
 .span11 {
 	width:89.6%;
 }
-
 .span12 {
 	width:98%;
 }
-
-.col2 {
-	width:48%;
-}
-
-.col3 {
-	width:31.33%;
-}
-
-.col4 {
-	width:23%;
-}
-
-.col5 {
-	width:18%;
-}
-
+/* The column grid */
+.col2,
+.col3,
+.col4,
+.col5,
 .col6 {
-	width:14.6%;
+	width: 98%; /* mobie first approach - load mobile styles first */
 }
 
 
@@ -214,7 +186,7 @@ ul.premise-inline > li {
  * @see premise_output_video()
  */
 .premise-video {
-	/*width: 100%;  Deleting these properties will enable control 
+	/*width: 100%;  Deleting these properties will enable control
 	height: 100%;   from premise_output_video() directly - MV */
 }
 
