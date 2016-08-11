@@ -422,6 +422,9 @@ Hook                               | Type         | Description                 
 
 ## Changelog
 
+#### 1.4.7
+* Updated CSS - replaced old responsive styles on fluid grids. Added premise resets for editor. New premise scroller to ceate horiantal scrollers on the fly
+
 #### 1.4.6
 * Updated CSS Grids. - for more informatin see [premise.css](css/source/premise.css)
 

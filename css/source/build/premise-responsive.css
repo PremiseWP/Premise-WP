@@ -31,6 +31,44 @@
 		width:31.33%;
 	}
 
+	/* Set responsive widths to fluid grid. This is meant to cover the most common use cases */
+	.premise-row > .span1 {
+		width:14.6%;
+	}
+	.premise-row > .span2 {
+		width:14.6%;
+	}
+	.premise-row > .span3 {
+		width:31.33%;
+	}
+	.premise-row > .span4 {
+		width:31.33%;
+	}
+	.premise-row > .span5 {
+		width:48%;
+	}
+	.premise-row > .span6 {
+		width:48%;
+	}
+	.premise-row > .span7 {
+		width:48%;
+	}
+	.premise-row > .span8 {
+		width:64.6%;
+	}
+	.premise-row > .span9 {
+		width:64.6%;
+	}
+	.premise-row > .span10 {
+		width:81.3%;
+	}
+	.premise-row > .span11 {
+		width:81.3%;
+	}
+	.premise-row > .span12 {
+		width:98%;
+	}
+
 	/* shows element on mobile devices, otherwise hides it. */
 	.premise-show-on-mobile {
 		display: none;
@@ -62,5 +100,43 @@
 
 	.col6 {
 		width:14.6%;
+	}
+
+	/* Set the final sizes for our fluid grid - for Desktop */
+	.span1 {
+		width:6.3%;
+	}
+	.span2 {
+		width:14.6%;
+	}
+	.span3 {
+		width:23%;
+	}
+	.span4 {
+		width:31.33%;
+	}
+	.span5 {
+		width:39.6%;
+	}
+	.span6 {
+		width:48%;
+	}
+	.span7 {
+		width:56.3%;
+	}
+	.span8 {
+		width:64.6%;
+	}
+	.span9 {
+		width:73%;
+	}
+	.span10 {
+		width:81.3%;
+	}
+	.span11 {
+		width:89.6%;
+	}
+	.span12 {
+		width:98%;
 	}
 }
