@@ -19,7 +19,7 @@
 }
 
 
-@media screen and ( min-width: 700px ) {
+@media screen and (min-width: 700px) {
 	/* Set the responsive sizes for column grid - for Desktop */
 	.col2,
 	.col4 {
@@ -69,6 +69,16 @@
 		width:98%;
 	}
 
+	/* reset clear */
+	.premise-row > .span2,
+	.premise-row > .span3,
+	.premise-row > .span4,
+	.premise-row > .span8,
+	.premise-row > .span9,
+	.premise-row > .span10 {
+		clear: none;
+	}
+
 	/* shows element on mobile devices, otherwise hides it. */
 	.premise-show-on-mobile {
 		display: none;
@@ -80,7 +90,7 @@
 }
 
 
-@media screen and ( min-width: 1024px ) {
+@media screen and (min-width: 1024px) {
 	/* Set the final sizes for column grid - for Desktop */
 	.col2 {
 		width:48%;
