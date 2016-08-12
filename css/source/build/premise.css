@@ -154,7 +154,6 @@ img.premise-responsive {
 .premise-row > .span9,
 .premise-row > .span10 {
 	width:98%;
-	clear:both;
 }
 /* The column grid */
 .col2,
