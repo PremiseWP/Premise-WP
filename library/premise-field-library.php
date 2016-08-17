@@ -256,8 +256,6 @@ function premise_output_video( $video, $args = array() ) {
 
 	if ( $video_type == 'youtube' ) {
 
-		$js = '';
-
 		$yt_args = '';
 
 		if ( is_array( $args ) && ( 0 < count( $args ) ) ) {
@@ -266,20 +264,7 @@ function premise_output_video( $video, $args = array() ) {
 
 		$video_cont_id = $video_count++;
 
-		// This code loads the IFrame Player API code asynchronously.
-		if ( ! $js_included ) {
-			$js = '<script>
-				(function($){
-					$(document).ready(function(){
-						$(".premise-youtube-video").premiseLoadYouTube(' . $yt_args . ');
-					});
-				}(jQuery));
-			</script>';
-
-			$js_included = true;
-		}
-
-		$html = $js . '<div class="premise-video premise-youtube-video" data-video-id="' . $video_id . '" id="premise-youtube-video-' . $video_cont_id . '"></div>';
+		$html = '<div class="premise-video premise-youtube-video" data-video-id="' . $video_id . '" id="premise-youtube-video-' . $video_cont_id . '"></div>';
 
 	} else {
 

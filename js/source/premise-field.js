@@ -64,6 +64,9 @@ var PremiseField = {
 		// bind the fa icon fields
 		jQuery('.premise-field-fa_icon-input').premiseFieldFaIcon();
 
+		// bind the youtube videos
+		jQuery('.premise-youtube-video').premiseLoadYouTube();
+
 		// Bind success message
 		jQuery(document).on('premiseFieldAfterInit', function(){console.log('PremiseField Object Initited successfully.');});
 	},
