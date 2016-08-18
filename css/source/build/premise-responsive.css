@@ -85,7 +85,7 @@
 	}
 	/* hides element on mobile devices */
 	.premise-hide-on-mobile {
-		display: block;
+		display: inline-block;
 	}
 }
 
