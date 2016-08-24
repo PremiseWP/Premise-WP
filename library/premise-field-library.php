@@ -285,7 +285,11 @@ function premise_output_video( $video, $args = array() ) {
 
 	} else {
 
-		$html = '<iframe src="//fast.wistia.net/embed/iframe/' . $video_id . '" class="premise-video premise-wistia-video" id="premise-wistia-video-' . $video_count++ .'" allowtransparency="true" frameborder="0" scrolling="no" class="wistia_embed" name="wistia_embed" allowfullscreen mozallowfullscreen webkitallowfullscreen oallowfullscreen msallowfullscreen></iframe>';
+		$html = '<iframe src="//fast.wistia.net/embed/iframe/' . $video_id . '"
+			class="premise-video premise-wistia-video" id="premise-wistia-video-' . $video_count++ .'"
+			width="620" height="349"
+			allowtransparency="true" frameborder="0" scrolling="no" name="wistia_embed"
+			allowfullscreen mozallowfullscreen webkitallowfullscreen oallowfullscreen msallowfullscreen></iframe>';
 
 		$html .= '<script src="//fast.wistia.net/assets/external/E-v1.js" async></script>';
 	}
