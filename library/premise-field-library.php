@@ -169,13 +169,14 @@ function premise_get_fa_icons() {
 
 
 /**
- * Output a Youtube or a Vimeo video
+ * Output a Youtube, Vimeo or Wistia video
  *
  * @see PremiseField 'video' type
  *
  * @link https://developers.google.com/youtube/iframe_api_reference
  * @link http://stackoverflow.com/questions/5830387/how-to-find-all-youtube-video-ids-in-a-string-using-a-regex
  * @link https://developer.vimeo.com/player/embedding
+ * @link https://wistia.com/doc/embedding
  *
  * @since 1.3
  *
@@ -229,10 +230,18 @@ function premise_output_video( $video, $args = array() ) {
 	} elseif ( strpos( $video, 'vimeo' ) ) {
 
 		if ( preg_match( '~(?<=/)([\d]+)~', $video, $matches ) ) {
+			$video_id = $matches[0];
+		}
+
+		$video_type = 'vimeo';
+
+	} elseif ( strpos( $video, 'wistia' ) ) {
+
+		if ( preg_match( '~(?<=/)([\w-]{10})~', $video, $matches ) ) {
  			$video_id = $matches[0];
  		}
 
-		$video_type = 'vimeo';
+		$video_type = 'wistia';
 
 	} else {
 
@@ -243,6 +252,10 @@ function premise_output_video( $video, $args = array() ) {
 			// Vimeo ID is integer.
 			$video_type = 'vimeo';
 
+		} elseif ( strlen( $video_id ) < 11 ) {
+
+			// Wistia ID is 10 char long.
+			$video_type = 'wistia';
 		} else {
 
 			// Youtube ID is 11 char long.
@@ -254,7 +267,7 @@ function premise_output_video( $video, $args = array() ) {
 		return '';
 	}
 
-	if ( $video_type == 'youtube' ) {
+	if ( $video_type === 'youtube' ) {
 
 		$yt_args = '';
 
@@ -266,9 +279,15 @@ function premise_output_video( $video, $args = array() ) {
 
 		$html = '<div class="premise-video premise-youtube-video" data-video-id="' . $video_id . '" id="premise-youtube-video-' . $video_cont_id . '"></div>';
 
+	} elseif ( $video_type === 'vimeo' ) {
+
+		$html = '<iframe src="//player.vimeo.com/video/' . $video_id . '" class="premise-video premise-vimeo-video" id="premise-vimeo-video-' . $video_count++ .'" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
+
 	} else {
 
-		$html = '<iframe src="//player.vimeo.com/video/' . $video_id . '" class="premise-video premise-vimeo-video" id="psv-vimeo-video-' . $video_count++ .'" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
+		$html = '<iframe src="//fast.wistia.net/embed/iframe/' . $video_id . '" class="premise-video premise-wistia-video" id="premise-wistia-video-' . $video_count++ .'" allowtransparency="true" frameborder="0" scrolling="no" class="wistia_embed" name="wistia_embed" allowfullscreen mozallowfullscreen webkitallowfullscreen oallowfullscreen msallowfullscreen></iframe>';
+
+		$html .= '<script src="//fast.wistia.net/assets/external/E-v1.js" async></script>';
 	}
 
 	return $html;

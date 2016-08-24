@@ -422,6 +422,9 @@ Hook                               | Type         | Description                 
 
 ## Changelog
 
+#### 1.4.8
+* Add Wistia support to `premise_output_video()`
+
 #### 1.4.7
 * Updated CSS - replaced old responsive styles on fluid grids. Added premise resets for editor. New premise scroller to ceate horiantal scrollers on the fly
 
