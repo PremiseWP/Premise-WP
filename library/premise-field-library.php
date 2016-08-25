@@ -294,7 +294,7 @@ function premise_output_video( $video, $args = array() ) {
 		$html .= '<script src="//fast.wistia.net/assets/external/E-v1.js" async></script>';
 	}
 
-	return $html;
+	return '<div class="premise-video-wrapper">' . $html . '</div>';
 }
 
 

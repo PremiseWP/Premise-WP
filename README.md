@@ -424,6 +424,7 @@ Hook                               | Type         | Description                 
 
 #### 1.4.8
 * Add Wistia support to `premise_output_video()`
+* Updated CSS - responsive Premise Video (embed, ratio of 16:9)
 
 #### 1.4.7
 * Updated CSS - replaced old responsive styles on fluid grids. Added premise resets for editor. New premise scroller to ceate horiantal scrollers on the fly
