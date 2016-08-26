@@ -422,6 +422,9 @@ Hook                               | Type         | Description                 
 
 ## Changelog
 
+#### 1.4.9
+* new CSS class `premise-aspect-ratio` to create elements with aspect ratio of 1:1 4:3 or 16:9
+
 #### 1.4.8
 * Add Wistia support to `premise_output_video()`
 * Updated CSS - responsive Premise Video (embed, ratio of 16:9)
