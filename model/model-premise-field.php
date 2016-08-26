@@ -382,7 +382,7 @@ class PremiseField {
 		if ( ! empty( $this->field['label'] ) ) {
 			$label .= '<label';
 			$label .= ! empty( $this->field['id'] )       ? ' for="' . esc_attr( $this->field['id'] ) . '">'                                                                                      : '>';
-			$label .= esc_attr( $this->field['label'] );
+			$label .= wp_kses_post( $this->field['label'] );
 			$label .= ! empty( $this->field['required'] ) ? ' <span class="premise-required">*</span>'                                                                                        : '';
 			$label .= premise_tooltip( $this->field['tooltip'] );
 			$label .= '</label>';
