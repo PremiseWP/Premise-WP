@@ -51,4 +51,3 @@ This example will style a row 3 columns on top and 2 columns centered right belo
 	<div class="span3"></div>
 </div>
 ```
-
