@@ -2,6 +2,10 @@
 
 	/**
 	 * Display dynamic columns
+	 *
+	 * This plugin will take all the direct children of an element and assign them column sizes
+	 * based on the number of elements. It tries to set the least number of rows while attempting to
+	 * set an even number of columns per row.
 	 */
 	$.fn.premiseDynamicColumns = function( options ) {
 
@@ -28,6 +32,7 @@
 
 			if ( ! el.is ( '.premise-dynamic-row' ) ) el.addClass( 'premise-dynamic-row' );
 
+			// set type of grid - row or inline
 			( 'row' == opts.grid ) ? el.addClass( 'premise-row' ) : el.addClass( 'premise-inline' );
 
 			var columns = [2,3,4,5,6],
@@ -36,22 +41,18 @@
 			cols = 6;
 
 			if ( children.length ) {
-
 				childCount = children.length
 				console.log( childCount );
 				for (var i = columns.length - 1; i >= 0; i--) {
-					// if ( 6 > columns ) return false;
-					console.log( columns[i] );
+					// find the best column size to use
 					if ( childCount % columns[i] === 0 ) {
 						cols = columns[i];
 						children.addClass( 'premise-dyn-col col'+cols );
-						return false;
+						return;
 					}
 				}
-
 			}
-
-
+			return;
 		}
 
 		init();
@@ -59,9 +60,9 @@
 		return this;
 	}
 
-	// Defaults. no defaults for now
+	// Defaults.
 	$.fn.premiseDynamicColumns.defaults = {
-		grid: 'row',
+		grid: 'row', // row or inline grid
 	}
 
 }(jQuery));
