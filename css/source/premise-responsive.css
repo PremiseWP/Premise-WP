@@ -32,50 +32,50 @@
 	}
 
 	/* Set responsive widths to fluid grid. This is meant to cover the most common use cases */
-	.premise-row > .span1 {
+	.span1 {
 		width:14.6%;
 	}
-	.premise-row > .span2 {
+	.span2 {
 		width:14.6%;
 	}
-	.premise-row > .span3 {
+	.span3 {
 		width:31.33%;
 	}
-	.premise-row > .span4 {
+	.span4 {
 		width:31.33%;
 	}
-	.premise-row > .span5 {
+	.span5 {
 		width:48%;
 	}
-	.premise-row > .span6 {
+	.span6 {
 		width:48%;
 	}
-	.premise-row > .span7 {
+	.span7 {
 		width:48%;
 	}
-	.premise-row > .span8 {
+	.span8 {
 		width:64.6%;
 	}
-	.premise-row > .span9 {
+	.span9 {
 		width:64.6%;
 	}
-	.premise-row > .span10 {
+	.span10 {
 		width:81.3%;
 	}
-	.premise-row > .span11 {
+	.span11 {
 		width:81.3%;
 	}
-	.premise-row > .span12 {
+	.span12 {
 		width:98%;
 	}
 
 	/* reset clear */
-	.premise-row > .span2,
-	.premise-row > .span3,
-	.premise-row > .span4,
-	.premise-row > .span8,
-	.premise-row > .span9,
-	.premise-row > .span10 {
+	.span2,
+	.span3,
+	.span4,
+	.span8,
+	.span9,
+	.span10 {
 		clear: none;
 	}
 

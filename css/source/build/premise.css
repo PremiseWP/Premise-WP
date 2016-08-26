@@ -156,12 +156,12 @@ img.premise-responsive {
  * - Inline Grid Wrapper - Uses inline-block for its inner elements
  */
 /* the fliud grid */
-.premise-row > .span2,
-.premise-row > .span3,
-.premise-row > .span4,
-.premise-row > .span8,
-.premise-row > .span9,
-.premise-row > .span10 {
+.span2,
+.span3,
+.span4,
+.span8,
+.span9,
+.span10 {
 	width:98%;
 }
 /* The column grid */
@@ -253,7 +253,7 @@ ul.premise-inline > li {
 
 [class^="premise-aspect-ratio-"] > div,
 [class*=" premise-aspect-ratio-"] > div,
-[class^="premise-aspect-ratio-"] .premise-aspect-ratio-el,
+[class^="premise-aspect-ratio-"],
 [class*=" premise-aspect-ratio-"] .premise-aspect-ratio-el {
 	position: absolute;
 	top: 0;
