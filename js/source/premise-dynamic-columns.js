@@ -42,7 +42,6 @@
 
 			if ( children.length ) {
 				childCount = children.length
-				console.log( childCount );
 				for (var i = columns.length - 1; i >= 0; i--) {
 					// find the best column size to use
 					if ( childCount % columns[i] === 0 ) {
@@ -51,6 +50,7 @@
 						return;
 					}
 				}
+				children.addClass( 'premise-dyn-col col'+cols );
 			}
 			return;
 		}
