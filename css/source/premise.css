@@ -173,8 +173,7 @@ img.premise-responsive {
 	width: 98%; /* mobie first approach - load mobile styles first */
 }
 /* the row grid wrapper */
-.premise-row,
-.premise-dynamic-row {
+.premise-row {
 	display:block;
 	margin-left:-1%;
 	margin-right:-1%;
@@ -188,8 +187,7 @@ img.premise-responsive {
 .premise-row > [class^="span"],
 .premise-row > [class*=" span"],
 .premise-row > [class^="col"],
-.premise-row > [class*=" col"],
-.premise-dynamic-row > .premise-dyn-col {
+.premise-row > [class*=" col"] {
 	float:left;
 	margin-left:1%;
 	margin-right:1%;
@@ -251,9 +249,10 @@ ul.premise-inline > li {
 	padding-top: 56.25%;
 }
 
+/* the aspect ration inner element must be div or have this class: premise-aspect-ratio-el */
 [class^="premise-aspect-ratio-"] > div,
 [class*=" premise-aspect-ratio-"] > div,
-[class^="premise-aspect-ratio-"],
+[class^="premise-aspect-ratio-"] .premise-aspect-ratio-el,
 [class*=" premise-aspect-ratio-"] .premise-aspect-ratio-el {
 	position: absolute;
 	top: 0;

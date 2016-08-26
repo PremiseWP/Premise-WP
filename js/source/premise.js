@@ -1,6 +1,6 @@
 /**
  * Load Premise WP core JS
- * 
+ *
  * @package Premise WP
  * @subpackage JS
  */
@@ -16,7 +16,7 @@ jQuery(function($){
 
 /**
  * Main Premise JS Object
- * 
+ *
  * @type {Object}
  */
 var Premise = {
@@ -26,6 +26,8 @@ var Premise = {
 	 * Initiate the main Premise Objcect
 	 */
 	init: function() {
+
+		jQuery( '.premise-dynamic-row' ).premiseDynamicColumns();
 
 
 		/**
