@@ -7,32 +7,27 @@
 jQuery(function($){
 
 	$(document).ready(function(){
-		Premise.init();
+
+		var dynamicRows = $( '.premise-dynamic-row' ),
+		sameHeightEls   = $( '.premise-same-height' );
+
+		function premiseInit() {
+			maybeBindElements();
+			initPremiseExtensions();
+		}
+
+		function maybeBindElements() {
+			( dynamicRows.length ) ? dynamicRows.premiseDynamicColumns() : false;
+			( sameHeightEls.length ) ? premiseSameHeight() : false;
+		}
+
+		function initPremiseExtensions() {
+			/**
+			 * Initiate the Premise Field Object
+			 */
+			PremiseField.init();
+		}
+
+		premiseInit();
 	});
-
 });
-
-
-
-/**
- * Main Premise JS Object
- *
- * @type {Object}
- */
-var Premise = {
-
-
-	/**
-	 * Initiate the main Premise Objcect
-	 */
-	init: function() {
-
-		jQuery( '.premise-dynamic-row' ).premiseDynamicColumns();
-
-
-		/**
-		 * Initiate the Premise Field Object
-		 */
-		PremiseField.init();
-	}
-}
