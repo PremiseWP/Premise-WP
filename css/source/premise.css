@@ -173,7 +173,8 @@ img.premise-responsive {
 	width: 98%; /* mobie first approach - load mobile styles first */
 }
 /* the row grid wrapper */
-.premise-row {
+.premise-row,
+.premise-dynamic-row {
 	display:block;
 	margin-left:-1%;
 	margin-right:-1%;
@@ -187,7 +188,8 @@ img.premise-responsive {
 .premise-row > [class^="span"],
 .premise-row > [class*=" span"],
 .premise-row > [class^="col"],
-.premise-row > [class*=" col"] {
+.premise-row > [class*=" col"],
+.premise-dynamic-row > .premise-dyn-col {
 	float:left;
 	margin-left:1%;
 	margin-right:1%;
