@@ -32,13 +32,13 @@ class PremiseField {
 	/**
 	 * Defaults for each field
 	 *
-	 * Special Parameters: This parameters are special because they alter the
-	 * HTML markup of a field or add functionality such as filters.
+	 * Reserved Arguments - The following arguments are reserved and should not be used as your own
+	 * arguments but as they were intended. Please read the list of reserved arguments below to avoid
+	 * using any of them in your own code. These arguments either serve a specific purpose within this
+	 * class and will not be added to the field as other attributes are added.
 	 *
-	 * Normal Parameters: This parameters (and every other paramaters passed) act as
-	 * additional attributes added the the field. We add some defaults
-	 * and some additional params to make your life easier like 'default'
-	 * or 'options'
+	 * Public Arguments - These aregumets you can use as your own because they are directly passed to the
+	 * field itself.
 	 *
 	 * @var array
 	 *
@@ -46,23 +46,23 @@ class PremiseField {
 	 */
 	public $defaults = array(
 		/**
-		 * Special Arguments
+		 * Reseved Arguments
 		 */
 		'label'      => '',      // Wraps label element around field. uses id for for attribute if id not empty.
 		'tooltip'    => '',      // Adds a tooltip and tooltip functionality to field.
-		'add_filter' => array(), // Add filter(s) to this field. Read documentation for list of filters.
 		'context'    => '',      // Used to let Premise know where to retrieve values from ( post, user ).
 		'wrapper_class' => '',   // Add additional classes to the fields wrapper.
-		'default'    => '',      // If value is empty and get_option() return false.
+		'default'    => '',      // If value is empty and premise_get_value() returns false we use this as the value
+		'value_att'  => '',      // print a value attribute on the field. Used for checkboxes and radio.
+		'attribute'  => '',      // HTML attributes to add to element i.e. onchange="doSomethingCool()".
+		'options'    => array(), // Options for select fields in this format ( 'Option Text' => 'Option Value' ).
+		'add_filter' => array(), // Add filter(s) to this field.
 		/**
-		 * Normal Arguments
+		 * Public Arguments
 		 */
 		'name'       => '',      // Name attribute. if empty fills from id.
-		'id'         => '',      // ID attribute. is empty fills from name.
-		'value'      => '',      // Value attribute. by default tries to get_option(name).
-		'value_att'  => '',      // Value attribute. Used for checkboxes and radio.
-		'options'    => array(), // Options for select fields in this format ( Text => Value ).
-		'attribute'  => '',      // HTML attributes to add to element i.e. onchange="doSomethingCool()".
+		'id'         => '',      // ID attribute. if empty fills from name (if name not empty).
+		'value'      => '',      // Value attribute. by default tries to premise_get_value( name ).
 	);
 
 
