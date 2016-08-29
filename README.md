@@ -422,6 +422,9 @@ Hook                               | Type         | Description                 
 
 ## Changelog
 
+#### 1.4.11
+* new jQuery plugin `premiseScroll` - create animations on scroll easily.
+
 #### 1.4.10
 * new jQuery plugin `premiseDynamicColumns` available to build dynamic grids based on number of columns. It is meant to optimize the number of rows while attempting to produc even columns per row.
 * Added Readme file for CSS Framework. Also added new CSS classes `premise-aspect-ratio-1-1`, `premise-aspect-ratio-4-3`, `premise-aspect-ratio-16-9` to build elements that are proportionally responsive based on their aspect ratio of 1:1, 4:3, or 16:9 respectively.
