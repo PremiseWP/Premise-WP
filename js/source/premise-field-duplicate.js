@@ -82,8 +82,24 @@
 			$clone.find('select').val(selectVal);
 
 			addListener($clone);
+
+			// Reset to default value.
+			// Text(area) + radio inputs: empty value.
 			$elem.find('input, textarea').val('');
-			$elem.find('select').val( function(){ return $(this).find('option').first().val(); } );
+			// (multiple) Select inputs.
+			$elem.find('select').val( function(){
+				var $this = $(this);
+
+				if ( $this.prop('multiple') ) {
+
+					// Multiple select: unselect all.
+					return [];
+				}
+
+				// Select: first value.
+				return $(this).find('option').first().val();
+			});
+			// Checkboxes: uncheck.
 			$elem.find('input[type=checkbox]').prop("checked", false);
 			$elem.before($clone);
 			options.onCopy.call($elem, $clone);
@@ -236,7 +252,6 @@
 			// Previous field classes (".class-1.class-2").
 			var prevClasses = '.' + prevField.attr("class").split(' ').join('.');
 
-			// If we had a clone button and others are visible,
 			// We did not remove the last input, so do not show clone button!
 			if ( prevField.parent().find( prevClasses + ' .premise-field-duplicate-add-button:visible' ).length ) {
 
