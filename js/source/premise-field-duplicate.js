@@ -80,10 +80,11 @@
 			$clone.removeClass('clone');
 			var selectVal = $elem.find('select').val();
 			$clone.find('select').val(selectVal);
-console.log(selectVal,  $elem.find('select option[selected=selected]').val());
+
 			addListener($clone);
 			$elem.find('input, textarea').val('');
 			$elem.find('select').val( function(){ return $(this).find('option').first().val(); } );
+			$elem.find('input[type=checkbox]').prop("checked", false);
 			$elem.before($clone);
 			options.onCopy.call($elem, $clone);
 		};
@@ -232,9 +233,12 @@ console.log(selectVal,  $elem.find('select option[selected=selected]').val());
 				return;
 			}
 
+			// Previous field classes (".class-1.class-2").
+			var prevClasses = '.' + prevField.attr("class").split(' ').join('.');
+
 			// If we had a clone button and others are visible,
 			// We did not remove the last input, so do not show clone button!
-			if ( prevField.parent().find('.premise-field-duplicate-add-button').filter(':visible').length > 1 ) {
+			if ( prevField.parent().find( prevClasses + ' .premise-field-duplicate-add-button:visible' ).length ) {
 
 				return;
 			}
