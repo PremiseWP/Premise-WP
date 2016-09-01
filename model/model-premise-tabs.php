@@ -15,6 +15,16 @@ defined( 'ABSPATH' ) or die();
 
 // if Premise Tabs plugin has not loaded
 if ( ! class_exists( 'Load_Premise_Tabs' ) ) {
+
+/**
+ * Empty class. Only declared so that we do not have to change
+ * all other projects that check if Premise Tabs is installed or not.
+ */
+class Load_Premise_Tabs {
+
+	function __construct(){}
+}
+
 /**
  * Premise Tabs Class
  *
