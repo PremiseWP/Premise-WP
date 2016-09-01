@@ -71,6 +71,7 @@ module.exports = function(grunt) {
 						'css/source/premise.css',
 						'css/source/premise-field.css',
 						'css/source/premise-admin.css',
+						'css/source/premise-tabs.css',
 						'css/source/premise-responsive.css'
 					]
 				}
@@ -86,7 +87,7 @@ module.exports = function(grunt) {
 	            }
 	        }
 	    },
-		
+
 	});
 
 	// Load the plugin that provides the "uglify" task.

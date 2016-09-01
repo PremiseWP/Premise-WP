@@ -17,6 +17,7 @@ defined( 'ABSPATH' ) or die();
 require_once PREMISE_PATH . 'model/model-premise-options.php';
 require_once PREMISE_PATH . 'model/model-premise-field.php';
 require_once PREMISE_PATH . 'model/model-premise-custom-post-type.php';
+require_once PREMISE_PATH . 'model/model-premise-tabs.php';
 
 
 
