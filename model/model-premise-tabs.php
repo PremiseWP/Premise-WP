@@ -65,7 +65,10 @@ class Premise_Tabs {
 	protected $options = array( 'layout' => 'top' );
 
 
-
+	/**
+	 * [$options_defaults description]
+	 * @var array
+	 */
 	protected $options_defaults = array(
 		'layout'           => 'top',
 		'content_in_tab' => false,
@@ -80,8 +83,12 @@ class Premise_Tabs {
 	protected $tabs = array();
 
 
-
-	public $raw = false;
+	/**
+	 * replace the default wrapper class with this one is not empty
+	 *
+	 * @var string
+	 */
+	public $wrapper_class = '';
 
 
 	/**
@@ -95,16 +102,17 @@ class Premise_Tabs {
 	/**
 	 * Constructor
 	 *
-	 * @param array        $tabs   Array of tabs title, icon, content, tab_class, content_class.
-	 * @param array|string $params Tabs options: string => layout|array => see doc.
-	 * @param bool         $raw    Returns raw HTML. Default is false.
+	 * @param array         $tabs           Array of tabs title, icon, content, tab_class, content_class.
+	 * @param array|string  $params         Tabs options: string => layout|array => see doc.
+	 * @param string        $wrapper_class  wrapper class to replace default with
 	 */
-	public function __construct( $tabs = array(), $params = '', $raw = false ) {
+	public function __construct( $tabs = array(), $params = '', $wrapper_class = '' ) {
 
 		if ( is_array( $tabs ) && ! empty( $tabs ) ) {
-			// Check raw feature.
-			$this->raw = is_bool( $raw ) ? $raw : $this->raw;
+			// parse wrapper class
+			$this->wrapper_class = ! empty( (string) $wrapper_class ) ? $wrapper_class : $this->wrapper_class;
 
+			// parse params
 			$this->set_options( $params );
 
 			// Save tabs into our object's tabs property.
@@ -192,7 +200,11 @@ class Premise_Tabs {
 	}
 
 
-
+	/**
+	 * get the html for the tabs with the content inside the tab
+	 *
+	 * @return string html for tabs with content inside
+	 */
 	public function tabs_together() {
 		$_tabs = '<div class="ptabs-tabs-inner">
 			<ul class="ptabs-tabs-ul">'; // Begin with an clean tabs container.
@@ -242,16 +254,23 @@ class Premise_Tabs {
 	 * @return string wrapper applicable classes
 	 */
 	public function wrapper_class() {
-		// Begin with the main class if not raw.
-		$class = $this->raw ? '' : 'ptabs-wrapper';
+		// insert defult wrapper if wrapper class is empty
+		$class = ! empty( $this->wrapper_class ) ? $this->wrapper_class : 'ptabs-wrapper';
 
-		$class .= isset( $this->options['layout'] ) && ! empty( $this->options['layout'] ) ? ' ptabs-' . esc_attr( $this->options['layout'] ) : '';
+		// insert the layout as the an additional class
+		$class .= isset( $this->options['layout'] ) && ! empty( $this->options['layout'] ) ? ' ptabs-' . $this->options['layout'] : '';
 
-		return $class;
+		return (string) esc_attr( $class );
 	}
 
 
 
+	/**
+	 * get the content for the tab
+	 *
+	 * @param  string $content the content to insert
+	 * @return string          the html for the content
+	 */
 	public function get_content( $content = '' ) {
 		$_html = '<div class="ptabs-content-inner">';
 
@@ -320,7 +339,11 @@ class Premise_Tabs {
 
 
 
-
+	/**
+	 * parse our options with the params provided
+	 *
+	 * @param string $params options to control the tabs
+	 */
 	public function set_options( $params = '' ) {
 
 		if ( is_string( $params ) && ! empty( $params ) ) {
