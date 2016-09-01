@@ -471,9 +471,11 @@
 	color: #444;
 	font-size: 30px; /* override the ul font size */
 	text-align: center;
+	transition: -webkit-transform .1s ease-in-out;
 	transition: transform .1s ease-in-out;
 }
 
 .premise-field-fa_icon .premise-field-fa-icon-anchor:hover {
-	transform: scale(1.8,1.8);
+	-webkit-transform: scale(1.8,1.8);
+	        transform: scale(1.8,1.8);
 }

@@ -13,16 +13,8 @@
 // Block direct access to this file.
 defined( 'ABSPATH' ) or die();
 
-// if this plugin has loaded exit.
-if ( class_exists( 'Premise_Tabs' ) )
-	return false;
-
-echo 'This class is supposed to do one thing well - output markup for tabs.
- * That means that this class is meant to provide developers with the markup
- * necessary for creating tabs, but should let the developer control functionality and
- * styles. Of course, by default this class outputs working tabs with basic styles and
- * fucntionality, but the idea is that they can be easily overridden or customized';
-
+// if Premise Tabs plugin has not loaded
+if ( ! class_exists( 'Load_Premise_Tabs' ) ) {
 /**
  * Premise Tabs Class
  *
@@ -337,4 +329,5 @@ class Premise_Tabs {
 			$this->options = wp_parse_args( $params, $this->options_defaults );
 		}
 	}
+}
 }
