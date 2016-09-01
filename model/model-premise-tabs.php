@@ -43,8 +43,8 @@ class Premise_Tabs {
 	 * @var array
 	 */
 	protected $defaults = array(
-		'title' => '',
-		'icon' => '',
+		'title'   => '',
+		'icon'    => '',
 		'content' => '',
 	);
 
@@ -62,12 +62,12 @@ class Premise_Tabs {
 	 *
 	 * @var array
 	 */
-	protected $options = array( 'skin' => 'top' );
+	protected $options = array( 'layout' => 'top' );
 
 
 
 	protected $options_defaults = array(
-		'skin' => 'top',
+		'layout'           => 'top',
 		'content_in_tab' => false,
 	);
 
@@ -96,7 +96,7 @@ class Premise_Tabs {
 	 * Constructor
 	 *
 	 * @param array        $tabs   Array of tabs title, icon, content, tab_class, content_class.
-	 * @param array|string $params Tabs options: string => skin|array => see doc.
+	 * @param array|string $params Tabs options: string => layout|array => see doc.
 	 * @param bool         $raw    Returns raw HTML. Default is false.
 	 */
 	public function __construct( $tabs = array(), $params = '', $raw = false ) {
@@ -129,10 +129,13 @@ class Premise_Tabs {
 	 */
 	public function load_tabs() {
 
-		$_html = ( ! isset( $this->options['content_in_tab'] ) || ! $this->options['content_in_tab'] ) ? $this->tabs_independent() : $this->tabs_together();
+		$html = ( ! isset( $this->options['content_in_tab'] )
+					|| ! $this->options['content_in_tab'] )
+						? $this->tabs_independent()
+							: $this->tabs_together();
 
 		// TODO: escape user defined content?
-		echo $_html;
+		echo $html;
 	}
 
 
@@ -182,7 +185,7 @@ class Premise_Tabs {
 		$_cont .= '</div>';
 
 		$_html = '<div class="' . $this->wrapper_class() . '">';
-			$_html .= ( 'bottom' == $this->options['skin'] ) ? $_cont . $_tabs : $_tabs . $_cont;
+			$_html .= ( 'bottom' == $this->options['layout'] ) ? $_cont . $_tabs : $_tabs . $_cont;
 		$_html .= '</div>';
 
 		return $_html;
@@ -226,7 +229,7 @@ class Premise_Tabs {
 		$_tabs .= '</ul></div>';
 
 		$_html = '<div class="' . $this->wrapper_class() . '">';
-			$_html .= ( 'bottom' == $this->options['skin'] ) ? $_cont . $_tabs : $_tabs . $_cont;
+			$_html .= ( 'bottom' == $this->options['layout'] ) ? $_cont . $_tabs : $_tabs . $_cont;
 		$_html .= '</div>';
 
 		return $_html;
@@ -242,7 +245,7 @@ class Premise_Tabs {
 		// Begin with the main class if not raw.
 		$class = $this->raw ? '' : 'ptabs-wrapper';
 
-		$class .= isset( $this->options['skin'] ) && ! empty( $this->options['skin'] ) ? ' ptabs-' . esc_attr( $this->options['skin'] ) : '';
+		$class .= isset( $this->options['layout'] ) && ! empty( $this->options['layout'] ) ? ' ptabs-' . esc_attr( $this->options['layout'] ) : '';
 
 		return $class;
 	}
@@ -266,12 +269,11 @@ class Premise_Tabs {
 	/**
 	 * Returns the icon as image or FontAwesome icon
 	 *
-	 * Uses regexp ti identify it the icon is an image or an fa icon then pricess it
-	 * accordingly.
+	 * Uses regexp to identify if the icon is an image or an fa icon or WP dashicon
 	 *
-	 * @param  string $icon FontAwesome icon class i.e. fa-plus. or image url to use as icon.
+	 * @param  string $icon img source or icon name to use.
 	 *
-	 * @return string       html for tab icon if it is img url or FontAwesome icon. empty string otherwise
+	 * @return string       html for tab icon or empty string
 	 */
 	public function get_icon( $icon = '' ) {
 		$_html = '';
@@ -279,6 +281,7 @@ class Premise_Tabs {
 			$_html = '<div class="ptabs-tab-icon">';
 
 			if ( preg_match( '/.*\.png|jpg|jpeg|gif/i', $icon, $match ) ) {
+
 				$_html .= '<img src="' . esc_url( $icon ) . '" class="premise-responsive">';
 
 			} elseif ( preg_match( '/^fa-/i', $icon, $match ) ) {
@@ -287,7 +290,7 @@ class Premise_Tabs {
 
 			} else {
 
-				$_html .= '';
+				$_html .= '<span class="dashicons ' . esc_attr( $icon ) . '"></span>';
 			}
 
 			$_html .= '</div>';
@@ -322,7 +325,7 @@ class Premise_Tabs {
 
 		if ( is_string( $params ) && ! empty( $params ) ) {
 
-			$this->options['skin'] = $params;
+			$this->options['layout'] = $params;
 
 		} elseif ( is_array( $params ) ) {
 
