@@ -22,6 +22,7 @@
 .ptabs-wrapper .ptabs-tabs-container {
 	position: relative;
 	display: block;
+	box-sizing: border-box;
 }
 
 /**
@@ -165,6 +166,7 @@
 	position: relative;
 	border-top: 0;
 	height: 400px;
+	box-sizing: border-box;
 }
 
 .ptabs-wrapper .ptabs-content {
