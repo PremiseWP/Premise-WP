@@ -423,7 +423,7 @@ Hook                               | Type         | Description                 
 ## Changelog
 
 #### 1.5.0
-* Integrated `Premise_Tabs` into Premise WP. Plugin is now derecated. having one calss in one separate plugin was not very effcient.
+* Integrated `Premise_Tabs` into Premise WP. Plugin is now deprecated. Having one class in one separate plugin was not very efficient.
 
 #### 1.4.11
 * new jQuery plugin `premiseScroll` - create animations on scroll easily.
