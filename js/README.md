@@ -93,17 +93,21 @@ video.premiseLoadYouTube({
 
 #### Options ####
 
-**onCopy** `(function) default: see code` Copy field callback. Tries to increment the ID of the input; Increments the `.increment` integers. Removes the add button from the copied field.
-**onRemove** `(function) default: see code` Remove field callback. Tries to show the add button for the last input.
-**addButton** `(string) default: <i class="premise-field-duplicate-add-button fa fa-plus"></i>` Add / clone button HTML (Font Awesome plus icon).
-**removeButton** `(string) default: <i class="premise-field-duplicate-remove-button fa fa-remove"></i>` Remove button HTML (Font Awesome remove icon).
+- **onCopy** `(function) default: see code` Copy field callback. Tries to increment the ID of the input; Increments the `.increment` integers. Removes the add button from the copied field.
+
+- **onRemove** `(function) default: see code` Remove field callback. Tries to show the add button for the last input.
+
+- **addButton** `(string) default: <i class="premise-field-duplicate-add-button fa fa-plus"></i>` Add / clone button HTML (Font Awesome plus icon).
+
+- **removeButton** `(string) default: <i class="premise-field-duplicate-remove-button fa fa-remove"></i>` Remove button HTML (Font Awesome remove icon).
 
 #### Examples ####
 
 ```PHP
+# Given a Premise select input field generated in PHP.
 premise_field( 'select',
 	array(
-		'name' => 'input3',
+		'name' => 'select-input[1]',
 		'value' => 'option2',
 		'label' => 'Select input <span class="increment">1</span>',
 		'options' => array( 'Option 1' => 'option1', 'Option 2' => 'option2' ),
