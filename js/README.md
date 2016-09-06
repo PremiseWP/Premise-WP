@@ -86,3 +86,35 @@ video.premiseLoadYouTube({
 	}
 });
 ```
+
+==========================================================================================================================================
+
+## premiseFieldDuplicate( options ) ##
+
+#### Options ####
+
+**onCopy** `(function) default: see code` Copy field callback. Tries to increment the ID of the input; Increments the `.increment` integers. Removes the add button from the copied field.
+**onRemove** `(function) default: see code` Remove field callback. Tries to show the add button for the last input.
+**addButton** `(string) default: <i class="premise-field-duplicate-add-button fa fa-plus"></i>` Add / clone button HTML (Font Awesome plus icon).
+**removeButton** `(string) default: <i class="premise-field-duplicate-remove-button fa fa-remove"></i>` Remove button HTML (Font Awesome remove icon).
+
+#### Examples ####
+
+```PHP
+premise_field( 'select',
+	array(
+		'name' => 'input3',
+		'value' => 'option2',
+		'label' => 'Select input <span class="increment">1</span>',
+		'options' => array( 'Option 1' => 'option1', 'Option 2' => 'option2' ),
+		'wrapper_class' => 'premise-field-duplicate-select',
+	)
+);
+```
+
+```JS
+$('.premise-field-duplicate-select').premiseFieldDuplicate();
+```
+
+**Note** if nothing happens when you click on the upload button and when you inspect the console you see this error: 'wp.media object is undefined. Make sure Wordpress Media Uploader Scripts are enqueued.', this means that the WP uploader scripts has not loaded. Just call `wp_enqueue_media()` in your php file. This should resolve the issue.
+
