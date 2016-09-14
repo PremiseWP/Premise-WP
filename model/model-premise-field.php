@@ -1041,41 +1041,6 @@ class PremiseField {
 
 
 
-
-	/**
-	 * Get value of a field by context
-	 *
-	 * Context applies to where the field is saved. By default fields are assumed to be saved
-	 * in the options table. But if adding fields to a custom post type, get_option()
-	 * would not work anymore so we pass the context 'post'.
-	 * That's how Premise knows to get the value from get_post_meta() instead of get_option().
-	 *
-	 * @since 1.2
-	 *
-	 * @param  string $name Field name.
-	 * @return mixed value found
-	 */
-	protected function get_value_by_context( $name ) {
-
-		$context = $this->args['context'];
-
-		switch ( $context ) {
-
-			case 'post':
-
-				$value = premise_get_option( $name, 'post' );
-				break;
-
-			default :
-
-				return get_option( $this->args['name'] );
-				break;
-		}
-	}
-
-
-
-
 	/**
 	 * Get id attribute for field from name
 	 *
