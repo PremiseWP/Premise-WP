@@ -64,11 +64,18 @@ function premise_get_value( $name = '', $context = '' ) {
 	 */
 	$_name = premise_name_att_to_array( $name );
 
-	/**
-	 * Prepare the context
-	 */
-	$context_type = is_array( $context ) ? $context['context'] : $context;
-	$id           = is_array( $context ) ? $context['id']      : '';
+	// prepare the context
+	$id = '';
+	$context_type = esc_attr( $context );
+	if ( is_array( $context ) ) {
+		$context_type = ( isset( $context['context'] ) && ! empty( $context['context'] ) )
+			? $context['context']
+				: '';
+
+		$id = ( isset( $context['id'] ) && ! empty( $context['id'] ) )
+			? $context['id']
+				: '';
+	}
 
 	/**
 	 * Get the value based on the context_type if $context_type is not empty.
