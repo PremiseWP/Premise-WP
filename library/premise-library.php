@@ -66,14 +66,16 @@ function premise_get_value( $name = '', $context = '' ) {
 
 	// prepare the context
 	$id = '';
-	$context_type = esc_attr( $context );
-	if ( is_array( $context ) ) {
+	if ( is_string( $context ) ) {
+		$context_type = esc_attr( $context );
+	}
+	elseif ( is_array( $context ) ) {
 		$context_type = ( isset( $context['context'] ) && ! empty( $context['context'] ) )
-			? $context['context']
+			? esc_attr( $context['context'] )
 				: '';
 
 		$id = ( isset( $context['id'] ) && ! empty( $context['id'] ) )
-			? $context['id']
+			? esc_attr( $context['id'] )
 				: '';
 	}
 
@@ -87,7 +89,7 @@ function premise_get_value( $name = '', $context = '' ) {
 
 	} else {
 
-		$value = 'post' == $context_type ? premise_get_post_meta( $id, $_name[0] ) : premise_get_user_meta( $id, $_name[0] );
+		$value = ( 'post' == $context_type ) ? premise_get_post_meta( $id, $_name[0] ) : premise_get_user_meta( $id, $_name[0] );
 	}
 
 	/**
