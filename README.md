@@ -423,7 +423,7 @@ Hook                               | Type         | Description                 
 ## Changelog
 
 #### 1.5.1
-* Added missing styles for classes `span11` and `span12` on mobile.
+* Added missing styles for classes `span5`, `span6`, `span7`, `span11` and `span12` on mobile.
 
 #### 1.5.0
 * Integrated `Premise_Tabs` into Premise WP. Plugin is now deprecated. Having one class in one separate plugin was not very efficient.
