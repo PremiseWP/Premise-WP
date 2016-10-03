@@ -422,6 +422,9 @@ Hook                               | Type         | Description                 
 
 ## Changelog
 
+#### 1.6.2
+* Set default class `premise-aspect-ratio` to be the same as `premise-aspect-ratio-16-9`.
+
 #### 1.6.1
 * FontAwesome icons version update.
 
