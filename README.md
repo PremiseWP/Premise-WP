@@ -422,6 +422,9 @@ Hook                               | Type         | Description                 
 
 ## Changelog
 
+#### 1.6.0
+* New jQuery plugin `premiseGoogleMap` allows you to easily insert a google map on any page.
+
 #### 1.5.1
 * Added missing styles for classes `span5`, `span6`, `span7`, `span11` and `span12` on mobile.
 
