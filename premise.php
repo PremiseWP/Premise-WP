@@ -212,11 +212,16 @@ class Premise_WP {
 
 			// Do not load color picker on frontend.
 			// Register scripts.
-			wp_register_script( 'premise_script_js'  , $this->plugin_url . 'js/Premise-WP.min.js', array( 'jquery' ) );
+			wp_register_script( 'premise_script_js'  , $this->plugin_url . 'js/Premise-WP.min.js' );
+
+			// load jquery independently in case someone deregisters or dequeues it.
+			// wp_enqueue_script( 'jquery' );
 		}
 
 		// Enqueue our styles and scripts for both admin and frontend.
 		wp_enqueue_style( 'premise_style_css' );
+
+		// Enqueue the scripts for front and back end
 		wp_enqueue_script( 'premise_script_js' );
 	}
 
