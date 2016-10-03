@@ -422,6 +422,9 @@ Hook                               | Type         | Description                 
 
 ## Changelog
 
+#### 1.6.1
+* FontAwesome icons version update.
+
 #### 1.6.0
 * New jQuery plugin `premiseGoogleMap` allows you to easily insert a google map on any page.
 
