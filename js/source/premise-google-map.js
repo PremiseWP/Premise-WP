@@ -40,7 +40,6 @@
 		 * @return {void} does not return anything
 		 */
 		var init = function() {
-			console.log( opts.minHeight );
 			el.css( 'min-height', opts.minHeight );
 			( ! $.fn.premiseGoogleMap.APILoaded ) ? loadAPI() : createMap();
 		},
@@ -51,7 +50,7 @@
 		 * @return {void} does not return anything
 		 */
 		loadAPI = function() {
-			if ( ! $.fn.premiseGoogleMap.APILoaded && '' !== opts.key ) {
+			if ( '' !== opts.key ) {
 				// load the gmaps api
 				var gmAPI  = document.createElement('script'),
 				firstTag   = document.getElementsByTagName('script')[0];
@@ -65,8 +64,7 @@
 				$.fn.premiseGoogleMap.APILoaded = true;
 
 			}
-
-			if ( ! opts.key.length ) {
+			else {
 				console.error( 'premiseGoogleMap(): Please provide a Google Maps API Key.');
 				return false;
 			}
