@@ -5,7 +5,7 @@
 	 *
 	 * @see https://developers.google.com/maps/documentation/javascript/tutorial
 	 *
-	 * @param  {Object} options options object to build the map
+	 * @param  {Object} options Options object to build the map.
 	 * @return {Object}         Node in context
 	 */
 	$.fn.premiseGoogleMap = function( options ) {
@@ -14,15 +14,15 @@
 			return this;
 		}
 
-		// Parse the default options
+		// Parse the default options.
 		var opts = $.extend( {}, $.fn.premiseGoogleMap.defaults, options );
 
-		// reference our element and global variables
+		// Reference our element and global variables.
 		var el = this,
-		map,
-		geocoder;
+			map,
+			geocoder;
 
-		// support multiple elements
+		// Support multiple elements.
 		if ( this.length > 1 ) {
 			this.each( function() {
 				$( this ).premiseGoogleMap( options );
@@ -30,37 +30,41 @@
 			return this;
 		}
 
-		/*
-			Private Methods
+		/**
+		 * Private Methods
 		 */
 
 		/**
 		 * Initiate the plugin
 		 *
-		 * @return {void} does not return anything
+		 * @return {void} Does not return anything
 		 */
 		var init = function() {
 			el.css( 'min-height', opts.minHeight );
-			( ! $.fn.premiseGoogleMap.APILoaded ) ? loadAPI() : createMap();
+			if ( ! $.fn.premiseGoogleMap.APILoaded ) {
+				loadAPI();
+			} else {
+				createMap();
+			}
 		},
 
 		/**
-		 * load the api if it has not been loaded already and if we have a key
+		 * Load the api if it has not been loaded already and if we have a key
 		 *
-		 * @return {void} does not return anything
+		 * @return {void} Does not return anything
 		 */
 		loadAPI = function() {
 			if ( '' !== opts.key ) {
-				// load the gmaps api
+				// Load the gmaps api.
 				var gmAPI  = document.createElement('script'),
 				firstTag   = document.getElementsByTagName('script')[0];
-				gmAPI.src  = "https://maps.googleapis.com/maps/api/js?key="; // Base URL
-				gmAPI.src += opts.key;                                       // API Key
-				gmAPI.src += "&callback=jQuery.fn.premiseGoogleMap.loadMap";                       // The callback
+				gmAPI.src  = "https://maps.googleapis.com/maps/api/js?key="; // Base URL.
+				gmAPI.src += opts.key;                                       // API Key.
+				gmAPI.src += "&callback=jQuery.fn.premiseGoogleMap.loadMap"; // The callback.
 
 				firstTag.parentNode.insertBefore(gmAPI, firstTag);
 
-				// prevent it from being loaded again
+				// Prevent it from being loaded again.
 				$.fn.premiseGoogleMap.APILoaded = true;
 
 			}
@@ -71,16 +75,16 @@
 		},
 
 		/**
-		 * creates the map given a center
+		 * Creates the map given a center
 		 *
-		 * @return {void} does not return anything.
+		 * @return {void} Does not return anything.
 		 */
 		createMap = function() {
 			if ( opts.center && '' !== opts.center ) {
-				// get lat and lng from center address
+				// Get lat and lng from center address.
 				geocoder.geocode( { 'address': opts.center }, function( results, status ) {
 					if ( status === 'OK' ) {
-						// save the location if successful
+						// Save the location if successful.
 						el.location = results[0].geometry.location;
 
 						map = new google.maps.Map( el[0], {
@@ -111,9 +115,9 @@
 		/**
 		 * Places a pin on the map
 		 *
-		 * @param  {marker} marker     the marker object
-		 * @param  {object} infowindow an infowindow object. optional
-		 * @return {object}            pin object.
+		 * @param  {marker} marker     The marker object.
+		 * @param  {object} infowindow An infowindow object. Optional.
+		 * @return {object}            Pin object.
 		 */
 		placeMarker = function( marker, infowindow ) {
 			marker = ( 'object' === typeof marker ) ? marker : defaultMarker();
@@ -135,21 +139,21 @@
 		/**
 		 * Add an infowindow to a marker
 		 *
-		 * @param  {object} infowindow the infow window object. refer to google maps docs
-		 * @param  {merker} marker     the marker obect alredy created.
-		 * @return {void}              adds infow window to marker and bind click event on marker.
+		 * @param  {object} infowindow The infowindow object. Refer to google maps docs.
+		 * @param  {merker} marker     The marker obect already created.
+		 * @return {void}              Adds infowindow to marker and binds click event on marker.
 		 */
 		attachInfowindow = function( infowindow, marker ) {
 			infowindow = infowindow || {};
 			marker     = marker || false;
 
 			if ( marker && infowindow && ! $.isEmptyObject( infowindow ) ) {
-				// create the infowindow
+				// Create the infowindow.
 				var _window = new google.maps.InfoWindow( infowindow );
 
-				// this opens the infowindow when the pin is clicked.
+				// This opens the infowindow when the pin is clicked.
 				marker.addListener('click', function() {
-				  	_window.open( map, marker );
+					_window.open( map, marker );
 				});
 
 				return _window;
@@ -159,57 +163,57 @@
 		},
 
 		/**
-		 * returns a default marker to add to the center of the map
+		 * Returns a default marker to add to the center of the map
 		 *
-		 * @return {object} marer object to use to create the marker
+		 * @return {object} Marker object to use to create the marker.
 		 */
 		defaultMarker = function() {
 			return {
 				map:      map,
 				position: el.location,
-				title:    el.center,
+				title:    el.center
 			};
 		},
 
 		/**
 		 * Ensures the animation is in uppercase to work properly
 		 *
-		 * @param  {string} string a string in upper or lower case.
-		 * @return {sring}         the same string in upper case if the string is equal to drop or bounce
+		 * @param  {string} string A string in upper or lower case.
+		 * @return {sring}         The same string in upper case if the string is equal to drop or bounce
 		 */
 		cleanUpAnimation = function( string ) {
 			return ( 'drop' == string.toLowerCase() || 'bounce' == string.toLowerCase() ) ? string.toUpperCase() : '';
 		};
 
 		/**
-		 * ths function is called when the API has loaded on the DOM
+		 * This function is called when the API has loaded on the DOM
 		 *
-		 * @return {void} does not return anything
+		 * @return {void} Does not return anything
 		 */
 		$.fn.premiseGoogleMap.loadMap = function() {
 			geocoder = new google.maps.Geocoder();
 			createMap();
 		};
 
-		/*
-		 	Public Methods
+		/**
+		 * Public Methods
 		 */
 
 		/**
 		 * Add a marker to a map
 		 *
-		 * @param {object} marker     the marker object. see google API docs for more details
-		 * @param {object} infowindow the infow window object if you want to add an infowindow
+		 * @param {object} marker     The marker object. see google API docs for more details.
+		 * @param {object} infowindow The infow window object if you want to add an infowindow.
 		 */
 		el.addMarker = function( marker, infowindow ) {
 			marker = marker || {};
 			var _pin = {};
 
 			if ( 'object' !== typeof marker.position ) {
-				// get lat and lng from center address
+				// Get lat and lng from center address.
 				geocoder.geocode( { 'address': marker.position }, function( results, status ) {
 					if ( status === 'OK' ) {
-						// save the location if successful
+						// Save the location if successful.
 						marker.position = results[0].geometry.location;
 						_pin = placeMarker( marker, infowindow );
 					}
@@ -226,11 +230,11 @@
 			return _pin;
 		};
 
-		// run our plugin
+		// Run our plugin.
 		init();
 
 		return this;
-	}
+	};
 
 	/**
 	 * APILoaded prevents the Google Maps API to load twice.
@@ -242,7 +246,7 @@
 	$.fn.premiseGoogleMap.APILoaded = false;
 
 	/**
-	 * our plugin defaults
+	 * Our plugin defaults
 	 *
 	 * @param {string}  key        Required. Google Maps API Key.
 	 * @param {string}  center     Required. An address to use as the center of the map
@@ -250,7 +254,7 @@
 	 * @param {object}  infowindow Optional. Object to build infowindow for marker
 	 * @param {integer} zoom       Optional. Set the default zoom for the map.
 	 * @param {integer} minHeight  Optional. Set the min-height for the map.
-	 * @param {object}  onMapLoad  this callback is called right after tha map loads.
+	 * @param {object}  onMapLoad  This callback is called right after tha map loads.
 	 *
 	 * @type {Object}
 	 */
@@ -261,7 +265,7 @@
 		key:        '',
 		zoom:       15,
 		minHeight:  300,
-		onMapLoad:  function() { return true; },
-	}
+		onMapLoad:  function() { return true; }
+	};
 
 }(jQuery));
