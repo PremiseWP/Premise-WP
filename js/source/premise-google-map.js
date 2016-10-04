@@ -20,7 +20,8 @@
 		// reference our element and global variables
 		var el = this,
 		map,
-		geocoder;
+		geocoder,
+		markers = [];
 
 		// support multiple elements
 		if ( this.length > 1 ) {
@@ -127,6 +128,9 @@
 
 			var _pin = new google.maps.Marker( marker );
 
+			// save a reference of all markers created
+			markers.push( _pin );
+
 			if ( infowindow ) attachInfowindow( infowindow, _pin );
 
 			return _pin;
@@ -148,7 +152,7 @@
 				var _window = new google.maps.InfoWindow( infowindow );
 
 				// this opens the infowindow when the pin is clicked.
-				marker.addListener('click', function() {
+				google.maps.event.addListener( marker, 'click', function() {
 				  	_window.open( map, marker );
 				});
 
@@ -224,6 +228,11 @@
 			}
 
 			return _pin;
+		};
+
+
+		el.getMarkers = function() {
+			return markers;
 		};
 
 		// run our plugin
