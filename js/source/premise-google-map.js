@@ -42,9 +42,11 @@
 		 */
 		var init = function() {
 			el.css( 'min-height', opts.minHeight );
+
 			if ( ! $.fn.premiseGoogleMap.APILoaded ) {
 				loadAPI();
-			} else {
+			}
+			else {
 				createMap();
 			}
 		},
@@ -81,13 +83,15 @@
 		 * @return {void} Does not return anything.
 		 */
 		createMap = function() {
+			geocoder = new google.maps.Geocoder();
+
 			if ( ! opts.center || '' === opts.center ) {
 				console.error( 'premiseGoogleMap() - @param center is required.' );
 				return false;
 			}
 
 			if ( ! geocoder ) {
-
+				console.error( 'premiseGoogleMap() - could not build the Geocoder object.' );
 				return false;
 			}
 
@@ -98,21 +102,22 @@
 					console.error( 'premiseGoogleMap() - Geocode was not successful for the following reason: ' + status );
 					return false;
 				}
+				else {
+					// Save the location if successful.
+					el.location = results[0].geometry.location;
 
-				// Save the location if successful.
-				el.location = results[0].geometry.location;
+					map = new google.maps.Map( el[0], {
+						center: el.location,
+						zoom:   opts.zoom,
+					} );
 
-				map = new google.maps.Map( el[0], {
-					center: el.location,
-					zoom:   opts.zoom,
-				} );
+					if ( opts.marker ) {
+						el.marker = placeMarker( opts.marker, opts.infowindow );
+					}
 
-				if ( opts.marker ) {
-					el.marker = placeMarker( opts.marker, opts.infowindow );
-				}
-
-				if ( 'function' === typeof opts.onMapLoad ) {
-					opts.onMapLoad.call( el );
+					if ( 'function' === typeof opts.onMapLoad ) {
+						opts.onMapLoad.call( el );
+					}
 				}
 			});
 		},
@@ -199,7 +204,6 @@
 		 * @return {void} Does not return anything
 		 */
 		$.fn.premiseGoogleMap.loadMap = function() {
-			geocoder = new google.maps.Geocoder();
 			createMap();
 		};
 
