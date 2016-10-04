@@ -80,36 +80,40 @@
 		 * @return {void} Does not return anything.
 		 */
 		createMap = function() {
-			if ( opts.center && '' !== opts.center ) {
-				// Get lat and lng from center address.
-				geocoder.geocode( { 'address': opts.center }, function( results, status ) {
-					if ( status === 'OK' ) {
-						// Save the location if successful.
-						el.location = results[0].geometry.location;
-
-						map = new google.maps.Map( el[0], {
-							center: el.location,
-							zoom:   opts.zoom,
-						} );
-
-						if ( opts.marker ) {
-							el.marker = placeMarker( opts.marker, opts.infowindow );
-						}
-
-						if ( 'function' === typeof opts.onMapLoad ) {
-							opts.onMapLoad.call( el );
-						}
-					}
-					else {
-						console.error( 'premiseGoogleMap() - Geocode was not successful for the following reason: ' + status );
-						return false;
-					}
-				});
-			}
-			else {
+			if ( ! opts.center || '' === opts.center ) {
 				console.error( 'premiseGoogleMap() - @param center is required.' );
 				return false;
 			}
+
+			if ( ! geocoder ) {
+
+				return false;
+			}
+
+			// Get lat and lng from center address.
+			geocoder.geocode( { 'address': opts.center }, function( results, status ) {
+
+				if ( status !== 'OK' ) {
+					console.error( 'premiseGoogleMap() - Geocode was not successful for the following reason: ' + status );
+					return false;
+				}
+
+				// Save the location if successful.
+				el.location = results[0].geometry.location;
+
+				map = new google.maps.Map( el[0], {
+					center: el.location,
+					zoom:   opts.zoom,
+				} );
+
+				if ( opts.marker ) {
+					el.marker = placeMarker( opts.marker, opts.infowindow );
+				}
+
+				if ( 'function' === typeof opts.onMapLoad ) {
+					opts.onMapLoad.call( el );
+				}
+			});
 		},
 
 		/**
