@@ -40,14 +40,17 @@
 		 * @return {void} Does not return anything
 		 */
 		var init = function() {
+			// check for api key
+			if ( ! opts.key.length ) {
+				console.error( 'premiseGoogleMap(): Please provide a Google Maps API Key.');
+				return false;
+			}
+
+			el.on( 'apiHasLoaded', createMap );
+
 			el.css( 'min-height', opts.minHeight );
 
-			if ( ! $.fn.premiseGoogleMap.APILoaded ) {
-				loadAPI();
-			}
-			else {
-				el.on( 'apiHasLoaded', createMap );
-			}
+			loadAPI();
 		},
 
 		/**
@@ -56,7 +59,7 @@
 		 * @return {void} Does not return anything
 		 */
 		loadAPI = function() {
-			if ( '' !== opts.key ) {
+			if ( ! $.fn.premiseGoogleMap.APILoaded ) {
 				// Load the gmaps api.
 				var gmAPI  = document.createElement('script'),
 				firstTag   = document.getElementsByTagName('script')[0];
@@ -68,11 +71,6 @@
 
 				// Prevent it from being loaded again.
 				$.fn.premiseGoogleMap.APILoaded = true;
-
-			}
-			else {
-				console.error( 'premiseGoogleMap(): Please provide a Google Maps API Key.');
-				return false;
 			}
 		},
 
