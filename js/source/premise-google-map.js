@@ -25,10 +25,9 @@
 
 		// Support multiple elements.
 		if ( this.length > 1 ) {
-			this.each( function() {
-				$( this ).premiseGoogleMap( options );
+			this.each( function(i,v) {
+				$(v).premiseGoogleMap( options );
 			});
-			return this;
 		}
 
 		/**
@@ -47,7 +46,7 @@
 				loadAPI();
 			}
 			else {
-				createMap();
+				el.on( 'apiHasLoaded', createMap );
 			}
 		},
 
@@ -204,7 +203,7 @@
 		 * @return {void} Does not return anything
 		 */
 		$.fn.premiseGoogleMap.loadMap = function() {
-			createMap();
+			el.trigger( 'apiHasLoaded' );
 		};
 
 		/**
