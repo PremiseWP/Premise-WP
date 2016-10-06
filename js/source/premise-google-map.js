@@ -41,10 +41,15 @@
 		 */
 		var init = function() {
 			el.css( 'min-height', opts.minHeight );
+			$.fn.premiseGoogleMap.els.push( el );
+
 			if ( ! $.fn.premiseGoogleMap.APILoaded ) {
 				loadAPI();
 			} else {
-				createMap();
+
+				// We already have pushed the element to els,
+				// they all should be called on API ready (see ).
+				// createMap();
 			}
 		},
 
@@ -56,11 +61,12 @@
 		loadAPI = function() {
 			if ( '' !== opts.key ) {
 				// Load the gmaps api.
-				var gmAPI  = document.createElement('script'),
-				firstTag   = document.getElementsByTagName('script')[0];
-				gmAPI.src  = "https://maps.googleapis.com/maps/api/js?key="; // Base URL.
-				gmAPI.src += opts.key;                                       // API Key.
-				gmAPI.src += "&callback=jQuery.fn.premiseGoogleMap.loadMap"; // The callback.
+				var firstTag   = document.getElementsByTagName('script')[0],
+					gmAPI = document.createElement('script');
+
+				gmAPI.src = "https://maps.googleapis.com/maps/api/js?key=" + // Base URL.
+					opts.key + // API Key.
+					"&callback=jQuery.fn.premiseGoogleMap.loadMap"; // The callback.
 
 				firstTag.parentNode.insertBefore(gmAPI, firstTag);
 
@@ -77,13 +83,17 @@
 		/**
 		 * Creates the map given a center
 		 *
-		 * @return {void} Does not return anything.
+		 * @param  {object} elem The element / div where to display the map.
+		 * @return {void}        Does not return anything.
 		 */
-		createMap = function() {
+		createMap = function( elem ) {
+
 			if ( ! opts.center || '' === opts.center ) {
 				console.error( 'premiseGoogleMap() - @param center is required.' );
 				return false;
 			}
+
+			geocoder = new google.maps.Geocoder();
 
 			if ( ! geocoder ) {
 
@@ -99,19 +109,19 @@
 				}
 
 				// Save the location if successful.
-				el.location = results[0].geometry.location;
+				elem.location = results[0].geometry.location;
 
-				map = new google.maps.Map( el[0], {
-					center: el.location,
+				map = new google.maps.Map( elem[0], {
+					center: elem.location,
 					zoom:   opts.zoom,
 				} );
 
 				if ( opts.marker ) {
-					el.marker = placeMarker( opts.marker, opts.infowindow );
+					elem.marker = placeMarker( opts.marker, opts.infowindow );
 				}
 
 				if ( 'function' === typeof opts.onMapLoad ) {
-					opts.onMapLoad.call( el );
+					opts.onMapLoad.call( elem );
 				}
 			});
 		},
@@ -195,8 +205,11 @@
 		 * @return {void} Does not return anything
 		 */
 		$.fn.premiseGoogleMap.loadMap = function() {
-			geocoder = new google.maps.Geocoder();
-			createMap();
+
+			// Create map, for each element / div.
+			for ( var i = 0, max = $.fn.premiseGoogleMap.els.length; i < max; i++ ) {
+				createMap( $.fn.premiseGoogleMap.els[ i ] );
+			}
 		};
 
 		/**
@@ -239,6 +252,13 @@
 
 		return this;
 	};
+
+	/**
+	 * Google Maps elements.
+	 *
+	 * @type {array}
+	 */
+	$.fn.premiseGoogleMap.els = [];
 
 	/**
 	 * APILoaded prevents the Google Maps API to load twice.
