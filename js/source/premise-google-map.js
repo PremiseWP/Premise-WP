@@ -19,15 +19,15 @@
 
 		// Reference our element and global variables.
 		var el = this,
-			map,
-			geocoder;
+		map,
+		geocoder,
+		markers = [];
 
 		// Support multiple elements.
 		if ( this.length > 1 ) {
-			this.each( function() {
-				$( this ).premiseGoogleMap( options );
+			this.each( function(i,v) {
+				$(v).premiseGoogleMap( options );
 			});
-			return this;
 		}
 
 		/**
@@ -40,17 +40,17 @@
 		 * @return {void} Does not return anything
 		 */
 		var init = function() {
-			el.css( 'min-height', opts.minHeight );
-			$.fn.premiseGoogleMap.els.push( el );
-
-			if ( ! $.fn.premiseGoogleMap.APILoaded ) {
-				loadAPI();
-			} else {
-
-				// We already have pushed the element to els,
-				// they all should be called on API ready (see ).
-				// createMap();
+			// check for api key
+			if ( ! opts.key.length ) {
+				console.error( 'premiseGoogleMap(): Please provide a Google Maps API Key.');
+				return false;
 			}
+
+			el.on( 'apiHasLoaded', createMap );
+
+			el.css( 'min-height', opts.minHeight );
+
+			loadAPI();
 		},
 
 		/**
@@ -59,44 +59,36 @@
 		 * @return {void} Does not return anything
 		 */
 		loadAPI = function() {
-			if ( '' !== opts.key ) {
+			if ( ! $.fn.premiseGoogleMap.APILoaded ) {
 				// Load the gmaps api.
-				var firstTag   = document.getElementsByTagName('script')[0],
-					gmAPI = document.createElement('script');
-
-				gmAPI.src = "https://maps.googleapis.com/maps/api/js?key=" + // Base URL.
-					opts.key + // API Key.
-					"&callback=jQuery.fn.premiseGoogleMap.loadMap"; // The callback.
+				var gmAPI  = document.createElement('script'),
+				firstTag   = document.getElementsByTagName('script')[0];
+				gmAPI.src  = "https://maps.googleapis.com/maps/api/js?key="; // Base URL.
+				gmAPI.src += opts.key;                                       // API Key.
+				gmAPI.src += "&callback=jQuery.fn.premiseGoogleMap.loadMap"; // The callback.
 
 				firstTag.parentNode.insertBefore(gmAPI, firstTag);
 
 				// Prevent it from being loaded again.
 				$.fn.premiseGoogleMap.APILoaded = true;
-
-			}
-			else {
-				console.error( 'premiseGoogleMap(): Please provide a Google Maps API Key.');
-				return false;
 			}
 		},
 
 		/**
 		 * Creates the map given a center
 		 *
-		 * @param  {object} elem The element / div where to display the map.
-		 * @return {void}        Does not return anything.
+		 * @return {void} Does not return anything.
 		 */
-		createMap = function( elem ) {
+		createMap = function() {
+			geocoder = new google.maps.Geocoder();
 
 			if ( ! opts.center || '' === opts.center ) {
 				console.error( 'premiseGoogleMap() - @param center is required.' );
 				return false;
 			}
 
-			geocoder = new google.maps.Geocoder();
-
 			if ( ! geocoder ) {
-
+				console.error( 'premiseGoogleMap() - could not build the Geocoder object.' );
 				return false;
 			}
 
@@ -107,21 +99,22 @@
 					console.error( 'premiseGoogleMap() - Geocode was not successful for the following reason: ' + status );
 					return false;
 				}
+				else {
+					// Save the location if successful.
+					el.location = results[0].geometry.location;
 
-				// Save the location if successful.
-				elem.location = results[0].geometry.location;
+					map = new google.maps.Map( el[0], {
+						center: el.location,
+						zoom:   opts.zoom,
+					} );
 
-				map = new google.maps.Map( elem[0], {
-					center: elem.location,
-					zoom:   opts.zoom,
-				} );
+					if ( opts.marker ) {
+						el.marker = placeMarker( opts.marker, opts.infowindow );
+					}
 
-				if ( opts.marker ) {
-					elem.marker = placeMarker( opts.marker, opts.infowindow );
-				}
-
-				if ( 'function' === typeof opts.onMapLoad ) {
-					opts.onMapLoad.call( elem );
+					if ( 'function' === typeof opts.onMapLoad ) {
+						opts.onMapLoad.call( el );
+					}
 				}
 			});
 		},
@@ -145,6 +138,9 @@
 
 			var _pin = new google.maps.Marker( marker );
 
+			// save a reference of all markers created
+			markers.push( _pin );
+
 			if ( infowindow ) attachInfowindow( infowindow, _pin );
 
 			return _pin;
@@ -165,9 +161,9 @@
 				// Create the infowindow.
 				var _window = new google.maps.InfoWindow( infowindow );
 
-				// This opens the infowindow when the pin is clicked.
-				marker.addListener('click', function() {
-					_window.open( map, marker );
+				// this opens the infowindow when the pin is clicked.
+				google.maps.event.addListener( marker, 'click', function() {
+				  	_window.open( map, marker );
 				});
 
 				return _window;
@@ -205,11 +201,7 @@
 		 * @return {void} Does not return anything
 		 */
 		$.fn.premiseGoogleMap.loadMap = function() {
-
-			// Create map, for each element / div.
-			for ( var i = 0, max = $.fn.premiseGoogleMap.els.length; i < max; i++ ) {
-				createMap( $.fn.premiseGoogleMap.els[ i ] );
-			}
+			el.trigger( 'apiHasLoaded' );
 		};
 
 		/**
@@ -247,18 +239,15 @@
 			return _pin;
 		};
 
-		// Run our plugin.
+		el.getMarkers = function() {
+			return markers;
+		};
+
+		// run our plugin
 		init();
 
 		return this;
 	};
-
-	/**
-	 * Google Maps elements.
-	 *
-	 * @type {array}
-	 */
-	$.fn.premiseGoogleMap.els = [];
 
 	/**
 	 * APILoaded prevents the Google Maps API to load twice.
