@@ -17,18 +17,26 @@
 		// Parse the default options.
 		var opts = $.extend( {}, $.fn.premiseGoogleMap.defaults, options );
 
+		// Load the api if it has not been loaded already and if we have a key
+		if ( ! $.fn.premiseGoogleMap.APILoaded && '' !== opts.key ) {
+			// Load the gmaps api.
+			var gmAPI  = document.createElement('script'),
+			firstTag   = document.getElementsByTagName('script')[0];
+			gmAPI.src  = "https://maps.googleapis.com/maps/api/js?key="; // Base URL.
+			gmAPI.src += opts.key;                                       // API Key.
+			gmAPI.src += "&callback=jQuery.fn.premiseGoogleMap.loadMap"; // The callback.
+
+			firstTag.parentNode.insertBefore(gmAPI, firstTag);
+
+			// Prevent it from being loaded again.
+			$.fn.premiseGoogleMap.APILoaded = true;
+		}
+
 		// Reference our element and global variables.
 		var el = this,
 		map,
 		geocoder,
 		markers = [];
-
-		// Support multiple elements.
-		if ( this.length > 1 ) {
-			this.each( function(i,v) {
-				$(v).premiseGoogleMap( options );
-			});
-		}
 
 		/**
 		 * Private Methods
@@ -45,33 +53,26 @@
 				console.error( 'premiseGoogleMap(): Please provide a Google Maps API Key.');
 				return false;
 			}
+			else {
+				el.on( 'apiHasLoaded', createMap );
 
-			el.on( 'apiHasLoaded', createMap );
+				el.css( 'min-height', opts.minHeight );
 
-			el.css( 'min-height', opts.minHeight );
+				if ( $.fn.premiseGoogleMap.APILoaded ) apiLoaded();
+			}
 
-			loadAPI();
 		},
 
 		/**
-		 * Load the api if it has not been loaded already and if we have a key
+		 * When the API has loaded, create our map(s)
 		 *
 		 * @return {void} Does not return anything
 		 */
-		loadAPI = function() {
-			if ( ! $.fn.premiseGoogleMap.APILoaded ) {
-				// Load the gmaps api.
-				var gmAPI  = document.createElement('script'),
-				firstTag   = document.getElementsByTagName('script')[0];
-				gmAPI.src  = "https://maps.googleapis.com/maps/api/js?key="; // Base URL.
-				gmAPI.src += opts.key;                                       // API Key.
-				gmAPI.src += "&callback=jQuery.fn.premiseGoogleMap.loadMap"; // The callback.
+		apiLoaded = function() {
 
-				firstTag.parentNode.insertBefore(gmAPI, firstTag);
-
-				// Prevent it from being loaded again.
-				$.fn.premiseGoogleMap.APILoaded = true;
-			}
+				$(window).load( function() {
+					el.trigger( 'apiHasLoaded' );
+				} );
 		},
 
 		/**
@@ -80,6 +81,7 @@
 		 * @return {void} Does not return anything.
 		 */
 		createMap = function() {
+
 			geocoder = new google.maps.Geocoder();
 
 			if ( ! opts.center || '' === opts.center ) {
@@ -91,7 +93,6 @@
 				console.error( 'premiseGoogleMap() - could not build the Geocoder object.' );
 				return false;
 			}
-
 			// Get lat and lng from center address.
 			geocoder.geocode( { 'address': opts.center }, function( results, status ) {
 
@@ -108,9 +109,9 @@
 						zoom:   opts.zoom,
 					} );
 
-					if ( opts.marker ) {
-						el.marker = placeMarker( opts.marker, opts.infowindow );
-					}
+					el.marker     = ( opts.marker ) ? placeMarker( opts.marker ) : opts.marker;
+
+					el.infowindow = attachInfowindow( opts.infowindow, el.marker );
 
 					if ( 'function' === typeof opts.onMapLoad ) {
 						opts.onMapLoad.call( el );
@@ -126,10 +127,8 @@
 		 * @param  {object} infowindow An infowindow object. Optional.
 		 * @return {object}            Pin object.
 		 */
-		placeMarker = function( marker, infowindow ) {
+		placeMarker = function( marker ) {
 			marker = ( 'object' === typeof marker ) ? marker : defaultMarker();
-
-			infowindow = infowindow || false;
 
 			if ( ! marker.map )      marker['map']      = map;
 			if ( ! marker.position ) marker['position'] = el.location;
@@ -140,8 +139,6 @@
 
 			// save a reference of all markers created
 			markers.push( _pin );
-
-			if ( infowindow ) attachInfowindow( infowindow, _pin );
 
 			return _pin;
 		},
@@ -155,7 +152,7 @@
 		 */
 		attachInfowindow = function( infowindow, marker ) {
 			infowindow = infowindow || {};
-			marker     = marker || false;
+			marker     = marker     || false;
 
 			if ( marker && infowindow && ! $.isEmptyObject( infowindow ) ) {
 				// Create the infowindow.
@@ -201,7 +198,7 @@
 		 * @return {void} Does not return anything
 		 */
 		$.fn.premiseGoogleMap.loadMap = function() {
-			el.trigger( 'apiHasLoaded' );
+			console.log( 'Google API Has Loaded.' );
 		};
 
 		/**
@@ -281,4 +278,4 @@
 		onMapLoad:  function() { return true; }
 	};
 
-}(jQuery));
+})(jQuery);
