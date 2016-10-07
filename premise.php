@@ -215,7 +215,7 @@ class Premise_WP {
 			wp_register_script( 'premise_script_js'  , $this->plugin_url . 'js/Premise-WP.min.js' );
 
 			// load jquery independently in case someone deregisters or dequeues it.
-			// wp_enqueue_script( 'jquery' );
+			wp_enqueue_script( 'jquery' );
 		}
 
 		// Enqueue our styles and scripts for both admin and frontend.
