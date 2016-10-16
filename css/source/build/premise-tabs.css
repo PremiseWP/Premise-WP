@@ -54,7 +54,6 @@
 	Tabs Layout
 */
 
-/* Horizontal Tabs */
 .pwptabs-wrapper .pwptabs-layout-tabs {
 	position: relative;
 }
@@ -73,19 +72,6 @@
 }
 
 
-
-
-/*
- 	Deprecated
- */
-
-
 /**
- * The main class '.pwptabs-wrapper'
- *
- * We scope everything in our css to this class
- * this allows the feature 'raw' to work well because
- * the html thet is output by Premise Tabs is unaffected
- * since it does not include this class.
+ * Skins - Templates
  */
-
