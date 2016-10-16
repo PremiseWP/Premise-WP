@@ -246,7 +246,7 @@ class Premise_Tabs {
 
 						// Build the content.
 						$_tabs .= '<div class="pwptabs-content pwptabs-content-' . $k . $cont_class . '">';
-							$_tabs .= $this->get_content( $tab['content'] );
+							$_tabs .= $this->get_content( ( isset( $tab['content'] ) && ! empty( $tab['content'] ) ) ? $tab['content'] : '' );
 						$_tabs .= '</div>';
 
 				$_tabs .= '</li>';
