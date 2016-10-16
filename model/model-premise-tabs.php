@@ -200,13 +200,13 @@ class Premise_Tabs {
 
 				// Build the content.
 				$_cont .= '<div class="pwptabs-content pwptabs-content-' . $k . $cont_class . '">';
-					$_cont .= $this->get_content( $tab['content'] );
+					$_cont .= $this->get_content( ( isset( $tab['content'] ) && ! empty( $tab['content'] ) ) ? $tab['content'] : '' );
 				$_cont .= '</div>';
 			}
 		}
 
-		$_tabs .= '</div>';
-		$_cont .= '</div>';
+		$_tabs .= '</div>'; // End tabs
+		$_cont .= '</div>'; // End content
 
 		$_html = '<div class="' . $this->wrapper_class() . '">';
 			$_html .= ( 'bottom' == $this->options['layout'] ) ? $_cont . $_tabs : $_tabs . $_cont;
@@ -254,7 +254,7 @@ class Premise_Tabs {
 			}
 		}
 
-		$_tabs .= '</ul></div>';
+		$_tabs .= '</ul></div>'; // End Tabs
 
 		$_html = '<div class="' . $this->wrapper_class() . ' pwptabs-tabs-inside">';
 			$_html .= ( 'bottom' == $this->options['layout'] ) ? $_cont . $_tabs : $_tabs . $_cont;
