@@ -4,6 +4,82 @@
  * @package Premise Tabs
  */
 
+.pwptabs-wrapper .pwptabs,
+.pwptabs-wrapper .pwptabs-tab,
+.pwptabs-wrapper .pwptabs-toggle,
+.pwptabs-wrapper .pwptabs-content {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.pwptabs-wrapper .pwptabs-toggle {
+	display: block;
+	cursor: pointer;
+}
+
+/*
+	Accordion Layout
+*/
+
+/* Vertical Accordion */
+.pwptabs-wrapper .pwptabs-layout-accordion.pwptabs-layout-vertical .pwptabs-tab {
+	display: block;
+	overflow: hidden;
+}
+
+/* Horizontal Accordion */
+.pwptabs-wrapper .pwptabs-layout-accordion.pwptabs-layout-horizontal .pwptabs-tab:after {
+	content: '';
+	display: table;
+	clear: both;
+}
+
+.pwptabs-wrapper .pwptabs-layout-accordion.pwptabs-layout-horizontal .pwptabs-tab {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.pwptabs-wrapper .pwptabs-layout-accordion.pwptabs-layout-horizontal .pwptabs-toggle,
+.pwptabs-wrapper .pwptabs-layout-accordion.pwptabs-layout-horizontal .pwptabs-content {
+	float: left;
+}
+
+.pwptabs-wrapper .pwptabs-layout-accordion.pwptabs-layout-horizontal .pwptabs-content {
+	overflow: hidden;
+}
+
+
+/*
+	Tabs Layout
+*/
+
+/* Horizontal Tabs */
+.pwptabs-wrapper .pwptabs-layout-tabs {
+	position: relative;
+}
+
+.pwptabs-wrapper .pwptabs-layout-tabs .pwptabs-tab {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.pwptabs-wrapper .pwptabs-layout-tabs .pwptabs-content {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	width: 100%;
+	height: auto;
+}
+
+
+
+
+/*
+ 	Deprecated
+ */
+
+
 /**
  * The main class '.ptabs-wrapper'
  *
@@ -336,14 +412,4 @@
 	max-height: 400px;
 	overflow: auto;
 	border-right: 1px solid #888;
-}
-
-
-
-/**
- * Admin.
- */
-.premise-admin,
-.premise-admin p {
-	font-size: 20px;
 }
