@@ -80,7 +80,7 @@ class Premise_Tabs {
 	 * @var array
 	 */
 	protected $options_defaults = array(
-		'layout'           => 'top',
+		'layout'         => 'top',
 		'content_in_tab' => false,
 	);
 
@@ -120,7 +120,7 @@ class Premise_Tabs {
 
 		if ( is_array( $tabs ) && ! empty( $tabs ) ) {
 			// parse wrapper class
-			$this->wrapper_class = ! empty( (string) $wrapper_class ) ? $wrapper_class : $this->wrapper_class;
+			$this->wrapper_class = ! empty( (string) $wrapper_class ) ? esc_attr( $wrapper_class ) : $this->wrapper_class;
 
 			// parse params
 			$this->set_options( $params );
