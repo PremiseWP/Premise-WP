@@ -18,7 +18,7 @@
 	}
 
 	/**
-	 * Deprecated in lieu of premiseTabs
+	 * Deprecated. Replaced with the new premiseTabs
 	 *
 	 * @since 1.7.2
 	 */
@@ -56,9 +56,12 @@
 	}
 
 	/**
-	 * [premiseTabs description]
-	 * @param  {[type]} options [description]
-	 * @return {[type]}         [description]
+	 * Add tab functionality to your markup
+	 *
+	 * @since 1.7.2
+	 *
+	 * @param  {Object} options an object with all the options. see defaults below
+	 * @return {object}         the element in scope
 	 */
 	$.fn.premiseTabs = function( options ) {
 
@@ -69,40 +72,41 @@
 		// Parse the default options.
 		var opts = $.extend( {}, $.fn.premiseTabs.defaults, options );
 
+		// reference outr variables for efficiency
 		var el    = this,
 		$el       = $(el),
 		tab       = $( opts.tabSelector ),
-		activeTab = $( '.'+opts.activeClass ),
 		toggle    = $( opts.toggleSelector ),
 		content   = $( opts.contentSelector )
-		layout    = opts.layout,
-		direction = opts.direction || '';
+		activeTab = $( '.'+opts.activeClass ),
+		// make sure the layout is either accordion or tabs
+		layout    = ( 'accordion' !== opts.layout ) ? 'tabs' : opts.layout;
+
+		// if tabs == opts.layout, make sure openMultiple is false
+		opts.openMultiple = ( 'tabs' !== layout ) ? opts.openMultiple : false;
 
 		var init = function() {
-
-			opts.openMultiple = ( 'tabs' !== opts.layout ) ? opts.openMultiple : false;
-
-			if ( ! $el.is( '.pwptabs' ) ) $el.addClass( 'pwptabs' );
-
 			// close all the tabs content first
 			content.hide( 1 );
 
+			// add classes to our $el
+			var classes = ( 'accordion' == layout ) ? 'pwptabs pwptabs-layout-'+layout+' pwptabs-layout-'+opts.direction : 'pwptabs pwptabs-layout-'+layout;
+			$el.addClass( classes );
+
 			// make sure we have our wrapper. needed for our css to kick in
-			if ( ! $el.parent( '.pwptabs-wrapper' ).length ) $el.wrap( '<div class="'+opts.wrapperClass+'"></div>' );
-
-			$el.addClass( 'pwptabs-layout-'+layout );
-
-			if ( 'accordion' == opts.layout && '' !== direction ) $el.addClass( 'pwptabs-layout-'+direction );
+			if ( ! $el.parent( '.'+opts.wrapperClass ).length ) $el.wrap( '<div class="'+opts.wrapperClass+'"></div>' );
 
 			// If no active tabs set the first one as active
 			if ( 0 == activeTab.length || 1 < activeTab.length ) {
 				tab.removeClass( opts.activeClass );
-				tab.first().addClass( opts.activeClass );
 				activeTab = tab.first();
+				activeTab.addClass( opts.activeClass );
 				openActive();
 			}
 
 			bindTabs();
+
+			$el.trigger( 'premiseTabsReady', [el, opts] );
 		},
 
 		// bind the anchor for each tab
@@ -152,18 +156,29 @@
 				opts.onTabClose.call( el );
 			}
 			else {
-				if ( ! opts.openMultiple ) {
-					content.hide( ( 'horizontal' == direction ) ? { width: 0 } : { height: 0 } );
+				if ( 'tabs' == layout ) {
+					content.fadeOut( 'fast' );
 				}
 				else {
-					activeTab.find( opts.contentSelector ).hide( ( 'horizontal' == direction ) ? { width: 0 } : { height: 0 } );
+					if ( ! opts.openMultiple ) {
+						content.hide( 'fast' );
+					}
+					else {
+						activeTab.find( opts.contentSelector ).hide( 'fast' );
+					}
 				}
 			}
 		},
 
 		// open the active tab
 		openActive = function() {
-			activeTab.find( opts.contentSelector ).show( ( 'horizontal' == direction ) ? { width: 'auto' } : { height: 'auto' } );
+			console.log( 'called' );
+			if ( 'tabs' == layout ) {
+				activeTab.find( opts.contentSelector ).fadeIn( 'fast' );
+			}
+			else {
+				activeTab.find( opts.contentSelector ).show( 'fast' );
+			}
 		};
 
 		init();
