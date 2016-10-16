@@ -80,8 +80,8 @@ class Premise_Tabs {
 	 * @var array
 	 */
 	protected $options_defaults = array(
-		'layout'         => 'top',
-		'content_in_tab' => false,
+		'layout'         => '',
+		'content_in_tab' => true,
 	);
 
 
@@ -146,11 +146,11 @@ class Premise_Tabs {
 	 * Outputs the html for the tabs.
 	 */
 	public function load_tabs() {
-
-		$html = ( ! isset( $this->options['content_in_tab'] )
-					|| ! $this->options['content_in_tab'] )
-						? $this->tabs_independent()
-							: $this->tabs_together();
+var_dump($this->options['content_in_tab']);
+		$html = ( isset( $this->options['content_in_tab'] )
+					&& $this->options['content_in_tab'] )
+						? $this->tabs_together()
+							: $this->tabs_independent();
 
 		// TODO: escape user defined content?
 		echo $html;
@@ -167,7 +167,7 @@ class Premise_Tabs {
 	 * @return string html for tabs
 	 */
 	public function tabs_independent() {
-		$_tabs = '<div class="pwptabs-tabs-container">'; // Begin with an clean tabs container.
+		$_tabs = '<div class="pwptabs pwptabs-tabs-container">'; // Begin with an clean tabs container.
 		$_cont = '<div class="pwptabs-content-container">'; // Begin with an clean contents container.
 
 		foreach ( $this->tabs as $k => $tab ) {
@@ -187,8 +187,8 @@ class Premise_Tabs {
 					' ' . esc_attr( $tab['tab_class'] ) : '';
 
 				// Build the tabs.
-				$_tabs .= '<div class="pwptabs-tab pwptabs-tab-' . $k . $tab_class . '" data-tab-index="' . $k . '">
-					<a href="javascript:;" class="pwptabs-toggle">';
+				$_tabs .= '<div class="pwptabs-tab pwptabs-tab-' . $k . $tab_class . '">
+					<a href="javascript:;" class="pwptabs-toggle" data-tab-index="' . $k . '">';
 						// Get icon whether is image or FA.
 						$_tabs .= ( isset( $tab['icon'] ) && ! empty( $tab['icon'] ) ) ? $this->get_icon( $tab['icon'] ) : '';
 						$_tabs .= '<div class="pwptabs-tab-title">' . $this->stripped_title( $tab['title'] ) . '</div>';
@@ -208,7 +208,7 @@ class Premise_Tabs {
 		$_tabs .= '</div>'; // End tabs
 		$_cont .= '</div>'; // End content
 
-		$_html = '<div class="' . $this->wrapper_class() . '">';
+		$_html = '<div class="' . $this->wrapper_class() . ' pwptabs-content-outside-tab">';
 			$_html .= ( 'bottom' == $this->options['layout'] ) ? $_cont . $_tabs : $_tabs . $_cont;
 		$_html .= '</div>';
 
@@ -256,7 +256,7 @@ class Premise_Tabs {
 
 		$_tabs .= '</ul></div>'; // End Tabs
 
-		$_html = '<div class="' . $this->wrapper_class() . ' pwptabs-tabs-inside">';
+		$_html = '<div class="' . $this->wrapper_class() . ' pwptabs-content-inside-tab">';
 			$_html .= ( 'bottom' == $this->options['layout'] ) ? $_cont . $_tabs : $_tabs . $_cont;
 		$_html .= '</div>';
 
@@ -274,7 +274,7 @@ class Premise_Tabs {
 		$class = ! empty( $this->wrapper_class ) ? $this->wrapper_class : 'pwptabs-wrapper';
 
 		// insert the layout as the an additional class
-		$class .= isset( $this->options['layout'] ) && ! empty( $this->options['layout'] ) ? ' pwptabs-' . $this->options['layout'] : '';
+		$class .= isset( $this->options['layout'] ) && ! empty( $this->options['layout'] ) ? ' pwptabs-layout-' . $this->options['layout'] : '';
 
 		return (string) esc_attr( $class );
 	}
@@ -362,9 +362,9 @@ class Premise_Tabs {
 	 */
 	public function set_options( $params = '' ) {
 
-		if ( is_string( $params ) && ! empty( $params ) ) {
+		if ( is_string( $params ) ) {
 
-			$this->options['layout'] = $params;
+			$this->options = wp_parse_args( array( 'layout' => $params ), $this->options_defaults );
 
 		} elseif ( is_array( $params ) ) {
 
