@@ -95,7 +95,7 @@
 			$el.addClass( classes );
 
 			// make sure we have our wrapper. needed for our css to kick in
-			if ( ! $el.parent( '.'+opts.wrapperClass ).length ) $el.wrap( '<div class="'+opts.wrapperClass+'"></div>' );
+			if ( ! $el.parents( '.'+opts.wrapperClass ).length ) $el.wrap( '<div class="'+opts.wrapperClass+'"></div>' );
 
 			// If no active tabs set the first one as active
 			if ( 0 == activeTab.length || 1 < activeTab.length ) {
