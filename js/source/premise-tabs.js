@@ -85,6 +85,7 @@
 		// if tabs == opts.layout, make sure openMultiple is false
 		opts.openMultiple = ( 'tabs' !== layout ) ? opts.openMultiple : false;
 
+		// run our code
 		var init = function() {
 			// close all the tabs content first
 			content.hide( 1 );
@@ -186,7 +187,8 @@
 	}
 
 	/**
-	 * [defaults description]
+	 * Defaults for our premiseTabs pugin
+	 *
 	 * @type {Object}
 	 */
 	$.fn.premiseTabs.defaults = {
@@ -194,22 +196,21 @@
 		tabSelector:     '.pwptabs-tab',
 		toggleSelector:  '.pwptabs-toggle',
 		contentSelector: '.pwptabs-content',
+
 		// Special classes
 		wrapperClass: 'pwptabs-wrapper',
 		activeClass:  'pwptabs-active',
-		// Tabs layout options
-		layout:    'tabs', // tabs|accordion
-		// accordion layout
+
+		// Tabs layout options (tabs|accordion)
+		layout:    'tabs',
+
+		// accordion layout ONLY
 		direction:    'vertical',
 		openMultiple: false,
+
 		// callbacks
 		onTabOpen:  null,
 		onTabClose: null,
 	};
 
 })(jQuery);
-
-(function($){
-
-
-}(jQuery));
