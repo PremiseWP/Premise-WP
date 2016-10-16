@@ -79,11 +79,16 @@
 		toggle    = $( opts.toggleSelector ),
 		content   = $( opts.contentSelector )
 		activeTab = $( '.'+opts.activeClass ),
+		activeContent = null,
 		// make sure the layout is either accordion or tabs
 		layout    = ( 'accordion' !== opts.layout ) ? 'tabs' : opts.layout;
 
 		// if tabs == opts.layout, make sure openMultiple is false
 		opts.openMultiple = ( 'tabs' !== layout ) ? opts.openMultiple : false;
+
+		/*
+			Private Methods
+		 */
 
 		// run our code
 		var init = function() {
@@ -118,8 +123,9 @@
 		// toggle tabs when in accordion layout
 		toggleTabs = function( e ) {
 			e.preventDefault();
+			var $this = $( this );
 
-			activeTab = $( this ).parents( opts.tabSelector );
+			activeTab = $this.parents( opts.tabSelector );
 
 			if ( activeTab.is( '.'+opts.activeClass ) ) {
 				if ( 'accordion' == opts.layout ) {
@@ -173,13 +179,25 @@
 
 		// open the active tab
 		openActive = function() {
-			console.log( 'called' );
+			var tabIndex = activeTab.find( opts.toggleSelector ).attr( 'data-tab-index' );
+
+			activeContent = getActiveContent( ( tabIndex ) ? tabIndex : '' );
+
+			console.log( activeContent );
 			if ( 'tabs' == layout ) {
-				activeTab.find( opts.contentSelector ).fadeIn( 'fast' );
+				activeContent.fadeIn( 'fast' );
 			}
 			else {
-				activeTab.find( opts.contentSelector ).show( 'fast' );
+				activeContent.show( 'fast' );
 			}
+		};
+
+
+		function getActiveContent( index ) {
+			console.log( index );
+			index = index || '';
+			console.log( index );
+			return ( '' !== index ) ? $(opts.contentSelector+'-'+index) : activeTab.find( opts.contentSelector );
 		};
 
 		init();
