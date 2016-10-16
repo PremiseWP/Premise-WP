@@ -73,5 +73,98 @@
 
 
 /**
- * Skins - Templates
+ * pwptabs-layout-wp-theme-options Skin
  */
+
+.pwptabs-wrapper.pwptabs-layout-wp-theme-options {
+	position: relative;
+	padding-top: 56.4%;
+}
+
+.pwptabs-wrapper.pwptabs-layout-wp-theme-options .pwptabs-tabs-inner {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border: 1px solid #444444;
+	overflow: auto;
+}
+
+.pwptabs-wrapper.pwptabs-layout-wp-theme-options .pwptabs-tabs-inner .pwptabs {
+	position: relative;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: auto;
+	background: #444444;
+}
+
+.pwptabs-wrapper.pwptabs-layout-wp-theme-options .pwptabs-tabs-inner .pwptabs-tab {
+	display: block;
+	width: 25%;
+	outline: 0;
+}
+
+.pwptabs-wrapper.pwptabs-layout-wp-theme-options .pwptabs-toggle {
+	padding: 15px 0 15px 15px;
+	background: #444444;
+	color: #FFFFFF;
+	/*border-bottom: 1px solid #FFFFFF;*/
+	border-top: 0;
+	text-decoration: none;
+	transition: all .4s ease;
+	position: relative;
+}
+
+.pwptabs-wrapper.pwptabs-layout-wp-theme-options .pwptabs-tab.pwptabs-active .pwptabs-toggle,
+.pwptabs-wrapper.pwptabs-layout-wp-theme-options .pwptabs-toggle:hover {
+	background: #222222;
+}
+
+.pwptabs-wrapper.pwptabs-layout-wp-theme-options .pwptabs-tab.pwptabs-active .pwptabs-toggle:after {
+	content: '';
+	display: block;
+	position: absolute;
+	top: 50%;
+	right: 0;
+	border-style: solid;
+	border-width: 10px 10px 10px 0;
+	border-color: transparent #FFFFFF transparent transparent;
+	margin-top: -10px;
+}
+
+.pwptabs-wrapper.pwptabs-layout-wp-theme-options .pwptabs-tab-icon,
+.pwptabs-wrapper.pwptabs-layout-wp-theme-options .pwptabs-tab-title {
+	display: inline;
+	font-size: 18px;
+	line-height: 22px;
+	font-family: 'Open Sans';
+	font-weight: 100;
+}
+
+.pwptabs-wrapper.pwptabs-layout-wp-theme-options .pwptabs-tab-icon {
+	margin-right: 10px;
+}
+
+.pwptabs-wrapper.pwptabs-layout-wp-theme-options .pwptabs-content {
+	background-color: #FFFFFF;
+	border-left: 0;
+	position: absolute;
+	top: 0;
+	left: 25%;
+	width: 75%;
+	height: 100%;
+	overflow: auto;
+}
+
+.pwptabs-wrapper.pwptabs-layout-wp-theme-options .pwptabs-content-inner {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	padding: 20px 10px;
+	box-sizing: border-box;
+}
