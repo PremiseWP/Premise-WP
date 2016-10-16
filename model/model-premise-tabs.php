@@ -174,6 +174,13 @@ class Premise_Tabs {
 
 			if ( ( isset( $tab['title'] ) && ! empty( $tab['title'] ) ) ) {
 
+				/**
+				 * pwptabs_before_tabs filter
+				 *
+				 * allows filtering of the tabs html before the tabs html is parsed
+				 *
+				 * @wphook pwptabs_before_tabs
+				 */
 				$_tabs .= apply_filters( 'pwptabs_before_tabs', '' );
 
 				$tab_class = ( isset( $tab['tab_class'] ) && ! empty( $tab['tab_class'] ) ) ?
