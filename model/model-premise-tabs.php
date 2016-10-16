@@ -146,7 +146,7 @@ class Premise_Tabs {
 	 * Outputs the html for the tabs.
 	 */
 	public function load_tabs() {
-var_dump($this->options['content_in_tab']);
+
 		$html = ( isset( $this->options['content_in_tab'] )
 					&& $this->options['content_in_tab'] )
 						? $this->tabs_together()
@@ -234,7 +234,7 @@ var_dump($this->options['content_in_tab']);
 					' ' . esc_attr( $tab['tab_class'] ) : '';
 
 				// Build the tabs.
-				$_tabs .= '<li class="pwptabs-tab pwptabs-tab-' . $k . $tab_class . ' pwptabs-tab-li" data-tab-index="' . $k . '">
+				$_tabs .= '<li class="pwptabs-tab pwptabs-tab-' . $k . $tab_class . ' pwptabs-tab-li">
 					<a href="javascript:;" class="pwptabs-toggle">';
 						// Get icon whether is image or FA.
 						$_tabs .= ( isset( $tab['icon'] ) && ! empty( $tab['icon'] ) ) ? $this->get_icon( $tab['icon'] ) : '';
