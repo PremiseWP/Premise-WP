@@ -422,6 +422,11 @@ Hook                               | Type         | Description                 
 
 ## Changelog
 
+#### 1.7.0
+* New `premiseTabs` jQuery plugin allows you to build tabs in accordion or tabs layout. this jquery plugin handles the tabs from Premise_Tabs class. Also added layout template for wp-theme-options layout.
+
+------------------------------------------
+
 #### 1.6.2
 * Set default class `premise-aspect-ratio` to be the same as `premise-aspect-ratio-16-9`.
 
@@ -436,6 +441,8 @@ Hook                               | Type         | Description                 
 
 #### 1.5.0
 * Integrated `Premise_Tabs` into Premise WP. Plugin is now deprecated. Having one class in one separate plugin was not very efficient.
+
+------------------------------------------
 
 #### 1.4.11
 * new jQuery plugin `premiseScroll` - create animations on scroll easily.
