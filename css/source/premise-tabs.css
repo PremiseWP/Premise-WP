@@ -4,346 +4,192 @@
  * @package Premise Tabs
  */
 
-/**
- * The main class '.ptabs-wrapper'
- *
- * We scope everything in our css to this class
- * this allows the feature 'raw' to work well because
- * the html thet is output by Premise Tabs is unaffected
- * since it does not include this class.
- */
-.ptabs-wrapper {
-	display: block;
-	margin-bottom: 20px;
-	height: 100%;
+.pwptabs-wrapper {
 	overflow: hidden;
 }
 
-.ptabs-wrapper .ptabs-tabs-container {
-	position: relative;
-	display: block;
+.pwptabs-wrapper .pwptabs,
+.pwptabs-wrapper .pwptabs-tab,
+.pwptabs-wrapper .pwptabs-toggle,
+.pwptabs-wrapper .pwptabs-content {
+	margin: 0;
+	padding: 0;
 	box-sizing: border-box;
 }
 
-/**
- * The Tabs (Default Style)
- */
-.ptabs-wrapper .ptabs-tab {
-	display: inline-block;
-	transition: all .4s ease-in-out;
-	border-radius: inherit;
-}
-.ptabs-wrapper .ptabs-tab.ptabs-active,
-.ptabs-wrapper .ptabs-tab-a:focus,
-.ptabs-wrapper .ptabs-tab:hover {
-	background: #fff;
-	color: inherit;
-	box-shadow: none; /* prevent default WP animation */
-	border-radius: inherit;
-}
-.ptabs-wrapper .ptabs-tab-title,
-.ptabs-wrapper .ptabs-tab-icon {
-	display: inline-block;
-	vertical-align: middle;
-	line-height: 1;
-	margin-left: 10px;
-}
-.ptabs-wrapper .ptabs-tab-title {
-	margin-right: 10px;
-}
-.ptabs-wrapper .ptabs-tab-a {
+.pwptabs-wrapper .pwptabs-toggle {
 	display: block;
-	padding: 10px 0;
-	color: inherit;
+	cursor: pointer;
+}
+
+.pwptabs-wrapper .pwptabs-loading-content {
+	position: relative;
+}
+
+.pwptabs-wrapper .pwptabs-loading-content i {
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	font-size: 30px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -15px;
+}
+
+.pwptabs-wrapper .pwptabs-content {
+	overflow:auto;
+}
+
+/*
+	Accordion Layout
+*/
+
+/* Vertical Accordion */
+.pwptabs-wrapper .pwptabs-layout-accordion.pwptabs-layout-vertical .pwptabs-tab {
+	display: block;
+	overflow: hidden;
+}
+
+/* Horizontal Accordion */
+.pwptabs-wrapper .pwptabs-layout-accordion.pwptabs-layout-horizontal .pwptabs-tab:after {
+	content: '';
+	display: table;
+	clear: both;
+}
+
+.pwptabs-wrapper .pwptabs-layout-accordion.pwptabs-layout-horizontal .pwptabs-tab {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.pwptabs-wrapper .pwptabs-layout-accordion.pwptabs-layout-horizontal .pwptabs-toggle,
+.pwptabs-wrapper .pwptabs-layout-accordion.pwptabs-layout-horizontal .pwptabs-content {
+	float: left;
+}
+
+.pwptabs-wrapper .pwptabs-layout-accordion.pwptabs-layout-horizontal .pwptabs-content {
+	overflow: hidden;
+}
+
+
+/*
+	Tabs Layout
+*/
+
+.pwptabs-wrapper .pwptabs-layout-tabs {
+	position: relative;
+}
+
+.pwptabs-wrapper .pwptabs-layout-tabs .pwptabs-tab {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.pwptabs-wrapper .pwptabs-layout-tabs .pwptabs-content {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	width: 100%;
+	height: auto;
+}
+
+
+/**
+ * pwptabs-layout-wp-theme-options Skin
+ */
+
+.pwptabs-wrapper.pwptabs-layout-wp-theme-options {
+	position: relative;
+	padding-top: 56.4%;
+	margin: 40px auto;
+	border: 1px solid #444444;
+}
+
+.pwptabs-wrapper.pwptabs-layout-wp-theme-options .pwptabs-tabs-inner {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+}
+
+.pwptabs-wrapper.pwptabs-layout-wp-theme-options .pwptabs-tabs-inner .pwptabs {
+	position: relative;
+	top: 0;
+	left: 0;
+	width: 100%;
+	min-height: 100%;
+	background: #444444;
+}
+
+.pwptabs-wrapper.pwptabs-layout-wp-theme-options .pwptabs-tabs-inner .pwptabs-tab {
+	display: block;
+	width: 25%;
 	outline: 0;
 }
 
-/* Top */
-.ptabs-wrapper.ptabs-top .ptabs-tabs-container {
-	width: 100%;
-	white-space: nowrap;
-	overflow-x: auto;
-	border-bottom: 1px solid #888;
-	padding: 20px 10px 0;
-}
-.ptabs-wrapper.ptabs-top .ptabs-tab {
-	border-right: 1px solid #888;
-	border-top: 1px solid #888;
-	border-bottom: 0;
-}
-
-.ptabs-wrapper.ptabs-top .ptabs-tab:first-child {
-	border-left: 1px solid #888;
-	border-top-left-radius: 6px;
-}
-
-.ptabs-wrapper.ptabs-top .ptabs-tab:last-child {
-	border-top-right-radius: 6px;
-}
-
-/* Bottom */
-.ptabs-wrapper.ptabs-bottom .ptabs-tabs-container {
-	width: 100%;
-	white-space: nowrap;
-	overflow-x: auto;
-	border-top: 1px solid #888;
-	padding: 0px 10px 20px;
-}
-.ptabs-wrapper.ptabs-bottom .ptabs-tab {
-	border-right: 1px solid #888;
-	border-bottom: 1px solid #888;
+.pwptabs-wrapper.pwptabs-layout-wp-theme-options .pwptabs-toggle {
+	padding: 15px 0 15px 15px;
+	background: #444444;
+	color: #FFFFFF;
+	/*border-bottom: 1px solid #FFFFFF;*/
 	border-top: 0;
-}
-
-.ptabs-wrapper.ptabs-bottom .ptabs-tab:first-child {
-	border-left: 1px solid #888;
-	border-bottom-left-radius: 6px;
-}
-
-.ptabs-wrapper.ptabs-bottom .ptabs-tab:last-child {
-	border-bottom-right-radius: 6px;
-}
-
-/* Left */
-.ptabs-wrapper.ptabs-left .ptabs-tabs-container {
-	width: 25%;
-	float: left;
-	padding: 20px 0 20px 0px;
-}
-
-.ptabs-wrapper.ptabs-left .ptabs-tab {
-	display: block;
-	border-left: 1px solid #888;
-	border-bottom: 1px solid #888;
-	border-top: 0;
-	white-space: normal;
-	word-break: break-word;
-}
-
-.ptabs-wrapper.ptabs-left .ptabs-tab:first-child {
-	border-left: 1px solid #888;
-	border-top: 1px solid #888;
-	border-top-left-radius: 6px;
-}
-
-.ptabs-wrapper.ptabs-left .ptabs-tab:last-child {
-	border-bottom-left-radius: 6px;
-}
-
-/* Right */
-.ptabs-wrapper.ptabs-right .ptabs-tabs-container {
-	width: 25%;
-	float: right;
-	padding: 20px 0 20px 0px;
-}
-
-.ptabs-wrapper.ptabs-right .ptabs-tab {
-	display: block;
-	border-right: 1px solid #888;
-	border-bottom: 1px solid #888;
-	border-top: 0;
-	white-space: normal;
-	word-break: break-word;
-}
-
-.ptabs-wrapper.ptabs-right .ptabs-tab:first-child {
-	border-right: 1px solid #888;
-	border-top: 1px solid #888;
-	border-top-right-radius: 6px;
-}
-
-.ptabs-wrapper.ptabs-right .ptabs-tab:last-child {
-	border-bottom-right-radius: 6px;
-}
-
-
-
-
-/**
- * The Content (Default Style)
- */
-.ptabs-wrapper .ptabs-content-container {
+	text-decoration: none;
+	transition: all .4s ease;
 	position: relative;
-	border-top: 0;
-	height: 400px;
-	box-sizing: border-box;
 }
 
-.ptabs-wrapper .ptabs-content {
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: 0;
-	width: 100%;
-	height: 100%;
-	transition: all .4s ease-in-out;
-	opacity: 0;
-	overflow: auto;
+.pwptabs-wrapper.pwptabs-layout-wp-theme-options .pwptabs-tab.pwptabs-active .pwptabs-toggle,
+.pwptabs-wrapper.pwptabs-layout-wp-theme-options .pwptabs-toggle:hover {
+	background: #222222;
 }
 
-.ptabs-wrapper .ptabs-content-inner {
-	display: block;
-	height: auto;
-	padding: 20px;
-}
-
-.ptabs-wrapper .ptabs-content.ptabs-active {
-	opacity: 1;
-	z-index: 1;
-}
-
-/* Left */
-.ptabs-wrapper.ptabs-left .ptabs-content-container {
-	width: 75%;
-	float: left;
-	border-left: 1px solid #888;
-}
-
-/* Right */
-.ptabs-wrapper.ptabs-right .ptabs-content-container {
-	width: 75%;
-	float: right;
-	border-right: 1px solid #888;
-}
-
-
-/**
- * Tabs Together
- */
-/* Top */
-.ptabs-wrapper.ptabs-top .ptabs-tabs-inner {}
-
-.ptabs-wrapper.ptabs-top .ptabs-tabs-ul {
-	position: relative;
-	/*border-bottom: 1px solid #888;*/
-	padding: 0 10px 0 10px;
-}
-
-.ptabs-wrapper.ptabs-top .ptabs-tab-li {
-	margin-bottom: 0;
-}
-
-.ptabs-wrapper.ptabs-top .ptabs-tab-li .ptabs-content {
-	top: 100%;
-	border-top: 1px solid #888;
-	height: 400px;
-}
-
-.ptabs-wrapper.ptabs-top .ptabs-tab-li .ptabs-content-inner {
-	/*max-height: 400px;*/
-	overflow: auto;
-}
-
-
-/* Bottom */
-.ptabs-wrapper.ptabs-bottom .ptabs-tabs-inner {
-	position: relative;
-	min-height: 400px;
-}
-
-.ptabs-wrapper.ptabs-bottom .ptabs-tabs-ul {
-	position: absolute;
-	top: 100%;
-	left: 0;
-	width: 100%;
-	border-top: 1px solid #888;
-	padding: 0 10px 0 10px;
-}
-
-.ptabs-wrapper.ptabs-bottom .ptabs-tab-li {
-	margin-bottom: 0;
-}
-
-.ptabs-wrapper.ptabs-bottom .ptabs-tab-li .ptabs-content {
-	top: 0;
-	margin-top: -400px;
-}
-
-.ptabs-wrapper.ptabs-bottom .ptabs-tab-li .ptabs-content-inner {
-	max-height: 400px;
-	overflow: auto;
-}
-
-
-/* Left */
-.ptabs-wrapper.ptabs-left .ptabs-tabs-inner {
-	position: relative;
-	min-height: 400px;
-}
-
-.ptabs-wrapper.ptabs-left .ptabs-tabs-inner:after {
+.pwptabs-wrapper.pwptabs-layout-wp-theme-options .pwptabs-tab.pwptabs-active .pwptabs-toggle:after {
 	content: '';
 	display: block;
-	clear: both;
-}
-.ptabs-wrapper.ptabs-left .ptabs-tabs-ul {
 	position: absolute;
-	top: 0;
+	top: 50%;
 	right: 0;
-	display: block;
+	border-style: solid;
+	border-width: 10px 10px 10px 0;
+	border-color: transparent #FFFFFF transparent transparent;
+	margin-top: -10px;
+}
+
+.pwptabs-wrapper.pwptabs-layout-wp-theme-options .pwptabs-tab-icon,
+.pwptabs-wrapper.pwptabs-layout-wp-theme-options .pwptabs-tab-title {
+	display: inline;
+	font-size: 18px;
+	line-height: 22px;
+	font-family: 'Open Sans';
+	font-weight: 100;
+}
+
+.pwptabs-wrapper.pwptabs-layout-wp-theme-options .pwptabs-tab-icon {
+	margin-right: 10px;
+}
+
+.pwptabs-wrapper.pwptabs-layout-wp-theme-options .pwptabs-content {
+	background-color: #FFFFFF;
+	border-left: 0;
+	position: absolute;
+	top: 0;
+	left: 25%;
 	width: 75%;
-	padding: 20px 0;
-}
-
-.ptabs-wrapper.ptabs-left .ptabs-tab-li {
-	width: 25%;
-	margin-left: -25%;
-	margin-bottom: 0;
-}
-
-.ptabs-wrapper.ptabs-left .ptabs-tab-li .ptabs-content {
-
-}
-
-.ptabs-wrapper.ptabs-left .ptabs-tab-li .ptabs-content-inner {
-	max-height: 400px;
+	height: 100%;
 	overflow: auto;
-	border-left: 1px solid #888;
 }
 
-
-/* Right */
-.ptabs-wrapper.ptabs-right .ptabs-tabs-inner {
-	position: relative;
-	min-height: 400px;
-}
-
-.ptabs-wrapper.ptabs-right .ptabs-tabs-inner:after {
-	content: '';
-	display: block;
-	clear: both;
-}
-.ptabs-wrapper.ptabs-right .ptabs-tabs-ul {
+.pwptabs-wrapper.pwptabs-layout-wp-theme-options .pwptabs-content-inner {
 	position: absolute;
 	top: 0;
 	left: 0;
-	display: block;
-	width: 75%;
-	padding: 20px 0;
-}
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	padding: 20px;
+	box-sizing: border-box;
 
-.ptabs-wrapper.ptabs-right .ptabs-tab-li {
-	width: 25%;
-	margin-left: 100%;
-	margin-bottom: 0;
-}
-
-.ptabs-wrapper.ptabs-right .ptabs-tab-li .ptabs-content {
-
-}
-
-.ptabs-wrapper.ptabs-right .ptabs-tab-li .ptabs-content-inner {
-	max-height: 400px;
-	overflow: auto;
-	border-right: 1px solid #888;
-}
-
-
-
-/**
- * Admin.
- */
-.premise-admin,
-.premise-admin p {
-	font-size: 20px;
 }
