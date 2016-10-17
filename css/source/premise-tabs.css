@@ -4,10 +4,6 @@
  * @package Premise Tabs
  */
 
-.pwptabs-wrapper {
-	overflow: hidden;
-}
-
 .pwptabs-wrapper .pwptabs,
 .pwptabs-wrapper .pwptabs-tab,
 .pwptabs-wrapper .pwptabs-toggle,
@@ -87,11 +83,11 @@
 }
 
 .pwptabs-wrapper .pwptabs-layout-tabs .pwptabs-content {
-	position: absolute;
+	/*position: absolute;
 	top: 100%;
 	left: 0;
 	width: 100%;
-	height: auto;
+	min-height: 300px;*/
 }
 
 
