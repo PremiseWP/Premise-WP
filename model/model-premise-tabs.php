@@ -56,6 +56,7 @@ class Premise_Tabs {
 		'title'   => '',
 		'icon'    => '',
 		'content' => '',
+		'url'     => 'javascript:;',
 	);
 
 
@@ -188,7 +189,7 @@ class Premise_Tabs {
 
 				// Build the tabs.
 				$_tabs .= '<div class="pwptabs-tab pwptabs-tab-' . $k . $tab_class . '">
-					<a href="javascript:;" class="pwptabs-toggle" data-tab-index="' . $k . '">';
+					<a href="' . $tab['url'] . '" class="pwptabs-toggle" data-tab-index="' . $k . '">';
 						// Get icon whether is image or FA.
 						$_tabs .= ( isset( $tab['icon'] ) && ! empty( $tab['icon'] ) ) ? $this->get_icon( $tab['icon'] ) : '';
 						$_tabs .= '<div class="pwptabs-tab-title">' . $this->stripped_title( $tab['title'] ) . '</div>';
@@ -235,7 +236,7 @@ class Premise_Tabs {
 
 				// Build the tabs.
 				$_tabs .= '<li class="pwptabs-tab pwptabs-tab-' . $k . $tab_class . ' pwptabs-tab-li">
-					<a href="javascript:;" class="pwptabs-toggle">';
+					<a href="' . $tab['url'] . '" class="pwptabs-toggle">';
 						// Get icon whether is image or FA.
 						$_tabs .= ( isset( $tab['icon'] ) && ! empty( $tab['icon'] ) ) ? $this->get_icon( $tab['icon'] ) : '';
 						$_tabs .= '<div class="pwptabs-tab-title">' . $this->stripped_title( $tab['title'] ) . '</div>';
