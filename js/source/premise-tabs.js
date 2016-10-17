@@ -8,48 +8,8 @@
 	// call the plugin automatically on our default class (.ptabs-wrapper)
 	// TODO Update to call the new version of the plugin.
 	$(document).ready(function(){
-		if ( 0 < $('.ptabs-wrapper').length ) $('.ptabs-wrapper')._deprecated_premiseTabs();
-
 		if ( 0 < $('.pwptabs').length ) $('.pwptabs').premiseTabs();
 	});
-
-	if ( $.fn._deprecated_premiseTabs ) {
-		return false;
-	}
-
-	/**
-	 * Deprecated. Replaced with the new premiseTabs
-	 *
-	 * @since 1.7.2
-	 */
-	$.fn._deprecated_premiseTabs = function() {
-
-		var tabs  = this.find( '.ptabs-tab' ),
-		tab       = this.find( '.ptabs-tab a' ),
-		activeTab = this.find( '.ptabs-tab.ptabs-active' );
-
-		// If no active tabs set the first one as active
-		if ( 0 == activeTab.length ) {
-			tabs.first().addClass('ptabs-active');
-			activeTab = tabs.first();
-		}
-
-		showContent( activeTab.attr('data-tab-index') );
-
-		tab.click(function(){
-			tabs.removeClass('ptabs-active');
-			$(this).parent('.ptabs-tab').addClass('ptabs-active');
-			$(this).parents('.ptabs-wrapper').find('.ptabs-content').removeClass('ptabs-active');
-			showContent( $(this).parent('.ptabs-tab').attr('data-tab-index') );
-		});
-
-
-		function showContent(index) {
-			var activeContent = index ? $('.ptabs-content-'+index) : null;
-			null !== activeContent ? activeContent.addClass('ptabs-active') : false;
-		}
-	}
-
 
 	if ( $.fn.premiseTabs ) {
 		return false;
@@ -107,8 +67,9 @@
 				tab.removeClass( opts.activeClass );
 				activeTab = tab.first();
 				activeTab.addClass( opts.activeClass );
-				openActive();
 			}
+
+			openActive();
 
 			bindTabs();
 
@@ -123,7 +84,8 @@
 		// toggle tabs when in accordion layout
 		toggleTabs = function( e ) {
 			e.preventDefault();
-			var $this = $( this );
+			var $this = $( this ),
+			href = $this.attr( 'href' );
 
 			activeTab = $this.parents( opts.tabSelector );
 
@@ -140,6 +102,8 @@
 				if ( ! opts.openMultiple ) tab.removeClass( opts.activeClass );
 				activeTab.addClass( opts.activeClass );
 				openTabs();
+				$this.attr( 'href', 'javascript:;' );
+				if ( ! href.match( /^((javascript)|(#)$)/g ) ) loadAjajxContent( href );
 			}
 
 			return false;
@@ -180,10 +144,8 @@
 		// open the active tab
 		openActive = function() {
 			var tabIndex = activeTab.find( opts.toggleSelector ).attr( 'data-tab-index' );
-
 			activeContent = getActiveContent( ( tabIndex ) ? tabIndex : '' );
 
-			console.log( activeContent );
 			if ( 'tabs' == layout ) {
 				activeContent.fadeIn( 'fast' );
 			}
@@ -194,11 +156,29 @@
 
 
 		function getActiveContent( index ) {
-			console.log( index );
 			index = index || '';
-			console.log( index );
 			return ( '' !== index ) ? $(opts.contentSelector+'-'+index) : activeTab.find( opts.contentSelector );
 		};
+
+
+		function loadAjajxContent( url ) {
+			url = url || '';
+
+			if ( '' !== url ) {
+				activeContent.addClass( 'pwptabs-loading-content' );
+				activeContent.html( '<i class="fa fa-spin fa-spinner"></i>' );
+				$.ajax({
+					url: url,
+					success: function( resp ) {
+						activeContent.html( resp );
+					},
+					error: function( err ) {
+						activeContent.html( err );
+					}
+				});
+				activeContent.addClass( 'pwptabs-ajax-content-loaded' );
+			}
+		}
 
 		init();
 		return this;
