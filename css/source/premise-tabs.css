@@ -4,6 +4,10 @@
  * @package Premise Tabs
  */
 
+.pwptabs-wrapper {
+	overflow: hidden;
+}
+
 .pwptabs-wrapper .pwptabs,
 .pwptabs-wrapper .pwptabs-tab,
 .pwptabs-wrapper .pwptabs-toggle,
@@ -16,6 +20,25 @@
 .pwptabs-wrapper .pwptabs-toggle {
 	display: block;
 	cursor: pointer;
+}
+
+.pwptabs-wrapper .pwptabs-loading-content {
+	position: relative;
+}
+
+.pwptabs-wrapper .pwptabs-loading-content i {
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	font-size: 30px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -15px;
+}
+
+.pwptabs-wrapper .pwptabs-content {
+	overflow:auto;
 }
 
 /*
@@ -164,8 +187,9 @@
 	top: 0;
 	left: 0;
 	width: 100%;
-	height: 100%;
-	overflow: auto;
+	height: auto;
+	overflow: hidden;
 	padding: 20px;
 	box-sizing: border-box;
+
 }
