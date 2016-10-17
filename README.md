@@ -424,6 +424,8 @@ Hook                               | Type         | Description                 
 
 #### 1.7.0
 * New `premiseTabs` jQuery plugin allows you to build tabs in accordion or tabs layout. this jquery plugin handles the tabs from Premise_Tabs class. Also added layout template for wp-theme-options layout.
+* Chnages to `Premise_Tabs` model, to match the classes and structure of the new jQuery plugin.
+* Added styles for layout `wp-theme-options` to display tabs for theme options.
 
 ------------------------------------------
 
