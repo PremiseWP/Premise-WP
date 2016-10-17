@@ -422,6 +422,11 @@ Hook                               | Type         | Description                 
 
 ## Changelog
 
+#### 1.7.0
+* New `premiseTabs` jQuery plugin to replace old one. This one can generate accordion tabs as well normal ones.
+* Chnages to `Premise_Tabs` model, to match the classes and structure of the new jQuery plugin.
+* Added styles for layout `wp-theme-options` to display tabs for theme options.
+
 #### 1.6.2
 * Set default class `premise-aspect-ratio` to be the same as `premise-aspect-ratio-16-9`.
 
