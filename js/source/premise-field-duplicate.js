@@ -14,7 +14,7 @@
 		}
 
 		// Parse the default options.
-		var options = $.extend( {}, $.fn.premiseFieldDuplicate.defaults, option );
+		var opts = $.extend( {}, $.fn.premiseFieldDuplicate.defaults, option );
 
 		// Support multiple elements.
 		if (this.length > 1) {
@@ -24,70 +24,152 @@
 		}
 
 		// Reference variables.
-		var $el = $(this);
+		var $el = $(this),
+		fields  = [],
+		requiredFields = [],
+
+		cloneBtn  = '<button class="button pwpfd-button pwpfd-clone"><i class="fa fa-clone"></i> Clone</button>',
+		removeBtn = '<button class="button button-wraning pwpfd-button pwpfd-remove"><i class="fa fa-close"></i> Remove</button>';
 
 		// Make sure we have everything we need to work with.
 		var _construct = function() {
 
-			// First, add remove (.pwpfd-remove) & add (.pwpfd-clone) buttons if none found.
-			if ( ! $el.children('.pwpfd-clone').length ) {
+			// prepare our element
+			if ( ! $el.parents( '.pwpfd-wrapper' ).length ) $el.wrap( '<div class="pwpfd-wrapper"></div>' );
+			$el.children().wrapAll( '<div class="pwpfd-duplicate-this" data-duplicate-count="'+opts.startCount+'"></div>' );
+			$el.addClass( 'pwpfd-duplicator' );
 
-				$el.append( '<button class="pwpfd-clone">Clone me</button>' );
+			// diplay the add button if applicable and does not exist
+			if ( opts.displayAddButton && ! $el.children( '.pwpfd-clone' ).length ) $el.append( cloneBtn );
+
+			fields = $el.find( 'select, input, textarea' );
+
+			if ( fields.prop( 'required' ) ) {
+				fields.each( function( i, v ) {
+					( $(this).prop( 'required' ) ) ? $(this).addClass( 'pwpfd-field' ) : false;
+				} );
 			}
-			if ( ! $el.children('.pwpfd-remove').length ) {
-
-				$el.append( '<button class="pwpfd-remove">Remove me</button>' );
+			else {
+				fields.addClass( 'pwpfd-field' );
 			}
 
-			addListener($el);
+			requiredFields = $el.find( '.pwpfd-field' );
 
-			/**
-			 * Add replaceLast function to String.prototype.
-			 * Replace last occurence in a string.
-			 *
-			 * @link http://stackoverflow.com/questions/2729666/javascript-replace-last-occurence-of-text-in-a-string
-			 */
-			if (!String.prototype.replaceLast) {
-				String.prototype.replaceLast = function(find, replace) {
-					var index = this.lastIndexOf(find);
+			serializeFieldsIntoArray();
 
-					if (index >= 0) {
-						return this.substring(0, index) + replace + this.substring(index + find.length);
+			if ( opts.autoDuplicate ) requiredFields.change( tryClone );
+
+			if ( opts.displayAddButton ) $el.find( '.pwpfd-clone' ).click( tryClone );
+		},
+
+
+		_clone = function() {
+			var subject = $el.find( '.pwpfd-duplicate-this' ),
+			_count      = subject.attr( 'data-duplicate-count' ),
+			clone       = subject.clone();
+
+			var count = ( +_count + 1 );
+
+			subject.attr( 'data-duplicate-count', count );
+
+			fields.each( function() {
+				$(this).val('');
+			} );
+
+			serializeFieldsIntoArray( _count, count );
+
+			$el.before( clone.addClass( 'pwpfd-duplicated' ).append( removeBtn ) );
+
+			$( '.pwpfd-remove' ).click( function( e ) {
+				e.preventDefault();
+				$(this).parent( '.pwpfd-duplicated' ).hide( 'fast', function() {
+					$(this).remove();
+				} );
+
+				// TODO reset all fields arrays
+
+				return false;
+			} );
+		},
+
+
+		tryClone = function( e ) {
+			e.preventDefault();
+			if ( ! reqFieldsEmpty() ) {
+				_clone();
+			}
+			return false;
+		};
+
+		/**
+		 * Pivate Helpers
+		 */
+
+		// make sure that fields and labels are serialized properly
+		function serializeFieldsIntoArray( index, replace ) {
+			index   = index || opts.startCount;
+
+			var _match = new RegExp( "(\["+index+"\])", "g" ),
+			_idmacth   = new RegExp( "(-"+index+")$", "g" );
+
+			fields.each( function( i, v ) {
+
+				var $this = $(this),
+				_id       = $this.attr( 'id' ),
+				_name     = $this.attr( 'name' );
+
+				if ( _name && '' !== _name ) {
+					// if the name is already serialized in an array
+					if ( _name.match( /^.*(\[|\]).*$/g ) ) {
+						if ( replace ) {
+							$this.attr( 'name', _name.replace( _match, replace ) );
+						}
+						else if ( ! _name.match( _match ) ) {
+							$this.attr( 'name', _name + '['+index+']' );
+						}
 					}
+					// not in an array, put it in an array and follow the sequence of starting count
+					else {
+						$this.attr( 'name', _name + '['+index+']' );
+					}
+				}
 
-					return this.toString();
-				};
-			}
-		};
+				if ( _id && '' !== _id ) {
+					if ( _id.match( _idmacth ) ) {
+						$this.attr( 'id', _id.replace( _idmacth, replace ) );
+					}
+					else {
+						$this.attr( 'id', _id + '-' + index );
+					}
+				}
 
-		// Copy the field.
-		var copy = function($el) {
-			var $clone = $el.clone(true, true);
-			$clone.removeClass('clone');
+			} );
 
-			addListener($clone);
-			$el.find('input, select, textarea').val('');
-			$el.before($clone);
-			callback( options.onCopy );
-		};
+			$el.find( 'label' ).each( function() {
+				var $this = $(this),
+				_for      = $this.attr( 'for' );
+				if ( _for && '' !== _for ) {
+					if ( _for.match( _idmacth ) ) {
+						$this.attr( 'for', _for.replace( _idmacth, replace ) );
+					}
+					else {
+						$this.attr( 'for', _for + '-' + index );
+					}
+				}
+			} );
+		}
 
-		// Remove the field.
-		var remove = function($el) {
-			$el.remove();
-			callback( options.onRemove );
-		};
 
-		// Add listener for when add/remove buttons are clicked.
-		var addListener = function($el) {
-			$el.on('click', '.pwpfd-clone', function(e){ copy($el); e.preventDefault(); } );
-			$el.on('click', '.pwpfd-remove', function(e){ remove($el); e.preventDefault(); });
-		};
-
-		var callback = function( func ) {
-			if ( typeof func == 'function' ) {
-				func.call($el);
-			}
-		};
+		function reqFieldsEmpty() {
+			var a = false;
+			requiredFields.each( function() {
+				if ( ! $(this).val() || '' == $(this).val() ) {
+					a = true;
+					return false;
+				}
+			} );
+			return a;
+		}
 
 		_construct();
 
@@ -95,91 +177,16 @@
 	};
 
 
-	/**
-	 * Get Input name's array ID.
-	 * @public
-	 *
-	 * @example $.fn.premiseFieldDuplicate.getInputNameArrayId( input.name );
-	 *
-	 * @param {string} name Input name.
-	 *
-	 * @return {string} Input ID.
-	 */
-	$.fn.premiseFieldDuplicate.getInputNameArrayId = function( name ) {
-
-		if ( name.substr( -2 ) === '[]' ) {
-
-			return '';
-		}
-
-		if ( name.substr( -1 ) === ']' ) {
-
-			name = name.substr( 0, name.length - 1 );
-		}
-
-		var strId = parseInt( name.substr( -1, 1 ), 10 );
-
-		if ( ! strId ) {
-
-			return '';
-		}
-
-		// We have an ID, get it!
-		for ( var i = -2; ; i-- ) {
-
-			var nextChar = parseInt( name.substr( i, 1 ), 10 );
-
-			if ( nextChar ) {
-
-				strId = nextChar.toString() + strId;
-			} else {
-
-				break;
-			}
-		}
-
-		return strId;
-	};
-
-
-	/**
-	 * Increment Input name & id attributes if ID found.
-	 * @public
-	 *
-	 * @example $.fn.premiseFieldDuplicate.incrementInputNameAndId( this );
-	 *
-	 * @param {string} input Input.
-	 */
-	$.fn.premiseFieldDuplicate.incrementInputNameAndId = function( input ) {
-
-		console.log(input.name, input.id);
-
-		var strId = $.fn.premiseFieldDuplicate.getInputNameArrayId( input.name );
-
-		if ( ! strId ) {
-
-			return;
-		}
-
-		var newStrId = parseInt( strId, 10 ) + 1;
-
-		// Replace ID with new one.
-		input.name = input.name.replaceLast( strId, newStrId );
-
-		input.id = input.id.replaceLast( strId, newStrId );
-	};
-
-
 	// Defaults: onCopy & onRemove callback functions.
 	$.fn.premiseFieldDuplicate.defaults = {
-		onCopy : function(){
-			// Try to increment the ID of the input (name & id attributes).
-			this.find('input, select, textarea').each(function() {
+		// options
+		displayAddButton: true, // displays and bind the add button
+		autoDuplicate:    true, // if true, when all required fields are filled out it will automatically duplicate
+		startCount:       1,    // begin the count at a different number than 0
 
-				$.fn.premiseFieldDuplicate.incrementInputNameAndId( this );
-			});
-		},
-		onRemove : function(){}
+		// callbacks
+		onCopy :   function() { return true }, // currently does not do anything
+		onRemove : function() { return true }, // currently does not do anything
 	};
 
 }(jQuery));

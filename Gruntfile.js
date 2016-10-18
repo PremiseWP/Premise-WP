@@ -72,6 +72,7 @@ module.exports = function(grunt) {
 						'css/source/premise-field.css',
 						'css/source/premise-admin.css',
 						'css/source/premise-tabs.css',
+						'css/source/premise-field-duplicate.css',
 						'css/source/premise-responsive.css'
 					]
 				}
