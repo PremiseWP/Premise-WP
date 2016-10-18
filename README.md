@@ -422,6 +422,51 @@ Hook                               | Type         | Description                 
 
 ## Changelog
 
+#### 1.7.0
+<<<<<<< HEAD
+* New `premiseTabs` jQuery plugin to replace old one. This one can generate accordion tabs as well normal ones.
+* Chnages to `Premise_Tabs` model, to match the classes and structure of the new jQuery plugin.
+* Added styles for layout `wp-theme-options` to display tabs for theme options.
+
+=======
+* New `premiseTabs` jQuery plugin allows you to build tabs in accordion or tabs layout. this jquery plugin handles the tabs from Premise_Tabs class. Also added layout template for wp-theme-options layout.
+* Chnages to `Premise_Tabs` model, to match the classes and structure of the new jQuery plugin.
+* Added styles for layout `wp-theme-options` to display tabs for theme options.
+
+------------------------------------------
+
+>>>>>>> new-tabs-js-plugin
+#### 1.6.2
+* Set default class `premise-aspect-ratio` to be the same as `premise-aspect-ratio-16-9`.
+
+#### 1.6.1
+* FontAwesome icons version update.
+
+#### 1.6.0
+* New jQuery plugin `premiseGoogleMap` allows you to easily insert a google map on any page.
+
+#### 1.5.1
+* Added missing styles for classes `span5`, `span6`, `span7`, `span11` and `span12` on mobile.
+
+#### 1.5.0
+* Integrated `Premise_Tabs` into Premise WP. Plugin is now deprecated. Having one class in one separate plugin was not very efficient.
+
+------------------------------------------
+
+#### 1.4.11
+* new jQuery plugin `premiseScroll` - create animations on scroll easily.
+
+#### 1.4.10
+* new jQuery plugin `premiseDynamicColumns` available to build dynamic grids based on number of columns. It is meant to optimize the number of rows while attempting to produc even columns per row.
+* Added Readme file for CSS Framework. Also added new CSS classes `premise-aspect-ratio-1-1`, `premise-aspect-ratio-4-3`, `premise-aspect-ratio-16-9` to build elements that are proportionally responsive based on their aspect ratio of 1:1, 4:3, or 16:9 respectively.
+
+#### 1.4.9
+* new CSS class `premise-aspect-ratio` to create elements with aspect ratio of 1:1 4:3 or 16:9
+
+#### 1.4.8
+* Add Wistia support to `premise_output_video()`
+* Updated CSS - responsive Premise Video (embed, ratio of 16:9)
+
 #### 1.4.7
 * Updated CSS - replaced old responsive styles on fluid grids. Added premise resets for editor. New premise scroller to ceate horiantal scrollers on the fly
 

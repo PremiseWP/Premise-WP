@@ -21,9 +21,6 @@
  */
 var PremiseField = {
 
-
-
-
 	/**
 	 * Initiate the PremiseField object
 	 *
@@ -33,8 +30,6 @@ var PremiseField = {
 	 * @return {void}
 	 */
 	init: function() {
-
-		this.bindEvents();
 
 		/**
 		 * premiseFieldAfterInit
@@ -46,29 +41,6 @@ var PremiseField = {
 		 * @param {object} this passes the object as parameter
 		 */
 		jQuery(document).trigger('premiseFieldAfterInit', this);
-	},
-
-
-
-
-	/**
-	 * Bind Events needed for Fields to work properly
-	 *
-	 * @return {void} Binds events
-	 */
-	bindEvents: function() {
-
-		// bind media preview if using media
-		jQuery('.premise-wp-media-field').premiseFieldWpMedia();
-
-		// bind the fa icon fields
-		jQuery('.premise-field-fa_icon-input').premiseFieldFaIcon();
-
-		// bind the youtube videos
-		jQuery('.premise-youtube-video').premiseLoadYouTube();
-
-		// Bind success message
-		jQuery(document).on('premiseFieldAfterInit', function(){console.log('PremiseField Object Initited successfully.');});
 	},
 
 

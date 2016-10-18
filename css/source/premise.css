@@ -43,8 +43,12 @@ img.alignright {
 
 
 /**
- * Global Classes
+ * Markup Classes
+ *
+ * Classes meant to help you build quicker markup
  */
+
+/* Position */
 .premise-absolute {
 	position:absolute;
 }
@@ -57,6 +61,7 @@ img.alignright {
 	position:fixed;
 }
 
+/* display */
 .premise-block {
 	display:block;
 }
@@ -70,15 +75,17 @@ img.alignright {
 }
 
 .premise-hidden {
-	display:none;
+	visibility: hidden;
 }
 
+/* responsive images */
 .premise-responsive,
 img.premise-responsive {
 	max-width:100%;
 	height:auto;
 }
 
+/* Floats */
 .premise-float-right {
 	float:right;
 }
@@ -87,6 +94,21 @@ img.premise-responsive {
 	float:left;
 }
 
+/* clear floats quickly */
+.premise-clear {
+	display:block;
+	clear:both;
+	width:100%;
+}
+
+/* fix 0 height on containers that have float child elements */
+.premise-clear-float:after {
+	content:"";
+	display:block;
+	clear: both;
+}
+
+/* text styles */
 .premise-align-center {
 	text-align:center;
 }
@@ -111,22 +133,9 @@ img.premise-responsive {
 	text-decoration: underline;
 }
 
+/* helpful for links that are already underlined */
 .premise-not-underline {
 	text-decoration: none;
-}
-
-/* This one is just helpful! */
-.premise-clear-float:after {
-	content:"";
-	display:block;
-	clear: both;
-}
-
-/* clear floats quickly */
-.premise-clear {
-	display:block;
-	clear:both;
-	width:100%;
 }
 
 
@@ -147,12 +156,17 @@ img.premise-responsive {
  * - Inline Grid Wrapper - Uses inline-block for its inner elements
  */
 /* the fliud grid */
-.premise-row > .span2,
-.premise-row > .span3,
-.premise-row > .span4,
-.premise-row > .span8,
-.premise-row > .span9,
-.premise-row > .span10 {
+.span2,
+.span3,
+.span4,
+.span5,
+.span6,
+.span7,
+.span8,
+.span9,
+.span10,
+.span11,
+.span12 {
 	width:98%;
 }
 /* The column grid */
@@ -210,6 +224,49 @@ ul.premise-inline > li {
 	display: inline-block;
 	float: none;
 	white-space: normal;
+}
+
+/**
+ * Premise Aspect Ratio Class
+ *
+ * create an element that adjust absed on its aspect ratio compared to its parent
+ */
+[class^="premise-aspect-ratio"],
+[class*=" premise-aspect-ratio"] {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	box-sizing: border-box;
+}
+
+
+/* ratio 16:9 - Default. premise-aspect-ratio, premise-aspect-ratio-16-9 */
+.premise-aspect-ratio,
+.premise-aspect-ratio-16-9 {
+	padding-top: 56.25%;
+}
+
+/* ratio 4:3 - premise-aspect-ratio-4-3*/
+.premise-aspect-ratio-4-3 {
+	padding-top: 75%;
+}
+
+/* ratio 1:1 - premise-aspect-ratio-1-1*/
+.premise-aspect-ratio-1-1 {
+	padding-top: 100%;
+}
+
+/* the aspect ration inner element must be div or have this class: premise-aspect-ratio-el */
+[class^="premise-aspect-ratio"] > div,
+[class*=" premise-aspect-ratio"] > div,
+[class^="premise-aspect-ratio"] .premise-aspect-ratio-el,
+[class*=" premise-aspect-ratio"] .premise-aspect-ratio-el {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	box-sizing: border-box;
 }
 
 /**

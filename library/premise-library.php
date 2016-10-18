@@ -39,7 +39,6 @@ defined( 'ABSPATH' ) or die();
  * <pre><code>premise_get_option( 'option[array1][array2]', array(
  * 	'context' => 'post',
  * 	'id'      => '78',
- * 	'single'  => false
  * ) );
  * </code></pre>
  *
@@ -65,12 +64,20 @@ function premise_get_value( $name = '', $context = '' ) {
 	 */
 	$_name = premise_name_att_to_array( $name );
 
-	/**
-	 * Prepare the context
-	 */
-	$context_type = is_array( $context ) ? $context['context'] : $context;
-	$id           = is_array( $context ) ? $context['id']      : '';
-	// $single       = is_array( $context ) ? $context['single']  : '';
+	// prepare the context
+	$id = '';
+	if ( is_string( $context ) ) {
+		$context_type = esc_attr( $context );
+	}
+	elseif ( is_array( $context ) ) {
+		$context_type = ( isset( $context['context'] ) && ! empty( $context['context'] ) )
+			? esc_attr( $context['context'] )
+				: '';
+
+		$id = ( isset( $context['id'] ) && ! empty( $context['id'] ) )
+			? esc_attr( $context['id'] )
+				: '';
+	}
 
 	/**
 	 * Get the value based on the context_type if $context_type is not empty.
@@ -82,7 +89,7 @@ function premise_get_value( $name = '', $context = '' ) {
 
 	} else {
 
-		$value = 'post' == $context_type ? premise_get_post_meta( $id, $_name[0] ) : premise_get_user_meta( $id, $_name[0] );
+		$value = ( 'post' == $context_type ) ? premise_get_post_meta( $id, $_name[0] ) : premise_get_user_meta( $id, $_name[0] );
 	}
 
 	/**
@@ -96,22 +103,11 @@ function premise_get_value( $name = '', $context = '' ) {
 
 				$value = $value[ $v ];
 			} else {
-
 				// Like get_option(), return FALSE if no value.
 				$value = false;
 			}
 		}
 	}
-
-	/**
-	 * If value is still in array but with only one value
-	 * get that value and return it.
-	 *
-	 * FJ fix error index 0 not set
-	 * Return array anyway
-	 */
-	/* if ( is_array( $value ) && ( 1 == count( $value ) ) )
-		$value = $value[0];*/
 
 	// Like get_option(), return FALSE if no value.
 	return ! empty( $value ) || '0' == $value ? $value : false;
