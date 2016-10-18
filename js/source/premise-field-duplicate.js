@@ -9,19 +9,18 @@
 	 */
 	$.fn.premiseFieldDuplicate = function( option ) {
 
-		// Parse the default options.
-		var options = $.extend( {}, $.fn.premiseFieldDuplicate.defaults, option );
-
 		if (this.length === 0) {
 			return this;
 		}
 
+		// Parse the default options.
+		var options = $.extend( {}, $.fn.premiseFieldDuplicate.defaults, option );
+
 		// Support multiple elements.
-		else if (this.length > 1) {
+		if (this.length > 1) {
 			this.each(function() {
 				$(this).premiseFieldDuplicate( options );
 			});
-			return this;
 		}
 
 		// Reference variables.
@@ -30,14 +29,14 @@
 		// Make sure we have everything we need to work with.
 		var _construct = function() {
 
-			// First, add remove (.clone-remove) & add (.clone-add) buttons if none found.
-			if ( ! $el.children('.clone-add').length ) {
+			// First, add remove (.pwpfd-remove) & add (.pwpfd-clone) buttons if none found.
+			if ( ! $el.children('.pwpfd-clone').length ) {
 
-				$el.append( '<button class="clone-add">Clone me</button>' );
+				$el.append( '<button class="pwpfd-clone">Clone me</button>' );
 			}
-			if ( ! $el.children('.clone-remove').length ) {
+			if ( ! $el.children('.pwpfd-remove').length ) {
 
-				$el.append( '<button class="clone-remove">Remove me</button>' );
+				$el.append( '<button class="pwpfd-remove">Remove me</button>' );
 			}
 
 			addListener($el);
@@ -80,8 +79,8 @@
 
 		// Add listener for when add/remove buttons are clicked.
 		var addListener = function($el) {
-			$el.on('click', '.clone-add', function(e){ copy($el); e.preventDefault(); } );
-			$el.on('click', '.clone-remove', function(e){ remove($el); e.preventDefault(); });
+			$el.on('click', '.pwpfd-clone', function(e){ copy($el); e.preventDefault(); } );
+			$el.on('click', '.pwpfd-remove', function(e){ remove($el); e.preventDefault(); });
 		};
 
 		var callback = function( func ) {
