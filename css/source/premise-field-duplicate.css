@@ -1,0 +1,26 @@
+.pwpfd-wrapper {}
+
+.pwpfd-wrapper .pwpfd-duplicator,
+.pwpfd-wrapper .pwpfd-duplicate-this {
+	box-shadow: 0 0 1px #444;
+	padding: 10px;
+	margin-bottom: 30px;
+}
+
+.pwpfd-wrapper .pwpfd-duplicator > .pwpfd-duplicate-this {
+	box-shadow: none;
+	padding: 0;
+	margin-bottom: 0;
+}
+
+.pwpfd-wrapper .pwpfd-duplicator:after,
+.pwpfd-wrapper .pwpfd-duplicate-this:after {
+	content: '';
+	display: table;
+	clear: both;
+}
+
+.pwpfd-wrapper .pwpfd-button {
+	display: inline-block;
+	float: right;
+}
