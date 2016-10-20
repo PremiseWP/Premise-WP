@@ -86,7 +86,7 @@
 			$el.addClass( 'pwpfd-duplicator' );
 			$el.children().wrapAll( '<div class="pwpfd-duplicate-this"></div>' );
 			if ( ! $el.parents( '.pwpfd-wrapper' ).length ) $el.wrap( '<div class="pwpfd-wrapper"></div>' );
-			if ( opts.displayAddButton && ! $el.find( '.pwpfd-clone' ).length ) $el.append( cloneBtn );
+			if ( opts.displayAddButton && ! $el.find( '.pwpfd-clone' ).length ) $el.find( '.pwpfd-duplicate-this' ).append( cloneBtn );
 		}
 
 		// get all fields and required fields as well
