@@ -422,20 +422,14 @@ Hook                               | Type         | Description                 
 
 ## Changelog
 
+#### 1.8.0
+* New `premiseFieldDuplicate` jQuery plugin. Duplicate a field section.
+
 #### 1.7.0
-<<<<<<< HEAD
 * New `premiseTabs` jQuery plugin to replace old one. This one can generate accordion tabs as well normal ones.
 * Chnages to `Premise_Tabs` model, to match the classes and structure of the new jQuery plugin.
 * Added styles for layout `wp-theme-options` to display tabs for theme options.
 
-=======
-* New `premiseTabs` jQuery plugin allows you to build tabs in accordion or tabs layout. this jquery plugin handles the tabs from Premise_Tabs class. Also added layout template for wp-theme-options layout.
-* Chnages to `Premise_Tabs` model, to match the classes and structure of the new jQuery plugin.
-* Added styles for layout `wp-theme-options` to display tabs for theme options.
-
-------------------------------------------
-
->>>>>>> new-tabs-js-plugin
 #### 1.6.2
 * Set default class `premise-aspect-ratio` to be the same as `premise-aspect-ratio-16-9`.
 
