@@ -258,7 +258,8 @@ class Premise_Tabs {
 		$_tabs .= '</ul></div>'; // End Tabs
 
 		$_html = '<div class="' . $this->wrapper_class() . ' pwptabs-content-inside-tab">';
-			$_html .= ( 'bottom' == $this->options['layout'] ) ? $_cont . $_tabs : $_tabs . $_cont;
+			// FJ: fix PHP notice $_cont not defined.
+			$_html .= $_tabs; //( 'bottom' == $this->options['layout'] ) ? $_cont . $_tabs : $_tabs . $_cont;
 		$_html .= '</div>';
 
 		return $_html;
