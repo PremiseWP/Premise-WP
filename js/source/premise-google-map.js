@@ -127,7 +127,7 @@
 		 * @param  {object} infowindow An infowindow object. Optional.
 		 * @return {object}            Pin object.
 		 */
-		placeMarker = function( marker ) {
+		placeMarker = function( marker, infowindow ) {
 			marker = ( 'object' === typeof marker ) ? marker : defaultMarker();
 
 			if ( ! marker.map )      marker['map']      = map;
@@ -139,6 +139,8 @@
 
 			// save a reference of all markers created
 			markers.push( _pin );
+
+			if ( infowindow ) attachInfowindow( infowindow, _pin );
 
 			return _pin;
 		},
@@ -199,6 +201,7 @@
 		 */
 		$.fn.premiseGoogleMap.loadMap = function() {
 			console.log( 'Google API Has Loaded.' );
+			el.trigger( 'apiHasLoaded' );
 		};
 
 		/**
