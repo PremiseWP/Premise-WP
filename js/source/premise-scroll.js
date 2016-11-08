@@ -25,7 +25,7 @@
 		opts.offsetIn  = opts.offsetIn || opts.offset;
 		opts.offsetOut = opts.offsetOut || opts.offset;
 
-		if (this.length === 0) {
+		if ( this.length === 0 ) {
 			return this;
 		}
 
@@ -34,11 +34,12 @@
 			this.each(function() {
 				$(this).premiseScroll( options );
 			});
-			return this;
 		}
 
 		// get reference of element
 		var el = this,
+
+		elm = $(el),
 
 		// records amount document has scrolled
 		scrolled = 0,
@@ -98,16 +99,15 @@
 		 * @return {boolean} false
 		 */
 		var doScroll = function() {
-			var elm = $(el);
-
-			// reset the element's positoin in case it moved
-			elemPos = Math.round( elm.offset().top );
 
 			if ( ! elm ||
 				scrollStopped ||
-				'function' !== typeof opts.onScroll ) {
-				return false;
+					'function' !== typeof opts.onScroll ) {
+						return false;
 			}
+
+			// reset the element's positoin in case it moved
+			elemPos = Math.round( elm.offset().top );
 
 			var newScroll     = getNewScroll();
 			totalScrolled     = getTotalScrolled();
@@ -215,9 +215,9 @@
 		/*
 			PUBLIC METHODS
 		 */
-
+console.log( elm )
 		// prevents the animation from happening again
-		el.stopScroll = function() {
+		elm.stopScroll = function() {
 			scrollStopped = true;
 		};
 
