@@ -58,21 +58,9 @@
 
 				el.css( 'min-height', opts.minHeight );
 
-				if ( $.fn.premiseGoogleMap.APILoaded ) apiLoaded();
+				//if ( $.fn.premiseGoogleMap.APILoaded ) apiLoaded();
 			}
 
-		},
-
-		/**
-		 * When the API has loaded, create our map(s)
-		 *
-		 * @return {void} Does not return anything
-		 */
-		apiLoaded = function() {
-
-				$(window).load( function() {
-					el.trigger( 'apiHasLoaded' );
-				} );
 		},
 
 		/**
@@ -201,7 +189,7 @@
 		 */
 		$.fn.premiseGoogleMap.loadMap = function() {
 			console.log( 'Google API Has Loaded.' );
-			//el.trigger( 'apiHasLoaded' );
+			el.trigger( 'apiHasLoaded' );
 		};
 
 		/**
