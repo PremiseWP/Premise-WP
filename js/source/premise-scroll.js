@@ -29,13 +29,6 @@
 			return this;
 		}
 
-		// support multiple elements
-		if (this.length > 1) {
-			this.each(function() {
-				$(this).premiseScroll( options );
-			});
-		}
-
 		// get reference of element
 		var el = this,
 
@@ -80,6 +73,8 @@
 
 			// Bind Scroll animation on window load
 			$(window).load(bindScroll);
+
+			return this;
 		};
 
 		/**
@@ -101,7 +96,7 @@
 		var doScroll = function() {
 
 			if ( ! elm ||
-				scrollStopped ||
+				elm.isPaused() ||
 					'function' !== typeof opts.onScroll ) {
 						return false;
 			}
@@ -135,6 +130,10 @@
 
 			scrolled = newScroll;
 
+			// record how much this element has scrolled
+			elm.totalScrolled = totalScrolled;
+
+
 			return false;
 		};
 
@@ -165,7 +164,7 @@
 		 * @return {Integer} number of pixels scrolled
 		 */
 		var getTotalScrolled = function() {
-			return Math.round( getNewScroll() + $(window).height() - $(el).offset().top - opts.offsetIn );
+			return Math.round( getNewScroll() + $(window).height() - elm.offset().top - opts.offsetIn );
 		};
 
 		/**
@@ -215,9 +214,9 @@
 		/*
 			PUBLIC METHODS
 		 */
-console.log( elm )
+
 		// prevents the animation from happening again
-		elm.stopScroll = function() {
+		el.stopScroll = function() {
 			scrollStopped = true;
 		};
 
@@ -256,9 +255,29 @@ console.log( elm )
 			return browserMobile();
 		};
 
-		init();
+		//
 
-		return this;
+		elm.pauseScroll = function( bool ) {
+			bool = bool || true;
+			elm.scrollStopped = bool;
+		};
+
+		elm.isPaused = function() {
+			if ( 'undefined' == typeof elm.scrollStopped ) {
+				elm.scrollStopped = false;
+			}
+			return elm.scrollStopped;
+		};
+
+		// support multiple elements
+		if (this.length > 1) {
+			this.each(function( i, v ) {
+				$(v).premiseScroll( options );
+			});
+		}
+		else {
+			init();
+		}
 	};
 
 	/**
