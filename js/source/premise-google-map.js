@@ -64,18 +64,6 @@
 		},
 
 		/**
-		 * When the API has loaded, create our map(s)
-		 *
-		 * @return {void} Does not return anything
-		 */
-		apiLoaded = function() {
-
-				$(window).load( function() {
-					el.trigger( 'apiHasLoaded' );
-				} );
-		},
-
-		/**
 		 * Creates the map given a center
 		 *
 		 * @return {void} Does not return anything.
