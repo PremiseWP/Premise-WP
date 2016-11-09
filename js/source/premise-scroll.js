@@ -53,7 +53,9 @@
 		wHeight = $(window).height(),
 
 		// this will hld the lement's position in pixels relative to the document
-		elemPos = 0;
+		elemPos = 0,
+
+		_s = null;
 
 		/*
 			PRIVATE METHODS
@@ -67,6 +69,37 @@
 		 * @return {void}
 		 */
 		var init = function() {
+
+			_s = new Scroller();
+
+			// if there is more than one element
+			if ( 1 < el.length ) {
+				for (var i = el.length - 1; i >= 0; i--) {
+					_s.newEl( el[i] );
+				}
+			}
+			// we only have one element
+			else {
+				_s.newEl( el[0] );
+			}
+
+			$(window).load(function(){
+				$(this).scroll( function(){
+					_s.scroll();
+				} );
+			});
+
+
+			return false;
+			// support multiple elements
+			if (this.length > 1) {
+				this.each(function( i, v ) {
+					$(v).premiseScroll( options );
+				});
+			}
+			else {
+
+			}
 
 			// set totalScrolled in case the user has already scrolled and the page is refreshed
 			totalScrolled = getTotalScrolled();
@@ -211,6 +244,7 @@
 			return check;
 		};
 
+
 		/*
 			PUBLIC METHODS
 		 */
@@ -269,15 +303,8 @@
 			return elm.scrollStopped;
 		};
 
-		// support multiple elements
-		if (this.length > 1) {
-			this.each(function( i, v ) {
-				$(v).premiseScroll( options );
-			});
-		}
-		else {
-			init();
-		}
+		init();
+
 	};
 
 	/**
@@ -300,6 +327,27 @@
 		 * @return {boolean}      true
 		 */
 		onScroll: function( node ) { return true; },
+	};
+
+
+	var Scroller = function() {
+
+		this.els = this.els || [];
+
+		return this;
+	};
+
+	Scroller.prototype.newEl = function( el ) {
+		e = el || {};
+		this.els.push( el );
+	};
+
+	Scroller.prototype.scroll = function() {
+		var els = this.els;
+
+		for (var i = els.length - 1; i >= 0; i--) {
+			console.log( els[i].offsetTop );
+		}
 	};
 
 }(jQuery));
