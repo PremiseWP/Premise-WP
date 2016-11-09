@@ -123,14 +123,19 @@
 
 			if ( marker.animation && '' !== marker.animation )  marker.animation = google.maps.Animation[cleanUpAnimation( marker.animation )];
 
-			var _pin = new google.maps.Marker( marker );
+			var _pin = new google.maps.Marker( marker ),
+			_window;
 
 			// save a reference of all markers created
 			markers.push( _pin );
 
-			if ( infowindow ) attachInfowindow( infowindow, _pin );
-
-			return _pin;
+			if ( infowindow ) {
+				_window = attachInfowindow( infowindow, _pin );
+				return { marker: _pin, infowindow: _window };
+			}
+			else {
+				return _pin;
+			}
 		},
 
 		/**
