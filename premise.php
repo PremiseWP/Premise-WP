@@ -2,8 +2,8 @@
 /**
  * Plugin Name: Premise WP
  * Description: A Wordpress framework for developers who build themes and plugins. It allows you to quickly build options in the backend by doing the heavy lifting and repetitive tasks for you. Premise WP aslo comes with a CSS framework readily available on both the backend and frontend that allows you to quickly build responsive markup. To begin using Premise WP simply download and install the plugin, once you activate it you are all set! You can begin using it in your theme or plugin's code.
- * Plugin URI:	https://github.com/PremiseWP/Premise-WP
- * Version:     1.8.0
+ * Plugin URI:  https://github.com/PremiseWP/Premise-WP
+ * Version:     2.0.0
  * Author:      Premise WP
  * Author URI:  http://premisewp.com
  * License:     GPL

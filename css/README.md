@@ -1,3 +1,3 @@
 # Premise CSS Framework
 
-Premise WP FRmework helps you build markup quicky. Fond out more [here](https://premisewp.com/premise-wp-css-framework/).
+Premise WP Framework helps you build markup quicky. Find out more [here](https://premisewp.com/premise-wp-css-framework/).

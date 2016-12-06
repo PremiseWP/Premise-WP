@@ -160,111 +160,6 @@ the fields won't work poroperly.
 
 ---
 
-### Create an option page in one function
-
-Now you can create a full options page, add it to the admin menu, and insert fields by calling just one function. Here is how it works..
-
-Premise WP has a class `Premise_Options`, and when instantiated it will create a new admin page for you. All you should do is give it a title
-and some fields. Technically you dont need to pass anything to this class, but if you dont it will just create a blank page, we did  this on
-purpose. Once instantiated this class takes care of registering your settings in the database, and inserting the necessary hidden fields for
-the page to work (including a random wp_nonce for security).
-
-```php
-/**
- * This is simply a helper function that we use to make sure our code
- * is executed on the 'init' wp hook. Basically all we have to do is
- * instantiate a class and pass 2 parameters: a page title, and an array of fields.
- *
- * Couldn't be easier!
- */
-function premise_call_options() {
-	// prepare the fields
-	// by default Premise WP will save your options using the option name 'premise_option'
-	$fields = array(
-		array(
-			'type' => 'text',
-			'name' => 'premise_option[text]'
-		),
-		array(
-			'type' => 'textarea',
-			'name' => 'premise_option[textarea]'
-		),
-		array(
-			'type' => 'wp_media',
-			'name' => 'premise_option[wp_media]'
-		),
-		array(
-			'type' => 'fa_icon',
-			'name' => 'premise_option[fa_icon]'
-		),
-		array(
-			'type' => 'date',
-			'name' => 'premise_option[date]'
-		),
-		array(
-			'type' => 'password',
-			'name' => 'premise_option[password]'
-		),
-		array(
-			'type' => 'submit',
-		)
-	);
-	// Instantiate the class Premise_Options
-	// pass a title plus the fields array and you're done.
-	$Obj = new Premise_Options( 'Your Page Title', $fields );
-}
-add_action('init', 'premise_call_options');
-
-```
-
-Want more control? Of course youd do, the example above shows the default parameters you should pass to build the object but there is more you can do.
-For exampe if you want to have more control over the title, like being able to display a shorter name for the menu title, then you can pass an array
-instead of a string as your first parameter. Here is an example..
-
-```php
-
-/**
- * Your title can hold all the parameters that can be passed to WP's default function add_menu_page()
- *
- * @link https://codex.wordpress.org/Function_Reference/add_menu_page for more information on add_menu_page()
- */
-$title = array(
-	'title' => 'Premise Options Page',
-	'menu_title' => 'Premise Options',
-	'capability' => 'manage_options',
-	'menu_slug' => 'premise_options_page',
-	'icon' => '',
-	'position' => '59.2',
-);
-
-$Obj = new Premise_Options( $title, $fields );
-
-```
-
-You can also change the option name used to save your options in the database. You can pass an array of option names if your options require multiple ones,
-or you can pass a string with just one option name and save your options in an array format. The latter is recommended so we dont add unnecessary rows to the
-database. Here is an example..
-
-```php
-
-/**
- * Add one option name
- */
-$Obj = new Premise_Options( $title, $fields, 'my_option_name' );
-
-/**
- * Add multiple option names
- */
-$option_names = array(
-	'option_one',
-	'option_two',
-	'option_three',
-	'you_get_the_point',
-);
-$Obj = new Premise_Options( $title, $fields, $option_names );
-
-```
-
 ### Building quick markup
 
 Premise WP comes with a small yet powerful CSS framework that helps you build markup quickly. Here are some of the most common uses of the framework.
@@ -412,7 +307,6 @@ Hook                               | Type         | Description                 
 `premise_field_icon_remove_btn`    | Filter       | do filter for button to hide fa icon             |
 `premise_field_section_html`       | Filter       | filter the field section html                    |
 `premise_field_wrapper_class`      | Filter       | filter the classes passed to the wrapper element |
-`premise_options_before_fields`    | Filter       | Insert html before fields in admin page          |
 `premise_field_fa_icon_html`       | Trigger      | do filter for fa_icon field                      |
 `premiseFieldAfterInit`            | Trigger      | do hook after PremiseField object inits          |
 `premiseFieldAfterFaIconsOpen`     | Trigger      | do hook after icons box opens                    |
@@ -421,6 +315,9 @@ Hook                               | Type         | Description                 
 ===
 
 ## Changelog
+
+#### 2.0.0
+* Remove all except PremiseField and CSS framework related files.
 
 #### 1.8.0
 * New `premiseFieldDuplicate` jQuery plugin. Duplicate a field section.
