@@ -97,6 +97,8 @@
 						zoom:   opts.zoom,
 					} );
 
+					el.map = map;
+
 					el.marker     = ( opts.marker ) ? placeMarker( opts.marker ) : opts.marker;
 
 					el.infowindow = attachInfowindow( opts.infowindow, el.marker );
