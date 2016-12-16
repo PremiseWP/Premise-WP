@@ -155,10 +155,13 @@
 				// Create the infowindow.
 				var _window = new google.maps.InfoWindow( infowindow );
 
-				// this opens the infowindow when the pin is clicked.
-				google.maps.event.addListener( marker, 'click', function() {
-				  	_window.open( map, marker );
-				});
+				// Bind infowindow if opts.bindInfowindow = true
+				if ( opts.bindInfowindow ) {
+					// this opens the infowindow when the pin is clicked.
+					google.maps.event.addListener( marker, 'click', function() {
+					  	_window.open( map, marker );
+					});
+				}
 
 				return _window;
 			}
@@ -273,6 +276,7 @@
 		key:        '',
 		zoom:       15,
 		minHeight:  300,
+		bindInfowindow: true,
 		onMapLoad:  function() { return true; }
 	};
 
