@@ -25,14 +25,20 @@
 		opts.offsetIn  = opts.offsetIn || opts.offset;
 		opts.offsetOut = opts.offsetOut || opts.offset;
 
-		if ( this.length === 0 ) {
+		if (this.length === 0) {
+			return this;
+		}
+
+		// support multiple elements
+		if (this.length > 1) {
+			this.each(function() {
+				$(this).premiseScroll( options );
+			});
 			return this;
 		}
 
 		// get reference of element
 		var el = this,
-
-		elm = $(el),
 
 		// records amount document has scrolled
 		scrolled = 0,
@@ -73,8 +79,6 @@
 
 			// Bind Scroll animation on window load
 			$(window).load(bindScroll);
-
-			return this;
 		};
 
 		/**
@@ -94,15 +98,16 @@
 		 * @return {boolean} false
 		 */
 		var doScroll = function() {
-
-			if ( ! elm ||
-				elm.isPaused() ||
-					'function' !== typeof opts.onScroll ) {
-						return false;
-			}
+			var elm = $(el);
 
 			// reset the element's positoin in case it moved
 			elemPos = Math.round( elm.offset().top );
+
+			if ( ! elm ||
+				scrollStopped ||
+				'function' !== typeof opts.onScroll ) {
+				return false;
+			}
 
 			var newScroll     = getNewScroll();
 			totalScrolled     = getTotalScrolled();
@@ -129,10 +134,6 @@
 			pixelsScrolled = newScroll - scrolled;
 
 			scrolled = newScroll;
-
-			// record how much this element has scrolled
-			elm.totalScrolled = totalScrolled;
-
 
 			return false;
 		};
@@ -164,7 +165,7 @@
 		 * @return {Integer} number of pixels scrolled
 		 */
 		var getTotalScrolled = function() {
-			return Math.round( getNewScroll() + $(window).height() - elm.offset().top - opts.offsetIn );
+			return Math.round( getNewScroll() + $(window).height() - $(el).offset().top - opts.offsetIn );
 		};
 
 		/**
@@ -255,29 +256,9 @@
 			return browserMobile();
 		};
 
-		//
+		init();
 
-		elm.pauseScroll = function( bool ) {
-			bool = bool || true;
-			elm.scrollStopped = bool;
-		};
-
-		elm.isPaused = function() {
-			if ( 'undefined' == typeof elm.scrollStopped ) {
-				elm.scrollStopped = false;
-			}
-			return elm.scrollStopped;
-		};
-
-		// support multiple elements
-		if (this.length > 1) {
-			this.each(function( i, v ) {
-				$(v).premiseScroll( options );
-			});
-		}
-		else {
-			init();
-		}
+		return this;
 	};
 
 	/**
