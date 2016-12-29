@@ -32,6 +32,8 @@
 			$.fn.premiseGoogleMap.APILoaded = true;
 		}
 
+		console.log( this);
+
 		// Reference our element and global variables.
 		var el = this,
 		map,
@@ -54,7 +56,7 @@
 				return false;
 			}
 			else {
-				el.on( 'apiHasLoaded', createMap );
+				$(document).on( 'apiHasLoaded', createMap );
 
 				el.css( 'min-height', opts.minHeight );
 
@@ -199,7 +201,7 @@
 		 */
 		$.fn.premiseGoogleMap.loadMap = function() {
 			console.log( 'Google API Has Loaded.' );
-			el.trigger( 'apiHasLoaded' );
+			$(document).trigger( 'apiHasLoaded' );
 		};
 
 		/**
@@ -240,6 +242,13 @@
 		el.getMarkers = function() {
 			return markers;
 		};
+
+		if ( 1 < this.length ) {
+			$(this).each( function() {
+				$(this).premiseGoogleMap( options );
+			});
+			return this;
+		}
 
 		// run our plugin
 		init();
