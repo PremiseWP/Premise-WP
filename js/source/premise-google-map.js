@@ -32,8 +32,6 @@
 			$.fn.premiseGoogleMap.APILoaded = true;
 		}
 
-		console.log( this);
-
 		// Reference our element and global variables.
 		var el = this,
 		map,
