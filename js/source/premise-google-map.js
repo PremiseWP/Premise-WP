@@ -97,10 +97,9 @@
 						zoom:   opts.zoom,
 					} );
 
-					el.map = map;
-
+					// buid element
+					el.map        = map;
 					el.marker     = ( opts.marker ) ? placeMarker( opts.marker ) : opts.marker;
-
 					el.infowindow = attachInfowindow( opts.infowindow, el.marker );
 
 					if ( 'function' === typeof opts.onMapLoad ) {
@@ -277,14 +276,14 @@
 	 * @type {Object}
 	 */
 	$.fn.premiseGoogleMap.defaults = {
-		center:     '',
-		marker:     true,
-		infowindow: {},
-		key:        '',
-		zoom:       15,
-		minHeight:  300,
-		bindInfowindow: true,
-		onMapLoad:  function() { return true; }
+		center         : '',
+		marker         : true,
+		infowindow     : {},
+		key            : '',
+		zoom           : 15,
+		minHeight      : 300,
+		bindInfowindow : true,
+		onMapLoad      : function() { return true; }
 	};
 
 })(jQuery);
