@@ -198,6 +198,13 @@ img.premise-responsive {
 	margin-right:1%;
 	box-sizing: border-box;
 }
+/* row grid - floating right */
+.premise-row.float-right > [class^="span"],
+.premise-row.float-right > [class*=" span"],
+.premise-row.float-right > [class^="col"],
+.premise-row.float-right > [class*=" col"] {
+	float:right;
+}
 /* inline grid */
 .premise-inline > [class^="span"],
 .premise-inline > [class*=" span"],
