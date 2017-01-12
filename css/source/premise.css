@@ -276,112 +276,113 @@ img.pwp-responsive {
 	display:block;
 	clear: both;
 }
-.pwp-row .col2,
-.premise-row .col2 {
-	width:48%;
-}
-.pwp-row .col3,
-.premise-row .col3 {
-	width:31.33%;
-}
-.pwp-row .col4,
-.premise-row .col4 {
-	width:23%;
-}
-.pwp-row .col5,
-.premise-row .col5 {
-	width:18%;
-}
-.pwp-row .col6,
-.premise-row .col6 {
-	width:14.6%;
-}
-/* Set the final sizes for our fluid grid - for Desktop */
-.pwp-row .span1,
-.premise-row .span1 {
-	width:6.3%;
-}
-.pwp-row .span2,
-.premise-row .span2 {
-	width:14.6%;
-}
-.pwp-row .span3,
-.premise-row .span3 {
-	width:23%;
-}
-.pwp-row .span4,
-.premise-row .span4 {
-	width:31.33%;
-}
-.pwp-row .span5,
-.premise-row .span5 {
-	width:39.6%;
-}
-.pwp-row .span6,
-.premise-row .span6 {
-	width:48%;
-}
-.pwp-row .span7,
-.premise-row .span7 {
-	width:56.3%;
-}
-.pwp-row .span8,
-.premise-row .span8 {
-	width:64.6%;
-}
-.pwp-row .span9,
-.premise-row .span9 {
-	width:73%;
-}
-.pwp-row .span10,
-.premise-row .span10 {
-	width:81.3%;
-}
-.pwp-row .span11,
-.premise-row .span11 {
-	width:89.6%;
-}
-.pwp-row .span12,
-.premise-row .span12 {
-	width:98%;
-}
 /* the fliud grid */
-.premise-row:not(.not-responsive) .span2,
-.pwp-row:not(.not-responsive) .span2,
-.premise-row:not(.not-responsive) .span3,
-.pwp-row:not(.not-responsive) .span3,
-.premise-row:not(.not-responsive) .span4,
-.pwp-row:not(.not-responsive) .span4,
-.premise-row:not(.not-responsive) .span5,
-.pwp-row:not(.not-responsive) .span5,
-.premise-row:not(.not-responsive) .span6,
-.pwp-row:not(.not-responsive) .span6,
-.premise-row:not(.not-responsive) .span7,
-.pwp-row:not(.not-responsive) .span7,
-.premise-row:not(.not-responsive) .span8,
-.pwp-row:not(.not-responsive) .span8,
-.premise-row:not(.not-responsive) .span9,
-.pwp-row:not(.not-responsive) .span9,
-.premise-row:not(.not-responsive) .span10,
-.pwp-row:not(.not-responsive) .span10,
-.premise-row:not(.not-responsive) .span11,
-.pwp-row:not(.not-responsive) .span11,
-.premise-row:not(.not-responsive) .span12,
-.pwp-row:not(.not-responsive) .span12 {
+.premise-row:not(.not-responsive,.flush-columns) .span2,
+.pwp-row:not(.not-responsive,.flush-columns) .span2,
+.premise-row:not(.not-responsive,.flush-columns) .span3,
+.pwp-row:not(.not-responsive,.flush-columns) .span3,
+.premise-row:not(.not-responsive,.flush-columns) .span4,
+.pwp-row:not(.not-responsive,.flush-columns) .span4,
+.premise-row:not(.not-responsive,.flush-columns) .span5,
+.pwp-row:not(.not-responsive,.flush-columns) .span5,
+.premise-row:not(.not-responsive,.flush-columns) .span6,
+.pwp-row:not(.not-responsive,.flush-columns) .span6,
+.premise-row:not(.not-responsive,.flush-columns) .span7,
+.pwp-row:not(.not-responsive,.flush-columns) .span7,
+.premise-row:not(.not-responsive,.flush-columns) .span8,
+.pwp-row:not(.not-responsive,.flush-columns) .span8,
+.premise-row:not(.not-responsive,.flush-columns) .span9,
+.pwp-row:not(.not-responsive,.flush-columns) .span9,
+.premise-row:not(.not-responsive,.flush-columns) .span10,
+.pwp-row:not(.not-responsive,.flush-columns) .span10,
+.premise-row:not(.not-responsive,.flush-columns) .span11,
+.pwp-row:not(.not-responsive,.flush-columns) .span11,
+.premise-row:not(.not-responsive,.flush-columns) .span12,
+.pwp-row:not(.not-responsive,.flush-columns) .span12 {
 	width:98%;
 }
 /* The column grid */
-.premise-row:not(.not-responsive) .col2,
-.pwp-row:not(.not-responsive) .col2,
-.premise-row:not(.not-responsive) .col3,
-.pwp-row:not(.not-responsive) .col3,
-.premise-row:not(.not-responsive) .col4,
-.pwp-row:not(.not-responsive) .col4,
-.premise-row:not(.not-responsive) .col5,
-.pwp-row:not(.not-responsive) .col5,
-.premise-row:not(.not-responsive) .col6,
-.pwp-row:not(.not-responsive) .col6 {
+.premise-row:not(.not-responsive,.flush-columns) .col2,
+.pwp-row:not(.not-responsive,.flush-columns) .col2,
+.premise-row:not(.not-responsive,.flush-columns) .col3,
+.pwp-row:not(.not-responsive,.flush-columns) .col3,
+.premise-row:not(.not-responsive,.flush-columns) .col4,
+.pwp-row:not(.not-responsive,.flush-columns) .col4,
+.premise-row:not(.not-responsive,.flush-columns) .col5,
+.pwp-row:not(.not-responsive,.flush-columns) .col5,
+.premise-row:not(.not-responsive,.flush-columns) .col6,
+.pwp-row:not(.not-responsive,.flush-columns) .col6 {
 	width: 98%; /* mobie first approach - load mobile styles first */
+}
+/* not-responsive css */
+.pwp-row.not-responsive:not( .flush-columns ) .col2,
+.premise-row.not-responsive:not( .flush-columns ) .col2 {
+	width:48%;
+}
+.pwp-row.not-responsive:not( .flush-columns ) .col3,
+.premise-row.not-responsive:not( .flush-columns ) .col3 {
+	width:31.33%;
+}
+.pwp-row.not-responsive:not( .flush-columns ) .col4,
+.premise-row.not-responsive:not( .flush-columns ) .col4 {
+	width:23%;
+}
+.pwp-row.not-responsive:not( .flush-columns ) .col5,
+.premise-row.not-responsive:not( .flush-columns ) .col5 {
+	width:18%;
+}
+.pwp-row.not-responsive:not( .flush-columns ) .col6,
+.premise-row.not-responsive:not( .flush-columns ) .col6 {
+	width:14.6%;
+}
+/* Set the final sizes for our fluid grid - for Desktop */
+.pwp-row.not-responsive:not( .flush-columns ) .span1,
+.premise-row.not-responsive:not( .flush-columns ) .span1 {
+	width:6.3%;
+}
+.pwp-row.not-responsive:not( .flush-columns ) .span2,
+.premise-row.not-responsive:not( .flush-columns ) .span2 {
+	width:14.6%;
+}
+.pwp-row.not-responsive:not( .flush-columns ) .span3,
+.premise-row.not-responsive:not( .flush-columns ) .span3 {
+	width:23%;
+}
+.pwp-row.not-responsive:not( .flush-columns ) .span4,
+.premise-row.not-responsive:not( .flush-columns ) .span4 {
+	width:31.33%;
+}
+.pwp-row.not-responsive:not( .flush-columns ) .span5,
+.premise-row.not-responsive:not( .flush-columns ) .span5 {
+	width:39.6%;
+}
+.pwp-row.not-responsive:not( .flush-columns ) .span6,
+.premise-row.not-responsive:not( .flush-columns ) .span6 {
+	width:48%;
+}
+.pwp-row.not-responsive:not( .flush-columns ) .span7,
+.premise-row.not-responsive:not( .flush-columns ) .span7 {
+	width:56.3%;
+}
+.pwp-row.not-responsive:not( .flush-columns ) .span8,
+.premise-row.not-responsive:not( .flush-columns ) .span8 {
+	width:64.6%;
+}
+.pwp-row.not-responsive:not( .flush-columns ) .span9,
+.premise-row.not-responsive:not( .flush-columns ) .span9 {
+	width:73%;
+}
+.pwp-row.not-responsive:not( .flush-columns ) .span10,
+.premise-row.not-responsive:not( .flush-columns ) .span10 {
+	width:81.3%;
+}
+.pwp-row.not-responsive:not( .flush-columns ) .span11,
+.premise-row.not-responsive:not( .flush-columns ) .span11 {
+	width:89.6%;
+}
+.pwp-row.not-responsive:not( .flush-columns ) .span12,
+.premise-row.not-responsive:not( .flush-columns ) .span12 {
+	width:98%;
 }
 /* row grid */
 .premise-row > [class^="span"],
@@ -393,10 +394,19 @@ img.pwp-responsive {
 .premise-row > [class*=" col"],
 .pwp-row > [class*=" col"] {
 	float:left;
-	margin-left:1%;
-	margin-right:1%;
 	box-sizing: border-box;
 	min-height: 1px;
+}
+.premise-row:not(.flush-columns) > [class^="span"],
+.pwp-row:not(.flush-columns) > [class^="span"],
+.premise-row:not(.flush-columns) > [class*=" span"],
+.pwp-row:not(.flush-columns) > [class*=" span"],
+.premise-row:not(.flush-columns) > [class^="col"],
+.pwp-row:not(.flush-columns) > [class^="col"],
+.premise-row:not(.flush-columns) > [class*=" col"],
+.pwp-row:not(.flush-columns) > [class*=" col"] {
+	margin-left:1%;
+	margin-right:1%;
 }
 /* row grid - floating right */
 .premise-row.float-right > [class^="span"],
