@@ -20,15 +20,14 @@ jQuery(function($){
 		}
 
 		function maybeBindElements() {
-			( dynamicRows.length ) ? dynamicRows.premiseDynamicColumns() : false;
+			// bind dynamic rows if used
+			( dynamicRows.length )   ? dynamicRows.premiseDynamicColumns() : false;
+			// bind premise same height elements
 			( sameHeightEls.length ) ? premiseSameHeight() : false;
-
 			// bind media preview if using media
 			( wpMedia.length ) ? wpMedia.premiseFieldWpMedia() : false;
-
 			// bind the fa icon fields
 			( faIcons.length ) ? faIcons.premiseFieldFaIcon() : false;
-
 			// bind the youtube videos
 			( ytVideo.length ) ? ytVideo.premiseLoadYouTube() : false;
 		}

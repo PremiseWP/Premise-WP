@@ -9,13 +9,13 @@
 
 /**
  * Premise Same Height
- * 
+ *
  * @param  {string} el the class of the elements to set same height
  * @return {mixed}     will set same min-height to elements. bool false if unsuccessful
  */
 function premiseSameHeight( el ) {
 	el = el || '.premise-same-height';
-	
+
 	var heightTallest = 0, setHeight;
 
 	var setUp = jQuery( el ).each(function(){
@@ -31,7 +31,7 @@ function premiseSameHeight( el ) {
 		}
 
 		var h = jQuery(this).outerHeight();
-		if( h > heightTallest ){
+		if( h > heightTallest ) {
 			heightTallest = h;
 		}
 	});
@@ -39,7 +39,7 @@ function premiseSameHeight( el ) {
 	var fixHeight = jQuery( el ).css( 'min-height', heightTallest );
 
 	jQuery.when( setUp ).done( fixHeight );
-	
+
 	return false;
 }
 
@@ -48,7 +48,7 @@ function premiseSameHeight( el ) {
  * Count visible elements within an array
  *
  * Useful little tool. quickly number of visible elements within an array.
- * 
+ *
  * @param  {array}   elements array of elements to check if are visible
  * @return {integer}          number of elements that are visible in the front end
  */
@@ -67,7 +67,7 @@ function premiseCountVisibleElements(elements) {
 
 /**
  * Returns the name of the browser being used
- * 
+ *
  * @return {string} browser name
  */
 function premiseBrowserName() {
