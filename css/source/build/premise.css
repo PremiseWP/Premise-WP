@@ -264,85 +264,85 @@ img.pwp-responsive {
  * - Inline Grid Wrapper - Uses inline-block for its inner elements
  */
 /* the row grid wrapper */
-.premise-row,
-.pwp-row {
+.pwp-row,
+.premise-row {
 	display:block;
 	margin-left:-1%;
 	margin-right:-1%;
 }
-.premise-row:after,
-.pwp-row:after {
+.pwp-row:after,
+.premise-row:after {
 	content:"";
 	display:block;
 	clear: both;
 }
-.premise-row .col2,
-.pwp-row .col2 {
+.pwp-row .col2,
+.premise-row .col2 {
 	width:48%;
 }
-.premise-row .col3,
-.pwp-row .col3 {
+.pwp-row .col3,
+.premise-row .col3 {
 	width:31.33%;
 }
-.premise-row .col4,
-.pwp-row .col4 {
+.pwp-row .col4,
+.premise-row .col4 {
 	width:23%;
 }
-.premise-row .col5,
-.pwp-row .col5 {
+.pwp-row .col5,
+.premise-row .col5 {
 	width:18%;
 }
-.premise-row .col6,
-.pwp-row .col6 {
+.pwp-row .col6,
+.premise-row .col6 {
 	width:14.6%;
 }
 /* Set the final sizes for our fluid grid - for Desktop */
-.premise-row .span1,
-.pwp-row .span1 {
+.pwp-row .span1,
+.premise-row .span1 {
 	width:6.3%;
 }
-.premise-row .span2,
-.pwp-row .span2 {
+.pwp-row .span2,
+.premise-row .span2 {
 	width:14.6%;
 }
-.premise-row .span3,
-.pwp-row .span3 {
+.pwp-row .span3,
+.premise-row .span3 {
 	width:23%;
 }
-.premise-row .span4,
-.pwp-row .span4 {
+.pwp-row .span4,
+.premise-row .span4 {
 	width:31.33%;
 }
-.premise-row .span5,
-.pwp-row .span5 {
+.pwp-row .span5,
+.premise-row .span5 {
 	width:39.6%;
 }
-.premise-row .span6,
-.pwp-row .span6 {
+.pwp-row .span6,
+.premise-row .span6 {
 	width:48%;
 }
-.premise-row .span7,
-.pwp-row .span7 {
+.pwp-row .span7,
+.premise-row .span7 {
 	width:56.3%;
 }
-.premise-row .span8,
-.pwp-row .span8 {
+.pwp-row .span8,
+.premise-row .span8 {
 	width:64.6%;
 }
-.premise-row .span9,
-.pwp-row .span9 {
+.pwp-row .span9,
+.premise-row .span9 {
 	width:73%;
 }
-.premise-row .span10,
-.pwp-row .span10 {
+.pwp-row .span10,
+.premise-row .span10 {
 	width:81.3%;
 }
-.premise-row .span11,
-.pwp-row .span11 {
+.pwp-row .span11,
+.premise-row .span11 {
 	width:89.6%;
 }
-.premise-row .span12,
-.pwp-row .span12 {
+.pwp-row .span12,
+.premise-row .span12 {
 	width:98%;
 }
 /* the fliud grid */
@@ -459,7 +459,9 @@ ul.pwp-inline > li {
  * create an element that adjust absed on its aspect ratio compared to its parent
  */
 [class^="premise-aspect-ratio"],
-[class*=" premise-aspect-ratio"] {
+[class*=" premise-aspect-ratio"],
+[class^="pwp-aspect-ratio"],
+[class*=" pwp-aspect-ratio"] {
 	position: relative;
 	width: 100%;
 	height: 100%;
@@ -495,7 +497,11 @@ ul.pwp-inline > li {
 [class^="premise-aspect-ratio"] .premise-aspect-ratio-el,
 [class^="pwp-aspect-ratio"] .premise-aspect-ratio-el,
 [class*=" premise-aspect-ratio"] .premise-aspect-ratio-el,
-[class*="pwp-aspect-ratio"] .premise-aspect-ratio-el {
+[class*="pwp-aspect-ratio"] .premise-aspect-ratio-el,
+[class^="premise-aspect-ratio"] .pwp-aspect-ratio-el,
+[class^="pwp-aspect-ratio"] .pwp-aspect-ratio-el,
+[class*=" premise-aspect-ratio"] .pwp-aspect-ratio-el,
+[class*="pwp-aspect-ratio"] .pwp-aspect-ratio-el {
 	position: absolute;
 	top: 0;
 	left: 0;

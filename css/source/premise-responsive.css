@@ -1,90 +1,137 @@
 /**
  * Responsive
  *
+ * - Resets
+ * - Tablet
+ * - Desktop
+ *
  * @package Premise WP
  * @subpackage CSS
  */
 
+/**
+ * Resets
+ */
+/* mobile first - show elements */
 .premise-show-on-mobile {
 	display: inline-block;
 }
-
+/* mobile first - hide elements */
 .premise-hide-on-mobile {
 	display: none;
 }
-
 /* trys to force an element to be fullwidth on mobile devices */
 .premise-fullwidth-on-mobile {
 	width:100%;
 }
 
-
+/**
+ * Tablet
+ *
+ * @screen 700px
+ */
 @media screen and (min-width: 700px) {
 	/* Set the responsive sizes for column grid - for Desktop */
+	.pwp-row:not(.not-responsive) .col2,
 	.premise-row:not(.not-responsive) .col2,
+	.pwp-row:not(.not-responsive) .col4,
 	.premise-row:not(.not-responsive) .col4 {
 		width:48%;
 	}
-	.premise-row.force-columns:not(.not-responsive) .col4:nth-child( 2n+1 ) {
-		clear: left;
-	}
+	.pwp-row:not(.not-responsive) .col3,
 	.premise-row:not(.not-responsive) .col3,
+	.pwp-row:not(.not-responsive) .col5,
 	.premise-row:not(.not-responsive) .col5,
+	.pwp-row:not(.not-responsive) .col6,
 	.premise-row:not(.not-responsive) .col6 {
 		width:31.33%;
 	}
-	.premise-row.force-columns:not(.not-responsive) .col3:nth-child( 3n+1 ),
-	.premise-row.force-columns:not(.not-responsive) .col5:nth-child( 3n+1 ),
-	.premise-row.force-columns:not(.not-responsive) .col6:nth-child( 3n+1 ) {
-		clear: left;
-	}
 
 	/* Set responsive widths to fluid grid. This is meant to cover the most common use cases */
+	.pwp-row:not(.not-responsive) .span1,
 	.premise-row:not(.not-responsive) .span1 {
 		width:14.6%;
 	}
+	.pwp-row:not(.not-responsive) .span2,
 	.premise-row:not(.not-responsive) .span2 {
 		width:14.6%;
 	}
+	.pwp-row:not(.not-responsive) .span3,
 	.premise-row:not(.not-responsive) .span3 {
 		width:31.33%;
 	}
+	.pwp-row:not(.not-responsive) .span4,
 	.premise-row:not(.not-responsive) .span4 {
 		width:31.33%;
 	}
+	.pwp-row:not(.not-responsive) .span5,
 	.premise-row:not(.not-responsive) .span5 {
 		width:48%;
 	}
+	.pwp-row:not(.not-responsive) .span6,
 	.premise-row:not(.not-responsive) .span6 {
 		width:48%;
 	}
+	.pwp-row:not(.not-responsive) .span7,
 	.premise-row:not(.not-responsive) .span7 {
 		width:48%;
 	}
+	.pwp-row:not(.not-responsive) .span8,
 	.premise-row:not(.not-responsive) .span8 {
 		width:64.6%;
 	}
+	.pwp-row:not(.not-responsive) .span9,
 	.premise-row:not(.not-responsive) .span9 {
 		width:64.6%;
 	}
+	.pwp-row:not(.not-responsive) .span10,
 	.premise-row:not(.not-responsive) .span10 {
 		width:81.3%;
 	}
+	.pwp-row:not(.not-responsive) .span11,
 	.premise-row:not(.not-responsive) .span11 {
 		width:81.3%;
 	}
+	.pwp-row:not(.not-responsive) .span12,
 	.premise-row:not(.not-responsive) .span12 {
 		width:98%;
 	}
 
-	/* reset clear */
-	.span2,
-	.span3,
-	.span4,
-	.span8,
-	.span9,
-	.span10 {
-		clear: none;
+	/* row grid - force columns float */
+	.pwp-row.force-columns .col2:nth-child( 2n+1 ),
+	.premise-row.force-columns .col2:nth-child( 2n+1 ) {
+		clear: left;
+	}
+	/* float right */
+	.pwp-row.force-columns.float-right .col2:nth-child( 2n+1 ),
+	.premise-row.force-columns.float-right .col2:nth-child( 2n+1 ) {
+		clear: right;
+	}
+	.pwp-row.force-columns .col4:nth-child( 2n+1 ),
+	.premise-row.force-columns .col4:nth-child( 2n+1 ) {
+		clear: left;
+	}
+	/* float right */
+	.pwp-row.force-columns.float-right .col4:nth-child( 2n+1 ),
+	.premise-row.force-columns.float-right .col4:nth-child( 2n+1 ) {
+		clear: right;
+	}
+	.pwp-row.force-columns .col3:nth-child( 3n+1 ),
+	.premise-row.force-columns .col3:nth-child( 3n+1 ),
+	.pwp-row.force-columns .col5:nth-child( 3n+1 ),
+	.premise-row.force-columns .col5:nth-child( 3n+1 ),
+	.pwp-row.force-columns .col6:nth-child( 3n+1 ),
+	.premise-row.force-columns .col6:nth-child( 3n+1 ) {
+		clear: left;
+	}
+	/* float right */
+	.pwp-row.force-columns.float-right .col3:nth-child( 3n+1 ),
+	.premise-row.force-columns.float-right .col3:nth-child( 3n+1 ),
+	.pwp-row.force-columns.float-right .col5:nth-child( 3n+1 ),
+	.premise-row.force-columns.float-right .col5:nth-child( 3n+1 ),
+	.pwp-row.force-columns.float-right .col6:nth-child( 3n+1 ),
+	.premise-row.force-columns.float-right .col6:nth-child( 3n+1 ) {
+		clear: right;
 	}
 
 	/* shows element on mobile devices, otherwise hides it. */
@@ -95,91 +142,146 @@
 	.premise-hide-on-mobile {
 		display: inline-block;
 	}
+	/* reset full width on mobile */
+	.premise-fullwidth-on-mobile {
+		width: auto;
+	}
 }
 
-
+/**
+ * Desktop
+ *
+ * @screen 1024px
+ */
 @media screen and (min-width: 1024px) {
 	/* Set the final sizes for column grid - for Desktop */
+	.pwp-row:not(.not-responsive) .col2,
 	.premise-row:not(.not-responsive) .col2 {
 		width:48%;
 	}
 
+	.pwp-row:not(.not-responsive) .col3,
 	.premise-row:not(.not-responsive) .col3 {
 		width:31.33%;
 	}
 
+	.pwp-row:not(.not-responsive) .col4,
 	.premise-row:not(.not-responsive) .col4 {
 		width:23%;
 	}
 
+	.pwp-row:not(.not-responsive) .col5,
 	.premise-row:not(.not-responsive) .col5 {
 		width:18%;
 	}
 
+	.pwp-row:not(.not-responsive) .col6,
 	.premise-row:not(.not-responsive) .col6 {
 		width:14.6%;
 	}
 
 	/* Set the final sizes for our fluid grid - for Desktop */
+	.pwp-row:not(.not-responsive) .span1,
 	.premise-row:not(.not-responsive) .span1 {
 		width:6.3%;
 	}
+	.pwp-row:not(.not-responsive) .span2,
 	.premise-row:not(.not-responsive) .span2 {
 		width:14.6%;
 	}
+	.pwp-row:not(.not-responsive) .span3,
 	.premise-row:not(.not-responsive) .span3 {
 		width:23%;
 	}
+	.pwp-row:not(.not-responsive) .span4,
 	.premise-row:not(.not-responsive) .span4 {
 		width:31.33%;
 	}
+	.pwp-row:not(.not-responsive) .span5,
 	.premise-row:not(.not-responsive) .span5 {
 		width:39.6%;
 	}
+	.pwp-row:not(.not-responsive) .span6,
 	.premise-row:not(.not-responsive) .span6 {
 		width:48%;
 	}
+	.pwp-row:not(.not-responsive) .span7,
 	.premise-row:not(.not-responsive) .span7 {
 		width:56.3%;
 	}
+	.pwp-row:not(.not-responsive) .span8,
 	.premise-row:not(.not-responsive) .span8 {
 		width:64.6%;
 	}
+	.pwp-row:not(.not-responsive) .span9,
 	.premise-row:not(.not-responsive) .span9 {
 		width:73%;
 	}
+	.pwp-row:not(.not-responsive) .span10,
 	.premise-row:not(.not-responsive) .span10 {
 		width:81.3%;
 	}
+	.pwp-row:not(.not-responsive) .span11,
 	.premise-row:not(.not-responsive) .span11 {
 		width:89.6%;
 	}
+	.pwp-row:not(.not-responsive) .span12,
 	.premise-row:not(.not-responsive) .span12 {
 		width:98%;
 	}
 
-	/**/
-	.premise-row.force-columns:not(.not-responsive) .col2:nth-child( 2n+1 ) {
+	/* row grid - force col float */
+	.pwp-row.force-columns .col3:nth-child( 3n+1 ),
+	.premise-row.force-columns .col3:nth-child( 3n+1 ) {
 		clear: left;
 	}
-	.premise-row.force-columns:not(.not-responsive) .col3:nth-child( 3n+1 ) {
+	/* float right */
+	.pwp-row.force-columns.float-right .col3:nth-child( 3n+1 ),
+	.premise-row.force-columns.float-right .col3:nth-child( 3n+1 ) {
+		clear: right;
+	}
+	.pwp-row.force-columns .col4:nth-child( 4n+1 ),
+	.premise-row.force-columns .col4:nth-child( 4n+1 ) {
 		clear: left;
 	}
-	.premise-row.force-columns:not(.not-responsive) .col4:nth-child( 4n+1 ) {
+	/* float right */
+	.pwp-row.force-columns.float-right .col4:nth-child( 4n+1 ),
+	.premise-row.force-columns.float-right .col4:nth-child( 4n+1 ) {
+		clear: right;
+	}
+	.pwp-row.force-columns .col5:nth-child( 5n+1 ),
+	.premise-row.force-columns .col5:nth-child( 5n+1 ) {
 		clear: left;
 	}
-	.premise-row.force-columns:not(.not-responsive) .col5:nth-child( 5n+1 ) {
+	/* float right */
+	.pwp-row.force-columns.float-right .col5:nth-child( 5n+1 ),
+	.premise-row.force-columns.float-right .col5:nth-child( 5n+1 ) {
+		clear: right;
+	}
+	.pwp-row.force-columns .col6:nth-child( 6n+1 ),
+	.premise-row.force-columns .col6:nth-child( 6n+1 ) {
 		clear: left;
 	}
-	.premise-row.force-columns:not(.not-responsive) .col6:nth-child( 6n+1 ) {
-		clear: left;
+	/* float right */
+	.pwp-row.force-columns.float-right .col6:nth-child( 6n+1 ),
+	.premise-row.force-columns.float-right .col6:nth-child( 6n+1 ) {
+		clear: right;
 	}
-	.premise-row.force-columns:not(.not-responsive) .col4:nth-child( 2n+1 ) {
+	/* Fix responsive clears */
+	.pwp-row.force-columns .col4:nth-child( 2n+1 ),
+	.premise-row.force-columns .col4:nth-child( 2n+1 ),
+	.pwp-row.force-columns.float-right .col4:nth-child( 2n+1 ),
+	.premise-row.force-columns.float-right .col4:nth-child( 2n+1 ) {
 		clear: none;
 	}
-	.premise-row.force-columns:not(.not-responsive) .col3:nth-child( 3n+1 ),
-	.premise-row.force-columns:not(.not-responsive) .col5:nth-child( 3n+1 ),
-	.premise-row.force-columns:not(.not-responsive) .col6:nth-child( 3n+1 ) {
+	.pwp-row.force-columns .col5:nth-child( 3n+1 ),
+	.premise-row.force-columns .col5:nth-child( 3n+1 ),
+	.pwp-row.force-columns .col6:nth-child( 3n+1 ),
+	.premise-row.force-columns .col6:nth-child( 3n+1 ),
+	.pwp-row.force-columns.float-right .col5:nth-child( 3n+1 ),
+	.premise-row.force-columns.float-right .col5:nth-child( 3n+1 ),
+	.pwp-row.force-columns.float-right .col6:nth-child( 3n+1 ),
+	.premise-row.force-columns.float-right .col6:nth-child( 3n+1 ) {
 		clear: none;
 	}
 }
