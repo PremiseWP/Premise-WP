@@ -49,95 +49,203 @@ img.alignright {
  */
 
 /* Position */
-.premise-absolute {
+.premise-absolute,
+.pwp-absolute {
 	position:absolute;
 }
 
-.premise-relative {
+.premise-relative,
+.pwp-relative {
 	position:relative;
 }
 
-.premise-fixed {
+.premise-fixed,
+.pwp-fixed {
 	position:fixed;
 }
 
 /* display */
-.premise-block {
+.premise-block,
+.pwp-block {
 	display:block;
 }
 
-.premise-inline-block {
+.premise-inline-block,
+.pwp-inline-block {
 	display:inline-block;
 }
 
-.premise-border-box {
+.premise-vertical-align-top,
+.pwp-vertical-align-top {
+	vertical-align: top;
+}
+
+.premise-vertical-align-middle,
+.pwp-vertical-align-middle {
+	vertical-align: middle;
+}
+
+.premise-vertical-align-bottom,
+.pwp-vertical-align-bottom {
+	vertical-align: bottom;
+}
+
+.premise-vertical-align-baseline,
+.pwp-vertical-align-baseline {
+	vertical-align: baseline;
+}
+
+.premise-vertical-align-texttop,
+.pwp-vertical-align-texttop {
+	vertical-align: text-top;
+}
+
+.premise-vertical-align-textbottom,
+.pwp-vertical-align-textbottom {
+	vertical-align: text-bottom;
+}
+
+.premise-border-box,
+.pwp-border-box {
 	box-sizing:border-box;
 }
 
-.premise-hidden {
+.premise-hidden,
+.pwp-hidden {
 	visibility: hidden;
 }
 
 /* responsive images */
 .premise-responsive,
-img.premise-responsive {
+.pwp-responsive,
+img.premise-responsive,
+img.pwp-responsive {
 	max-width:100%;
 	height:auto;
 }
 
 /* Floats */
-.premise-float-right {
+.premise-float-right,
+.pwp-float-right {
 	float:right;
 }
 
-.premise-float-left {
+.premise-float-left,
+.pwp-float-left {
 	float:left;
 }
 
 /* clear floats quickly */
-.premise-clear {
+.premise-clear,
+.pwp-clear {
 	display:block;
 	clear:both;
 	width:100%;
 }
 
 /* fix 0 height on containers that have float child elements */
-.premise-clear-float:after {
+.premise-clear-float:after,
+.pwp-clear-float:after {
 	content:"";
 	display:block;
 	clear: both;
 }
 
 /* text styles */
-.premise-align-center {
+.premise-align-center,
+.pwp-align-center {
 	text-align:center;
 }
 
-.premise-align-left {
+.premise-align-left,
+.pwp-align-left {
 	text-align:left;
 }
 
-.premise-align-right {
+.premise-align-right,
+.pwp-align-right {
 	text-align:right;
 }
 
-.premise-align-justify {
+.premise-align-justify,
+.pwp-align-justify {
 	text-align:justify;
 }
 
-.premise-uppercase {
+.premise-uppercase,
+.pwp-uppercase {
 	text-transform: uppercase;
 }
 
-.premise-underline {
+.premise-underline,
+.pwp-underline {
 	text-decoration: underline;
 }
 
 /* helpful for links that are already underlined */
-.premise-not-underline {
+.premise-not-underline,
+.pwp-not-underline {
 	text-decoration: none;
 }
 
+/* Set the size for column grid - for Desktop */
+.col2 {
+	width:50%;
+}
+
+.col3 {
+	width:33.33333%;
+}
+
+.col4 {
+	width:25%;
+}
+
+.col5 {
+	width:20%;
+}
+
+.col6 {
+	width:16.666%;
+}
+
+/* Set the final sizes for our fluid grid - for Desktop */
+.span1 {
+	width:8.333%;
+}
+.span2 {
+	width:16.666%;
+}
+.span3 {
+	width:25%;
+}
+.span4 {
+	width:33.33333%;
+}
+.span5 {
+	width:41.666%;
+}
+.span6 {
+	width:50%;
+}
+.span7 {
+	width:58.333%;
+}
+.span8 {
+	width:66.666%;
+}
+.span9 {
+	width:75%;
+}
+.span10 {
+	width:83.333%;
+}
+.span11 {
+	width:91.666%;
+}
+.span12 {
+	width:100%;
+}
 
 /**
  * Premise CSS Grid Sysytem
@@ -155,79 +263,191 @@ img.premise-responsive {
  * - Row Grid Wrapper    - uses floats for its inner elements.
  * - Inline Grid Wrapper - Uses inline-block for its inner elements
  */
-/* the fliud grid */
-.span2,
-.span3,
-.span4,
-.span5,
-.span6,
-.span7,
-.span8,
-.span9,
-.span10,
-.span11,
-.span12 {
-	width:98%;
-}
-/* The column grid */
-.col2,
-.col3,
-.col4,
-.col5,
-.col6 {
-	width: 98%; /* mobie first approach - load mobile styles first */
-}
 /* the row grid wrapper */
-.premise-row {
+.premise-row,
+.pwp-row {
 	display:block;
 	margin-left:-1%;
 	margin-right:-1%;
 }
-.premise-row:after {
+.premise-row:after,
+.pwp-row:after {
 	content:"";
 	display:block;
 	clear: both;
 }
+.premise-row .col2,
+.pwp-row .col2 {
+	width:48%;
+}
+.premise-row .col3,
+.pwp-row .col3 {
+	width:31.33%;
+}
+.premise-row .col4,
+.pwp-row .col4 {
+	width:23%;
+}
+.premise-row .col5,
+.pwp-row .col5 {
+	width:18%;
+}
+.premise-row .col6,
+.pwp-row .col6 {
+	width:14.6%;
+}
+/* Set the final sizes for our fluid grid - for Desktop */
+.premise-row .span1,
+.pwp-row .span1 {
+	width:6.3%;
+}
+.premise-row .span2,
+.pwp-row .span2 {
+	width:14.6%;
+}
+.premise-row .span3,
+.pwp-row .span3 {
+	width:23%;
+}
+.premise-row .span4,
+.pwp-row .span4 {
+	width:31.33%;
+}
+.premise-row .span5,
+.pwp-row .span5 {
+	width:39.6%;
+}
+.premise-row .span6,
+.pwp-row .span6 {
+	width:48%;
+}
+.premise-row .span7,
+.pwp-row .span7 {
+	width:56.3%;
+}
+.premise-row .span8,
+.pwp-row .span8 {
+	width:64.6%;
+}
+.premise-row .span9,
+.pwp-row .span9 {
+	width:73%;
+}
+.premise-row .span10,
+.pwp-row .span10 {
+	width:81.3%;
+}
+.premise-row .span11,
+.pwp-row .span11 {
+	width:89.6%;
+}
+.premise-row .span12,
+.pwp-row .span12 {
+	width:98%;
+}
+/* the fliud grid */
+.premise-row:not(.not-responsive) .span2,
+.pwp-row:not(.not-responsive) .span2,
+.premise-row:not(.not-responsive) .span3,
+.pwp-row:not(.not-responsive) .span3,
+.premise-row:not(.not-responsive) .span4,
+.pwp-row:not(.not-responsive) .span4,
+.premise-row:not(.not-responsive) .span5,
+.pwp-row:not(.not-responsive) .span5,
+.premise-row:not(.not-responsive) .span6,
+.pwp-row:not(.not-responsive) .span6,
+.premise-row:not(.not-responsive) .span7,
+.pwp-row:not(.not-responsive) .span7,
+.premise-row:not(.not-responsive) .span8,
+.pwp-row:not(.not-responsive) .span8,
+.premise-row:not(.not-responsive) .span9,
+.pwp-row:not(.not-responsive) .span9,
+.premise-row:not(.not-responsive) .span10,
+.pwp-row:not(.not-responsive) .span10,
+.premise-row:not(.not-responsive) .span11,
+.pwp-row:not(.not-responsive) .span11,
+.premise-row:not(.not-responsive) .span12,
+.pwp-row:not(.not-responsive) .span12 {
+	width:98%;
+}
+/* The column grid */
+.premise-row:not(.not-responsive) .col2,
+.pwp-row:not(.not-responsive) .col2,
+.premise-row:not(.not-responsive) .col3,
+.pwp-row:not(.not-responsive) .col3,
+.premise-row:not(.not-responsive) .col4,
+.pwp-row:not(.not-responsive) .col4,
+.premise-row:not(.not-responsive) .col5,
+.pwp-row:not(.not-responsive) .col5,
+.premise-row:not(.not-responsive) .col6,
+.pwp-row:not(.not-responsive) .col6 {
+	width: 98%; /* mobie first approach - load mobile styles first */
+}
 /* row grid */
 .premise-row > [class^="span"],
+.pwp-row > [class^="span"],
 .premise-row > [class*=" span"],
+.pwp-row > [class*=" span"],
 .premise-row > [class^="col"],
-.premise-row > [class*=" col"] {
+.pwp-row > [class^="col"],
+.premise-row > [class*=" col"],
+.pwp-row > [class*=" col"] {
 	float:left;
 	margin-left:1%;
 	margin-right:1%;
 	box-sizing: border-box;
+	min-height: 1px;
 }
 /* row grid - floating right */
 .premise-row.float-right > [class^="span"],
+.pwp-row.float-right > [class^="span"],
 .premise-row.float-right > [class*=" span"],
+.pwp-row.float-right > [class*=" span"],
 .premise-row.float-right > [class^="col"],
-.premise-row.float-right > [class*=" col"] {
+.pwp-row.float-right > [class^="col"],
+.premise-row.float-right > [class*=" col"],
+.pwp-row.float-right > [class*=" col"] {
 	float:right;
 }
 /* inline grid */
+.premise-inline,
+.pwp-inline {
+	white-space: nowrap;
+}
 .premise-inline > [class^="span"],
+.pwp-inline > [class^="span"],
 .premise-inline > [class*=" span"],
+.pwp-inline > [class*=" span"],
 .premise-inline > [class^="col"],
+.pwp-inline > [class^="col"],
 .premise-inline > [class*=" col"],
-ul.premise-inline > li {
+.pwp-inline > [class*=" col"],
+ul.premise-inline > li ,
+ul.pwp-inline > li {
 	display:inline-block;
+	white-space: normal;
 }
 /* Premise Scroller - use premise scroller to create a horizontal scroll using the column widths */
-.premise-scroller {
+.premise-scroller,
+.pwp-scroller {
 	display: block;
 	box-sizing: border-box;
 	overflow: auto;
 	white-space: nowrap;
 }
 /* make it vertical - you must add a max height for it to work */
-.premise-scroller.vertical {
+.premise-scroller.vertical,
+.pwp-scroller.vertical {
 	white-space: normal;
 }
 .premise-scroller > [class^="span"],
+.pwp-scroller > [class^="span"],
 .premise-scroller > [class*=" span"],
+.pwp-scroller > [class*=" span"],
 .premise-scroller > [class^="col"],
-.premise-scroller > [class*=" col"] {
+.pwp-scroller > [class^="col"],
+.premise-scroller > [class*=" col"],
+.pwp-scroller > [class*=" col"] {
 	display: inline-block;
 	float: none;
 	white-space: normal;
@@ -249,25 +469,33 @@ ul.premise-inline > li {
 
 /* ratio 16:9 - Default. premise-aspect-ratio, premise-aspect-ratio-16-9 */
 .premise-aspect-ratio,
-.premise-aspect-ratio-16-9 {
+.pwp-aspect-ratio,
+.premise-aspect-ratio-16-9,
+.pwp-aspect-ratio-16-9 {
 	padding-top: 56.25%;
 }
 
 /* ratio 4:3 - premise-aspect-ratio-4-3*/
-.premise-aspect-ratio-4-3 {
+.premise-aspect-ratio-4-3,
+.pwp-aspect-ratio-4-3 {
 	padding-top: 75%;
 }
 
 /* ratio 1:1 - premise-aspect-ratio-1-1*/
-.premise-aspect-ratio-1-1 {
+.premise-aspect-ratio-1-1,
+.pwp-aspect-ratio-1-1 {
 	padding-top: 100%;
 }
 
 /* the aspect ration inner element must be div or have this class: premise-aspect-ratio-el */
 [class^="premise-aspect-ratio"] > div,
+[class^="pwp-aspect-ratio"] > div,
 [class*=" premise-aspect-ratio"] > div,
+[class*="pwp-aspect-ratio"] > div,
 [class^="premise-aspect-ratio"] .premise-aspect-ratio-el,
-[class*=" premise-aspect-ratio"] .premise-aspect-ratio-el {
+[class^="pwp-aspect-ratio"] .premise-aspect-ratio-el,
+[class*=" premise-aspect-ratio"] .premise-aspect-ratio-el,
+[class*="pwp-aspect-ratio"] .premise-aspect-ratio-el {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -281,11 +509,13 @@ ul.premise-inline > li {
  *
  * @see premise_output_video()
  */
-.premise-video {
+.premise-video,
+.pwp-video {
 	/*width: 100%;  Deleting these properties will enable control
 	height: 100%;   from premise_output_video() directly - MV */
 }
 
-.premise-vimeo-video {
+.premise-vimeo-video,
+.pwp-vimeo-video {
 	border: 0;
 }
