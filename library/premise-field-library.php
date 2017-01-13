@@ -86,7 +86,9 @@ function premise_field( $type = 'text', $args = array(), $echo = true ) {
 }
 
 
-
+function pwp_field( $args = array() ) {
+	var_dump( new PWP_Field_controller( $args ) );
+}
 
 /**
  * Premise field section
