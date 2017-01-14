@@ -90,9 +90,39 @@ function premise_field( $type = 'text', $args = array(), $echo = true ) {
 }
 
 
-function pwp_field( $args ) {
-	$field = new PWP_Field_Controller( $args );
-	echo $field->field;
+function pwp_field( $args = '', $echo = true ) {
+	// set arguments
+	$_args = is_array( $args ) ? $args : array( 'type' => (string) $args );
+	// set and unset the 'before_field' if exists
+	if ( isset( $_args['before_field'] ) && ! empty( $_args['before_field'] ) ) {
+		$_before = (string) $_args['before_field'];
+		unset( $_args['before_field'] );
+	}
+	// set and unset the 'after_field' if exists
+	if ( isset( $_args['after_field'] ) && ! empty( $_args['after_field'] ) ) {
+		$_after = (string) $_args['after_field'];
+		unset( $_args['after_field'] );
+	}
+	// set and unset the 'label' if exists
+	if ( isset( $_args['label'] ) && ! empty( $_args['label'] ) ) {
+		$_label = (string) $_args['label'];
+		unset( $_args['label'] );
+	}
+	// build the field
+	$_f = new PWP_Field_Controller( $_args );
+
+	$_html = '<div class="premise-'.esc_attr( $_args['type'] ).'">';
+		// $_html.= ( $_label ) ? '<label for="'$_f->id'">'.esc_attr( $_label ) : '';
+		$_html.= $_f->field;
+		// $_html.= ( $_label ) ? '</label>' : '';
+	$_html.= '</div>';
+
+	if ( $echo ) {
+		echo $_html;
+	}
+	else {
+		return $_html;
+	}
 }
 
 /**
