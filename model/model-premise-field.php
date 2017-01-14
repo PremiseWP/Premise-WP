@@ -48,21 +48,18 @@ class PremiseField {
 		/**
 		 * Reseved Arguments
 		 */
-		'label'      => '',      // Wraps label element around field. uses id for for attribute if id not empty.
-		'tooltip'    => '',      // Adds a tooltip and tooltip functionality to field.
-		'context'    => '',      // Used to let Premise know where to retrieve values from ( post, user ).
-		'wrapper_class' => '',   // Add additional classes to the fields wrapper.
-		'default'    => '',      // If value is empty and premise_get_value() returns false we use this as the value
-		'value_att'  => '',      // print a value attribute on the field. Used for checkboxes and radio.
-		'attribute'  => '',      // HTML attributes to add to element i.e. onchange="doSomethingCool()".
-		'options'    => array(), // Options for select fields in this format ( 'Option Text' => 'Option Value' ).
-		'add_filter' => array(), // Add filter(s) to this field.
-		/**
-		 * Public Arguments
-		 */
-		'name'       => '',      // Name attribute. if empty fills from id.
-		'id'         => '',      // ID attribute. if empty fills from name (if name not empty).
-		'value'      => '',      // Value attribute. by default tries to premise_get_value( name ).
+		'label'      => '',
+		'tooltip'    => '',
+		'context'    => '',
+		'wrapper_class' => '',
+		'default'    => '',
+		'value_att'  => '',
+		'attribute'  => '',
+		'options'    => array(),
+		'add_filter' => array(),
+		'name'       => '',
+		'id'         => '',
+		'value'      => '',
 	);
 
 
