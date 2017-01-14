@@ -58,7 +58,7 @@ function premise_field( $type = 'text', $args = array(), $echo = true ) {
 		if ( isset( $type['type'] ) ) {
 
 			$_type = $type['type'];
-			unset( $type['type'] );
+			// unset( $type['type'] );
 		}
 
 		$args = $type;
@@ -69,6 +69,10 @@ function premise_field( $type = 'text', $args = array(), $echo = true ) {
 		$type  = ! empty( $type ) && is_string( $type ) ? $type : 'text';
 		$args  = is_array( $args ) ? $args : array();
 	}
+
+	$field = new PWP_Field_Controller( $args );
+	echo $field->field;
+	return false;
 
 	$field = new PremiseField( $type, $args );
 	$html  = $field->get_field();
@@ -86,8 +90,9 @@ function premise_field( $type = 'text', $args = array(), $echo = true ) {
 }
 
 
-function pwp_field( $args = array() ) {
-	var_dump( new PWP_Field_controller( $args ) );
+function pwp_field( $args ) {
+	$field = new PWP_Field_Controller( $args );
+	echo $field->field;
 }
 
 /**

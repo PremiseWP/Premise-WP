@@ -351,3 +351,23 @@ function premise_rand_str( $length = '' ) {
 	// Return random string.
 	return esc_attr( $token );
 }
+
+/**
+ * Is value empty?
+ * Allow '0' values
+ * Prefer empty_value over PHP empty function when checking for empty values
+ * excluding 0, '0' or 0.0 values
+ *
+ * @link http://php.net/empty
+ *
+ * @since 1.2
+ *
+ * @example if ( isset( $value ) && ! pwp_empty_value( $value ) )
+ *
+ * @param  string $value Value.
+ *
+ * @return boolean True if empty value & $value !== 0, 0.0, '0', else false
+ */
+function pwp_empty_value( $val = '' ) {
+	return empty( $val ) && $val !== 0 && $val !== 0.0 && $val !== '0';
+}

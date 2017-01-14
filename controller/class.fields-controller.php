@@ -8,23 +8,19 @@ class PWP_Field_Controller {
 
 	protected $defaults = array(
 		'tag'           => '',
-		'type'          => 'text',
+		'type'          => '',
 		'name'          => '',
 		'id'            => '',
 		'value'         => '',
-		'value_att'     => '',
-		'default'       => '',
 		'options'       => array(),
-		'before_field'  => '',
-		'after_field'   => '',
 		'context'       => '',
 	);
 
-	protected $args = array();
+	public $args = array();
 
 	public $tag = 'input';
 
-	public $type = 'text';
+	public $type = '';
 
 	public $name = '';
 
@@ -34,32 +30,43 @@ class PWP_Field_Controller {
 
 		$this->args = wp_parse_args( $args, $this->defaults );
 
-		$this->tag  = $this->get_tag();
-
-		$this->type  = $this->get_type();
-
-		$this->name = $this->get_name();
-
-		$this->id   = $this->get_id();
+		$this->extract_params();
 
 		$this->build_field();
 	}
 
-
-	public function input() {
-		return '<input type="'.$this->type.'" name="'.$this->name.'" id="'.$this->id.'">';
+	/**
+	 * build an input field
+	 *
+	 * @return string html for input field
+	 */
+	protected function input() {
+		return '<input type="'.$this->type.'" '.$this->field_atts().'>';
 	}
 
-
-	public function select() {
-		return '<select name="'.$this->name.'" id="'.$this->id.'">'.''.'</select>';
+	/**
+	 * build an select field
+	 *
+	 * @return string html for select field
+	 */
+	protected function select() {
+		return '<select '.$this->field_atts().'>'.$this->options.'</select>';
 	}
 
-	public function build_tag() {
-		return '<'.$this->tag.' name="'.$this->name.'" id="'.$this->id.'">'.''.'</'.$this->tag.'>';
+	/**
+	 * build a custom field
+	 *
+	 * @return string html for custom field
+	 */
+	protected function build_tag() {
+		return '<'.$this->tag.' '.$this->field_atts( 'value' ).'>'.$this->value.'</'.$this->tag.'>';
 	}
 
-
+	/**
+	 * Build the field. This creates the field based on the tag
+	 *
+	 * @return void saves and buiild the field.
+	 */
 	protected function build_field() {
 		$_field = '';
 		// build the field
@@ -76,17 +83,75 @@ class PWP_Field_Controller {
 				$_field = $this->build_tag();
 				break;
 		}
-		// build the field's html
-		$html  = ( isset( $this->args['before_field'] )
-			 && ! empty( $this->args['before_field'] ) ) ? $this->args['before_field'] : '';
-		$html .= $_field;
-		$html .= ( isset( $this->args['after_field'] )
-			 && ! empty( $this->args['after_field'] ) ) ? $this->args['after_field'] : '';
 		// add a filter here
-		$this->field = $html;
+		$this->field = $_field;
 	}
 
+	/**
+	 * get the field attributes in a string separated by space
+	 *
+	 * @param  string $exclude attributes to be excluded. can be a string or an array
+	 * @return string          attributes to be inserted into field.
+	 */
+	protected function field_atts( $exclude = '' ) {
+		$atts = '';
 
+		$exc = (array) $exclude;
+
+		$atts .= ( ! empty( $this->type )
+			&& ! in_array( 'type', $exc ) )
+			? ' type="'.$this->type.'"'   : '';
+
+		$atts .= ( ! empty( $this->name )
+			&& ! in_array( 'name', $exc ) )
+			? ' name="'.$this->name.'"'   : '';
+
+		$atts .= ( ! empty( $this->id )
+			&& ! in_array( 'id', $exc ) )
+			? ' id="'.$this->id.'"'       : '';
+
+		$atts .= ( ! empty( $this->value )
+			&& ! in_array( 'value', $exc ) )
+			? ' value="'.$this->value.'"' : '';
+
+
+		foreach ($this->args as $key => $value) {
+			if ( ! in_array( $key, $exc ) && $value ) {
+				$atts .= ' '.$key.'="'.$value.'"';
+			}
+		}
+
+		return $atts;
+	}
+
+	/**
+	 * Extract and save the necessary params from the arguments passed to the construct.
+	 *
+	 * @return void does not return anything. basically builds our object.
+	 */
+	private function extract_params() {
+		$this->tag     = $this->get_tag();
+		$this->type    = $this->get_type();
+		$this->name    = $this->get_name();
+		$this->id      = $this->get_id();
+		$this->value   = $this->get_value();
+		$this->options = $this->get_options();
+		$this->context = esc_attr( $this->args['context'] );
+
+		unset( $this->args['tag'] );
+		unset( $this->args['type'] );
+		unset( $this->args['name'] );
+		unset( $this->args['id'] );
+		unset( $this->args['value'] );
+		unset( $this->args['options'] );
+		unset( $this->args['context'] );
+	}
+
+	/**
+	 * get the html tag to use for our field
+	 *
+	 * @return string html tag
+	 */
 	private function get_tag() {
 		if ( ! empty( $this->args['tag'] ) ) {
 			$_tag = esc_attr( $this->args['tag'] );
@@ -106,13 +171,21 @@ class PWP_Field_Controller {
 		return $_tag;
 	}
 
-
+	/**
+	 * get the type to use when building our field
+	 *
+	 * @return string type to use
+	 */
 	private function get_type() {
-		$_type = ( ! empty( $this->args['type'] ) ) ? esc_attr( $this->args['type'] ) : 'text';
+		$_type = ( ! empty( $this->args['type'] ) ) ? esc_attr( $this->args['type'] ) : '';
 		return $_type;
 	}
 
-
+	/**
+	 * get the name attribute for our field
+	 *
+	 * @return string the name attribute
+	 */
 	private function get_name() {
 		$name = ( ! empty( $this->args['name'] ) ) ? esc_attr( $this->args['name'] ) : '';
 		// if no name, try getting from id
@@ -127,7 +200,11 @@ class PWP_Field_Controller {
 		return esc_attr( $name );
 	}
 
-
+	/**
+	 * get the id attribute for our field
+	 *
+	 * @return string id attribute
+	 */
 	private function get_id() {
 		$id_att = '';
 		if ( ! empty( $this->args['id'] ) ) {
@@ -142,5 +219,65 @@ class PWP_Field_Controller {
 			}
 		}
 		return esc_attr( $id_att );
+	}
+
+	/**
+	 * get the value attribute for our field
+	 *
+	 * @return string the value attribute or content if the field does not support value. see buildt_tag() for more info
+	 */
+	private function get_value() {
+		$val = '';
+		if ( isset( $this->args['value'] ) && ! empty( $this->args['value'] ) ) {
+			$val = esc_attr( $this->args['value'] );
+		}
+		elseif ( ! empty( $this->name ) ) {
+			$val = premise_get_value( $this->name, $this->context );
+		}
+		else {
+			return '';
+		}
+
+		if ( is_array( $val ) ) {
+
+			return $val;
+		}
+		elseif ( ! pwp_empty_value( $val ) ) {
+
+			return esc_attr( $val );
+		}
+		else {
+			// return default
+			return '';
+		}
+	}
+
+	/**
+	 * get the options for the select field. Only applies to the selcet field
+	 *
+	 * @return string html for options
+	 */
+	private function get_options() {
+		$opts = '';
+		if ( isset( $this->args['options'] ) && is_array( $this->args['options'] ) ) {
+
+			foreach ( $this->args['options'] as $k => $v ) {
+				if ( ! empty( $k ) ) {
+					$opts .= '<option value="'.esc_attr( $v ).'"';
+
+						if ( is_array( $this->value ) ) {
+
+							$opts .= in_array( $v, $this->value ) ? 'selected="selected"' : '';
+
+						} else {
+
+							$opts .= selected( $this->value, $v, false );
+						}
+
+					$opts .= '>'.esc_attr( $k ).'</option>';
+				}
+			}
+		}
+		return $opts;
 	}
 }
