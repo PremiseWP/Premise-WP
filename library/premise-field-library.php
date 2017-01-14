@@ -111,7 +111,7 @@ function pwp_field( $args = '', $echo = true ) {
 	// build the field
 	$_f = new PWP_Field_Controller( $_args );
 
-	$_html = '<div class="premise-'.$_f->tag.'">';
+	$_html = '<div class="premise-field premise-'.$_f->tag.'">';
 		// $_html.= ( $_label ) ? '<label for="'$_f->id'">'.esc_attr( $_label ) : '';
 		$_html.= $_f->field;
 		// $_html.= ( $_label ) ? '</label>' : '';
