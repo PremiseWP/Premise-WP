@@ -41,88 +41,46 @@ defined( 'ABSPATH' ) or die();
  */
 function premise_field( $type = 'text', $args = array(), $echo = true ) {
 
-	/**
-	 * Backward compatibility with version < 1.2
-	 *
-	 * Allows you to skip the first param and pass it as part of args i.e. ( 'type' => 'text' )
-	 *
-	 * @since 1.2 If the first param is an array, the function was called the old way
-	 *            or it was called from premise_field_section(). Unset 'type' and pass
-	 *            arguments correctly as expected since 1.2
-	 */
 	if ( is_array( $type ) ) {
-
-		$_type = 'text';
-
-		// If 'type' param was submitted, get it and unset it.
-		if ( isset( $type['type'] ) ) {
-
-			$_type = $type['type'];
-			// unset( $type['type'] );
-		}
-
-		$args = $type;
-		$type = $_type;
-
-	} else {
-
-		$type  = ! empty( $type ) && is_string( $type ) ? $type : 'text';
-		$args  = is_array( $args ) ? $args : array();
-	}
-
-	$field = new PWP_Field_Controller( $args );
-	echo $field->field;
-	return false;
-
-	$field = new PremiseField( $type, $args );
-	$html  = $field->get_field();
-
-	if ( ! $echo ) {
-
-		return $html;
-
-	} else {
-
-		echo $html;
-	}
-
-	return false;
-}
-
-
-function pwp_field( $args = '', $echo = true ) {
-	// set arguments
-	$_args = is_array( $args ) ? $args : array( 'type' => (string) $args );
-	// set and unset the 'before_field' if exists
-	if ( isset( $_args['before_field'] ) && ! empty( $_args['before_field'] ) ) {
-		$_before = (string) $_args['before_field'];
-		unset( $_args['before_field'] );
-	}
-	// set and unset the 'after_field' if exists
-	if ( isset( $_args['after_field'] ) && ! empty( $_args['after_field'] ) ) {
-		$_after = (string) $_args['after_field'];
-		unset( $_args['after_field'] );
-	}
-	// set and unset the 'label' if exists
-	if ( isset( $_args['label'] ) && ! empty( $_args['label'] ) ) {
-		$_label = (string) $_args['label'];
-		unset( $_args['label'] );
-	}
-	// build the field
-	$_f = new PWP_Field_Controller( $_args );
-
-	$_html = '<div class="premise-field premise-'.$_f->tag.'">';
-		// $_html.= ( $_label ) ? '<label for="'$_f->id'">'.esc_attr( $_label ) : '';
-		$_html.= $_f->field;
-		// $_html.= ( $_label ) ? '</label>' : '';
-	$_html.= '</div>';
-
-	if ( $echo ) {
-		echo $_html;
+		$_args = $type;
 	}
 	else {
-		return $_html;
+		$_args = $args;
+		// do not allow an empty type for backward compatibility
+		$_args['type'] = ( ! empty( $type ) ) ? esc_attr( $type ) : 'text';
 	}
+
+	pwp_field( $_args, $echo );
+}
+
+/**
+ * output a field
+ *
+ * @since 2.0.0 added to replace premise_field. for backward compatibility premise_field became a wrapper for this function.
+ *
+ * @param  string  $args arguments can be a string - the 'type' param, or an array - argument for field
+ * @param  boolean $echo whether to echo ro return the thml
+ * @return string        html for field
+ */
+function pwp_field( $args = '', $echo = true ) {
+	// allow args to be an array of args or string for 'type'
+	$_args = is_array( $args ) ? $args : array( 'type' => (string) $args );
+	// build the field
+	$_f = new PWP_Field_Controller( $_args );
+	// echo or return
+	if ( (boolean) $echo ) {
+		echo $_f->html;
+	}
+	else {
+		return $_f->html;
+	}
+}
+
+function pwp_form( $args = '', $echo = '' ) {
+
+	new PWP_Form( $args );
+
+
 }
 
 /**
