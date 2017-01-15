@@ -1,19 +1,21 @@
 <?php
 /**
-* Premise Fields Controller
+* Premise Fields Model
 *
 * @package Premise WP
 */
-class PWP_Field_Controller {
+class PWP_Field {
 
-	protected $defaults = array(
+	protected $_defaults = array(
 		'tag'           => '',
 		'type'          => '',
 		'name'          => '',
 		'id'            => '',
 		'value'         => '',
+		'value_att'     => '1',
 		'options'       => array(),
 		'context'       => '',
+		'default'       => '',
 	);
 
 	public $args = array();
@@ -28,9 +30,9 @@ class PWP_Field_Controller {
 
 	function __construct( $args = '' ) {
 
-		$this->args = wp_parse_args( $args, $this->defaults );
+		$this->args = wp_parse_args( $args, $this->_defaults );
 
-		$this->extract_params();
+		$this->extract_args();
 
 		$this->build_field();
 	}
@@ -42,6 +44,15 @@ class PWP_Field_Controller {
 	 */
 	protected function input() {
 		return '<input type="'.$this->type.'" '.$this->field_atts().'>';
+	}
+
+	/**
+	 * build an textarea field
+	 *
+	 * @return string html for textarea field
+	 */
+	protected function textarea() {
+		return '<textarea '.$this->field_atts( array( 'type', 'value' ) ).'>'.$this->options.'</textarea>';
 	}
 
 	/**
@@ -59,7 +70,7 @@ class PWP_Field_Controller {
 	 * @return string html for custom field
 	 */
 	protected function build_tag() {
-		return '<'.$this->tag.' '.$this->field_atts( 'value' ).'>'.$this->value.'</'.$this->tag.'>';
+		return '<'.$this->tag.' '.$this->field_atts().'>'.$this->value.'</'.$this->tag.'>';
 	}
 
 	/**
@@ -73,6 +84,10 @@ class PWP_Field_Controller {
 		switch ( $this->tag ) {
 			case 'select':
 				$_field = $this->select();
+				break;
+
+			case 'textarea':
+				$_field = $this->textarea();
 				break;
 
 			case 'input':
@@ -114,6 +129,15 @@ class PWP_Field_Controller {
 			&& ! in_array( 'value', $exc ) )
 			? ' value="'.$this->value.'"' : '';
 
+		if ( 'checkbox' == $this->type || 'radio' == $this->type ) {
+			$atts .= ' value="' . esc_attr( $this->args['value_att'] ) . '" '.
+			checked( $this->args['value_att'], $this->value, false );
+			unset( $this->args['value_att'] );
+		}
+		else {
+			unset( $this->args['value_att'] );
+		}
+
 
 		foreach ($this->args as $key => $value) {
 			if ( ! in_array( $key, $exc ) && $value ) {
@@ -129,7 +153,7 @@ class PWP_Field_Controller {
 	 *
 	 * @return void does not return anything. basically builds our object.
 	 */
-	private function extract_params() {
+	private function extract_args() {
 		$this->tag     = $this->get_tag();
 		$this->type    = $this->get_type();
 		$this->name    = $this->get_name();
@@ -248,7 +272,7 @@ class PWP_Field_Controller {
 		}
 		else {
 			// return default
-			return '';
+			return ( isset( $this->args['default'] ) && ! empty( $this->args['default'] ) ) ? esc_attr( $this->args['default'] ) : '';
 		}
 	}
 
