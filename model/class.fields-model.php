@@ -138,6 +138,11 @@ class PWP_Field {
 			unset( $this->args['value_att'] );
 		}
 
+		// backward compatibility for attribute
+		if ( isset( $this->args['attribute'] ) && ! empty( $this->args['attribute'] ) ) {
+			$atts .= ' ' . $this->args['attribute'];
+			unset( $this->args['attribute'] );
+		}
 
 		foreach ($this->args as $key => $value) {
 			if ( ! in_array( $key, $exc ) && $value ) {

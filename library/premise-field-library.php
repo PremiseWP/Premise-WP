@@ -56,14 +56,6 @@ function premise_field( $type = 'text', $args = array(), $echo = true ) {
 		unset( $_args['tooltip'] );
 	}
 
-	// backward compatibility for attribute
-	if ( isset( $_args['attribute'] ) && ! empty( $_args['attribute'] ) ) {
-		preg_match_all( '/([\w]*)=/', $_args['attribute'], $attribute_a );
-		var_dump($attribute_a);
-		$_args['before_field'] = '<br><i>'.strip_tags( $_args['attribute'], '<span>,<p>,<b>,<strong>,<br>' ).'</i>';
-		unset( $_args['attribute'] );
-	}
-
 	// make the field
 	pwp_field( $_args, $echo );
 }
