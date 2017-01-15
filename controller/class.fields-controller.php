@@ -102,6 +102,10 @@ class PWP_Field_Controller extends PWP_Field {
 	 * @param string $args params for field. can be string or array.
 	 */
 	function __construct( $args = '' ) {
+		// empty args not accepted
+		if ( empty( $args ) )
+			return false;
+
 		// parse with defaults
 		$this->params = wp_parse_args( $args, $this->defaults );
 
@@ -109,6 +113,11 @@ class PWP_Field_Controller extends PWP_Field {
 
 		if ( 'wp_media' == $this->field_type ) {
 			wp_enqueue_media();
+		}
+
+		if ( 'wp_color' == $this->field_type ) {
+			wp_enqueue_script( 'wp-color-picker' );
+			wp_enqueue_style( 'wp-color-picker' );
 		}
 
 		parent::__construct( $this->params );
@@ -194,5 +203,15 @@ class PWP_Field_Controller extends PWP_Field {
 			$this->label = (string) $this->params['label'];
 			unset( $this->params['label'] );
 		}
+
+		// allow to pass param as bool - i.e. 'multiple' => true|false
+		if ( isset( $this->params['multiple'] ) && $this->params['multiple'] )
+			$this->params['multiple'] = 'multiple';
+		// allow to pass param as bool - i.e. 'required' => true|false
+		if ( isset( $this->params['required'] ) && $this->params['required'] )
+			$this->params['required'] = 'required';
+		// allow to pass param as bool - i.e. 'disabled' => true|false
+		if ( isset( $this->params['disabled'] ) && $this->params['disabled'] )
+			$this->params['disabled'] = 'disabled';
 	}
 }
