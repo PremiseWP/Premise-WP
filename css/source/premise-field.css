@@ -8,370 +8,95 @@
  */
 
 
-
-
-/**
- * Premise Forms Global
- *
- * Styles that apply to every field.
- */
-.premise-field{
-	position: relative;
-	display: block;
-	margin-bottom: 20px;
-	box-sizing: border-box;
-	line-height: 20px;
-	font-size: 16px;
-}
-
-/**
- * The Field Wrapper
- */
-.premise-field > div {
-	position: relative;
+.premise-field {
 	display: block;
 	box-sizing: border-box;
-}
-
-/**
- * Apply general styles to form elements
- */
-.premise-field input,
-.premise-field textarea,
-.premise-field select {
-	box-sizing: border-box;
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	border: 1px solid #888;
-	border-radius: 2px;
-	background: #fff;
-	line-height: inherit;
 	font-size: inherit;
+	margin-bottom: 1.3em;
 }
 
-/**
- * Full Width Fields
- *
- * NOT checkbox, radio
- */
-.premise-field input,
-.premise-field input[type="text"],
-.premise-field input[type="username"],
-.premise-field input[type="password"],
-.premise-field input[type="email"],
-.premise-field input[type="file"],
+.premise-field select,
+.premise-field textarea,
+.premise-field input {
+	display: block;
+	box-sizing: border-box;
+	font-size: 1em;
+	line-height: 1;
+	padding: .5em;
+}
+
+/* 100% width fields */
+.premise-field select,
+.premise-field textarea,
 .premise-field input[type="tel"],
-.premise-field input[type="number"],
-.premise-field input[type="color"],
-.premise-field input[type="range"],
-.premise-field input[type="search"],
 .premise-field input[type="url"],
-.premise-field input[type="date"],
-.premise-field input[type="datetime"],
-.premise-field input[type="datetime-local"],
+.premise-field input[type="text"],
 .premise-field input[type="time"],
 .premise-field input[type="week"],
-.premise-field input[type="month"],
-.premise-field textarea,
-.premise-field select {
-	display: block;
+.premise-field input[type="email"],
+.premise-field input[type="phone"],
+.premise-field input[type="search"],
+.premise-field input[type="username"],
+.premise-field input[type="password"],
+.premise-field input[type="datetime"],
+.premise-field input[type="datetime-local"] {
 	width: 100%;
-	padding: 5px;
-	margin: 0;
 }
 
-/**
- * Non-Full Width Fields
- *
- * Checkboxes and radio fields
- */
-.premise-field input[type="checkbox"],
-.premise-field input[type="radio"] {
+/* Taller fields */
+.premise-field textarea,
+.premise-field select[multiple="multiple"] {
+	min-height: 10em;
+}
+
+/* radio and checkbox */
+.premise-field input[type="radio"],
+.premise-field input[type="checkbox"] {
+	float: left;
 	display: inline-block;
-	vertical-align: top;
-	margin: 0;
+	vertical-align: middle;
+	margin-right: 10px;
 }
-
-/**
- * Color fields
- */
-.premise-field input[type="color"] {
-	padding: 0;
-}
-
-/**
- * Button input fields
- */
-.premise-field input[type="button"],
-.premise-field input[type="submit"],
-.premise-field input[type="reset"] {
-	display: inline-block;
-	padding: 10px 20px;
-	width: auto;
-}
-
-/**
- * Placeholders
- */
-.premise-field > div ::-webkit-input-placeholder {
-	line-height: inherit;
-	font-size: inherit;
-	color: inherit;
-	letter-spacing: 1px;
-	opacity: .6;
-}
-.premise-field > div :-moz-placeholder {
-	line-height: inherit;
-	font-size: inherit;
-	color: inherit;
-	letter-spacing: 1px;
-	opacity: .6;
-}
-.premise-field > div ::-moz-placeholder {
-	line-height: inherit;
-	font-size: inherit;
-	color: inherit;
-	letter-spacing: 1px;
-	opacity: .6;
-}
-.premise-field > div :-ms-input-placeholder {
-	line-height: inherit;
-	font-size: inherit;
-	color: inherit;
-	letter-spacing: 1px;
-	opacity: .6;
-}
-
-/**
- * The field label
- */
-.premise-field > label,
-.premise-field > .premise-label {
-	display: inline-block;
-	text-transform: uppercase;
-	margin:0 0 5px;
-	line-height: 1.2em;
-	font-size: 1em;
-}
-
-/**
- * Field Tooltip
- *
- * Displays a tooltip when someone hovers the icon.
- * Adds an icon next to the label element that explains the field
- * to the user.
- */
-.premise-tooltip {
-	position: relative;
-	display: inline-block;
-	vertical-align: top;
-	line-height: 1.2em;
-	color: #fff;
-	margin: -2.5px 0 0 2.5px;
-	cursor: help;
-}
-
-.premise-tooltip:before{
-	color: #888;
-	font-family: 'FontAwesome';
-	content: "\f05a";
-}
-
-/*.premise-tooltip:after {
+.premise-type-radio:after,
+.premise-type-checkbox:after {
 	content: '';
-	position: absolute;
-	z-index: 99999;
-	left: 50%;
-	margin-left: -15px;
-	border-width: 15px 15px 15px 15px;
-	border-style: solid;
-	visibility:hidden;
-	opacity: 0;
-	transition: opacity .3s ease-in-out;
-}*/
-
-.premise-tooltip > .premise-tooltip-inner{
-	visibility:hidden;
-	opacity:0;
-	position:absolute;
-	bottom:150%;
-	left:-90px;
-	width:200px;
-	z-index:999999;
-	display:inline-block;
-	padding: 10px;
-	border-radius: 10px;
-	transition:opacity .3s ease-in-out;
-	text-align:left;
-	text-transform: none;
-	background: #444;
+	display: table;
+	clear: both;
 }
-
-.premise-tooltip:hover > .premise-tooltip-inner{
-	visibility:visible;
-	opacity:1
+.premise-type-radio > label,
+.premise-type-checkbox > label {
+	float: left;
 }
-
-.premise-admin .premise-tooltip-inner{
-	font-size: 0.7em;
-	line-height: 1.3;
-}
-
-
-
-
-/**
- * Textarea Fields
- *
- * for types video and textarea
- */
-.premise-field .premise-field-textarea textarea,
-.premise-field .premise-field-video textarea {
-	height: 150px;
-	text-align: justify;
-}
-
-
-
-
-/**
- * Select Field
- *
- * Only for select field that are not multiple
- */
-.premise-field .premise-field-select select {
-	height: auto;
-}
-
-.premise-field:not(.premise-field-multiple) > .premise-field-select select {
-	padding-right: 15px;
-}
-
-.premise-field:not(.premise-field-multiple) > .premise-field-select:after {
-	position: absolute;
-	top:  25%;
-	right: 5px;
-	content: '\f107';
-	font-family: 'FontAwesome';
-	pointer-events: none;
-}
-
-
-
-
-/**
- * Checkbox
- *
- * @see http://www.sitepoint.com/css3-toggle-switch/
- */
-.premise-field > .premise-field-checkbox {
-	display: inline-block;
-	margin-right: 10px;
-}
-
-
-
-
-/**
- * Radio
- */
-.premise-field > .premise-field-radio {
-	display: inline-block;
-	margin-right: 10px;
-}
-
-
-
-
-/**
- * Hidden
- */
-.premise-field-type-hidden {
-	margin-bottom: 0;
-}
-
 
 
 
 /**
  * wp_media Field
  */
-.premise-field-wp_media .premise-btn-upload,
-.premise-field-wp_media .premise-btn-remove {
-	position:absolute;
-	display:block;
+
+.premise-field-wp_media-wrapper {
+	position: relative;
+	padding-right: 80px;
+}
+.premise-field-wp_media-wrapper .premise-btn-remove,
+.premise-field-wp_media-wrapper .premise-btn-upload {
+	position: absolute;
 	top: 0;
-	z-index: 1;
-	box-sizing:border-box;
-	padding: 5px;
-	border: 1px solid;
-	border-color: #888 transparent #888 #ccc;
-	background:#fff;
-	width:40px;
-	height: 31px;
-	text-align:center;
+	right: 0;
+	width: 40px;
+	height: 100%;
+	line-height: 1;
+	padding: .5em;
+	text-align: center;
+	font-size: 1em;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
 	outline: 0;
 }
-
-.premise-field-wp_media > .premise-btn-upload {
-	right:41px;
+.premise-field-wp_media-wrapper .premise-btn-upload {
+	margin-right: 3em;
 }
-
-.premise-field-wp_media > .premise-btn-remove {
-	right:1px;
-}
-
-.premise-wp_media-preview {
-	position: relative;
-	height: auto;
-	width: 100%;
-	padding: 20px;
-	margin-top: 13px;
-	border: 1px solid #888;
-	border-radius: 2px;
-	background-position: center center;
-	background-size: contain;
-	background-repeat: no-repeat;
-	background-color: #fff;
-	transition: all .4s ease-in-out;
-}
-
-.premise-wp_media-preview-inner {
-	position: relative;
-	height: auto;
-	max-height: 300px;
-	overflow: auto;
-}
-
-.premise-wp_media-preview:before,
-.premise-wp_media-preview:after {
-	content: '';
-	display: block;
-	position: absolute;
-	left: 50%;
-	margin-left: -10px;
-	border-width: 0 10px 10px 10px;
-	border-style: solid;
-}
-
-.premise-wp_media-preview:before {
-	top: -11px;
-	border-color: transparent transparent #888 transparent;
-}
-
-.premise-wp_media-preview:after {
-	top: -9px;
-	border-color: transparent transparent #fff transparent;
-}
-
-.premise-preview-thumb {
-	padding-top: 25%;
-	background-size: contain;
-	background-position: center;
-	background-repeat: no-repeat;
-}
-
-
 
 
 /**
