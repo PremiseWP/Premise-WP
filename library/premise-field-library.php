@@ -50,13 +50,28 @@ function premise_field( $type = 'text', $args = array(), $echo = true ) {
 		$_args['type'] = ( ! empty( $type ) ) ? esc_attr( $type ) : 'text';
 	}
 
+	// backward compatibility for tooltip
+	if ( isset( $_args['tooltip'] ) && ! empty( $_args['tooltip'] ) ) {
+		$_args['before_field'] = '<br><i>'.strip_tags( $_args['tooltip'], '<span>,<p>,<b>,<strong>,<br>' ).'</i>';
+		unset( $_args['tooltip'] );
+	}
+
+	// backward compatibility for attribute
+	if ( isset( $_args['attribute'] ) && ! empty( $_args['attribute'] ) ) {
+		preg_match_all( '/([\w]*)=/', $_args['attribute'], $attribute_a );
+		var_dump($attribute_a);
+		$_args['before_field'] = '<br><i>'.strip_tags( $_args['attribute'], '<span>,<p>,<b>,<strong>,<br>' ).'</i>';
+		unset( $_args['attribute'] );
+	}
+
+	// make the field
 	pwp_field( $_args, $echo );
 }
 
 /**
  * output a field
  *
- * @since 2.0.0 added to replace premise_field. for backward compatibility premise_field became a wrapper for this function.
+ * @since  2.0.0         added to replace premise_field. for backward compatibility premise_field became a wrapper for this function.
  *
  * @param  string  $args arguments can be a string - the 'type' param, or an array - argument for field
  * @param  boolean $echo whether to echo ro return the thml
@@ -76,11 +91,25 @@ function pwp_field( $args = '', $echo = true ) {
 	}
 }
 
-function pwp_form( $args = '', $echo = '' ) {
-
-	new PWP_Form( $args );
-
-
+/**
+ * output a form or field section
+ *
+ * @since  2.0.0         added to replace premise_fieldSection().
+ *
+ * @param  array   $args array of fields and attributes
+ * @param  boolean $echo true to echo. false to return html
+ * @return string        the html for the form or field section
+ */
+function pwp_form( $args = '', $echo = true ) {
+	// build the form
+	$_f = new PWP_Form( $args );
+	// echo or return
+	if ( $_f && (boolean) $echo ) {
+		echo $_f->form;
+	}
+	else {
+		return $_f->form;
+	}
 }
 
 /**
@@ -98,26 +127,7 @@ function pwp_form( $args = '', $echo = '' ) {
  */
 function premise_field_section( $args = array(), $echo = true ) {
 
-	/**
-	 * Backward comaptibility with versions < 1.2
-	 *
-	 * If the $args array has the key 'fields', it was called using the old way. we need to fix that.
-	 *
-	 * @since  1.2 array of array no longer requires fields to be in its own array called 'fields'
-	 */
-	$args = array_key_exists( 'fields', $args ) && is_array( $args['fields'] ) ? $args['fields'] : $args;
-
-	$html = ''; // Start with a clean section.
-
-	foreach ( $args as $k => $v ) {
-
-		if ( is_array( $v ) ) {
-
-			// Pass each field args as first parameter
-			// We can do this because of backward compatibilty.
-			$html .= premise_field( $v, '', false );
-		}
-	}
+	$html = pwp_form( $args, false );
 
 	/**
 	 * premise_field_section_html filter
