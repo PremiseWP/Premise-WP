@@ -20,9 +20,9 @@
 
 		// reference all our global variables
 		var $el       = $(el),
-		wrapper       = $el.parent(),
-		btnUpload     = $el.siblings('.premise-btn-upload'),
-		btnDelete     = $el.siblings('.premise-btn-remove'),
+		wrapper       = null,
+		btnUpload     = $el.siblings( '.'+opts.btnUploadClass ),
+		btnDelete     = $el.siblings( '.'+opts.btnRemoveClass ),
 		uploader,
 		mediaUploaded = [];
 
@@ -43,7 +43,9 @@
 			}
 
 			// wrap container around element
-			if ( opts.wrap ) $el.wrap( '<div class="premise-field-wp_media"></div>' );
+			if ( opts.wrap ) $el.wrap( '<div class="premise-field-wp_media-wrapper"></div>' );
+
+			wrapper = $el.parent();
 
 			if ( opts.preview && '' !== $el.val() ) {
 				var media = $el.val().split( ',' );
@@ -167,15 +169,15 @@
 			if ( ! btnDelete.length ) {
 				// btnDelete = $('<a class="premise-btn-remove" href="javascript:void(0);"><i class="fa fa-fw fa-times"></i></a>');
 				// $el.parentNode.insertBefore( btnDelete[0], field[0].nextSibling );
-				wrapper.append( $('<a class="premise-btn-remove" href="javascript:void(0);"><i class="fa fa-fw fa-times"></i></a>') );
-				btnDelete = $( '.premise-btn-remove' );
+				wrapper.append( $('<a class="'+opts.btnRemoveClass+'" href="javascript:void(0);"><i class="fa fa-fw fa-times"></i></a>') );
+				btnDelete = $( '.'+opts.btnRemoveClass );
 			}
 
 			if ( ! btnUpload.length ) {
 				// btnUpload = $('<a class="premise-btn-upload" href="javascript:void(0);"><i class="fa fa-fw fa-upload"></i></a>');
 				// $el.parentNode.insertBefore( btnUpload[0], field[0].nextSibling );
-				wrapper.append( $('<a class="premise-btn-upload" href="javascript:void(0);"><i class="fa fa-fw fa-upload"></i></a>') );
-				btnUpload = $( '.premise-btn-upload' );
+				wrapper.append( $('<a class="'+opts.btnUploadClass+'" href="javascript:void(0);"><i class="fa fa-fw fa-upload"></i></a>') );
+				btnUpload = $( '.'+opts.btnUploadClass );
 			}
 
 			// Bind upload button
@@ -203,6 +205,8 @@
 		return: 'url',
 		preview: false,
 		wrap: true,
+		btnUploadClass: 'premise-btn-upload',
+		btnRemoveClass: 'premise-btn-remove',
 	}
 
 }(jQuery));
