@@ -7,14 +7,13 @@
  * @subpackage CSS
  */
 
-
+/* Basic styles */
 .premise-field {
 	display: block;
 	box-sizing: border-box;
 	font-size: inherit;
 	margin-bottom: 1.3em;
 }
-
 .premise-field select,
 .premise-field textarea,
 .premise-field input {
@@ -33,8 +32,11 @@
 .premise-field input[type="text"],
 .premise-field input[type="time"],
 .premise-field input[type="week"],
+.premise-field input[type="date"],
+.premise-field input[type="month"],
 .premise-field input[type="email"],
 .premise-field input[type="phone"],
+.premise-field input[type="range"],
 .premise-field input[type="search"],
 .premise-field input[type="username"],
 .premise-field input[type="password"],
@@ -52,28 +54,23 @@
 /* radio and checkbox */
 .premise-field input[type="radio"],
 .premise-field input[type="checkbox"] {
-	float: left;
 	display: inline-block;
 	vertical-align: middle;
-	margin-right: 10px;
-}
-.premise-type-radio:after,
-.premise-type-checkbox:after {
-	content: '';
-	display: table;
-	clear: both;
-}
-.premise-type-radio > label,
-.premise-type-checkbox > label {
-	float: left;
+	margin-left: 10px;
 }
 
+/* buttons */
+.premise-field input[type="reset"],
+.premise-field input[type="submit"],
+.premise-field input[type="button"] {
+	display: inline-block;
+	padding: .5em 1em;
+	border: 1px solid #ccc;
+	background-color: #fff;
+	border-radius: .3em;
+}
 
-
-/**
- * wp_media Field
- */
-
+/* wp_media Field */
 .premise-field-wp_media-wrapper {
 	position: relative;
 	padding-right: 80px;
@@ -98,57 +95,39 @@
 	margin-right: 3em;
 }
 
+/* wp_color field */
+.premise-wp_color-field .wp-picker-container {
+	display: block;
+}
+.premise-wp_color-field .wp-picker-active .wp-picker-input-wrap input {
+	float: left;
+	height: 25px; /* Force height */
+}
 
-/**
- * FontAwesome Icon Field
- */
+/* FontAwesome Icon Field */
 .premise-field-fa_icon {
 	position: relative;
-	line-height: 20px;
-	font-size: 16px;
+	padding-right: 80px;
 }
-
-.premise-field-fa_icon > input.premise-field-fa_icon-input {
-	display: block;
-	width: 100%;
-	padding: 5px;
-	margin: 0;
-	box-sizing: border-box;
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	border: 1px solid #888;
-	border-radius: 2px;
-	background: #fff;
-	line-height: inherit;
-	font-size: inherit;
-}
-
 .premise-field-fa_icon .premise-choose-icon,
 .premise-field-fa_icon .premise-remove-icon {
-	display: block;
 	position: absolute;
 	top: 0;
-	z-index: 1;
-	box-sizing: border-box;
-	padding: 5px;
-	border: 1px solid;
-	border-color: #888 transparent #888 #ccc;
-	background: #fff;
+	right: 0;
 	width: 40px;
-	line-height: inherit;
-	font-size: inherit;
-	text-align:center;
+	height: 100%;
+	line-height: 1;
+	padding: .5em;
+	text-align: center;
+	font-size: 1em;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
 	outline: 0;
 }
-
 .premise-field-fa_icon .premise-choose-icon {
-	right:41px;
+	margin-right: 3em;
 }
-
-.premise-field-fa_icon .premise-remove-icon {
-	right:1px;
-}
-
 .premise-field-fa_icon .premise-field-fa-icons-container {
 	position: absolute;
 	z-index: 2;
@@ -156,49 +135,44 @@
 	right: 0;
 	width: 100%;
 	background: #fff;
-	border: 1px solid #888;
-	border-radius: 2px;
+	border: 1px solid #ccc;
+	border-radius: .2em;
 	padding: 0;
-	margin-top: 5px;
+	margin-top: .5em;
 	box-sizing: border-box;
-	max-width: 400px;
 }
-
 .premise-field-fa_icon .premise-field-fa-icons-container-inner {
-	position: relative;
-	padding: 75% 0 0 0;
-	box-sizing: border-box;
 	overflow: hidden;
+	position: relative;
+	padding: 50% 0 0 0;
+	box-sizing: border-box;
 }
-
 .premise-field-fa_icon .premise-field-fa-icons-ul {
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
-	box-sizing: border-box;
-	padding: 20px;
+	padding: 1em;
+	margin: 0;
 	overflow: auto;
-	font-size: 0px; /* important to remove any white space in between li elements */
+	box-sizing: border-box;
 }
-
 .premise-field-fa_icon .premise-field-fa-icon-li {
-	margin-top: 5px;
-	margin-bottom: 5px;
-	transition: all .4s ease-in-out;
-	width: 20%;
+	display: inline-block;
+	margin: 5px;
+	transition: box-shadow .4s ease-in-out;
 }
-
 .premise-field-fa_icon .premise-field-fa-icon-anchor {
 	display: block;
-	padding: 5px;
+	padding: .5em;
 	color: #444;
-	font-size: 30px; /* override the ul font size */
+	font-size: 2em; /* override the ul font size */
 	text-align: center;
 	transition: transform .1s ease-in-out;
 }
-
 .premise-field-fa_icon .premise-field-fa-icon-anchor:hover {
 	transform: scale(1.8,1.8);
+	box-shadow: 0 0 1px #ccc;
+	background-color: #fff;
 }
