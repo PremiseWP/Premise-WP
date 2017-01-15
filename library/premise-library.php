@@ -371,3 +371,38 @@ function premise_rand_str( $length = '' ) {
 function pwp_empty_value( $val = '' ) {
 	return empty( $val ) && $val !== 0 && $val !== 0.0 && $val !== '0';
 }
+
+
+function pwp_add_metabox( $title = '', $post_type = '', $fields = '' ) {
+
+	$args = array();
+
+	$_defaults = array(
+		'id'            => '',
+		'title'         => '',
+		'callback'      => '',
+		'screen'        => '',
+		'context'       => '',
+		'priority'      => '',
+		'callback_args' => '',
+	);
+
+	if ( is_string( $title ) ) {
+		$args['title']  = esc_html( $title );
+		$args['id']     = str_replace( ' ', '-', strtolower( $args['title'] ) );
+		// get post type. allows it to be an array of multi post types
+		$args['screen'] = ( is_string( $post_type ) ) ? esc_attr( $post_type ) : (array) $post_type;
+	}
+	elseif ( is_array( $title ) ) {
+		$args = wp_parse_args( $title, $_defaults );
+	}
+	else {
+		return false;
+	}
+
+	if ( ! empty( $fields ) && is_array( $fields ) ) {
+		$args['fields'] = $fields;
+	}
+
+	new PWP_Metabox( $args );
+}

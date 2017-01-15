@@ -6,6 +6,11 @@
 */
 class PWP_Field {
 
+	/**
+	 * Holds param defaults
+	 *
+	 * @var array
+	 */
 	protected $_defaults = array(
 		'tag'           => '',
 		'type'          => '',
@@ -18,16 +23,46 @@ class PWP_Field {
 		'default'       => '',
 	);
 
+	/**
+	 * holds args
+	 *
+	 * @var array
+	 */
 	public $args = array();
 
+	/**
+	 * holds tag
+	 *
+	 * @var array
+	 */
 	public $tag = 'input';
 
+	/**
+	 * holds type
+	 *
+	 * @var array
+	 */
 	public $type = '';
 
+	/**
+	 * holds name
+	 *
+	 * @var array
+	 */
 	public $name = '';
 
+	/**
+	 * holds id
+	 *
+	 * @var array
+	 */
 	public $id = '';
 
+	/**
+	 * build our object
+	 *
+	 * @param string $args [description]
+	 */
 	function __construct( $args = '' ) {
 
 		$this->args = wp_parse_args( $args, $this->_defaults );

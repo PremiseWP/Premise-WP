@@ -42,10 +42,21 @@
 				return false;
 			}
 
-			// wrap container around element
-			if ( opts.wrap ) $el.wrap( '<div class="premise-field-wp_media-wrapper"></div>' );
+			if ( $el.attr( 'preview' ) ) opts.preview = true;
+			if ( $el.attr( 'multiple' ) ) opts.multiple = true;
 
-			wrapper = $el.parent();
+			// Override options if submitted inline via 'data-options'
+			var inlineOptions = $el.attr( 'data-options' );
+			if ( '' !== inlineOptions ) {
+				var optionsObj = $.parseJSON( inlineOptions );
+				opts = $.extend( {}, opts, optionsObj );
+			}
+
+			// wrap container around element
+			if ( opts.wrap ) {
+				$el.wrap( '<div class="premise-field-wp_media-wrapper"></div>' );
+				wrapper = $el.parent();
+			}
 
 			if ( opts.preview && '' !== $el.val() ) {
 				var media = $el.val().split( ',' );
@@ -55,13 +66,6 @@
 					}
 				}
 				setPreview();
-			}
-
-			// Override options if submitted inline via 'data-options'
-			var inlineOptions = $el.attr( 'data-options' );
-			if ( '' !== inlineOptions ) {
-				var optionsObj = $.parseJSON( inlineOptions );
-				opts = $.extend( {}, opts, optionsObj );
 			}
 
 			// now that we have our $el ready, insert buttons.

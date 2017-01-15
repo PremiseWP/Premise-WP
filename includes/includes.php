@@ -11,20 +11,19 @@ defined( 'ABSPATH' ) or die();
 
 
 
-/**
- * Model
- */
 require_once PREMISE_PATH . 'model/model-premise-options.php';
-require_once PREMISE_PATH . 'model/model-premise-field.php';
+// require_once PREMISE_PATH . 'model/model-premise-field.php';
 require_once PREMISE_PATH . 'model/model-premise-custom-post-type.php';
 require_once PREMISE_PATH . 'model/model-premise-tabs.php';
-require_once PREMISE_PATH . 'model/class.fields-model.php';
 
+// new models
+require_once PREMISE_PATH . 'model/class.fields-model.php';
+require_once PREMISE_PATH . 'model/class.metabox-model.php';
+
+// new controllers
 require_once PREMISE_PATH . 'controller/class.fields-controller.php';
 require_once PREMISE_PATH . 'controller/class.forms-controller.php';
 
-/**
- * Libraries
- */
+// Libraries
 require_once PREMISE_PATH . 'library/premise-library.php';
 require_once PREMISE_PATH . 'library/premise-field-library.php';

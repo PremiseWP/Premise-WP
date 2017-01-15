@@ -13,17 +13,18 @@ class PWP_Metabox {
      * @var array
      */
     protected $defaults = array(
-        'id'            => 'premise-wp-mb',
+        'id'            => '',
         'title'         => 'Metabox Created with Premise WP',
         'callback'      => '',
         'screen'        => 'post',     // post type. Default post
         'context'       => 'advanced', // normal | side | advanced. Default advanced
         'priority'      => 'default',  // high | low | default
         'callback_args' => '',         // Data that should be set as the $args property of the box array (which is the second parameter passed to your callback).
+        'fields'        => array(),    // any fields to display in the metabox
     );
 
     /**
-     * Holds paresed arguments
+     * Holds parsed arguments
      *
      * @var array
      */
@@ -34,12 +35,13 @@ class PWP_Metabox {
      */
     public function __construct( $mb_args = array() ) {
 
-        $this->nonce = $this->rand_str();
+        $this->nonce = 'pwp-metabox-nonce';
+        $this->nonce_action = premise_rand_str( 8 );
 
         if ( is_admin() ) {
             $this->mb = wp_parse_args( $mb_args, $this->defaults );
 
-            if ( '' == $this->mb['callback'] ) {
+            if ( empty( $this->mb['callback'] ) ) {
                 $this->mb['callback'] = array( $this, 'render_metabox' );
             }
 
@@ -61,12 +63,14 @@ class PWP_Metabox {
      * Check if we should load the metabox, and load it if we should. This checks for the post type to see  if it matches the screen param sent.
      */
     public function maybe_load_mb( $post_type ) {
-        if ( $post_type == $this->mb['screen'] ) {
+        if ( ( is_array( $this->mb['screen'] ) && in_array( $post_type, $this->mb['screen'] ) )
+             || ( is_string( $this->mb['screen'] ) && $post_type == $this->mb['screen'] ) ) {
+
             add_meta_box(
                 $this->mb['id'],
                 __( $this->mb['title'], 'textdomain' ),
                 $this->mb['callback'],
-                $this->mb['screen'],
+                $post_type,
                 $this->mb['context'],
                 $this->mb['priority']
             );
@@ -78,9 +82,14 @@ class PWP_Metabox {
      */
     public function render_metabox( $post ) {
         // Add nonce for security and authentication.
-        wp_nonce_field( 'custom_nonce_action', $this->nonce );
+        wp_nonce_field( $this->nounce_action, $this->nonce );
 
-        echo 'This content is loaded by default by the PWP_Metabox class.';
+        if ( ! empty( $this->mb['fields'] ) && is_array( $this->mb['fields'] ) ) {
+            pwp_form( $this->mb['fields'], true );
+        }
+        else {
+            echo 'This content is loaded by default by the PWP_Metabox class since no fields were submitted.';
+        }
     }
 
     /**
@@ -93,8 +102,7 @@ class PWP_Metabox {
     public function save_metabox( $post_id, $post ) {
         // Add nonce for security and authentication.
         $nonce_name   = isset( $_POST[ $this->nonce ] ) ? $_POST[ $this->nonce ] : '';
-        $nonce_action = 'custom_nonce_action';
-
+        $nonce_action = $this->nounce_action;
         // Check if nonce is set.
         if ( ! isset( $nonce_name ) ) {
             return;
@@ -119,15 +127,5 @@ class PWP_Metabox {
         if ( wp_is_post_revision( $post_id ) ) {
             return;
         }
-    }
-
-    public function rand_str($length = 10) {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $charactersLength = strlen($characters);
-        $randomString = '';
-        for ($i = 0; $i < $length; $i++) {
-            $randomString .= $characters[rand(0, $charactersLength - 1)];
-        }
-        return $randomString;
     }
 }

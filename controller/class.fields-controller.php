@@ -207,11 +207,14 @@ class PWP_Field_Controller extends PWP_Field {
 		// allow to pass param as bool - i.e. 'multiple' => true|false
 		if ( isset( $this->params['multiple'] ) && $this->params['multiple'] )
 			$this->params['multiple'] = 'multiple';
+		else unset( $this->params['multiple'] );
 		// allow to pass param as bool - i.e. 'required' => true|false
 		if ( isset( $this->params['required'] ) && $this->params['required'] )
 			$this->params['required'] = 'required';
+		else unset( $this->params['required'] );
 		// allow to pass param as bool - i.e. 'disabled' => true|false
 		if ( isset( $this->params['disabled'] ) && $this->params['disabled'] )
 			$this->params['disabled'] = 'disabled';
+		else unset( $this->params['disabled'] );
 	}
 }
