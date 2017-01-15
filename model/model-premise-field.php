@@ -50,7 +50,6 @@ class PremiseField {
 		 */
 		'label'      => '',
 		'tooltip'    => '',
-		'context'    => '',
 		'wrapper_class' => '',
 		'default'    => '',
 		'value_att'  => '',
@@ -60,6 +59,7 @@ class PremiseField {
 		'name'       => '',
 		'id'         => '',
 		'value'      => '',
+		'context'    => '',
 	);
 
 
