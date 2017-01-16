@@ -373,7 +373,7 @@ function pwp_empty_value( $val = '' ) {
 }
 
 
-function pwp_add_metabox( $title = '', $post_type = '', $fields = '' ) {
+function pwp_add_metabox( $title = '', $post_type = '', $fields = '', $option_names = '' ) {
 
 	$args = array();
 
@@ -404,5 +404,5 @@ function pwp_add_metabox( $title = '', $post_type = '', $fields = '' ) {
 		$args['fields'] = $fields;
 	}
 
-	new PWP_Metabox( $args );
+	new PWP_Metabox( $args, $option_names );
 }
