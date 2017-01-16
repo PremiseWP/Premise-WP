@@ -45,10 +45,27 @@ class PWP_Metabox {
      *
      * @var string
      */
-    public $errors = '';
+    private $errors = '';
+
+    /**
+     * Holds the nonce
+     *
+     * @var string
+     */
+    private $nonce = 'pwp-metabox-nonce';
+
+    /**
+     * Holds the nonce_action
+     *
+     * @var string
+     */
+    private $nonce_action = '';
 
     /**
      * Constructor
+     *
+     * @param array  $mb_args      the arguments to build the metabox
+     * @param string $option_names the option names being used in the metabox.
      */
     public function __construct( $mb_args = array(), $option_names = '' ) {
 
@@ -60,7 +77,6 @@ class PWP_Metabox {
                 $this->new_error( 'pwp_metabox_no_option_names' );
             }
 
-            $this->nonce = 'pwp-metabox-nonce';
             $this->nonce_action = premise_rand_str( 8 );
 
             $this->mb = wp_parse_args( $mb_args, $this->defaults );
@@ -84,29 +100,29 @@ class PWP_Metabox {
      */
     public function init() {
         add_action( 'add_meta_boxes' , array( $this , 'maybe_load_mb'  ) );
-        add_action( 'save_post'      , array( $this , 'save_metabox' ), 10 );
+        add_action( 'save_post'      , array( $this , 'save_metabox' ), 10, 2 );
     }
 
     /**
      * Check if we should load the metabox, and load it if we should. This checks for the post type to see  if it matches the screen param sent.
+     *
+     * @param string $post_type the post type being used
      */
     public function maybe_load_mb( $post_type ) {
-        if ( ( is_array( $this->mb['screen'] ) && in_array( $post_type, $this->mb['screen'] ) )
-             || ( is_string( $this->mb['screen'] ) && $post_type == $this->mb['screen'] ) ) {
-
-            add_meta_box(
-                $this->mb['id'],
-                __( $this->mb['title'], 'textdomain' ),
-                $this->mb['callback'],
-                $post_type,
-                $this->mb['context'],
-                $this->mb['priority']
-            );
-        }
+        add_meta_box(
+            $this->mb['id'],
+            __( $this->mb['title'] ),
+            $this->mb['callback'],
+            $this->mb['screen'],
+            $this->mb['context'],
+            $this->mb['priority']
+        );
     }
 
     /**
      * Renders the meta box.
+     *
+     * @param object $post the post object for the post being viewed
      */
     public function render_metabox( $post ) {
         // if there are errors. show them instead of the fields
@@ -126,8 +142,8 @@ class PWP_Metabox {
     /**
      * Handles saving the meta box.
      *
-     * @param int     $post_id Post ID.
-     * @param WP_Post $post    Post object.
+     * @param  int     $post_id Post ID.
+     * @param  WP_Post $post    Post object.
      * @return null
      */
     public function save_metabox( $post_id, $post ) {
@@ -171,7 +187,12 @@ class PWP_Metabox {
         }
     }
 
-
+    /**
+     * add an error to be handed later
+     *
+     * @param  string $error_code the error "slug" to know what error message to display
+     * @return void               saves the error, does not return anything
+     */
     private function new_error( $error_code = '' ) {
         $e = ( ! empty( $error_code ) && array_key_exists( $error_code, $this->error_codes ) ) ? $this->error_codes[ $error_code ] : '';
         if ( is_wp_error( $this->errors ) ) {

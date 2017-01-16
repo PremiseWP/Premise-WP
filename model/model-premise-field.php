@@ -4,6 +4,8 @@
  *
  * @see library/premise-field-library.php For functions that that this class depends on
  *
+ * @deprecated 2.0.0 replaced by class PWP_Field and PWP_Field_Controller
+ *
  * @package Premise WP
  * @subpackage Model
  */
