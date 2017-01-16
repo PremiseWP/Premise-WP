@@ -40,14 +40,21 @@ defined( 'ABSPATH' ) or die();
  * @return string       html markup for a form field
  */
 function premise_field( $type = 'text', $args = array(), $echo = true ) {
-
+	// allow type to be an array with all the arguments
 	if ( is_array( $type ) ) {
 		$_args = $type;
 	}
-	else {
+	elseif ( is_string( $type ) ) {
 		$_args = $args;
 		// do not allow an empty type for backward compatibility
-		$_args['type'] = ( ! empty( $type ) ) ? esc_attr( $type ) : 'text';
+		if ( ! isset( $_args['type'] ) ) {
+			$_args['type'] = ( ! empty( $type ) ) ? esc_attr( $type ) : 'text';
+		}
+	}
+	else {
+		// First argument must be a string or array
+		// so if neither is true, stop here.
+		return false;
 	}
 
 	// backward compatibility for tooltip
