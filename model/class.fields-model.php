@@ -87,7 +87,7 @@ class PWP_Field {
 	 * @return string html for textarea field
 	 */
 	protected function textarea() {
-		return '<textarea '.$this->field_atts( array( 'type', 'value' ) ).'>'.$this->options.'</textarea>';
+		return '<textarea '.$this->field_atts( array( 'type', 'value' ) ).'>'.$this->value.'</textarea>';
 	}
 
 	/**
@@ -194,13 +194,13 @@ class PWP_Field {
 	 * @return void does not return anything. basically builds our object.
 	 */
 	private function extract_args() {
+		$this->context = esc_attr( $this->args['context'] );
 		$this->tag     = $this->get_tag();
 		$this->type    = $this->get_type();
 		$this->name    = $this->get_name();
 		$this->id      = $this->get_id();
 		$this->value   = $this->get_value();
 		$this->options = $this->get_options();
-		$this->context = esc_attr( $this->args['context'] );
 
 		unset( $this->args['tag'] );
 		unset( $this->args['type'] );
@@ -301,7 +301,6 @@ class PWP_Field {
 		else {
 			return '';
 		}
-
 		if ( is_array( $val ) ) {
 
 			return $val;
