@@ -372,7 +372,15 @@ function pwp_empty_value( $val = '' ) {
 	return empty( $val ) && $val !== 0 && $val !== 0.0 && $val !== '0';
 }
 
-
+/**
+ * add a metabox with one function!
+ *
+ * @param  mixed  $title        Required. can be a string or array with all params that add_meta_box takes
+ * @param  mixed  $post_type    Optional. can be a string or array with multiple post type or WP_Screen
+ * @param  array  $fields       Optional. array of fields to display in the metabox
+ * @param  mixed  $option_names Required. can be a string or array with multiple names
+ * @return void                 Registers the metabox. Does not return anything
+ */
 function pwp_add_metabox( $title = '', $post_type = '', $fields = '', $option_names = '' ) {
 
 	$args = array();
@@ -386,23 +394,26 @@ function pwp_add_metabox( $title = '', $post_type = '', $fields = '', $option_na
 		'priority'      => '',
 		'callback_args' => '',
 	);
-
+	// if title is a string
 	if ( is_string( $title ) ) {
 		$args['title']  = esc_html( $title );
 		$args['id']     = str_replace( ' ', '-', strtolower( $args['title'] ) );
-		// get post type. allows it to be an array of multi post types
-		$args['screen'] = ( is_string( $post_type ) ) ? esc_attr( $post_type ) : (array) $post_type;
 	}
 	elseif ( is_array( $title ) ) {
 		$args = wp_parse_args( $title, $_defaults );
+
 	}
 	else {
 		return false;
 	}
-
-	if ( ! empty( $fields ) && is_array( $fields ) ) {
-		$args['fields'] = $fields;
+	// add screen if not present
+	if ( ! isset( $args['screen'] ) ) {
+		$args['screen'] = ( is_string( $post_type ) && ! empty( $post_type ) ) ? esc_attr( $post_type ) : array_map( esc_attr, $post_type );
 	}
-
+	// add fields if not present
+	if ( ! isset( $args['fields'] ) ) {
+		$args['fields'] = ( ! empty( $fields ) && is_array( $fields ) ) ? $fields : '';
+	}
+	// register meta box
 	new PWP_Metabox( $args, $option_names );
 }
