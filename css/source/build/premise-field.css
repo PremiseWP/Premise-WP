@@ -73,26 +73,26 @@
 /* wp_media Field */
 .premise-field-wp_media-wrapper {
 	position: relative;
-	padding-right: 80px;
+	padding-right: 6em;
 }
 .premise-field-wp_media-wrapper .premise-btn-remove,
 .premise-field-wp_media-wrapper .premise-btn-upload {
 	position: absolute;
 	top: 0;
 	right: 0;
-	width: 40px;
+	outline: 0;
+	width: 3em;
 	height: 100%;
-	line-height: 1;
 	padding: .5em;
-	text-align: center;
 	font-size: 1em;
+	text-align: center;
 	background-color: #fff;
 	border: 1px solid #ccc;
 	box-sizing: border-box;
-	outline: 0;
 }
 .premise-field-wp_media-wrapper .premise-btn-upload {
 	margin-right: 3em;
+	border-right: 0;
 }
 
 /* wp_color field */
@@ -107,26 +107,26 @@
 /* FontAwesome Icon Field */
 .premise-field-fa_icon {
 	position: relative;
-	padding-right: 80px;
+	padding-right: 6em;
 }
 .premise-field-fa_icon .premise-choose-icon,
 .premise-field-fa_icon .premise-remove-icon {
 	position: absolute;
 	top: 0;
 	right: 0;
-	width: 40px;
+	outline: 0;
+	width: 3em;
 	height: 100%;
-	line-height: 1;
 	padding: .5em;
-	text-align: center;
 	font-size: 1em;
+	text-align: center;
 	background-color: #fff;
 	border: 1px solid #ccc;
 	box-sizing: border-box;
-	outline: 0;
 }
 .premise-field-fa_icon .premise-choose-icon {
 	margin-right: 3em;
+	border-right: 0;
 }
 .premise-field-fa_icon .premise-field-fa-icons-container {
 	position: absolute;
