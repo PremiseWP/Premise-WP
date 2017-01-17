@@ -166,13 +166,11 @@ function premise_get_post_meta( $post_id = '', $name = '', $single = true ) {
  *
  * @return mixed            Returns value from database
  */
-function premise_get_user_meta( $user_id = '', $name = '', $single = true ) {
+function premise_get_user_meta( $_user_id = '', $name = '', $single = true ) {
 
-	if ( empty( $user_id ) ) {
-
-		global $user;
-
-		$user_id = $user->ID;
+	if ( empty( $_user_id ) ) {
+		global $user_id;
+		$_user_id = $user_id;
 	}
 
 	/**
@@ -180,7 +178,7 @@ function premise_get_user_meta( $user_id = '', $name = '', $single = true ) {
 	 *
 	 * @var mixed
 	 */
-	return get_user_meta( $user_id, $name, $single );
+	return get_user_meta( $_user_id, $name, $single );
 }
 
 
