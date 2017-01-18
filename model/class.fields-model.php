@@ -306,7 +306,7 @@ class PWP_Field {
 		}
 		if ( is_array( $val ) ) {
 
-			return $val;
+			return implode( ',', $val );
 		}
 		elseif ( ! pwp_empty_value( $val ) ) {
 
