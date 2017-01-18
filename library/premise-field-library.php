@@ -16,9 +16,6 @@
 // Block direct access to this file.
 defined( 'ABSPATH' ) or die();
 
-
-
-
 /**
  * Premise Field
  *
@@ -29,9 +26,11 @@ defined( 'ABSPATH' ) or die();
  * For example passing the 'name' attribute will add 'name="your_value"' to your field but it will also tell
  * Premise where to save the value and how to retrieve it after a value has been saved.
  *
- * @since 1.2 Parameters order changed, new parameter added:
- *            Old params: (array) arguments, (boolean) echo
- *            New params: (string) type, (array) arguments, (boolean) echo
+ * @since 1.2           Parameters order changed, new parameter added:
+ *                      Old params: (array) arguments, (boolean) echo
+ *                      New params: (string) type, (array) arguments, (boolean) echo
+ *
+ * @since 2.0.0         this function is now a wrapper for pwp_field()
  *
  * @param string  $type the type of field to print or return. i.e. text, textarea, checkbox, wp_media, video.
  * @param array   $args array of arguments to buid a field.
@@ -118,6 +117,8 @@ function pwp_form( $args = '', $echo = true ) {
  *
  * @since  1.2     Simplified parameters. You can no longer use 'container' parameters.
  *                 instead, use the 'premise_field_section_html' filter.
+ *
+ * @since 2.0.0    this function is now a wrapper for pwp_form()
  *
  * @param  array   $args array of arrays. The fields to insert.
  * @param  boolean $echo whether to echo ro return the string.

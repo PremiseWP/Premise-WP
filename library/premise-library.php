@@ -13,9 +13,6 @@
 // Block direct access to this file.
 defined( 'ABSPATH' ) or die();
 
-
-
-
 /**
  * Get the value from any option, including options from a post or a user.
  *
@@ -373,7 +370,9 @@ function pwp_empty_value( $val = '' ) {
 /**
  * add a metabox with one function!
  *
- * @param  mixed  $title        Required. can be a string or array with all params that add_meta_box takes
+ * @since  2.0.0
+ *
+ * @param  mixed  $title        Optional. can be a string or array with all params that add_meta_box takes
  * @param  mixed  $post_type    Optional. can be a string or array with multiple post type or WP_Screen
  * @param  array  $fields       Optional. array of fields to display in the metabox
  * @param  mixed  $option_names Required. can be a string or array with multiple names
@@ -391,6 +390,7 @@ function pwp_add_metabox( $title = '', $post_type = '', $fields = '', $option_na
 		'context'       => '',
 		'priority'      => '',
 		'callback_args' => '',
+		'fields'        => '',
 	);
 	// if title is a string
 	if ( is_string( $title ) ) {
