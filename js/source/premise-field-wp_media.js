@@ -154,12 +154,12 @@
 			if ( mediaUploaded.length > 1 ) {
 				for ( var i = 0; i < mediaUploaded.length; i++ ) {
 					var col = ( 6 > mediaUploaded.length ) ? mediaUploaded.length : 6;
-					str += '<span class="premise-preview-thumb col'+col+'" style="background-image: url('+mediaUploaded[i]+');"></span>';
+					str += '<span class="premise-preview-thumb col'+col+'"><div class="premise-aspect-ratio-4-3"><div style="background-image: url('+mediaUploaded[i]+');"></div></div></span>';
 				}
 			}
 			// process only one file
 			else {
-				str += '<span class="premise-preview-thumb span12" style="background-image: url('+mediaUploaded[0]+');"></span>';
+				str += '<span class="premise-preview-thumb span12"><div class="premise-aspect-ratio-16-9"><div style="background-image: url('+mediaUploaded[0]+');"></div></div></span>';
 			}
 			str += '</div>';
 
