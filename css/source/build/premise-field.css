@@ -73,7 +73,7 @@
 /* wp_media Field */
 .premise-field-wp_media-wrapper {
 	position: relative;
-	padding-right: 6em;
+	/*padding-right: 6em;*/
 }
 .premise-field-wp_media-wrapper .premise-btn-remove,
 .premise-field-wp_media-wrapper .premise-btn-upload {
@@ -82,9 +82,9 @@
 	right: 0;
 	outline: 0;
 	width: 3em;
-	height: 100%;
+	/*height: 100%;*/
 	padding: .5em;
-	font-size: 1em;
+	font-size: .85em;
 	text-align: center;
 	background-color: #fff;
 	border: 1px solid #ccc;
@@ -93,6 +93,24 @@
 .premise-field-wp_media-wrapper .premise-btn-upload {
 	margin-right: 3em;
 	border-right: 0;
+}
+.premise-wp_media-preview {
+	display: block;
+	margin-top: .5em;
+	width: 100%;
+}
+.premise-wp_media-preview .premise-preview-thumb {
+	/*padding-top: 25%;*/
+	background-color: #fff;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+	margin-bottom: 2%;
+}
+.premise-wp_media-preview .premise-preview-thumb div div {
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+
 }
 
 /* wp_color field */
@@ -107,7 +125,7 @@
 /* FontAwesome Icon Field */
 .premise-field-fa_icon {
 	position: relative;
-	padding-right: 6em;
+	/*padding-right: 6em;*/
 }
 .premise-field-fa_icon .premise-choose-icon,
 .premise-field-fa_icon .premise-remove-icon {
@@ -116,9 +134,9 @@
 	right: 0;
 	outline: 0;
 	width: 3em;
-	height: 100%;
+	/*height: 100%;*/
 	padding: .5em;
-	font-size: 1em;
+	font-size: .85em;
 	text-align: center;
 	background-color: #fff;
 	border: 1px solid #ccc;

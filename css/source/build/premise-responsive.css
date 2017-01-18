@@ -22,7 +22,7 @@
 }
 /* trys to force an element to be fullwidth on mobile devices */
 .premise-fullwidth-on-mobile {
-	width:100%;
+	width: 100%;
 }
 
 /**
@@ -36,13 +36,7 @@
 	.premise-row:not(.not-responsive) .col2,
 	.pwp-row:not(.not-responsive) .col4,
 	.premise-row:not(.not-responsive) .col4 {
-		width:48%;
-	}
-	.pwp-row.flush-columns .col2,
-	.premise-row.flush-columns .col2,
-	.pwp-row.flush-columns .col4,
-	.premise-row.flush-columns .col4 {
-		width:50%;
+		width: 48%;
 	}
 	.pwp-row:not(.not-responsive) .col3,
 	.premise-row:not(.not-responsive) .col3,
@@ -50,29 +44,39 @@
 	.premise-row:not(.not-responsive) .col5,
 	.pwp-row:not(.not-responsive) .col6,
 	.premise-row:not(.not-responsive) .col6 {
-		width:31.33%;
+		width: 31.33%;
 	}
-	.pwp-row.flush-columns .col3,
-	.premise-row.flush-columns .col3,
-	.pwp-row.flush-columns .col5,
-	.premise-row.flush-columns .col5,
-	.pwp-row.flush-columns .col6,
-	.premise-row.flush-columns .col6 {
-		width:33.33%;
+	/* flush columns css for column grid */
+	.pwp-row.flush-columns:not(.not-responsive) .col2,
+	.premise-row.flush-columns:not(.not-responsive) .col2,
+	.pwp-row.flush-columns:not(.not-responsive) .col4,
+	.premise-row.flush-columns:not(.not-responsive) .col4 {
+		width: 50%;
+	}
+	.pwp-row.flush-columns:not(.not-responsive) .col3,
+	.premise-row.flush-columns:not(.not-responsive) .col3,
+	.pwp-row.flush-columns:not(.not-responsive) .col5,
+	.premise-row.flush-columns:not(.not-responsive) .col5,
+	.pwp-row.flush-columns:not(.not-responsive) .col6,
+	.premise-row.flush-columns:not(.not-responsive) .col6 {
+		width: 33.33%;
 	}
 
-	/* Set responsive widths to fluid grid. This is meant to cover the most common use cases */
+	/* Set responsive widths to fluid grid.
+	This is meant to cover the most common use cases
+	to avoid conflicts with your markup use the
+	'not-responsive' class. */
 	.pwp-row:not(.not-responsive) .span1,
 	.premise-row:not(.not-responsive) .span1,
 	.pwp-row:not(.not-responsive) .span2,
 	.premise-row:not(.not-responsive) .span2 {
-		width:14.6%;
+		width: 14.6%;
 	}
 	.pwp-row:not(.not-responsive) .span3,
 	.premise-row:not(.not-responsive) .span3,
 	.pwp-row:not(.not-responsive) .span4,
 	.premise-row:not(.not-responsive) .span4 {
-		width:31.33%;
+		width: 31.33%;
 	}
 	.pwp-row:not(.not-responsive) .span5,
 	.premise-row:not(.not-responsive) .span5,
@@ -80,23 +84,23 @@
 	.premise-row:not(.not-responsive) .span6,
 	.pwp-row:not(.not-responsive) .span7,
 	.premise-row:not(.not-responsive) .span7 {
-		width:48%;
+		width: 48%;
 	}
 	.pwp-row:not(.not-responsive) .span8,
 	.premise-row:not(.not-responsive) .span8,
 	.pwp-row:not(.not-responsive) .span9,
 	.premise-row:not(.not-responsive) .span9 {
-		width:64.6%;
+		width: 64.6%;
 	}
 	.pwp-row:not(.not-responsive) .span10,
 	.premise-row:not(.not-responsive) .span10,
 	.pwp-row:not(.not-responsive) .span11,
 	.premise-row:not(.not-responsive) .span11 {
-		width:81.3%;
+		width: 81.3%;
 	}
 	.pwp-row:not(.not-responsive) .span12,
 	.premise-row:not(.not-responsive) .span12 {
-		width:98%;
+		width: 98%;
 	}
 
 	/* row grid - force columns float */
@@ -159,92 +163,93 @@
 	/* Set the final sizes for column grid - for Desktop */
 	.pwp-row:not(.not-responsive) .col2,
 	.premise-row:not(.not-responsive) .col2 {
-		width:48%;
-	}
-	.pwp-row.flush-columns .col2,
-	.premise-row.flush-columns .col2 {
-		width:50%;
+		width: 48%;
 	}
 	.pwp-row:not(.not-responsive) .col3,
 	.premise-row:not(.not-responsive) .col3 {
-		width:31.33%;
-	}
-	.pwp-row.flush-columns .col3,
-	.premise-row.flush-columns .col3 {
-		width:33.33%;
+		width: 31.33%;
 	}
 	.pwp-row:not(.not-responsive) .col4,
 	.premise-row:not(.not-responsive) .col4 {
-		width:23%;
-	}
-	.pwp-row.flush-columns .col4,
-	.premise-row.flush-columns .col4 {
-		width:25%;
+		width: 23%;
 	}
 	.pwp-row:not(.not-responsive) .col5,
 	.premise-row:not(.not-responsive) .col5 {
-		width:18%;
-	}
-	.pwp-row.flush-columns .col5,
-	.premise-row.flush-columns .col5 {
-		width:20%;
+		width: 18%;
 	}
 	.pwp-row:not(.not-responsive) .col6,
 	.premise-row:not(.not-responsive) .col6 {
-		width:14.6%;
+		width: 14.6%;
 	}
-	.pwp-row.flush-columns .col6,
-	.premise-row.flush-columns .col6 {
-		width:16.6%;
+	/* column grid flush columns */
+	.pwp-row.flush-columns:not(.not-responsive) .col2,
+	.premise-row.flush-columns:not(.not-responsive) .col2 {
+		width: 50%;
+	}
+	.pwp-row.flush-columns:not(.not-responsive) .col3,
+	.premise-row.flush-columns:not(.not-responsive) .col3 {
+		width: 33.33%;
+	}
+	.pwp-row.flush-columns:not(.not-responsive) .col4,
+	.premise-row.flush-columns:not(.not-responsive) .col4 {
+		width: 25%;
+	}
+	.pwp-row.flush-columns:not(.not-responsive) .col5,
+	.premise-row.flush-columns:not(.not-responsive) .col5 {
+		width: 20%;
+	}
+	.pwp-row.flush-columns:not(.not-responsive) .col6,
+	.premise-row.flush-columns:not(.not-responsive) .col6 {
+		width: 16.6%;
 	}
 	/* Set the final sizes for our fluid grid - for Desktop */
 	.pwp-row:not(.not-responsive) .span1,
 	.premise-row:not(.not-responsive) .span1 {
-		width:6.3%;
+		width: 6.3%;
 	}
 	.pwp-row:not(.not-responsive) .span2,
 	.premise-row:not(.not-responsive) .span2 {
-		width:14.6%;
+		width: 14.6%;
 	}
 	.pwp-row:not(.not-responsive) .span3,
 	.premise-row:not(.not-responsive) .span3 {
-		width:23%;
+		width: 23%;
 	}
 	.pwp-row:not(.not-responsive) .span4,
 	.premise-row:not(.not-responsive) .span4 {
-		width:31.33%;
+		width: 31.33%;
 	}
 	.pwp-row:not(.not-responsive) .span5,
 	.premise-row:not(.not-responsive) .span5 {
-		width:39.6%;
+		width: 39.6%;
 	}
 	.pwp-row:not(.not-responsive) .span6,
 	.premise-row:not(.not-responsive) .span6 {
-		width:48%;
+		width: 48%;
 	}
 	.pwp-row:not(.not-responsive) .span7,
 	.premise-row:not(.not-responsive) .span7 {
-		width:56.3%;
+		width: 56.3%;
 	}
 	.pwp-row:not(.not-responsive) .span8,
 	.premise-row:not(.not-responsive) .span8 {
-		width:64.6%;
+		width: 64.6%;
 	}
 	.pwp-row:not(.not-responsive) .span9,
 	.premise-row:not(.not-responsive) .span9 {
-		width:73%;
+		width: 73%;
 	}
 	.pwp-row:not(.not-responsive) .span10,
 	.premise-row:not(.not-responsive) .span10 {
-		width:81.3%;
+		width: 81.3%;
 	}
 	.pwp-row:not(.not-responsive) .span11,
 	.premise-row:not(.not-responsive) .span11 {
-		width:89.6%;
+		width: 89.6%;
 	}
 	.pwp-row:not(.not-responsive) .span12,
 	.premise-row:not(.not-responsive) .span12 {
-		width:98%;
+		width: 98%;
 	}
 
 	/* Fix responsive clears */
