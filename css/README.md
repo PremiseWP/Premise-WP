@@ -179,30 +179,30 @@ To create elements that hold their aspect ratio and are fully responsive use the
 
 These classes are random things that can save time css footprint on your project.
 
-** Class ** | Descriptio |
------------ | -----------
-`.pwp-absolute` | absolute
-`.pwp-relative` | relative
-`.pwp-fixed` | fixed
-`.pwp-block` | block
-`.pwp-inline-block` | inline-block
-`.pwp-vertical-align-top` | vertical-align-top
-`.pwp-vertical-align-middle` | vertical-align-middle
-`.pwp-vertical-align-bottom` | vertical-align-bottom
-`.pwp-vertical-align-baseline` | vertical-align-baseline
-`.pwp-vertical-align-texttop` | vertical-align-texttop
-`.pwp-vertical-align-textbottom` | vertical-align-textbottom
-`.pwp-border-box` | border-box
-`.pwp-hidden` | hidden
-`.pwp-responsive` | responsive
-`.pwp-float-right` | float-right
-`.pwp-float-left` | float-left
-`.pwp-clear` | clear
-`.pwp-clear-float:after` | clear-float:after
-`.pwp-align-center` | align-center
-`.pwp-align-left` | align-left
-`.pwp-align-right` | align-right
-`.pwp-align-justify` | align-justify
-`.pwp-uppercase` | uppercase
-`.pwp-underline` | underline
-`.pwp-not-underline` | not-underline
+Class | Description |
+----- | -----------
+`.pwp-absolute` | adds `position: absolute`
+`.pwp-relative` | adds `position: relative`
+`.pwp-fixed` | adds `position: fixed`
+`.pwp-block` | adds `display: block`
+`.pwp-inline-block` | adds `display: inline-block`
+`.pwp-vertical-align-top` | sets `vertical-align: top`
+`.pwp-vertical-align-middle` | sets `vertical-align: middle`
+`.pwp-vertical-align-bottom` | sets `vertical-align: bottom`
+`.pwp-vertical-align-baseline` | sets `vertical-align: baseline`
+`.pwp-vertical-align-texttop` | sets `vertical-align: texttop`
+`.pwp-vertical-align-textbottom` | sets `vertical-align: textbottom`
+`.pwp-border-box` | adds `box-sizing: border-box`
+`.pwp-hidden` | sets`visibility: hidden`
+`.pwp-responsive` | Makes an image responsive. add this class directly to the image
+`.pwp-float-right` | sets`float:right`
+`.pwp-float-left` | sets`float:left`
+`.pwp-clear` | sets`clear: both`
+`.pwp-clear-float` | prevents children within an element to float out of place
+`.pwp-align-center` | sets `text-align: center`
+`.pwp-align-left` | sets `text-align: left`
+`.pwp-align-right` | sets `text-align: right`
+`.pwp-align-justify` | sets `text-align: justify`
+`.pwp-uppercase` | converts text to uppercase
+`.pwp-underline` | underlines text
+`.pwp-not-underline` | removes underline from text
