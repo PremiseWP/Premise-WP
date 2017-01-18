@@ -114,6 +114,8 @@ class PWP_Field_Controller extends PWP_Field {
 
 		$this->extract_params();
 
+		parent::__construct( $this->params );
+
 		if ( 'wp_media' == $this->field_type ) {
 			wp_enqueue_media();
 		}
@@ -122,8 +124,6 @@ class PWP_Field_Controller extends PWP_Field {
 			wp_enqueue_script( 'wp-color-picker' );
 			wp_enqueue_style( 'wp-color-picker' );
 		}
-
-		parent::__construct( $this->params );
 
 		$this->create_field();
 	}
