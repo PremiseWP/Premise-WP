@@ -167,7 +167,7 @@ To create elements that hold their aspect ratio and are fully responsive use the
 </div>
 ```
 
-*If chid is not a div:*
+*If child is not a div:*
 
 ```html
 <div class="pwp-aspect-ratio">
