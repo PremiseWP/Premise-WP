@@ -1,4 +1,7 @@
 <?php
+// Block direct access to this file.
+defined( 'ABSPATH' ) or die();
+
 /**
 * Premise Forms Controller
 *
