@@ -395,21 +395,23 @@ function pwp_add_metabox( $title = '', $post_type = '', $fields = '', $option_na
 	// if title is a string
 	if ( is_string( $title ) ) {
 		$args['title']  = esc_html( $title );
-		$args['id']     = str_replace( ' ', '-', strtolower( $args['title'] ) );
 	}
 	elseif ( is_array( $title ) ) {
 		$args = wp_parse_args( $title, $_defaults );
-
 	}
 	else {
 		return false;
 	}
+	// add id if not present
+	if ( ! isset( $args['id'] ) || empty( $args['id'] ) ) {
+		$args['id'] = str_replace( ' ', '-', strtolower( $args['title'] ) );
+	}
 	// add screen if not present
-	if ( ! isset( $args['screen'] ) ) {
-		$args['screen'] = ( is_string( $post_type ) && ! empty( $post_type ) ) ? esc_attr( $post_type ) : array_map( esc_attr, $post_type );
+	if ( ! isset( $args['screen'] ) || empty( $args['screen'] ) ) {
+		$args['screen'] = $post_type;
 	}
 	// add fields if not present
-	if ( ! isset( $args['fields'] ) ) {
+	if ( ! isset( $args['fields'] ) || empty( $args['fields'] ) ) {
 		$args['fields'] = ( ! empty( $fields ) && is_array( $fields ) ) ? $fields : '';
 	}
 	// register meta box
