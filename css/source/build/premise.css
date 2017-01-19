@@ -189,33 +189,33 @@ img.pwp-responsive {
 }
 
 /* Set the size for column grid - for Desktop */
+.col2,
 .pwp-row.not-responsive.flush-columns .col2,
-.premise-row.not-responsive.flush-columns .col2,
-.col2 {
+.premise-row.not-responsive.flush-columns .col2 {
 	width: 50%;
 }
 
+.col3,
 .pwp-row.not-responsive.flush-columns .col3,
-.premise-row.not-responsive.flush-columns .col3,
-.col3 {
+.premise-row.not-responsive.flush-columns .col3 {
 	width: 33.33333%;
 }
 
+.col4,
 .pwp-row.not-responsive.flush-columns .col4,
-.premise-row.not-responsive.flush-columns .col4,
-.col4 {
+.premise-row.not-responsive.flush-columns .col4 {
 	width: 25%;
 }
 
+.col5,
 .pwp-row.not-responsive.flush-columns .col5,
-.premise-row.not-responsive.flush-columns .col5,
-.col5 {
+.premise-row.not-responsive.flush-columns .col5 {
 	width: 20%;
 }
 
+.col6,
 .pwp-row.not-responsive.flush-columns .col6,
-.premise-row.not-responsive.flush-columns .col6,
-.col6 {
+.premise-row.not-responsive.flush-columns .col6 {
 	width: 16.666%;
 }
 
@@ -287,28 +287,28 @@ img.pwp-responsive {
 	clear: both;
 }
 /* the fliud grid */
-.premise-row:not(.not-responsive,.flush-columns) .span2,
-.pwp-row:not(.not-responsive,.flush-columns) .span2,
-.premise-row:not(.not-responsive,.flush-columns) .span3,
-.pwp-row:not(.not-responsive,.flush-columns) .span3,
-.premise-row:not(.not-responsive,.flush-columns) .span4,
-.pwp-row:not(.not-responsive,.flush-columns) .span4,
-.premise-row:not(.not-responsive,.flush-columns) .span5,
-.pwp-row:not(.not-responsive,.flush-columns) .span5,
-.premise-row:not(.not-responsive,.flush-columns) .span6,
-.pwp-row:not(.not-responsive,.flush-columns) .span6,
-.premise-row:not(.not-responsive,.flush-columns) .span7,
-.pwp-row:not(.not-responsive,.flush-columns) .span7,
-.premise-row:not(.not-responsive,.flush-columns) .span8,
-.pwp-row:not(.not-responsive,.flush-columns) .span8,
-.premise-row:not(.not-responsive,.flush-columns) .span9,
-.pwp-row:not(.not-responsive,.flush-columns) .span9,
-.premise-row:not(.not-responsive,.flush-columns) .span10,
-.pwp-row:not(.not-responsive,.flush-columns) .span10,
-.premise-row:not(.not-responsive,.flush-columns) .span11,
-.pwp-row:not(.not-responsive,.flush-columns) .span11,
-.premise-row:not(.not-responsive,.flush-columns) .span12,
-.pwp-row:not(.not-responsive,.flush-columns) .span12 {
+.premise-row .span2,
+.pwp-row .span2,
+.premise-row .span3,
+.pwp-row .span3,
+.premise-row .span4,
+.pwp-row .span4,
+.premise-row .span5,
+.pwp-row .span5,
+.premise-row .span6,
+.pwp-row .span6,
+.premise-row .span7,
+.pwp-row .span7,
+.premise-row .span8,
+.pwp-row .span8,
+.premise-row .span9,
+.pwp-row .span9,
+.premise-row .span10,
+.pwp-row .span10,
+.premise-row .span11,
+.pwp-row .span11,
+.premise-row .span12,
+.pwp-row .span12 {
 	width: 98%;
 }
 .premise-row.flush-columns .span2,
@@ -336,16 +336,16 @@ img.pwp-responsive {
 	width: 100%;
 }
 /* The column grid */
-.premise-row:not(.not-responsive,.flush-columns) .col2,
-.pwp-row:not(.not-responsive,.flush-columns) .col2,
-.premise-row:not(.not-responsive,.flush-columns) .col3,
-.pwp-row:not(.not-responsive,.flush-columns) .col3,
-.premise-row:not(.not-responsive,.flush-columns) .col4,
-.pwp-row:not(.not-responsive,.flush-columns) .col4,
-.premise-row:not(.not-responsive,.flush-columns) .col5,
-.pwp-row:not(.not-responsive,.flush-columns) .col5,
-.premise-row:not(.not-responsive,.flush-columns) .col6,
-.pwp-row:not(.not-responsive,.flush-columns) .col6 {
+.premise-row .col2,
+.pwp-row .col2,
+.premise-row .col3,
+.pwp-row .col3,
+.premise-row .col4,
+.pwp-row .col4,
+.premise-row .col5,
+.pwp-row .col5,
+.premise-row .col6,
+.pwp-row .col6 {
 	width: 98%; /* mobie first approach - load mobile styles first */
 }
 .premise-row.flush-columns .col2,
