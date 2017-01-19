@@ -81,8 +81,6 @@ class PWP_Metabox {
                 $this->new_error( 'pwp_metabox_no_option_names' );
             }
 
-            $this->nonce_action = premise_rand_str( 8 );
-
             $this->mb = wp_parse_args( $mb_args, $this->defaults );
 
             if ( empty( $this->mb['fields'] ) ) {
@@ -91,6 +89,7 @@ class PWP_Metabox {
 
             if ( empty( $this->mb['callback'] ) ) {
                 $this->mb['callback'] = array( $this, 'render_metabox' );
+                $this->nonce_action = premise_rand_str( 8 );
             }
 
             add_action( 'load-post.php',     array( $this, 'init' ) );
@@ -146,22 +145,26 @@ class PWP_Metabox {
     /**
      * Handles saving the meta box.
      *
+     * @todo   find a way to set your own custom nonce and nocen action to check against when using custom callback
+     *
      * @param  int     $post_id Post ID.
      * @param  WP_Post $post    Post object.
      * @return null
      */
     public function save_metabox( $post_id, $post ) {
-        // Add nonce for security and authentication.
-        $nonce_name   = isset( $_POST[ $this->nonce ] ) ? $_POST[ $this->nonce ] : '';
-        $nonce_action = $this->nounce_action;
-        // Check if nonce is set.
-        if ( ! isset( $nonce_name ) ) {
-            return;
-        }
+        // fix for not having a nonce action to check when using a custom callback
+        if ( ! empty( $this->nonce_action ) ) {
+            // Add nonce for security and authentication.
+            $nonce_name   = isset( $_POST[ $this->nonce ] ) ? $_POST[ $this->nonce ] : '';
+            // Check if nonce is set.
+            if ( ! isset( $nonce_name ) ) {
+                return;
+            }
 
-        // Check if nonce is valid.
-        if ( ! wp_verify_nonce( $nonce_name, $nonce_action ) ) {
-            return;
+            // Check if nonce is valid.
+            if ( ! wp_verify_nonce( $nonce_name, $this->nounce_action ) ) {
+                return;
+            }
         }
 
         // Check if user has permissions to save data.
@@ -178,6 +181,7 @@ class PWP_Metabox {
         if ( wp_is_post_revision( $post_id ) ) {
             return;
         }
+        // var_dump( $this->option_names );exit();
         foreach ( $this->option_names as $option ) {
             /**
              * allows you to validate your own data.
