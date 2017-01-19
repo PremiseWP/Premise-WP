@@ -385,11 +385,7 @@ function pwp_add_metabox( $title = '', $post_type = '', $fields = '', $option_na
 	$_defaults = array(
 		'id'            => '',
 		'title'         => '',
-		'callback'      => '',
 		'screen'        => '',
-		'context'       => '',
-		'priority'      => '',
-		'callback_args' => '',
 		'fields'        => '',
 	);
 	// if title is a string
@@ -403,17 +399,18 @@ function pwp_add_metabox( $title = '', $post_type = '', $fields = '', $option_na
 		return false;
 	}
 	// add id if not present
-	if ( ! isset( $args['id'] ) || empty( $args['id'] ) ) {
+	if ( empty( $args['id'] ) ) {
 		$args['id'] = str_replace( ' ', '-', strtolower( $args['title'] ) );
 	}
 	// add screen if not present
-	if ( ! isset( $args['screen'] ) || empty( $args['screen'] ) ) {
+	if ( empty( $args['screen'] ) ) {
 		$args['screen'] = $post_type;
 	}
 	// add fields if not present
-	if ( ! isset( $args['fields'] ) || empty( $args['fields'] ) ) {
+	if ( empty( $args['fields'] ) ) {
 		$args['fields'] = ( ! empty( $fields ) && is_array( $fields ) ) ? $fields : '';
 	}
+	// var_dump($args);exit();
 	// register meta box
 	new PWP_Metabox( $args, $option_names );
 }

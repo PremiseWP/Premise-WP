@@ -178,7 +178,6 @@ class PWP_Metabox {
         if ( wp_is_post_revision( $post_id ) ) {
             return;
         }
-
         foreach ( $this->option_names as $option ) {
             /**
              * allows you to validate your own data.
