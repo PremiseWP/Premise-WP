@@ -81,7 +81,7 @@ class PWP_Field {
 	 * @return string html for input field
 	 */
 	protected function input() {
-		return '<input type="'.$this->type.'" '.$this->field_atts().'>';
+		return '<input type="'.$this->type.'" '.$this->field_atts().'/>';
 	}
 
 	/**
@@ -136,6 +136,7 @@ class PWP_Field {
 				$_field = $this->build_tag();
 				break;
 		}
+		// if ( 'checkbox' == $this->type ) var_dump( $_field );
 		// add a filter here
 		$this->field = $_field;
 	}
@@ -163,16 +164,15 @@ class PWP_Field {
 			&& ! in_array( 'id', $exc ) )
 			? ' id="'.$this->id.'"'       : '';
 
-		$atts .= ( ! empty( $this->value )
-			&& ! in_array( 'value', $exc ) )
-			? ' value="'.$this->value.'"' : '';
-
 		if ( 'checkbox' == $this->type || 'radio' == $this->type ) {
 			$atts .= ' value="' . esc_attr( $this->args['value_att'] ) . '" '.
 			checked( $this->args['value_att'], $this->value, false );
 			unset( $this->args['value_att'] );
 		}
 		else {
+			$atts .= ( ! empty( $this->value )
+				&& ! in_array( 'value', $exc ) )
+				? ' value="'.$this->value.'"' : '';
 			unset( $this->args['value_att'] );
 		}
 
