@@ -198,8 +198,8 @@ class PWP_Field {
 	 */
 	private function extract_args() {
 		$this->context = esc_attr( $this->args['context'] );
-		$this->tag     = $this->get_tag();
 		$this->type    = $this->get_type();
+		$this->tag     = $this->get_tag();
 		$this->name    = $this->get_name();
 		$this->id      = $this->get_id();
 		$this->value   = $this->get_value();
@@ -215,6 +215,15 @@ class PWP_Field {
 	}
 
 	/**
+	 * get the type to use when building our field
+	 *
+	 * @return string type to use
+	 */
+	private function get_type() {
+		return ( ! empty( $this->args['type'] ) ) ? esc_attr( $this->args['type'] ) : '';
+	}
+
+	/**
 	 * get the html tag to use for our field
 	 *
 	 * @return string html tag
@@ -224,10 +233,10 @@ class PWP_Field {
 			$_tag = esc_attr( $this->args['tag'] );
 		}
 		else {
-			switch ( $this->args['type'] ) {
+			switch ( $this->type ) {
 				case 'select':
 				case 'textarea':
-					$_tag = esc_attr( $this->args['type'] );
+					$_tag = $this->type;
 					break;
 
 				default:
@@ -239,31 +248,25 @@ class PWP_Field {
 	}
 
 	/**
-	 * get the type to use when building our field
-	 *
-	 * @return string type to use
-	 */
-	private function get_type() {
-		$_type = ( ! empty( $this->args['type'] ) ) ? esc_attr( $this->args['type'] ) : '';
-		return $_type;
-	}
-
-	/**
 	 * get the name attribute for our field
 	 *
 	 * @return string the name attribute
 	 */
 	private function get_name() {
-		$name = ( ! empty( $this->args['name'] ) ) ? esc_attr( $this->args['name'] ) : '';
-		// if no name, try getting from id
-		if ( empty( $name ) && ! empty( $this->args['id'] ) ) {
-			$name = preg_replace( '/[^-_a-z0-9]/', '', esc_attr( $this->args['id'] ) );
+		$name = ''; // begin with an empty name
+		// if the field is not a button, then get the name
+		if ( ! $this->is_btn() ) {
+			$name = ( ! empty( $this->args['name'] ) ) ? esc_attr( $this->args['name'] ) : '';
+			// if no name, try getting from id
+			if ( empty( $name ) && ! empty( $this->args['id'] ) ) {
+				$name = preg_replace( '/[^-_a-z0-9]/', '', esc_attr( $this->args['id'] ) );
+			}
+			// If the field's 'multiple' attribute is true,
+			// and the name does not already have '[]' at the end of it, then add it.
+			$name = ( isset( $this->args['multiple'] )
+				&& $this->args['multiple'] )
+				&& ! preg_match( '/\[\]$/', $this->args['name'] ) ? $name . '[]' : $name;
 		}
-		// If the field's 'multiple' attribute is true,
-		// and the name does not already have '[]' at the end of it, then add it.
-		$name = ( isset( $this->args['multiple'] )
-			&& $this->args['multiple'] )
-			&& ! preg_match( '/\[\]$/', $this->args['name'] ) ? $name . '[]' : $name;
 		return esc_attr( $name );
 	}
 
@@ -345,5 +348,12 @@ class PWP_Field {
 			}
 		}
 		return $opts;
+	}
+
+	private function is_btn() {
+		return ( 'button' !== $this->type
+			 && 'submit'  !== $this->type
+			 && 'reset'   !== $this->type )
+			 ? false : true;
 	}
 }
