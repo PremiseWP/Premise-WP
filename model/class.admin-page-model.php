@@ -32,6 +32,11 @@ class PWP_Admin_Page {
 	 */
 	private $option_names = 'premise_option';
 
+	/**
+	 * Holds the defaults for params to build menu page
+	 *
+	 * @var array
+	 */
 	private $_defaults = array(
 		'title'      => 'Premise Options Page',
 		'menu_title' => 'Premise Options',
