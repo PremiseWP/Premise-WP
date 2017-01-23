@@ -56,14 +56,6 @@ class PWP_Admin_Page {
 	 */
 	public $fields = array();
 
-// Marked for deletion
-/**
- * Callback function to sanitize values passed to the option
- *
- * @var string
- */
-private $sanitize_callback = '';
-
 	/**
 	 * Build our object and register hooks to add menu page.
 	 *
