@@ -19,6 +19,7 @@ require_once PREMISE_PATH . 'model/model-premise-tabs.php';
 // new models
 require_once PREMISE_PATH . 'model/class.fields-model.php';
 require_once PREMISE_PATH . 'model/class.metabox-model.php';
+require_once PREMISE_PATH . 'model/class.admin-page-model.php';
 
 // new controllers
 require_once PREMISE_PATH . 'controller/class.fields-controller.php';

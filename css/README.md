@@ -37,8 +37,6 @@ The code below will make a grid with 2 rows - the first row will have 2 columns 
 
 Fluid Grids are based on 12 column grids where you assign each column the number of columns you want it to occupy within a row. So on a 12 column grid, if I assign a column the class `span3`, I am saying that I want that column to occupy the width of 3 columns within a row. That would be the equivalent of 1/4 of the row - `12/3 = 4; 3/12 = 0.25`. This class can be used with any number between '1 - 12'. You can see some examples below.
 
-##### The basic syntax
-
 The code below will outpput a 3 column grid with the first column occupying 2 columns, the second 6, and the third 4 columns.
 
 ```html
