@@ -278,9 +278,9 @@ class PWP_Field {
 	private function get_id() {
 		$id_att = '';
 		if ( ! empty( $this->args['id'] ) ) {
-			$id_att = esc_attr( $this->args['id'] );
+			$id_att = $this->args['id'];
 		} elseif ( ! empty( $this->args['name'] ) ) {
-			$name = esc_attr( $this->args['name'] );
+			$name = $this->args['name'];
 			// If values are stored in an array
 			if ( preg_match( '/\[|\]/', $name ) ) {
 				$id_att = preg_replace( array( '/\[/', '/\]/' ), array( '-', '' ), $name );
