@@ -170,7 +170,7 @@ class PWP_Field {
 			unset( $this->args['value_att'] );
 		}
 		else {
-			$atts .= ( ! empty( $this->value )
+			$atts .= ( ! pwp_empty_value( $this->value )
 				&& ! in_array( 'value', $exc ) )
 				? ' value="'.$this->value.'"' : '';
 			unset( $this->args['value_att'] );
@@ -298,7 +298,7 @@ class PWP_Field {
 	 */
 	private function get_value() {
 		$val = '';
-		if ( isset( $this->args['value'] ) && ! empty( $this->args['value'] ) ) {
+		if ( isset( $this->args['value'] ) && ! pwp_empty_value( $this->args['value'] ) ) {
 			$val = esc_attr( $this->args['value'] );
 		}
 		elseif ( ! empty( $this->name ) ) {
@@ -317,7 +317,7 @@ class PWP_Field {
 		}
 		else {
 			// return default
-			return ( isset( $this->args['default'] ) && ! empty( $this->args['default'] ) ) ? esc_attr( $this->args['default'] ) : '';
+			return ( isset( $this->args['default'] ) && ! pwp_empty_value( $this->args['default'] ) ) ? esc_attr( $this->args['default'] ) : '';
 		}
 	}
 
