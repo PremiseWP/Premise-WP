@@ -76,9 +76,10 @@
 
 			// set totalScrolled in case the user has already scrolled and the page is refreshed
 			totalScrolled = getTotalScrolled();
+			console.log( 'elemPos' );
 
-			// Bind Scroll animation on window load
-			$(window).load(bindScroll);
+			// Bind Scroll animation
+			$(window).scroll(doScroll);
 		};
 
 		/**
