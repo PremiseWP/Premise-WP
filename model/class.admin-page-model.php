@@ -106,9 +106,6 @@ class PWP_Admin_Page {
 		add_action( 'admin_menu', array( $this, 'add_menu' ) );
 	}
 
-
-
-
 	/**
 	 * Registers options in the database
 	 *
@@ -131,9 +128,6 @@ class PWP_Admin_Page {
 		}
 	}
 
-
-
-
 	/**
 	 * Adds menu page to the Wordpress admin
 	 *
@@ -152,9 +146,6 @@ class PWP_Admin_Page {
 			$this->menu_page_args['position']    // $position.
 		);
 	}
-
-
-
 
 	/**
 	 * Display the options page content
