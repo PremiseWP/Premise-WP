@@ -63,17 +63,11 @@ class Premise_Tabs {
 	/**
 	 * The options.
 	 *
-	 * For ease of use, the options argument can be a string
-	 * simply containing the location of where to place the tabs.
-	 * This argument defaults to 'top'. An array can also be passed
-	 * as the second argument to give you more control - further documentation
-	 * in the constructor function.
-	 *
-	 * @see constructor
+	 * @see set_options()
 	 *
 	 * @var array
 	 */
-	protected $options = array( 'layout' => 'top' );
+	protected $options = array();
 
 
 	/**
