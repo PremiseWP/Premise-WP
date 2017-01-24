@@ -138,5 +138,4 @@ class PWP_Form {
 			}
 		}
 	}
-
 }
