@@ -331,7 +331,7 @@ class PWP_Field {
 		if ( isset( $this->args['options'] ) && is_array( $this->args['options'] ) ) {
 
 			foreach ( $this->args['options'] as $k => $v ) {
-				if ( ! empty( $k ) ) {
+				if ( ! pwp_empty_value( $k ) ) {
 					$opts .= '<option value="'.esc_attr( $v ).'"';
 
 						if ( is_array( $this->value ) ) {
