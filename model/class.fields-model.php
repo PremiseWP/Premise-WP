@@ -256,10 +256,10 @@ class PWP_Field {
 		$name = ''; // begin with an empty name
 		// if the field is not a button, then get the name
 		if ( ! $this->is_btn() ) {
-			$name = ( ! empty( $this->args['name'] ) ) ? esc_attr( $this->args['name'] ) : '';
+			$name = ( ! empty( $this->args['name'] ) ) ? $this->args['name'] : '';
 			// if no name, try getting from id
 			if ( empty( $name ) && ! empty( $this->args['id'] ) ) {
-				$name = preg_replace( '/[^-_a-z0-9]/', '', esc_attr( $this->args['id'] ) );
+				$name = preg_replace( '/[^-_a-z0-9]/', '', $this->args['id'] );
 			}
 			// If the field's 'multiple' attribute is true,
 			// and the name does not already have '[]' at the end of it, then add it.
