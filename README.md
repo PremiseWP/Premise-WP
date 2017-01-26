@@ -100,6 +100,7 @@ pwp_field( array(
 	'type' => 'text',
 	'name' => 'my_option[in_an_array]',
 ) );
+```
 
 #### Create an Admin Page
 
