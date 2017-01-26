@@ -2,10 +2,10 @@
 
 Build Wordpress themes and plugins faster! Premise WP simplifies the way you do things in the backend of Wordpress while reducing the steps that it takes to get something done.
 
+* [Examples](#examples)
 * [Getting Started](#getting-started)
-* Examples
-* Uses Grunt
-* Changelog
+* [Uses Grunt](#uses-grunt)
+* [Changelog](#changelog)
 
 ## Getting Started
 
@@ -109,7 +109,7 @@ pwp_field( array(
 ```php
 // let premise handle the page, you pass the fields
 $fields = array(
-	'name_prefix' => 'your_option_name', // this is your name attribute. It is prepended to the anem of each field
+	'name_prefix' => 'your_option_name', // this is your name attribute. It is prepended to the name of each field
 	array(
 		'type' => 'text',
 		'name' => '[your_text_field]',
@@ -189,31 +189,29 @@ pwp_add_metabox( $metabox, '', '', 'your_option_name' );
 `new PWP_User_Fields( $args = array(), $option_names = '' )`
 
 ```php
-// insert custom user fields
-// this time, lets also add a condition that look sofr our class
-// in case premise wp is not yet installed
+// insert custom fields for all user profiles
 if ( class_exists( 'PWP_User_fields' ) ) {
 	new PWP_User_fields( array(
-		'title' => 'The title for you section',
+		'title' => 'The title for your section',
 		'description' => 'This one is a little abvious.',
 		'fields' => array(
 			array(
 				'type' => 'text',
 				'name' => 'your_option_name[field-1]',
 				'label' => 'Field 1',
-				'context' => 'user', // This is importatnt. otherwose fields wont display value after being saved
+				'context' => 'user', // This is importatnt. otherwise fields won't display a value after being saved
 			),
 			array(
 				'type' => 'text',
 				'name' => 'your_option_name[field-2]',
 				'label' => 'Field 2',
-				'context' => 'user', // This is importatnt. otherwose fields wont display value after being saved
+				'context' => 'user', // This is importatnt. otherwise fields won't display a value after being saved
 			),
 			array(
 				'type' => 'text',
 				'name' => 'your_option_name[field-3]',
 				'label' => 'Field 3',
-				'context' => 'user', // This is importatnt. otherwose fields wont display value after being saved
+				'context' => 'user', // This is importatnt. otherwise fields won't display a value after being saved
 			),
 		),
 	), 'your_option_name' );
