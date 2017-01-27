@@ -113,12 +113,12 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="../reports/errors.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">4</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">14</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="../reports/markers.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">2</span>
                                 </a>
                             </li>
                         </ul>
@@ -138,19 +138,25 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1636544543"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1422762853"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1636544543" class="accordion-body collapse in">
+            <div id="namespace-1422762853" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
                     <ul>
-                                                                                                    <li class="class"><a href="../classes/PremiseCPT.html">PremiseCPT</a></li>
+                                                                                                    <li class="class"><a href="../classes/Premise_WP.html">Premise_WP</a></li>
+                                                    <li class="class"><a href="../classes/PremiseCPT.html">PremiseCPT</a></li>
                                                     <li class="class"><a href="../classes/PremiseField.html">PremiseField</a></li>
-                                                    <li class="class"><a href="../classes/Premise_Options.html">Premise_Options</a></li>
                                                     <li class="class"><a href="../classes/A.html">A</a></li>
-                                                    <li class="class"><a href="../classes/Premise_WP.html">Premise_WP</a></li>
+                                                    <li class="class"><a href="../classes/Premise_Options.html">Premise_Options</a></li>
+                                                    <li class="class"><a href="../classes/PWP_Field_Controller.html">PWP_Field_Controller</a></li>
+                                                    <li class="class"><a href="../classes/PWP_Form.html">PWP_Form</a></li>
+                                                    <li class="class"><a href="../classes/PWP_Field.html">PWP_Field</a></li>
+                                                    <li class="class"><a href="../classes/PWP_Metabox.html">PWP_Metabox</a></li>
+                                                    <li class="class"><a href="../classes/Load_Premise_Tabs.html">Load_Premise_Tabs</a></li>
+                                                    <li class="class"><a href="../classes/Premise_Tabs.html">Premise_Tabs</a></li>
                                             </ul>
                 </div>
             </div>
@@ -190,7 +196,7 @@
                                                                     <a href="../classes/PremiseField.html#method___construct" class="">__construct()</a><br />
                                                                     <a href="../classes/PremiseField.html#method_wp_media_input" class="">wp_media_input()</a><br />
                                                                     <a href="../classes/PremiseField.html#method_fa_icon_input" class="">fa_icon_input()</a><br />
-                                                                    <a href="../classes/PremiseField.html#method_fa_icons" class="">fa_icons()</a><br />
+                                                                    <a href="../classes/PremiseField.html#method_fa_icons" class="deprecated">fa_icons()</a><br />
                                                                     <a href="../classes/PremiseField.html#method_wp_color_input" class="">wp_color_input()</a><br />
                                                                     <a href="../classes/PremiseField.html#method_get_field" class="">get_field()</a><br />
                                                                     <a href="../classes/PremiseField.html#method_empty_value" class="">empty_value()</a><br />
@@ -226,7 +232,6 @@
                                                                     <a href="../classes/PremiseField.html#method_video" class="">video()</a><br />
                                                                     <a href="../classes/PremiseField.html#method_wp_color" class="">wp_color()</a><br />
                                                                     <a href="../classes/PremiseField.html#method_get_db_value" class="">get_db_value()</a><br />
-                                                                    <a href="../classes/PremiseField.html#method_get_value_by_context" class="">get_value_by_context()</a><br />
                                                                     <a href="../classes/PremiseField.html#method_get_id_att" class="">get_id_att()</a><br />
                                                                     <a href="../classes/PremiseField.html#method_get_name" class="">get_name()</a><br />
                                                                     <a href="../classes/PremiseField.html#method_get_atts" class="">get_atts()</a><br />
@@ -307,12 +312,12 @@
                 <h3 class="public ">$defaults</h3>
                 <pre class="signature">$defaults : array</pre>
                 <p><em>Defaults for each field</em></p>
-                <p>Special Parameters: This parameters are special because they alter the
-HTML markup of a field or add functionality such as filters.</p>
-<p>Normal Parameters: This parameters (and every other paramaters passed) act as
-additional attributes added the the field. We add some defaults
-and some additional params to make your life easier like 'default'
-or 'options'</p>
+                <p>Reserved Arguments - The following arguments are reserved and should not be used as your own
+arguments but as they were intended. Please read the list of reserved arguments below to avoid
+using any of them in your own code. These arguments either serve a specific purpose within this
+class and will not be added to the field as other attributes are added.</p>
+<p>Public Arguments - These aregumets you can use as your own because they are directly passed to the
+field itself.</p>
 
                                 <h4>Type</h4>
                 array
@@ -868,7 +873,7 @@ or 'options'</p>
         <div class="span8 content class">
             <a id="method_fa_icons" name="method_fa_icons" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">fa_icons()</h3>
+                <h3 class="public deprecated">fa_icons()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">fa_icons() : string</pre>
                 <p><em>Display the fa-icons for user to choose from</em></p>
@@ -883,7 +888,11 @@ or 'options'</p>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
+                                                                <aside class="alert alert-block alert-error">
+                    <h4>Deprecated since 1.4.5</h4>
+                    replaced with premise_get_fa_icons_html() which is called by ajax when the fields get loaded in the front end
+                </aside>
+                        <dl>
                                                                             </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
@@ -1727,59 +1736,6 @@ display the wp_color below or something.</p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_get_value_by_context" name="method_get_value_by_context" class="anchor"></a>
-            <article class="method">
-                <h3 class="protected ">get_value_by_context()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">get_value_by_context(string <span class="argument">$name</span>) : mixed</pre>
-                <p><em>Get value of a field by context</em></p>
-                <p>Context applies to where the field is saved. By default fields are assumed to be saved
-in the options table. But if adding fields to a custom post type, get_option()
-would not work anymore so we pass the context 'post'.
-That's how Premise knows to get the value from get_post_meta() instead of get_option().</p>
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string</td>
-                                <td>$name</td>
-                                <td><p>Field name.</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    mixed
-                                            &mdash; <p>value found</p>
-                                                </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr>
-                        <th>
-                            since
-                        </th>
-                        <td>
-                                                            1.2                                
-                                                    </td>
-                    </tr>
-                                    <tr>
-                        <th>
-                            todo
-                        </th>
-                        <td>
-                                                    </td>
-                    </tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
             <a id="method_get_id_att" name="method_get_id_att" class="anchor"></a>
             <article class="method">
                 <h3 class="protected ">get_id_att()</h3>
@@ -2030,7 +1986,9 @@ unhook the filters and action hooks</p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on May 18th, 2016 at 20:52.
+                    on 
+Warning: date_default_timezone_get(): It is not safe to rely on the system's timezone settings. You are *required* to use the date.timezone setting or the date_default_timezone_set() function. In case you used any of those methods and you are still getting this warning, you most likely misspelled the timezone identifier. We selected the timezone 'UTC' for now, but please set date.timezone to select your timezone. in phar:///Users/mariovallejo/sites/wp.dev/wp-content/plugins/Premise-WP/node_modules/grunt-phpdocumentor/bin/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Extension/Core.php on line 89
+January 26th, 2017 at 17:52.
                 </section>
             </section>
         </section>

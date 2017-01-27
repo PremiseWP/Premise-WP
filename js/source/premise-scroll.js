@@ -77,8 +77,8 @@
 			// set totalScrolled in case the user has already scrolled and the page is refreshed
 			totalScrolled = getTotalScrolled();
 
-			// Bind Scroll animation on window load
-			$(window).load(bindScroll);
+			// Bind Scroll animation
+			$(window).scroll(doScroll);
 		};
 
 		/**
@@ -118,17 +118,17 @@
 				if ( -1 !== opts.offsetOut ) {
 					if ( ( newScroll + wHeight >= elemPos + opts.offsetIn ) &&
 						( newScroll - elm.height() <= elemPos + opts.offsetOut ) ) {
-						opts.onScroll.call( elm );
+						opts.onScroll.call( el );
 					}
 				}
 				else {
 					if ( ( newScroll + wHeight >= elemPos + opts.offsetIn ) ) {
-						opts.onScroll.call( elm );
+						opts.onScroll.call( el );
 					}
 				}
 			}
 			else {
-				opts.onScroll.call( elm );
+				opts.onScroll.call( el );
 			}
 
 			pixelsScrolled = newScroll - scrolled;

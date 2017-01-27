@@ -16,9 +16,6 @@
 // Block direct access to this file.
 defined( 'ABSPATH' ) or die();
 
-
-
-
 /**
  * Premise Field
  *
@@ -29,9 +26,11 @@ defined( 'ABSPATH' ) or die();
  * For example passing the 'name' attribute will add 'name="your_value"' to your field but it will also tell
  * Premise where to save the value and how to retrieve it after a value has been saved.
  *
- * @since 1.2 Parameters order changed, new parameter added:
- *            Old params: (array) arguments, (boolean) echo
- *            New params: (string) type, (array) arguments, (boolean) echo
+ * @since 1.2           Parameters order changed, new parameter added:
+ *                      Old params: (array) arguments, (boolean) echo
+ *                      New params: (string) type, (array) arguments, (boolean) echo
+ *
+ * @since 2.0.0         this function is now a wrapper for pwp_field()
  *
  * @param string  $type the type of field to print or return. i.e. text, textarea, checkbox, wp_media, video.
  * @param array   $args array of arguments to buid a field.
@@ -40,53 +39,76 @@ defined( 'ABSPATH' ) or die();
  * @return string       html markup for a form field
  */
 function premise_field( $type = 'text', $args = array(), $echo = true ) {
-
-	/**
-	 * Backward compatibility with version < 1.2
-	 *
-	 * Allows you to skip the first param and pass it as part of args i.e. ( 'type' => 'text' )
-	 *
-	 * @since 1.2 If the first param is an array, the function was called the old way
-	 *            or it was called from premise_field_section(). Unset 'type' and pass
-	 *            arguments correctly as expected since 1.2
-	 */
+	// allow type to be an array with all the arguments
 	if ( is_array( $type ) ) {
-
-		$_type = 'text';
-
-		// If 'type' param was submitted, get it and unset it.
-		if ( isset( $type['type'] ) ) {
-
-			$_type = $type['type'];
-			unset( $type['type'] );
+		$_args = $type;
+	}
+	elseif ( is_string( $type ) ) {
+		$_args = $args;
+		// do not allow an empty type for backward compatibility
+		if ( ! isset( $_args['type'] ) ) {
+			$_args['type'] = ( ! empty( $type ) ) ? esc_attr( $type ) : 'text';
 		}
-
-		$args = $type;
-		$type = $_type;
-
-	} else {
-
-		$type  = ! empty( $type ) && is_string( $type ) ? $type : 'text';
-		$args  = is_array( $args ) ? $args : array();
+	}
+	else {
+		// First argument must be a string or array
+		// so if neither is true, stop here.
+		return false;
 	}
 
-	$field = new PremiseField( $type, $args );
-	$html  = $field->get_field();
-
-	if ( ! $echo ) {
-
-		return $html;
-
-	} else {
-
-		echo $html;
+	// backward compatibility for tooltip
+	if ( isset( $_args['tooltip'] ) && ! empty( $_args['tooltip'] ) ) {
+		$_args['before_field'] = '<br><i>'.strip_tags( $_args['tooltip'], '<span>,<p>,<b>,<strong>,<br>' ).'</i>';
+		unset( $_args['tooltip'] );
 	}
 
-	return false;
+	// make the field
+	pwp_field( $_args, $echo );
 }
 
+/**
+ * output a field
+ *
+ * @since  2.0.0         added to replace premise_field. for backward compatibility premise_field became a wrapper for this function.
+ *
+ * @param  string  $args arguments can be a string - the 'type' param, or an array - argument for field
+ * @param  boolean $echo whether to echo ro return the thml
+ * @return string        html for field
+ */
+function pwp_field( $args = '', $echo = true ) {
+	// allow args to be an array of args or string for 'type'
+	$_args = is_array( $args ) ? $args : array( 'type' => (string) $args );
+	// build the field
+	$_f = new PWP_Field_Controller( $_args );
+	// echo or return
+	if ( (boolean) $echo ) {
+		echo $_f->html;
+	}
+	else {
+		return $_f->html;
+	}
+}
 
-
+/**
+ * output a form or field section
+ *
+ * @since  2.0.0         added to replace premise_fieldSection().
+ *
+ * @param  array   $args array of fields and attributes
+ * @param  boolean $echo true to echo. false to return html
+ * @return string        the html for the form or field section
+ */
+function pwp_form( $args = '', $echo = true ) {
+	// build the form
+	$_f = new PWP_Form( $args );
+	// echo or return
+	if ( $_f && (boolean) $echo ) {
+		echo $_f->form;
+	}
+	else {
+		return $_f->form;
+	}
+}
 
 /**
  * Premise field section
@@ -96,6 +118,8 @@ function premise_field( $type = 'text', $args = array(), $echo = true ) {
  * @since  1.2     Simplified parameters. You can no longer use 'container' parameters.
  *                 instead, use the 'premise_field_section_html' filter.
  *
+ * @since 2.0.0    this function is now a wrapper for pwp_form()
+ *
  * @param  array   $args array of arrays. The fields to insert.
  * @param  boolean $echo whether to echo ro return the string.
  *
@@ -103,26 +127,7 @@ function premise_field( $type = 'text', $args = array(), $echo = true ) {
  */
 function premise_field_section( $args = array(), $echo = true ) {
 
-	/**
-	 * Backward comaptibility with versions < 1.2
-	 *
-	 * If the $args array has the key 'fields', it was called using the old way. we need to fix that.
-	 *
-	 * @since  1.2 array of array no longer requires fields to be in its own array called 'fields'
-	 */
-	$args = array_key_exists( 'fields', $args ) && is_array( $args['fields'] ) ? $args['fields'] : $args;
-
-	$html = ''; // Start with a clean section.
-
-	foreach ( $args as $k => $v ) {
-
-		if ( is_array( $v ) ) {
-
-			// Pass each field args as first parameter
-			// We can do this because of backward compatibilty.
-			$html .= premise_field( $v, '', false );
-		}
-	}
+	$html = pwp_form( $args, false );
 
 	/**
 	 * premise_field_section_html filter

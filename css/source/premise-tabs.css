@@ -41,31 +41,22 @@
 	Accordion Layout
 */
 
-/* Vertical Accordion */
-.pwptabs-wrapper .pwptabs-layout-accordion.pwptabs-layout-vertical .pwptabs-tab {
+.pwptabs-wrapper.pwptabs-layout-accordion {
+	margin-bottom: 2%;
+	border-top: 0;
+}
+.pwptabs-wrapper.pwptabs-layout-accordion .pwptabs-tab {
 	display: block;
 	overflow: hidden;
+	border-top: 1px solid #bebebe
 }
 
-/* Horizontal Accordion */
-.pwptabs-wrapper .pwptabs-layout-accordion.pwptabs-layout-horizontal .pwptabs-tab:after {
-	content: '';
-	display: table;
-	clear: both;
+.pwptabs-wrapper.pwptabs-layout-accordion .pwptabs-content {
+	position: relative;
+	padding: 0;
 }
-
-.pwptabs-wrapper .pwptabs-layout-accordion.pwptabs-layout-horizontal .pwptabs-tab {
-	display: inline-block;
-	vertical-align: top;
-}
-
-.pwptabs-wrapper .pwptabs-layout-accordion.pwptabs-layout-horizontal .pwptabs-toggle,
-.pwptabs-wrapper .pwptabs-layout-accordion.pwptabs-layout-horizontal .pwptabs-content {
-	float: left;
-}
-
-.pwptabs-wrapper .pwptabs-layout-accordion.pwptabs-layout-horizontal .pwptabs-content {
-	overflow: hidden;
+.pwptabs-wrapper.pwptabs-layout-accordion .pwptabs-content-inner {
+	position: relative;
 }
 
 
@@ -73,21 +64,55 @@
 	Tabs Layout
 */
 
-.pwptabs-wrapper .pwptabs-layout-tabs {
+.pwptabs-wrapper {
 	position: relative;
+	margin-bottom: 62%;
+	border: 1px solid #bebebe;
+	background-color: #eeeeee;
 }
 
-.pwptabs-wrapper .pwptabs-layout-tabs .pwptabs-tab {
+.pwptabs-wrapper .pwptabs-tab {
 	display: inline-block;
 	vertical-align: top;
+	/*border-right: 1px solid #bebebe;*/
 }
 
-.pwptabs-wrapper .pwptabs-layout-tabs .pwptabs-content {
-	/*position: absolute;
+.pwptabs-wrapper .pwptabs-toggle {
+	display: block;
+	padding: 1em 2em;
+	font-size: 1.2em;
+	text-decoration: none;
+	color: #222;
+}
+
+.pwptabs-wrapper .pwptabs-toggle:hover,
+.pwptabs-wrapper .pwptabs-toggle:active,
+.pwptabs-wrapper .pwptabs-toggle:focus,
+.pwptabs-wrapper .pwptabs-active .pwptabs-toggle {
+	color: #0073aa;
+}
+
+.pwptabs-wrapper .pwptabs-content {
+	position: absolute;
 	top: 100%;
 	left: 0;
 	width: 100%;
-	min-height: 300px;*/
+	padding-top: 60%;
+	overflow: auto;
+	border: 1px solid #bebebe;
+	/*border-top: 0;*/
+}
+
+.pwptabs-wrapper .pwptabs-content-inner {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: auto;
+	min-height: 100%;
+	padding: 1.25em;
+	box-sizing: border-box;
+	background-color: #FFFFFF;
 }
 
 

@@ -16,9 +16,6 @@
 // Block direct access to this file.
 defined( 'ABSPATH' ) or die();
 
-
-
-
 /**
  * Premise Field
  *
@@ -29,9 +26,11 @@ defined( 'ABSPATH' ) or die();
  * For example passing the 'name' attribute will add 'name="your_value"' to your field but it will also tell
  * Premise where to save the value and how to retrieve it after a value has been saved.
  *
- * @since 1.2 Parameters order changed, new parameter added:
- *            Old params: (array) arguments, (boolean) echo
- *            New params: (string) type, (array) arguments, (boolean) echo
+ * @since 1.2           Parameters order changed, new parameter added:
+ *                      Old params: (array) arguments, (boolean) echo
+ *                      New params: (string) type, (array) arguments, (boolean) echo
+ *
+ * @since 2.0.0         this function is now a wrapper for pwp_field()
  *
  * @param string  $type the type of field to print or return. i.e. text, textarea, checkbox, wp_media, video.
  * @param array   $args array of arguments to buid a field.
@@ -40,53 +39,76 @@ defined( 'ABSPATH' ) or die();
  * @return string       html markup for a form field
  */
 function premise_field( $type = 'text', $args = array(), $echo = true ) {
-
-	/**
-	 * Backward compatibility with version < 1.2
-	 *
-	 * Allows you to skip the first param and pass it as part of args i.e. ( 'type' => 'text' )
-	 *
-	 * @since 1.2 If the first param is an array, the function was called the old way
-	 *            or it was called from premise_field_section(). Unset 'type' and pass
-	 *            arguments correctly as expected since 1.2
-	 */
+	// allow type to be an array with all the arguments
 	if ( is_array( $type ) ) {
-
-		$_type = 'text';
-
-		// If 'type' param was submitted, get it and unset it.
-		if ( isset( $type['type'] ) ) {
-
-			$_type = $type['type'];
-			unset( $type['type'] );
+		$_args = $type;
+	}
+	elseif ( is_string( $type ) ) {
+		$_args = $args;
+		// do not allow an empty type for backward compatibility
+		if ( ! isset( $_args['type'] ) ) {
+			$_args['type'] = ( ! empty( $type ) ) ? esc_attr( $type ) : 'text';
 		}
-
-		$args = $type;
-		$type = $_type;
-
-	} else {
-
-		$type  = ! empty( $type ) && is_string( $type ) ? $type : 'text';
-		$args  = is_array( $args ) ? $args : array();
+	}
+	else {
+		// First argument must be a string or array
+		// so if neither is true, stop here.
+		return false;
 	}
 
-	$field = new PremiseField( $type, $args );
-	$html  = $field->get_field();
-
-	if ( ! $echo ) {
-
-		return $html;
-
-	} else {
-
-		echo $html;
+	// backward compatibility for tooltip
+	if ( isset( $_args['tooltip'] ) && ! empty( $_args['tooltip'] ) ) {
+		$_args['before_field'] = '<br><i>'.strip_tags( $_args['tooltip'], '<span>,<p>,<b>,<strong>,<br>' ).'</i>';
+		unset( $_args['tooltip'] );
 	}
 
-	return false;
+	// make the field
+	pwp_field( $_args, $echo );
 }
 
+/**
+ * output a field
+ *
+ * @since  2.0.0         added to replace premise_field. for backward compatibility premise_field became a wrapper for this function.
+ *
+ * @param  string  $args arguments can be a string - the 'type' param, or an array - argument for field
+ * @param  boolean $echo whether to echo ro return the thml
+ * @return string        html for field
+ */
+function pwp_field( $args = '', $echo = true ) {
+	// allow args to be an array of args or string for 'type'
+	$_args = is_array( $args ) ? $args : array( 'type' => (string) $args );
+	// build the field
+	$_f = new PWP_Field_Controller( $_args );
+	// echo or return
+	if ( (boolean) $echo ) {
+		echo $_f->html;
+	}
+	else {
+		return $_f->html;
+	}
+}
 
-
+/**
+ * output a form or field section
+ *
+ * @since  2.0.0         added to replace premise_fieldSection().
+ *
+ * @param  array   $args array of fields and attributes
+ * @param  boolean $echo true to echo. false to return html
+ * @return string        the html for the form or field section
+ */
+function pwp_form( $args = '', $echo = true ) {
+	// build the form
+	$_f = new PWP_Form( $args );
+	// echo or return
+	if ( $_f && (boolean) $echo ) {
+		echo $_f->form;
+	}
+	else {
+		return $_f->form;
+	}
+}
 
 /**
  * Premise field section
@@ -96,6 +118,8 @@ function premise_field( $type = 'text', $args = array(), $echo = true ) {
  * @since  1.2     Simplified parameters. You can no longer use 'container' parameters.
  *                 instead, use the 'premise_field_section_html' filter.
  *
+ * @since 2.0.0    this function is now a wrapper for pwp_form()
+ *
  * @param  array   $args array of arrays. The fields to insert.
  * @param  boolean $echo whether to echo ro return the string.
  *
@@ -103,26 +127,7 @@ function premise_field( $type = 'text', $args = array(), $echo = true ) {
  */
 function premise_field_section( $args = array(), $echo = true ) {
 
-	/**
-	 * Backward comaptibility with versions < 1.2
-	 *
-	 * If the $args array has the key 'fields', it was called using the old way. we need to fix that.
-	 *
-	 * @since  1.2 array of array no longer requires fields to be in its own array called 'fields'
-	 */
-	$args = array_key_exists( 'fields', $args ) && is_array( $args['fields'] ) ? $args['fields'] : $args;
-
-	$html = ''; // Start with a clean section.
-
-	foreach ( $args as $k => $v ) {
-
-		if ( is_array( $v ) ) {
-
-			// Pass each field args as first parameter
-			// We can do this because of backward compatibilty.
-			$html .= premise_field( $v, '', false );
-		}
-	}
+	$html = pwp_form( $args, false );
 
 	/**
 	 * premise_field_section_html filter
@@ -169,13 +174,14 @@ function premise_get_fa_icons() {
 
 
 /**
- * Output a Youtube or a Vimeo video
+ * Output a Youtube, Vimeo or Wistia video
  *
  * @see PremiseField 'video' type
  *
  * @link https://developers.google.com/youtube/iframe_api_reference
  * @link http://stackoverflow.com/questions/5830387/how-to-find-all-youtube-video-ids-in-a-string-using-a-regex
  * @link https://developer.vimeo.com/player/embedding
+ * @link https://wistia.com/doc/embedding
  *
  * @since 1.3
  *
@@ -186,7 +192,8 @@ function premise_get_fa_icons() {
  */
 function premise_output_video( $video, $args = array() ) {
 
-	static $video_count = 1;
+	static $video_count = 1,
+		$js_included = false;
 
 	if ( empty( $video ) || ! is_string( $video ) ) {
 		return '';
@@ -228,10 +235,18 @@ function premise_output_video( $video, $args = array() ) {
 	} elseif ( strpos( $video, 'vimeo' ) ) {
 
 		if ( preg_match( '~(?<=/)([\d]+)~', $video, $matches ) ) {
+			$video_id = $matches[0];
+		}
+
+		$video_type = 'vimeo';
+
+	} elseif ( strpos( $video, 'wistia' ) ) {
+
+		if ( preg_match( '~(?<=/)([\w-]{10})~', $video, $matches ) ) {
  			$video_id = $matches[0];
  		}
 
-		$video_type = 'vimeo';
+		$video_type = 'wistia';
 
 	} else {
 
@@ -242,6 +257,10 @@ function premise_output_video( $video, $args = array() ) {
 			// Vimeo ID is integer.
 			$video_type = 'vimeo';
 
+		} elseif ( strlen( $video_id ) < 11 ) {
+
+			// Wistia ID is 10 char long.
+			$video_type = 'wistia';
 		} else {
 
 			// Youtube ID is 11 char long.
@@ -253,37 +272,34 @@ function premise_output_video( $video, $args = array() ) {
 		return '';
 	}
 
-	if ( $video_type == 'youtube' ) {
+	if ( $video_type === 'youtube' ) {
 
-		$js = '';
+		$yt_args = '';
 
 		if ( is_array( $args ) && ( 0 < count( $args ) ) ) {
 			$yt_args = json_encode( $args );
 		}
 
-		// This code loads the IFrame Player API code asynchronously.
-		if ( ! $js_included ) {
-			$video_cont_id = $video_count++;
+		$video_cont_id = $video_count++;
 
-			$js = '<script>
-				(function($){
-					$(document).ready(function(){
-						$(\'#premise-youtube-video-' . $video_cont_id . '\').premiseLoadYouTube(' . $yt_args . ');
-					});
-				}(jQuery));
-			</script>';
+		$html = '<div class="premise-video premise-youtube-video premise-aspect-ratio-el" data-video-id="' . $video_id . '" id="premise-youtube-video-' . $video_cont_id . '"></div>';
 
-			// $js_included = true; let it always be false. that way it always loads
-		}
+	} elseif ( $video_type === 'vimeo' ) {
 
-		$html = $js . '<div class="premise-video premise-youtube-video" data-video-id="' . $video_id . '" id="premise-youtube-video-' . $video_cont_id . '"></div>';
+		$html = '<iframe src="//player.vimeo.com/video/' . $video_id . '" class="premise-video premise-vimeo-video premise-aspect-ratio-el" id="premise-vimeo-video-' . $video_count++ .'" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
 
 	} else {
 
-		$html = '<iframe src="//player.vimeo.com/video/' . $video_id . '" class="premise-video premise-vimeo-video" id="psv-vimeo-video-' . $video_count++ .'" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
+		$html = '<iframe src="//fast.wistia.net/embed/iframe/' . $video_id . '"
+			class="premise-video premise-wistia-video premise-aspect-ratio-el" id="premise-wistia-video-' . $video_count++ .'"
+			width="620" height="349"
+			allowtransparency="true" frameborder="0" scrolling="no" name="wistia_embed"
+			allowfullscreen mozallowfullscreen webkitallowfullscreen oallowfullscreen msallowfullscreen></iframe>';
+
+		$html .= '<script src="//fast.wistia.net/assets/external/E-v1.js" async></script>';
 	}
 
-	return $html;
+	return '<div class="premise-aspect-ratio-16-9">' . $html . '</div>';
 }
 
 
@@ -312,3 +328,42 @@ function premise_tooltip( $tooltip_text ) {
 	return ' <span class="premise-tooltip"><span class="premise-tooltip-inner"><i>' .
 		esc_attr( $tooltip_text ) . '</i></span></span>';
 }
+
+
+
+/**
+ * get the html for the font awesome icons including the container. This function is used to load icons on fa_icon field.
+ *
+ * @return string html for font awesome icons.
+ */
+function premise_get_fa_icons_html() {
+	$icons = '<div class="premise-field-fa-icons-container" style="display:none;">
+		<div class="premise-field-fa-icons-container-inner">
+			<ul class="premise-field-fa-icons-ul">';
+				foreach ( (array) premise_get_fa_icons() as $icon ) {
+					$icons .= '<li class="premise-field-fa-icon-li premise-inline-block">
+						<a href="javascript:;" class="premise-field-fa-icon-anchor premise-block" data-icon="' . esc_attr( $icon ) . '">
+							<i class="fa fa-fw ' . esc_attr( $icon ) . '"></i>
+						</a>
+					</li>';
+				}
+			$icons .= '</ul>
+		</div>
+	</div>';
+
+	return $icons;
+}
+
+
+
+
+/**
+ * load the font awesome UI via ajax. This function is called by the jQuery pugin premiseFieldFaIcon
+ *
+ * @return string html for font awesome icons
+ */
+function premise_get_fa_icons_html_ajax() {
+	echo premise_get_fa_icons_html();
+	die();
+}
+

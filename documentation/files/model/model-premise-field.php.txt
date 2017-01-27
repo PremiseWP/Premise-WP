@@ -4,6 +4,8 @@
  *
  * @see library/premise-field-library.php For functions that that this class depends on
  *
+ * @deprecated 2.0.0 replaced by class PWP_Field and PWP_Field_Controller
+ *
  * @package Premise WP
  * @subpackage Model
  */
@@ -32,13 +34,13 @@ class PremiseField {
 	/**
 	 * Defaults for each field
 	 *
-	 * Special Parameters: This parameters are special because they alter the
-	 * HTML markup of a field or add functionality such as filters.
+	 * Reserved Arguments - The following arguments are reserved and should not be used as your own
+	 * arguments but as they were intended. Please read the list of reserved arguments below to avoid
+	 * using any of them in your own code. These arguments either serve a specific purpose within this
+	 * class and will not be added to the field as other attributes are added.
 	 *
-	 * Normal Parameters: This parameters (and every other paramaters passed) act as
-	 * additional attributes added the the field. We add some defaults
-	 * and some additional params to make your life easier like 'default'
-	 * or 'options'
+	 * Public Arguments - These aregumets you can use as your own because they are directly passed to the
+	 * field itself.
 	 *
 	 * @var array
 	 *
@@ -46,23 +48,20 @@ class PremiseField {
 	 */
 	public $defaults = array(
 		/**
-		 * Special Arguments
+		 * Reseved Arguments
 		 */
-		'label'      => '',      // Wraps label element around field. uses id for for attribute if id not empty.
-		'tooltip'    => '',      // Adds a tooltip and tooltip functionality to field.
-		'add_filter' => array(), // Add filter(s) to this field. Read documentation for list of filters.
-		'context'    => '',      // Used to let Premise know where to retrieve values from ( post, user ).
-		'wrapper_class' => '',   // Add additional classes to the fields wrapper.
-		'default'    => '',      // If value is empty and get_option() return false.
-		/**
-		 * Normal Arguments
-		 */
-		'name'       => '',      // Name attribute. if empty fills from id.
-		'id'         => '',      // ID attribute. is empty fills from name.
-		'value'      => '',      // Value attribute. by default tries to get_option(name).
-		'value_att'  => '',      // Value attribute. Used for checkboxes and radio.
-		'options'    => array(), // Options for select fields in this format ( Text => Value ).
-		'attribute'  => '',      // HTML attributes to add to element i.e. onchange="doSomethingCool()".
+		'label'      => '',
+		'tooltip'    => '',
+		'wrapper_class' => '',
+		'default'    => '',
+		'value_att'  => '',
+		'attribute'  => '',
+		'options'    => array(),
+		'add_filter' => array(),
+		'name'       => '',
+		'id'         => '',
+		'value'      => '',
+		'context'    => '',
 	);
 
 
@@ -123,8 +122,8 @@ class PremiseField {
 	 *
 	 * @var string
 	 */
-	protected $btn_upload_file = '<a 
-		class="premise-btn-upload" 
+	protected $btn_upload_file = '<a
+		class="premise-btn-upload"
 		href="javascript:void(0);"
 		><i class="fa fa-fw fa-upload"></i></a>';
 
@@ -136,8 +135,8 @@ class PremiseField {
 	 *
 	 * @var string
 	 */
-	protected $btn_remove_file = '<a 
-		class="premise-btn-remove" 
+	protected $btn_remove_file = '<a
+		class="premise-btn-remove"
 		href="javascript:void(0);"
 		><i class="fa fa-fw fa-times"></i></a>';
 
@@ -149,9 +148,9 @@ class PremiseField {
 	 *
 	 * @var string
 	 */
-	protected $btn_insert_icon = '<a 
-		href="javascript:void(0);" 
-		class="premise-choose-icon" 
+	protected $btn_insert_icon = '<a
+		href="javascript:void(0);"
+		class="premise-choose-icon"
 		><i class="fa fa-fw fa-th"></i></a>';
 
 
@@ -163,9 +162,9 @@ class PremiseField {
 	 *
 	 * @var string
 	 */
-	protected $btn_remove_icon = '<a 
-		href="javascript:void(0);" 
-		class="premise-remove-icon" 
+	protected $btn_remove_icon = '<a
+		href="javascript:void(0);"
+		class="premise-remove-icon"
 		><i class="fa fa-fw fa-times"></i></a>';
 
 
@@ -355,12 +354,6 @@ class PremiseField {
 
 				array_push( $this->filters_used, $this->field['add_filter'][0] );
 			}
-		}
-
-		if ( 'fa_icon' == $this->type ) {
-
-			add_filter( 'premise_field_html_after_wrapper', array( $this, 'fa_icons' ) );
-			array_push( $this->filters_used, 'premise_field_html_after_wrapper' );
 		}
 
 		if ( 'wp_media' == $this->type ) {
@@ -871,7 +864,7 @@ class PremiseField {
 	 */
 	public function fa_icon_input( $field ) {
 
-		return str_replace( 'type="fa_icon"', 'type="text" class="premise-fa_icon"', $field );
+		return str_replace( 'type="fa_icon"', 'type="text" class="premise-field-fa_icon-input"', $field );
 	}
 
 
@@ -879,6 +872,8 @@ class PremiseField {
 
 	/**
 	 * Display the fa-icons for user to choose from
+	 *
+	 * @deprecated 1.4.5 replaced with premise_get_fa_icons_html() which is called by ajax when the fields get loaded in the front end
 	 *
 	 * @return string html for fa icons
 	 */
@@ -889,7 +884,7 @@ class PremiseField {
 
 		foreach ( (array) premise_get_fa_icons() as $icon ) {
 
-			$icons .= '<li class="premise-field-fa-icon-li premise-inline-block premise-float-left span1">
+			$icons .= '<li class="premise-field-fa-icon-li premise-inline-block">
 				<a href="javascript:;" class="premise-field-fa-icon-anchor premise-block" data-icon="' . $icon . '">
 					<i class="fa fa-fw ' . $icon . '"></i>
 				</a>
@@ -1033,47 +1028,12 @@ class PremiseField {
 		elseif ( ! $this->empty_value( $val ) ) {
 
 			return esc_attr( $val );
-		} 
+		}
 		else {
 
 			return isset( $this->args['default'] ) && ! $this->empty_value( $this->args['default'] ) ?
 				esc_attr( $this->args['default'] ) :
 				'';
-		}
-	}
-
-
-
-
-
-	/**
-	 * Get value of a field by context
-	 *
-	 * Context applies to where the field is saved. By default fields are assumed to be saved
-	 * in the options table. But if adding fields to a custom post type, get_option()
-	 * would not work anymore so we pass the context 'post'.
-	 * That's how Premise knows to get the value from get_post_meta() instead of get_option().
-	 *
-	 * @since 1.2
-	 *
-	 * @param  string $name Field name.
-	 * @return mixed value found
-	 */
-	protected function get_value_by_context( $name ) {
-
-		$context = $this->args['context'];
-
-		switch ( $context ) {
-
-			case 'post':
-
-				$value = premise_get_option( $name, 'post' );
-				break;
-
-			default :
-
-				return get_option( $this->args['name'] );
-				break;
 		}
 	}
 
@@ -1194,7 +1154,7 @@ class PremiseField {
 
 		// If it is media field and value is array
 		// display comma separated values
-		if ( 'wp_media' == $this->type && is_array( $_field['value'] ) ) 
+		if ( 'wp_media' == $this->type && is_array( $_field['value'] ) )
 			$_field['value'] = implode( ',', $_field['value'] );
 
 		unset( $_field['label'] );

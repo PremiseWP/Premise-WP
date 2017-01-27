@@ -13,9 +13,6 @@
 // Block direct access to this file.
 defined( 'ABSPATH' ) or die();
 
-
-
-
 /**
  * Get the value from any option, including options from a post or a user.
  *
@@ -166,13 +163,11 @@ function premise_get_post_meta( $post_id = '', $name = '', $single = true ) {
  *
  * @return mixed            Returns value from database
  */
-function premise_get_user_meta( $user_id = '', $name = '', $single = true ) {
+function premise_get_user_meta( $_user_id = '', $name = '', $single = true ) {
 
-	if ( empty( $user_id ) ) {
-
-		global $user;
-
-		$user_id = $user->ID;
+	if ( empty( $_user_id ) ) {
+		global $user_id;
+		$_user_id = $user_id;
 	}
 
 	/**
@@ -180,7 +175,7 @@ function premise_get_user_meta( $user_id = '', $name = '', $single = true ) {
 	 *
 	 * @var mixed
 	 */
-	return get_user_meta( $user_id, $name, $single );
+	return get_user_meta( $_user_id, $name, $single );
 }
 
 
@@ -350,4 +345,72 @@ function premise_rand_str( $length = '' ) {
 
 	// Return random string.
 	return esc_attr( $token );
+}
+
+/**
+ * Is value empty?
+ * Allow '0' values
+ * Prefer empty_value over PHP empty function when checking for empty values
+ * excluding 0, '0' or 0.0 values
+ *
+ * @link http://php.net/empty
+ *
+ * @since 1.2
+ *
+ * @example if ( isset( $value ) && ! pwp_empty_value( $value ) )
+ *
+ * @param  string $value Value.
+ *
+ * @return boolean True if empty value & $value !== 0, 0.0, '0', else false
+ */
+function pwp_empty_value( $val = '' ) {
+	return empty( $val ) && $val !== 0 && $val !== 0.0 && $val !== '0';
+}
+
+/**
+ * add a metabox with one function!
+ *
+ * @since  2.0.0
+ *
+ * @param  mixed  $title        Optional. can be a string or array with all params that add_meta_box takes
+ * @param  mixed  $post_type    Optional. can be a string or array with multiple post type or WP_Screen
+ * @param  array  $fields       Optional. array of fields to display in the metabox
+ * @param  mixed  $option_names Required. can be a string or array with multiple names
+ * @return void                 Registers the metabox. Does not return anything
+ */
+function pwp_add_metabox( $title = '', $post_type = '', $fields = '', $option_names = '' ) {
+
+	$args = array();
+
+	$_defaults = array(
+		'id'            => '',
+		'title'         => '',
+		'screen'        => '',
+		'fields'        => '',
+	);
+	// if title is a string
+	if ( is_string( $title ) ) {
+		$args['title']  = esc_html( $title );
+	}
+	elseif ( is_array( $title ) ) {
+		$args = wp_parse_args( $title, $_defaults );
+	}
+	else {
+		return false;
+	}
+	// add id if not present
+	if ( empty( $args['id'] ) ) {
+		$args['id'] = str_replace( ' ', '-', strtolower( $args['title'] ) );
+	}
+	// add screen if not present
+	if ( empty( $args['screen'] ) ) {
+		$args['screen'] = $post_type;
+	}
+	// add fields if not present
+	if ( empty( $args['fields'] ) ) {
+		$args['fields'] = ( ! empty( $fields ) && is_array( $fields ) ) ? $fields : '';
+	}
+	// var_dump($args);exit();
+	// register meta box
+	new PWP_Metabox( $args, $option_names );
 }

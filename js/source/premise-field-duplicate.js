@@ -19,7 +19,7 @@
 		// Support multiple elements.
 		if (this.length > 1) {
 			this.each(function() {
-				$(this).premiseFieldDuplicate( options );
+				$(this).premiseFieldDuplicate( option );
 			});
 			return;
 		}

@@ -1,9 +1,9 @@
 <?php
 /**
  * Plugin Name: Premise WP
- * Description: A Wordpress framework for developers who build themes and plugins. It allows you to quickly build options in the backend by doing the heavy lifting and repetitive tasks for you. Premise WP aslo comes with a CSS framework readily available on both the backend and frontend that allows you to quickly build responsive markup. To begin using Premise WP simply download and install the plugin, once you activate it you are all set! You can begin using it in your theme or plugin's code.
+ * Description: Do things faster as a Wordpess developer! Build options in the backedn, create custom post types, add new admin pages or metaboxes, and more.
  * Plugin URI:	https://github.com/PremiseWP/Premise-WP
- * Version:     1.8.0
+ * Version:     2.0.0
  * Author:      Premise WP
  * Author URI:  http://premisewp.com
  * License:     GPL
@@ -14,24 +14,15 @@
 // Block direct access to this file.
 defined( 'ABSPATH' ) or die();
 
-
-
-
 /**
  * Define Premise path
  */
 define( 'PREMISE_PATH', plugin_dir_path( __FILE__ ) );
 
-
-
-
 /**
  * Define Premise url
  */
 define( 'PREMISE_URL', plugin_dir_url( __FILE__ ) );
-
-
-
 
 // Instantiate our main class and setup Premise WP
 // Must use 'plugins_loaded' hook.
@@ -44,7 +35,6 @@ add_action( 'plugins_loaded', array( Premise_WP::get_instance(), 'premise_setup'
  */
 class Premise_WP {
 
-
 	/**
 	 * Plugin instance.
 	 *
@@ -54,18 +44,12 @@ class Premise_WP {
 	 */
 	protected static $instance = null;
 
-
-
-
 	/**
 	 * Plugin url
 	 *
 	 * @var string
 	 */
 	public $plugin_url = PREMISE_URL;
-
-
-
 
 	/**
 	 * Plugin path
@@ -74,10 +58,6 @@ class Premise_WP {
 	 */
 	public $plugin_path = PREMISE_PATH;
 
-
-
-
-
 	/**
 	 * Constructor. Intentionally left empty and public.
 	 *
@@ -85,10 +65,6 @@ class Premise_WP {
 	 * @since 	1.0
 	 */
 	public function __construct() {}
-
-
-
-
 
 	/**
 	 * Access this plugin’s working instance
@@ -102,10 +78,6 @@ class Premise_WP {
 		return self::$instance;
 	}
 
-
-
-
-
 	/**
 	 * Setup Premise
 	 *
@@ -118,23 +90,29 @@ class Premise_WP {
 		$this->premise_hooks();
 	}
 
-
-
-
-
-
 	/**
 	 * Includes
 	 *
 	 * @since 1.0
 	 */
 	protected function do_includes() {
-		require_once 'includes/includes.php';
+		// models
+		require_once PREMISE_PATH . 'model/model-premise-tabs.php';
+		require_once PREMISE_PATH . 'model/class.fields-model.php';
+		require_once PREMISE_PATH . 'model/class.metabox-model.php';
+		require_once PREMISE_PATH . 'model/class.admin-page-model.php';
+		require_once PREMISE_PATH . 'model/model-premise-custom-post-type.php';
+		// controllers
+		require_once PREMISE_PATH . 'controller/class.forms-controller.php';
+		require_once PREMISE_PATH . 'controller/class.fields-controller.php';
+		require_once PREMISE_PATH . 'controller/class.user-fields-controller.php';
+		// Libraries
+		require_once PREMISE_PATH . 'library/premise-library.php';
+		require_once PREMISE_PATH . 'library/premise-field-library.php';
+		// deprecated
+		require_once PREMISE_PATH . 'model/model-premise-field.php';
+		require_once PREMISE_PATH . 'model/model-premise-options.php';
 	}
-
-
-
-
 
 	/**
 	 * Premise Hooks
@@ -157,9 +135,6 @@ class Premise_WP {
 		add_action( 'wp_ajax_nopriv_premise_field_load_fa_icons_ajax', 'premise_get_fa_icons_html_ajax' );
 	}
 
-
-
-
 	/**
 	 * Add premise classes to body of document in the front-end and backend
 	 *
@@ -176,11 +151,6 @@ class Premise_WP {
 		$classes[] = 'premise-wp-frontend';
 		return $classes;
 	}
-
-
-
-
-
 
 	/**
 	 * Premise CSS & JS
@@ -226,10 +196,6 @@ class Premise_WP {
 		// Enqueue the scripts for front and back end
 		wp_enqueue_script( 'premise_script_js' );
 	}
-
-
-
-
 
 	/**
 	 * Loads translation file.
