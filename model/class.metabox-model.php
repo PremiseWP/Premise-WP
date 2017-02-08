@@ -1,13 +1,16 @@
 <?php
+/**
+ * Metabox Model
+ *
+ * @package Premise WP
+ * @subpackage Model
+ */
 
 // Block direct access to this file.
 defined( 'ABSPATH' ) or die();
 
 /**
- * Register a meta box
- *
- * @package Premise WP
- * @subpackage Model
+ * Register a meta box to any post, page or custon post type.
  */
 class PWP_Metabox {
 
