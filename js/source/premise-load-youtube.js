@@ -2,7 +2,7 @@
 
 	/**
 	 * Load a YouTube video
-	 * 
+	 *
 	 * @param  {Object} options options object to build a youtube player
 	 * @return {Object}         Node in context
 	 */
@@ -29,6 +29,7 @@
 
 		// Initiate the plugin
 		var init = function() {
+			$(window).on( 'pwpYoutubeAPIReady', buildPlayer );
 			// build plugin options
 			buildOptions();
 			// build player if YT API exists, otherwise load YT API first
@@ -48,11 +49,11 @@
 				}
 			}
 
-			// Parse quick options 
+			// Parse quick options
 			opts.playerVars.autoplay = opts.playerVars.autoplay || opts.autoplay;
 			opts.playerVars.playlist = opts.playerVars.playlist || opts.playlist;
 			opts.playerVars.loop     = opts.playerVars.loop     || opts.loop;
-			
+
 			// if loop option is true, make sure our video/s is/are passed as a playlist
 			if ( opts.playerVars.loop && ( 0 === opts.playerVars.playlist.length ) ) {
 				opts.playerVars.playlist = [opts.videoId];
@@ -67,7 +68,7 @@
 				height: opts.height,
 				width: opts.width,
 				videoId: opts.videoId,
-				playerVars: opts.playerVars, 
+				playerVars: opts.playerVars,
 				events: opts.events,
 			});
 
@@ -78,7 +79,7 @@
 		// load the youtube API asynchronously
 		var loadAPI = function() {
 			// bind youtube api ready function
-			window.onYouTubeIframeAPIReady = buildPlayer;
+			window.onYouTubeIframeAPIReady = loadVideos;
 			// create API script
 			var tag = document.createElement("script");
 			tag.src = "https://www.youtube.com/iframe_api";
@@ -87,9 +88,13 @@
 			firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 		}
 
+		var loadVideos = function() {
+			$(window).trigger( 'pwpYoutubeAPIReady' );
+		}
+
 		// on player ready
 		var ready = function() {
-			// set the volume 
+			// set the volume
 			if ( -1 !== opts.volume ) player.setVolume( opts.volume );
 
 			// mute if mute option is true
@@ -107,16 +112,16 @@
 	// Defaults.
 	$.fn.premiseLoadYouTube.defaults = {
 		videoId: [],
-		height: '390', 
-		width: '640', 
-		playerVars: {}, 
+		height: '390',
+		width: '640',
+		playerVars: {},
 		events: {
 			// onReady: $.fn.premiseLoadYouTube.ready,
-		}, 
+		},
 		// quick options - for commonly used settings
 		autoplay: 0,
 		loop: 0,
-		playlist: [], 
+		playlist: [],
 		mute: false,
 		volume: -1,
 	}
