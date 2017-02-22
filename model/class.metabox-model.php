@@ -156,7 +156,7 @@ class PWP_Metabox {
      */
     public function save_metabox( $post_id, $post ) {
         // fix for not having a nonce action to check when using a custom callback
-        if ( ! empty( $this->nonce_action ) ) {
+        if ( $this->nonce_action && ! empty( $this->nonce_action ) ) {
             // Add nonce for security and authentication.
             $nonce_name   = isset( $_POST[ $this->nonce ] ) ? $_POST[ $this->nonce ] : '';
             // Check if nonce is set.
@@ -165,7 +165,7 @@ class PWP_Metabox {
             }
 
             // Check if nonce is valid.
-            if ( ! wp_verify_nonce( $nonce_name, $this->nounce_action ) ) {
+            if ( ! wp_verify_nonce( $nonce_name, $this->nonce_action ) ) {
                 return;
             }
         }
@@ -191,9 +191,10 @@ class PWP_Metabox {
              *
              * @var mixed
              */
-            $data = apply_filters( 'pwp_metabox_sanitize_option', $_POST[ $option ], $post );
+            $data = ( isset( $_POST[ $option ] ) ) ? apply_filters( 'pwp_metabox_sanitize_option', $_POST[ $option ], $post ) : false;
             // save the option
-            update_post_meta( $post_id, $option, $data );
+            if ( $data )
+                update_post_meta( $post_id, $option, $data );
         }
     }
 
