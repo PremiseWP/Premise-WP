@@ -224,6 +224,9 @@ Premise WP uses [Gruntjs.com](http://gruntjs.com/) to compile JS and CSS files. 
 
 ## Changelog
 
+#### 2.0.1
+* Fixed ssue with meta box nonces sometimes preventing saves.
+
 #### 2.0.0
 * New `PWP_Field` Model - Builds the html element for the field and gets all necessary attributes (name, value, id, etc). It can build other html elements as well; although it is not the intended use for this class, it is a neat option to have.
 * New `PWP_Metabox` Model - Adds a metabox to any post page or custom post type.
