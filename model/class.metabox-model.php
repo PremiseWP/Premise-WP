@@ -92,7 +92,7 @@ class PWP_Metabox {
 
             if ( empty( $this->mb['callback'] ) ) {
                 $this->mb['callback'] = array( $this, 'render_metabox' );
-                $this->nonce_action = premise_rand_str( 8 );
+                // $this->nonce_action = premise_rand_str( 8 );
             }
 
             add_action( 'load-post.php',     array( $this, 'init' ) );
@@ -140,7 +140,8 @@ class PWP_Metabox {
         }
 
         // Add nonce for security and authentication.
-        wp_nonce_field( $this->nounce_action, $this->nonce );
+        $this->nonce_action = premise_rand_str( 8 );
+        wp_nonce_field( $this->nonce_action, $this->nonce );
 
         pwp_form( $this->mb['fields'], true );
     }
@@ -155,19 +156,18 @@ class PWP_Metabox {
      * @return null
      */
     public function save_metabox( $post_id, $post ) {
-        // fix for not having a nonce action to check when using a custom callback
-        if ( $this->nonce_action && ! empty( $this->nonce_action ) ) {
-            // Add nonce for security and authentication.
-            $nonce_name   = isset( $_POST[ $this->nonce ] ) ? $_POST[ $this->nonce ] : '';
-            // Check if nonce is set.
-            if ( ! isset( $nonce_name ) ) {
-                return;
-            }
+        // if we are not dealing with the same post type we have on our screen then dont do anything.
+        if ( ! in_array( $post->post_type, (array) $this->mb['screen'] ) ) {
+            return;
+        }
 
+        // fix for not having a nonce action to check when using a custom callback
+        if ( isset( $_POST[ $this->nonce ] ) && ! empty( $this->nonce_action ) ) {
             // Check if nonce is valid.
-            if ( ! wp_verify_nonce( $nonce_name, $this->nonce_action ) ) {
+            if ( ! wp_verify_nonce( $_POST[ $this->nonce ], $this->nonce_action ) ) {
                 return;
             }
+var_dump( $this->nonce_action );
         }
 
         // Check if user has permissions to save data.
@@ -192,9 +192,11 @@ class PWP_Metabox {
              * @var mixed
              */
             $data = ( isset( $_POST[ $option ] ) ) ? apply_filters( 'pwp_metabox_sanitize_option', $_POST[ $option ], $post ) : false;
+
             // save the option
-            if ( $data )
+            if ( $data ) {
                 update_post_meta( $post_id, $option, $data );
+            }
         }
     }
 
