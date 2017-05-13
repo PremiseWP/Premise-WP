@@ -62,6 +62,13 @@ class PWP_Field {
 	public $id = '';
 
 	/**
+	 * Holds the field element
+	 *
+	 * @var string
+	 */
+	public $field = '';
+
+	/**
 	 * build our object
 	 *
 	 * @param string $args [description]
