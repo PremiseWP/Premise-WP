@@ -3,7 +3,7 @@
  * Plugin Name: Premise WP
  * Description: Do things faster as a Wordpess developer! Build options in the backedn, create custom post types, add new admin pages or metaboxes, and more.
  * Plugin URI:	https://github.com/PremiseWP/Premise-WP
- * Version:     2.0.1
+ * Version:     2.0.2
  * Author:      Premise WP
  * Author URI:  http://premisewp.com
  * License:     GPL
