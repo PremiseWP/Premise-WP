@@ -189,3 +189,4 @@ class PWP_Admin_Page {
 		</div><?
 	}
 }
+?>
