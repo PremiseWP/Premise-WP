@@ -130,10 +130,10 @@ function pwp_custom_fields( $name = '', $context = 'post', $echo = true ) {
 	$cfields = premise_get_value( esc_attr( $name ) . '[pwp_custom_fields]', esc_attr( $context ) );
 
 	ob_start();
-	?><div class="pwp-duplicate-fields"><?
+	?><div class="pwp-duplicate-fields"><?php
 		$i=0;
 		foreach ( (array) $cfields as $k => $field ) {
-			?><div class="pwp-duplicate-section"><div class="pwp-row"><?
+			?><div class="pwp-duplicate-section"><div class="pwp-row"><?php
 
 				pwp_field( array(
 					'type'          => 'text',
@@ -152,10 +152,10 @@ function pwp_custom_fields( $name = '', $context = 'post', $echo = true ) {
 					'value'         => esc_attr( $field['value'] ),
 				) );
 
-			?></div></div><?
+			?></div></div><?php
 			$i++;
 		}
-	?></div><?
+	?></div><?php
 	$_html = ob_get_clean();
 
 	if ( $echo ) {
