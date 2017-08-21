@@ -100,9 +100,9 @@ class Premise_WP {
 		require_once PREMISE_PATH . 'model/model-premise-tabs.php';
 		require_once PREMISE_PATH . 'model/class.fields-model.php';
 		require_once PREMISE_PATH . 'model/class.metabox-model.php';
-		require_once PREMISE_PATH . 'model/class.admin-page-model.php';
 		require_once PREMISE_PATH . 'model/model-premise-custom-post-type.php';
 		// controllers
+		require_once PREMISE_PATH . 'controller/class.admin-page-controller.php';
 		require_once PREMISE_PATH . 'controller/class.forms-controller.php';
 		require_once PREMISE_PATH . 'controller/class.fields-controller.php';
 		require_once PREMISE_PATH . 'controller/class.user-fields-controller.php';

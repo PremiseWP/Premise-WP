@@ -186,7 +186,7 @@ class PWP_Admin_Page {
 				}
 
 			?></form>
-		</div><?
+		</div><?php
 	}
 }
-
+?>
