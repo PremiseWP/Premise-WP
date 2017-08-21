@@ -224,6 +224,9 @@ Premise WP uses [Gruntjs.com](http://gruntjs.com/) to compile JS and CSS files. 
 
 ## Changelog
 
+#### 2.1.0
+* Deprecated plugin `premiseGoogleMap` and replaced it with `roamiGmap` - v1.0.0.
+
 #### 2.0.2
 * PHP function `pwp_custom_fields` inserts "Wordpress like" custom fields functionality anywhere.
 * Updated code for jQuery plugin `premiseFieldDuplicate`. This plugin takes a container with any number of fields in it and allows you tu duplicate those fields to allow the user to enter unlimited number of the same set of fields. Used by `pwp_custom_fields`.
