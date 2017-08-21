@@ -174,14 +174,14 @@
 				// btnDelete = $('<a class="premise-btn-remove" href="javascript:void(0);"><i class="fa fa-fw fa-times"></i></a>');
 				// $el.parentNode.insertBefore( btnDelete[0], field[0].nextSibling );
 				wrapper.append( $('<a class="'+opts.btnRemoveClass+'" href="javascript:void(0);"><i class="fa fa-fw fa-times"></i></a>') );
-				btnDelete = $( '.'+opts.btnRemoveClass );
+				btnDelete  = wrapper.find( '.'+opts.btnRemoveClass );
 			}
 
 			if ( ! btnUpload.length ) {
 				// btnUpload = $('<a class="premise-btn-upload" href="javascript:void(0);"><i class="fa fa-fw fa-upload"></i></a>');
 				// $el.parentNode.insertBefore( btnUpload[0], field[0].nextSibling );
 				wrapper.append( $('<a class="'+opts.btnUploadClass+'" href="javascript:void(0);"><i class="fa fa-fw fa-upload"></i></a>') );
-				btnUpload = $( '.'+opts.btnUploadClass );
+				btnUpload  = wrapper.find( '.'+opts.btnUploadClass );
 			}
 
 			// Bind upload button

@@ -111,6 +111,62 @@ function pwp_form( $args = '', $echo = true ) {
 }
 
 /**
+ * Outputs a set of cutom fields like Wordpress's custom fields used in posts meta data.
+ * These fields can be used anywhere, but since they are used mostly in posts
+ * the second param 'context' is set to 'post' by default. Change this to 'user'
+ * or leave empty to use on a user profile or an options page respectively.
+ *
+ * @since  2.0.2
+ *
+ * @param  string  $name    Required. the name attribute to use for the fields.
+ * @param  string  $context the context param to be used for each field. Defaults to post.
+ * @param  boolean $echo    whether to echo the fields or return as string
+ * @return string           The html for the cutom fields
+ */
+function pwp_custom_fields( $name = '', $context = 'post', $echo = true ) {
+	// if no name. exit, ntohing to look for
+	if ( empty( $name ) ) return false;
+	// get the fields
+	$cfields = premise_get_value( esc_attr( $name ) . '[pwp_custom_fields]', esc_attr( $context ) );
+
+	ob_start();
+	?><div class="pwp-duplicate-fields"><?
+		$i=0;
+		foreach ( (array) $cfields as $k => $field ) {
+			?><div class="pwp-duplicate-section"><div class="pwp-row"><?
+
+				pwp_field( array(
+					'type'          => 'text',
+					'label'         => 'Key',
+					'name'          => esc_attr( $name ) . '[pwp_custom_fields]['.$i.'][key]',
+					'context'       => esc_attr( $context ),
+					'wrapper_class' => 'span4',
+					'value'         => esc_attr( $field['key'] ),
+				) );
+				pwp_field( array(
+					'type'          => 'textarea',
+					'label'         => 'value',
+					'name'          => esc_attr( $name ) . '[pwp_custom_fields]['.$i.'][value]',
+					'context'       => esc_attr( $context ),
+					'wrapper_class' => 'span8',
+					'value'         => esc_attr( $field['value'] ),
+				) );
+
+			?></div></div><?
+			$i++;
+		}
+	?></div><?
+	$_html = ob_get_clean();
+
+	if ( $echo ) {
+		echo $_html;
+	}
+	else {
+		return $_html;
+	}
+}
+
+/**
  * Premise field section
  *
  * Group of fields wrapped within one parent element.

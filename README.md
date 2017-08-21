@@ -224,6 +224,17 @@ Premise WP uses [Gruntjs.com](http://gruntjs.com/) to compile JS and CSS files. 
 
 ## Changelog
 
+#### 2.1.0
+* Deprecated plugin `premiseGoogleMap` and replaced it with `roamiGmap` - v1.0.0.
+
+#### 2.0.2
+* PHP function `pwp_custom_fields` inserts "Wordpress like" custom fields functionality anywhere.
+* Updated code for jQuery plugin `premiseFieldDuplicate`. This plugin takes a container with any number of fields in it and allows you tu duplicate those fields to allow the user to enter unlimited number of the same set of fields. Used by `pwp_custom_fields`.
+* Move premise field binding to premise-field.js file.
+
+#### 2.0.1
+* Fixed ssue with meta box nonces sometimes preventing saves.
+
 #### 2.0.0
 * New `PWP_Field` Model - Builds the html element for the field and gets all necessary attributes (name, value, id, etc). It can build other html elements as well; although it is not the intended use for this class, it is a neat option to have.
 * New `PWP_Metabox` Model - Adds a metabox to any post page or custom post type.

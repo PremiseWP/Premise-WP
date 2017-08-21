@@ -3,41 +3,40 @@
 	/**
 	 * Display a google map on any page
 	 *
-	 * @deprecated replaced by jquery.roamiGmap.js
-	 *
 	 * @see https://developers.google.com/maps/documentation/javascript/tutorial
 	 *
 	 * @param  {Object} options Options object to build the map.
 	 * @return {Object}         Node in context
 	 */
-	$.fn.premiseGoogleMap = function( options ) {
+	$.fn.roamiGmap = function( options ) {
 
 		if ( this.length === 0 ) {
 			return this;
 		}
 
 		// Parse the default options.
-		var opts = $.extend( {}, $.fn.premiseGoogleMap.defaults, options );
+		var opts = $.extend( {}, $.fn.roamiGmap.defaults, options );
 
 		// Load the api if it has not been loaded already and if we have a key
-		if ( ! $.fn.premiseGoogleMap.APILoaded && '' !== opts.key ) {
+		if ( ! $.fn.roamiGmap.APILoaded && '' !== opts.key ) {
 			// Load the gmaps api.
 			var gmAPI  = document.createElement('script'),
 			firstTag   = document.getElementsByTagName('script')[0];
 			gmAPI.src  = "https://maps.googleapis.com/maps/api/js?key="; // Base URL.
 			gmAPI.src += opts.key;                                       // API Key.
-			gmAPI.src += "&callback=jQuery.fn.premiseGoogleMap.loadMap"; // The callback.
+			gmAPI.src += "&libraries=places&callback=jQuery.fn.roamiGmap.gmapsAPILoaded"; // The callback.
 
 			firstTag.parentNode.insertBefore(gmAPI, firstTag);
 
 			// Prevent it from being loaded again.
-			$.fn.premiseGoogleMap.APILoaded = true;
+			$.fn.roamiGmap.APILoaded = true;
 		}
 
 		// Reference our element and global variables.
 		var el = this,
 		map,
 		geocoder,
+		places,
 		markers = [];
 
 		/**
@@ -52,17 +51,17 @@
 		var init = function() {
 			// check for api key
 			if ( ! opts.key.length ) {
-				console.error( 'premiseGoogleMap(): Please provide a Google Maps API Key.');
+				console.error( 'roamiGmap(): Please provide a Google Maps API Key.');
 				return false;
 			}
 			else {
+				// bind map creation when api has loaded
+				// must bind on document so that multiple maps
+				// can be aware of this event.
 				$(document).on( 'apiHasLoaded', createMap );
-
+				// set the min height for our element.
 				el.css( 'min-height', opts.minHeight );
-
-				//if ( $.fn.premiseGoogleMap.APILoaded ) apiLoaded();
 			}
-
 		},
 
 		/**
@@ -72,38 +71,43 @@
 		 */
 		createMap = function() {
 
-			geocoder = new google.maps.Geocoder();
+			if (!geocoder) {
+				geocoder = new google.maps.Geocoder();
+				if (!geocoder) {
+					console.error( 'roamiGmap() - could not build the Geocoder object.' );
+					return false;
+				}
+			}
 
 			if ( ! opts.center || '' === opts.center ) {
-				console.error( 'premiseGoogleMap() - @param center is required.' );
+				console.error( 'roamiGmap() - @param center is required.' );
 				return false;
 			}
 
-			if ( ! geocoder ) {
-				console.error( 'premiseGoogleMap() - could not build the Geocoder object.' );
-				return false;
-			}
 			// Get lat and lng from center address.
 			geocoder.geocode( { 'address': opts.center }, function( results, status ) {
 
 				if ( status !== 'OK' ) {
-					console.error( 'premiseGoogleMap() - Geocode was not successful for the following reason: ' + status );
+					console.error( 'roamiGmap() - Geocode was not successful for the following reason: ' + status );
 					return false;
 				}
 				else {
-					// Save the location if successful.
+					// Save the location for our center
 					el.location = results[0].geometry.location;
 
-					map = new google.maps.Map( el[0], {
+					var mapOpts = $.extend( {}, {
 						center: el.location,
 						zoom:   opts.zoom,
-					} );
+					}, opts.mapOptions );
 
-					// buid element
-					el.map        = map;
+					map = new google.maps.Map( el[0], mapOpts );
+
+					// buid el
+					el.gmap       = map;
 					el.marker     = ( opts.marker ) ? placeMarker( opts.marker ) : opts.marker;
 					el.infowindow = attachInfowindow( opts.infowindow, el.marker );
 
+					// if onMapLoad is a function, call it
 					if ( 'function' === typeof opts.onMapLoad ) {
 						opts.onMapLoad.call( el );
 					}
@@ -158,12 +162,28 @@
 
 				// Bind infowindow if opts.bindInfowindow = true
 				if ( opts.bindInfowindow ) {
+
 					// this opens the infowindow when the pin is clicked.
 					google.maps.event.addListener( marker, 'click', function() {
-					  	_window.open( map, marker );
+						if(opts.autoCloseInfowindow) {
+							if (el.infowindows.length) {
+								for (var i = el.infowindows.length - 1; i >= 0; i--) {
+									if(el.infowindows[i].map) {
+										el.infowindows[i].close();
+									}
+								}
+							}
+						}
+					  _window.open( map, marker );
 					});
 				}
 
+				if (!el.infowindows || !el.infowindows.length) {
+					el.infowindows = [_window];
+				}
+				else {
+					el.infowindows.push(_window);
+				}
 				return _window;
 			}
 
@@ -194,16 +214,6 @@
 		};
 
 		/**
-		 * This function is called when the API has loaded on the DOM
-		 *
-		 * @return {void} Does not return anything
-		 */
-		$.fn.premiseGoogleMap.loadMap = function() {
-			console.log( 'Google API Has Loaded.' );
-			$(document).trigger( 'apiHasLoaded' );
-		};
-
-		/**
 		 * Public Methods
 		 */
 
@@ -226,7 +236,7 @@
 						_pin = placeMarker( marker, infowindow );
 					}
 					else {
-						console.error( 'premiseGoogleMap() - Geocode was not successful for the following reason: ' + status );
+						console.error( 'roamiGmap() - Geocode was not successful for the following reason: ' + status );
 						return false;
 					}
 				});
@@ -234,24 +244,94 @@
 			else {
 				_pin = placeMarker( marker, infowindow );
 			}
-
+			// return marker object
 			return _pin;
 		};
 
+		/**
+		 * returns all the markers in an arrray
+		 *
+		 * @return {array} all markers in a map
+		 */
 		el.getMarkers = function() {
 			return markers;
 		};
 
-		if ( 1 < this.length ) {
-			$(this).each( function() {
-				$(this).premiseGoogleMap( options );
-			});
-			return this;
+		/**
+		 * Search for places within a map
+		 *
+		 * @see nearbySearch documentation for more information -
+		 * @url https://developers.google.com/maps/documentation/javascript/places#place_search_requests
+		 *
+		 * @param  {Object}   options  the options for your search.
+		 * @param  {Function} callback a callback function to handle results of the search.
+		 * @return {void}              does not return anything
+		 */
+		el.searchPlaces = function( options, callback ) {
+			options = options || {};
+			// set a default callback if none was passed
+			if ('function' !== typeof callback) {
+				callback = function(results, status) {
+					if (status === google.maps.places.PlacesServiceStatus.OK) {
+	          for (var i = 0; i < results.length; i++) {
+	          	// console.log(results[i])
+	          	// build infowindow HTML
+	          	var _iw = '<h4>'+results[i].name+'</h4>';
+	          	_iw += (results[i].opening_hours && results[i].opening_hours.open_now)
+	          		? '<p>Opened.</p>'
+	          		: '<p>Closed.</p>';
+	          	// TODO: fix issue with getUrl function to display images
+	          	// if (results[i].photos && results[i].photos.length) {
+	          	// 	var _imgUrl = results[i].photos[0].getUrl();
+	          	// 	_iw += '<img src="'+_imgUrl+'" width="200" height="100" />';
+	          	// }
+
+	          	el.addMarker({
+	          		position: results[i].geometry.location
+	          	},
+	          	{
+	          		content: _iw,
+	          	});
+	          }
+	        }
+				};
+			}
+			// some basic options that if not provided, we can set
+			options.location = options.location || this.location;
+			options.radius   = options.radius || 500;
+			options.type     = options.type || [];
+			// instantiate places and perform search.
+			// Build places only once
+			if (!places) {
+				places = new google.maps.places.PlacesService( el.gmap );
+				if (!places) {
+					console.error( 'roamiGmap() - could not build the Places object.' );
+					return false;
+				}
+			}
+			// search
+			places.nearbySearch(options, callback);
 		}
 
-		// run our plugin
-		init();
+		/**
+		 * This function is called when the Google Maps Javascript API has loaded. It is made public so that we can use it as the callback on API load.
+		 *
+		 * @return {void} Does not return anything
+		 */
+		$.fn.roamiGmap.gmapsAPILoaded = function() {
+			$(document).trigger( 'apiHasLoaded' );
+			console.log( 'Google API Has Loaded.' );
+		};
 
+		/* Run our code */
+
+		if ( 1 < this.length ) {
+			$(this).each( function() {
+				$(this).roamiGmap( options );
+			});
+		}
+
+		init();
 		return this;
 	};
 
@@ -262,29 +342,36 @@
 	 *
 	 * @type {Boolean}
 	 */
-	$.fn.premiseGoogleMap.APILoaded = false;
+	$.fn.roamiGmap.APILoaded = false;
 
 	/**
 	 * Our plugin defaults
 	 *
 	 * @param {string}  key        Required. Google Maps API Key.
-	 * @param {string}  center     Required. An address to use as the center of the map
-	 * @param {mixed}   marker     Optional. Boolean value to display default marker or not. Object builds a custom marker.
+	 * @param {string}  center     Required. An address to use as the center of the map. Can be an address, place, or lat,lng coordinates. Must be a string
+	 * @param {mixed}   marker     Optional. Boolean value to display default marker or not. Object builds a custom marker. Defaults to true
 	 * @param {object}  infowindow Optional. Object to build infowindow for marker
-	 * @param {integer} zoom       Optional. Set the default zoom for the map.
-	 * @param {integer} minHeight  Optional. Set the min-height for the map.
-	 * @param {object}  onMapLoad  This callback is called right after tha map loads.
+	 * @param {Boolean} autoCloseInfowindow Optional. Whether to close the last opened infowindow before another one is opened. Defaults to true.
+	 * @param {mixed}   infowindows Holds an array of infowindows added by the attachInfowindow private method. This is documented here for reference. For example you can call this variable to handle infowindows added via a search.
+	 * @param {integer} zoom       Optional. Set the default zoom for the map. Defaults to 15
+	 * @param {integer} minHeight  Optional. Set the min-height for the map. Defaults to 300
+	 * @param {boolean} bindInfowindow Whether to bind the infowindow open and close action. If false, you can control this.
+	 * @param {Object} mapOptions all other map options that you can pass to Google Map Javascript API when creating a `new google.maps.Map(el, options)`. https://developers.google.com/maps/documentation/javascript/3.exp/reference#MapOptions
+	 * @param {object}  onMapLoad  This is called right after tha map loads. `this` is set to the map object that just loaded. Makes it easy to do things like: `this.getMarkers()`. Useful to bind a search or other functionality that depend son the map being loaded.
 	 *
 	 * @type {Object}
 	 */
-	$.fn.premiseGoogleMap.defaults = {
+	$.fn.roamiGmap.defaults = {
 		center         : '',
 		marker         : true,
 		infowindow     : {},
+		autoCloseInfowindow: true,
+		infowindows: false,
 		key            : '',
 		zoom           : 15,
 		minHeight      : 300,
 		bindInfowindow : true,
+		mapOptions: {},
 		onMapLoad      : function() { return true; }
 	};
 

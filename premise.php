@@ -3,7 +3,7 @@
  * Plugin Name: Premise WP
  * Description: Do things faster as a Wordpess developer! Build options in the backedn, create custom post types, add new admin pages or metaboxes, and more.
  * Plugin URI:	https://github.com/PremiseWP/Premise-WP
- * Version:     2.0.0
+ * Version:     2.1.0
  * Author:      Premise WP
  * Author URI:  http://premisewp.com
  * License:     GPL
@@ -170,6 +170,8 @@ class Premise_WP {
 		wp_register_script( 'premise_font_awesome', 'https://use.fontawesome.com/a4c255239f.js' );
 		wp_register_style( 'premise_style_css'   , $this->plugin_url . 'css/Premise-WP.min.css' );
 
+		wp_enqueue_script( 'premise_font_awesome' );
+
 		if ( is_admin() ) {
 
 			// Register scripts.
@@ -190,8 +192,6 @@ class Premise_WP {
 
 		// Enqueue our styles and scripts for both admin and frontend.
 		wp_enqueue_style( 'premise_style_css' );
-
-		wp_enqueue_script( 'premise_font_awesome' );
 
 		// Enqueue the scripts for front and back end
 		wp_enqueue_script( 'premise_script_js' );

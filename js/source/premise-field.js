@@ -31,6 +31,20 @@ var PremiseField = {
 	 */
 	init: function() {
 
+		this.wpMedia         = jQuery( '.premise-wp-media-field, .premise-wp_media-field input' );
+		this.wpColor         = jQuery(  '.premise-wp_color-field input' );
+		this.faIcons         = jQuery( '.premise-field-fa_icon-input, .premise-fa_icon-field input' );
+		this.duplicateFields = jQuery( '.pwp-duplicate-fields' );
+
+		// bind media preview if using media
+		( this.wpMedia.length )         ? this.wpMedia.premiseFieldWpMedia()           : false;
+		// bind wp color picker
+		( this.wpColor.length )         ? this.wpColor.wpColorPicker()                 : false;
+		// bind the fa icon fields
+		( this.faIcons.length )         ? this.faIcons.premiseFieldFaIcon()            : false;
+		// bind the fa icon fields
+		( this.duplicateFields.length ) ? this.duplicateFields.premiseFieldDuplicate() : false;
+
 		/**
 		 * premiseFieldAfterInit
 		 *
