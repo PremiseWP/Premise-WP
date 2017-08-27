@@ -234,7 +234,7 @@
 
 		// amount of pixels scrolled per event
 		el.pixelsScrolled = function() {
-			return pixelsScrolled;
+			return 0 !== pixelsScrolled ? pixelsScrolled : 1;
 		};
 
 		// records amount document has scrolled
