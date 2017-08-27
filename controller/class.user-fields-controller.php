@@ -1,9 +1,9 @@
 <?php
 /**
-* Insert custom fields in the backend in a user's profile
-*
-* @package Premise WP\Controller
-*/
+ * Insert custom fields in the backend in a user's profile
+ *
+ * @package Premise WP\Controller
+ */
 class PWP_User_Fields {
 
 	/**
@@ -74,6 +74,14 @@ class PWP_User_Fields {
 			<tbody>
 				<?php foreach ( $this->fields as $field ) {
 					$f = new PWP_Field_Controller( $field );
+
+					// Do not add row for hidden fields.
+					if ( $f->type === 'hidden' ) {
+
+						echo $f->field;
+
+						continue;
+					}
 					?><tr>
 						<th>
 							<label for="<?php echo $f->id ?>"><?php echo $f->label; ?></label>
@@ -81,31 +89,30 @@ class PWP_User_Fields {
 						<td>
 							<?php echo $f->field; ?>
 						</td>
-					</tr><?
+					</tr><?php
 				} ?>
 			</tbody>
-		</table><?
+		</table><?php
 	}
 
 	/**
 	 * Saves the fields to the user profile if the option_names param was passed.
 	 *
-	 * @param  integer $user_id the user id for the user neing edited
-	 * @return boolean          true on success false on failuer
+	 * @param  integer $user_id The user id for the user being edited.
+	 * @return boolean          True on success false on failure.
 	 */
 	public function save_fields( $user_id ) {
 		if ( ! current_user_can( 'edit_user', $user_id ) ) {
-	   	 return false;
-	    }
+			return false;
+		}
 
-	    foreach ( $this->option_names as $option ) {
-	    	if ( ! empty( $_POST[ $option ] ) ) {
-		    	update_usermeta( $user_id, $option, $_POST[ $option ] );
-	    	}
-	    	else {
-	    		return false;
-	    	}
-	    }
+		foreach ( $this->option_names as $option ) {
+			if ( isset( $_POST[ $option ] ) ) {
+				update_user_meta( $user_id, $option, $_POST[ $option ] );
+			}
+		}
+
+		return true;
 	}
 
 	/**

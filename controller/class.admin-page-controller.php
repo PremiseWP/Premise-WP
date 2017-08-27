@@ -174,7 +174,7 @@ class PWP_Admin_Page {
 
 		?><div class="wrap premise-admin-page">
 			<h1><?php echo esc_html( $this->menu_page_args['title'] ); ?></h1>
-			<form action="<?php echo $action; ?>" method="<?php echo $method; ?>" enctype="<?php echo $enctype; ?>" id="<?php echo esc_attr( $this->menu_page_args['menu_slug'] ); ?>-form"><?
+			<form action="<?php echo $action; ?>" method="<?php echo $method; ?>" enctype="<?php echo $enctype; ?>" id="<?php echo esc_attr( $this->menu_page_args['menu_slug'] ); ?>-form"><?php
 				wp_nonce_field( $this->nonce, $_POST['_wpnonce'], true, true );
 				settings_fields( $this->option_group );
 
@@ -186,7 +186,7 @@ class PWP_Admin_Page {
 				}
 
 			?></form>
-		</div><?
+		</div><?php
 	}
 }
 ?>
