@@ -76,6 +76,7 @@
 
 			// set totalScrolled in case the user has already scrolled and the page is refreshed
 			totalScrolled = getTotalScrolled();
+			scrolled = getNewScroll();
 
 			// Bind Scroll animation
 			$(window).scroll(doScroll);
