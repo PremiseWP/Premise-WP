@@ -151,7 +151,7 @@
 			}
 			else {
 				if ( getUA() == 'Safari' || getUA() == 'Chrome' ) {
-					newScroll = $('body').scrollTop();
+					newScroll = $('html,body').scrollTop();
 				}
 				else {
 					newScroll = $('html,body').scrollTop();
