@@ -341,9 +341,10 @@ class PWP_Field {
 				if ( ! pwp_empty_value( $k ) ) {
 					$opts .= '<option value="'.esc_attr( $v ).'"';
 
-						if ( is_array( $this->value ) ) {
+						if ( isset( $this->args['multiple'] ) && ! empty( $this->args['multiple'] ) ) {
 
-							$opts .= in_array( $v, $this->value ) ? 'selected="selected"' : '';
+							if ( ! empty( $v ) )
+								$opts .= preg_match("/{$v}/", $this->value) ? 'selected="selected"' : '';
 
 						} else {
 
