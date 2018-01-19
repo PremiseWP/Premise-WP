@@ -224,6 +224,9 @@ Premise WP uses [Gruntjs.com](http://gruntjs.com/) to compile JS and CSS files. 
 
 ## Changelog
 
+#### 2.1.1
+* Fixed bug in PWP_Field Class that did not allow values to be saved on select elements that had the 'multiple' attribute assigned to them.
+
 #### 2.1.0
 * Deprecated plugin `premiseGoogleMap` and replaced it with `roamiGmap` - v1.0.0.
 
