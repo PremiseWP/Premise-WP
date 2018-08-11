@@ -167,7 +167,6 @@ class PWP_Metabox {
             if ( ! wp_verify_nonce( $_POST[ $this->nonce ], $this->nonce_action ) ) {
                 return;
             }
-var_dump( $this->nonce_action );
         }
 
         // Check if user has permissions to save data.
@@ -184,8 +183,7 @@ var_dump( $this->nonce_action );
         if ( wp_is_post_revision( $post_id ) ) {
             return;
         }
-        // var_dump( $this->option_names );exit();
-        foreach ( $this->option_names as $option ) {
+        foreach ( (array) $this->option_names as $option ) {
             /**
              * allows you to validate your own data.
              *
